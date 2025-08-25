@@ -1,57 +1,70 @@
-# Loan Calculator (Next.js 14, i18n, Deep SEO)
+## Finance Hub (Next.js 14 + TypeScript)
 
-Production-ready international loan calculator with 13 locales and 13 country routes. Ships SSG/ISR, programmatic hreflang, sitemap, robots, JSON-LD, and fast UX.
+Production-ready, static-exportable Finance Hub with high-CPC calculators, multilingual UI (17 languages), dark mode, SEO, animated pages, and ad/analytics placeholders. Works on Vercel (App Router) and GitHub Pages via `next export`.
 
-## Run
+### Features
+- Multilingual routing at `/{lang}` with 17 languages (en, es, pt, de, fr, ja, ko, zh, th, ar, hi, id, ru, it, nl, vi, fa)
+- Four calculators: Loan, Mortgage (with optional closing costs), Tax (progressive brackets), Insurance Premium
+- Static Site Generation with revalidation (revalidate=86400) and prebuilt routes via `generateStaticParams`
+- Dark/light theme toggle using CSS variables; fade-in animation
+- Dynamic `sitemap.xml` and `robots.txt`
+- Minimal dependencies, TypeScript + ESLint
 
-1) Install deps
+### Quickstart
 ```bash
-npm i
-```
-
-2) Develop
-```bash
+npm install
 npm run dev
 ```
+Open http://localhost:3000.
 
-3) Build
+Build and export static site:
 ```bash
 npm run build
+npm run start   # serves the exported /out directory on port 3000
 ```
 
-Deploy to Vercel. Optionally set `NEXT_PUBLIC_SITE_URL` to your domain.
+### Deploy
+- Vercel: Import this repo. Build command: `npm run build`. Output directory: `out/`.
+- GitHub Pages: Push to main. Use an action or locally run `npm run build` and push the `out/` directory to `gh-pages` branch.
 
-## Configure domain
-- In Vercel project settings, add your domain and set as production.
+Set `NEXT_PUBLIC_SITE_URL` for correct absolute URLs in the sitemap.
 
-## Ads & Analytics
-- TODO: paste your ad script into `app/layout.tsx` where markers exist.
-- TODO: paste GA4 tag likewise.
+### Ads and Analytics
+Paste your ad script and GA4 tag in `app/components/Header.tsx` placeholders:
+```tsx
+{/* Ad Slot Top */}
+<div id="ad-top" className="ad-slot"></div>
+{/* TODO: paste your ad script here */}
+{/* Google Analytics */}
+{/* TODO: paste GA4 script here */}
+```
+The `ad-top` and `ad-bottom` slots reserve vertical space to minimize CLS.
 
-## Search Console
+### i18n
+- URL structure: `/{lang}` (no auto-detection). Language switch preserves current path.
+- Translations defined in `lib/i18n.ts`. Unknown keys fallback to English.
+
+### Calculators
+- `calcLoan(principal, rate%, years)` amortizing formula
+- `calcMortgage(principal, rate%, years, closing)` adds closing costs to principal then applies loan formula
+- `calcTax(income)` applies a simple progressive bracket array
+- `calcInsurance(amount, rate%)` multiplies amount by rate
+
+All calculators update results as inputs change and format outputs using `Intl.NumberFormat` for the active locale.
+
+### SEO
+- `generateMetadata` used for page titles and descriptions (with the current year)
+- Dynamic `app/sitemap.ts` generates all routes for all languages
+- `app/robots.txt` allows all and references `/sitemap.xml`
+
+### Local Development
+- Type-check: `npm run typecheck`
+- Lint: `npm run lint`
+
+### Notes
+- Content is informational only and not professional advice.
+- Images are unoptimized and `output: 'export'` enables static export for GitHub Pages compatibility.
+
+### Search Console
 - Add your site in Google Search Console.
 - Submit `https://yourdomain.com/sitemap.xml`.
-
-## Content rules
-- Country copy comes from `lib/markets.ts`. Edit bullets/fees for realism.
-- Localized labels and SEO terms live in `i18n/config.ts` and `i18n/templates.ts`.
-- To add calculators like auto/personal/refinance, copy the page and adjust content.
-
-## Core Web Vitals
-- CLS: reserved ad slot in `app/layout.tsx` prevents layout shift.
-- No external fonts; minimal JS; unoptimized images.
-
-## i18n
-- Locales: en, es, pt, de, fr, ja, ko, zh, th, ar, hi, id, ru
-- Countries: us, mx, br, de, fr, jp, kr, cn, th, sa, in, id, ru
-- Routes: `/(i18n)/[locale]/[country]/loan-calculator`
-
-## SEO
-- Unique title/description per locale-country using `i18n/templates.ts`.
-- Hreflang across all pairs + x-default.
-- JSON-LD: FAQPage, WebApplication, Breadcrumb.
-- Sitemap includes all pages; robots points to sitemap.
-
-## Extend
-- Add new locales/countries in `i18n/config.ts` and `lib/seo.ts`.
-- Add new pages under `app/(i18n)/[locale]/[country]/...` and reuse components.
