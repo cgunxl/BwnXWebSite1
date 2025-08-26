@@ -4,13 +4,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { useMemo } from 'react';
 import { SUPPORTED_LANGS, t } from '@/lib/i18n';
-
-function getLangFromPath(pathname: string): string {
-  const parts = pathname.split('/').filter(Boolean);
-  const candidate = parts[0];
-  if (SUPPORTED_LANGS.includes(candidate as any)) return candidate;
-  return 'en';
-}
+import { getLangFromPath } from '@/lib/path';
 
 export default function FooterClient() {
   const pathname = usePathname() || '/';

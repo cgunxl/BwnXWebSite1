@@ -4,25 +4,7 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import { SUPPORTED_LANGS, t, isRtlLang } from './i18n';
-
-function getLangFromPath(pathname: string): string {
-  const parts = pathname.split('/').filter(Boolean);
-  const candidate = parts[0];
-  if (SUPPORTED_LANGS.includes(candidate as any)) return candidate;
-  return 'en';
-}
-
-function replaceLang(pathname: string, nextLang: string): string {
-  const parts = pathname.split('/');
-  // parts[0] is '' because pathname starts with '/'
-  const segments = parts.slice(1);
-  if (SUPPORTED_LANGS.includes(segments[0] as any)) {
-    segments[0] = nextLang;
-  } else {
-    segments.unshift(nextLang);
-  }
-  return '/' + segments.join('/');
-}
+import { getLangFromPath, replaceLang } from './path';
 
 export default function HeaderClient() {
   const pathname = usePathname() || '/';

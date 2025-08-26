@@ -32,7 +32,7 @@ npm run build
 ```
 The static output is generated to `out/` automatically by Next (output: 'export'). To preview with a simple server:
 ```bash
-npm run start
+npm run preview
 ```
 
 ## Deploying
@@ -50,15 +50,12 @@ npm run start
 ## Customization
 
 ### Ads and GA4
-Open `app/layout.tsx` and paste your scripts:
-```tsx
-{/* Ad Slot Top */}
-<div id="ad-top" style={{minHeight:'90px'}}></div>
-{/* TODO: paste your ad script here */}
-{/* Google Analytics */}
-{/* TODO: paste GA4 script here */}
-```
-Maintain the reserved minHeight to minimize CLS.
+This project includes a consent banner and lazy-loaded analytics/ads.
+- Set `NEXT_PUBLIC_GA_MEASUREMENT_ID` in your environment (optional)
+- Set `NEXT_PUBLIC_ADS_SCRIPT_SRC` if you have an ad tag URL (optional)
+- Users can accept/decline; scripts load only after consent.
+
+Maintain the reserved minHeight of `#ad-top`/`#ad-bottom` to minimize CLS.
 
 ### Languages and Translations
 Edit `lib/i18n.ts` to add or refine translations. The `t(lang,key)` helper falls back to English for missing keys.

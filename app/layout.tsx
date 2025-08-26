@@ -1,10 +1,21 @@
 import './globals.css';
-import type { Metadata } from 'next';
+import type { Metadata, Viewport } from 'next';
 import HeaderClient from '@/lib/HeaderClient';
 import { getAllLocales } from '@/lib/i18n';
 import FooterClient from '@/lib/FooterClient';
+import ConsentBannerClient from '@/lib/ConsentBannerClient';
+import Analytics from '@/lib/Analytics';
+import AdsClient from '@/lib/AdsClient';
+import { Suspense } from 'react';
 
 export const revalidate = 86400;
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: '#ffffff' },
+    { media: '(prefers-color-scheme: dark)', color: '#0b1020' }
+  ]
+};
 
 export async function generateMetadata(): Promise<Metadata> {
   const origin = process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com';
@@ -45,11 +56,7 @@ export async function generateMetadata(): Promise<Metadata> {
       other: [
         { rel: 'manifest', url: `${basePath}/manifest.webmanifest` }
       ]
-    },
-    themeColor: [
-      { media: '(prefers-color-scheme: light)', color: '#ffffff' },
-      { media: '(prefers-color-scheme: dark)', color: '#0b1020' }
-    ]
+    }
   };
 }
 
@@ -61,9 +68,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <HeaderClient />
         {/* Ad Slot Top */}
         <div id="ad-top" style={{minHeight:'90px'}}></div>
-        {/* TODO: paste your ad script here */}
-        {/* Google Analytics */}
-        {/* TODO: paste GA4 script here */}
+        <Suspense fallback={null}>
+          <ConsentBannerClient />
+          <Analytics />
+          <AdsClient />
+        </Suspense>
         <main id="main" className="container" role="main">
           {children}
         </main>

@@ -3,6 +3,7 @@
 import { useMemo, useState } from 'react';
 import { TAX_BRACKETS, calcTax } from '@/lib/calculators';
 import { t, getCurrencyForLang } from '@/lib/i18n';
+import { toNumberSafe } from '@/lib/number';
 
 export default function TaxClient({ lang }: { lang: string }) {
   const [income, setIncome] = useState<number>(120000);
@@ -17,7 +18,7 @@ export default function TaxClient({ lang }: { lang: string }) {
       <div className="form-row">
         <div>
           <label className="label" htmlFor="tax-income">{t(lang, 'income')}</label>
-          <input id="tax-income" className="input" type="number" min={0} value={income} onChange={(e) => setIncome(parseFloat(e.target.value || '0'))} />
+          <input id="tax-income" className="input" type="number" min={0} value={income} onChange={(e) => setIncome(toNumberSafe(e.target.value, 0))} />
         </div>
         <div style={{display:'flex', alignItems:'flex-end'}} aria-hidden>
           <button className="button" type="button" disabled>{t(lang, 'results')}</button>
