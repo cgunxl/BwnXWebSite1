@@ -2,12 +2,13 @@
 
 import { useMemo, useState } from 'react';
 import { TAX_BRACKETS, calcTax } from '@/lib/calculators';
-import { t } from '@/lib/i18n';
+import { t, getCurrencyForLang } from '@/lib/i18n';
 
 export default function TaxClient({ lang }: { lang: string }) {
   const [income, setIncome] = useState<number>(120000);
 
-  const nf = useMemo(() => new Intl.NumberFormat(lang, { style: 'currency', currency: 'USD' }), [lang]);
+  const currency = getCurrencyForLang(lang);
+  const nf = useMemo(() => new Intl.NumberFormat(lang, { style: 'currency', currency }), [lang, currency]);
   const pf = useMemo(() => new Intl.NumberFormat(lang, { style: 'percent', maximumFractionDigits: 2 }), [lang]);
   const result = useMemo(() => calcTax(income), [income]);
 
@@ -15,11 +16,11 @@ export default function TaxClient({ lang }: { lang: string }) {
     <div className="card" style={{marginTop: 12}}>
       <div className="form-row">
         <div>
-          <div className="label">{t(lang, 'income')}</div>
-          <input className="input" type="number" min={0} value={income} onChange={(e) => setIncome(parseFloat(e.target.value || '0'))} />
+          <label className="label" htmlFor="tax-income">{t(lang, 'income')}</label>
+          <input id="tax-income" className="input" type="number" min={0} value={income} onChange={(e) => setIncome(parseFloat(e.target.value || '0'))} />
         </div>
-        <div style={{display:'flex', alignItems:'flex-end'}}>
-          <button className="button" type="button">{t(lang, 'calculate')}</button>
+        <div style={{display:'flex', alignItems:'flex-end'}} aria-hidden>
+          <button className="button" type="button" disabled>{t(lang, 'results')}</button>
         </div>
       </div>
       <div className="result">

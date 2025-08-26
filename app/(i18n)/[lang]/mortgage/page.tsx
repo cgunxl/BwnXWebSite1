@@ -12,9 +12,14 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   const { lang } = params;
   const year = new Date().getFullYear();
+  const origin = process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com';
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+  const url = `${origin}${basePath}/${lang}/mortgage`;
+  const languages = Object.fromEntries(getAllLocales().map((lc) => [lc, `${origin}${basePath}/${lc}/mortgage`]));
   return {
     title: `${t(lang, 'mortgageCalc')} – ${year}`,
-    description: `${t(lang, 'mortgageCalc')} including optional closing costs.`
+    description: `${t(lang, 'mortgageCalc')} including optional closing costs.`,
+    alternates: { canonical: url, languages }
   };
 }
 

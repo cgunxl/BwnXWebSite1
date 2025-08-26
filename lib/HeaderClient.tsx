@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
-import { SUPPORTED_LANGS, t } from './i18n';
+import { SUPPORTED_LANGS, t, isRtlLang } from './i18n';
 
 function getLangFromPath(pathname: string): string {
   const parts = pathname.split('/').filter(Boolean);
@@ -44,6 +44,12 @@ export default function HeaderClient() {
     document.body.classList.toggle('theme-dark', isDark);
     localStorage.setItem('fh-theme', isDark ? 'dark' : 'light');
   }, [isDark]);
+
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+    document.documentElement.lang = currentLang;
+    document.documentElement.dir = isRtlLang(currentLang) ? 'rtl' : 'ltr';
+  }, [currentLang]);
 
   return (
     <header>

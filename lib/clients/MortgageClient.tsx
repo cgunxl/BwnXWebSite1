@@ -2,7 +2,7 @@
 
 import { useMemo, useState } from 'react';
 import { calcMortgage } from '@/lib/calculators';
-import { t } from '@/lib/i18n';
+import { t, getCurrencyForLang } from '@/lib/i18n';
 
 export default function MortgageClient({ lang }: { lang: string }) {
   const [principal, setPrincipal] = useState<number>(300000);
@@ -10,29 +10,30 @@ export default function MortgageClient({ lang }: { lang: string }) {
   const [years, setYears] = useState<number>(30);
   const [closing, setClosing] = useState<number>(6000);
 
-  const nf = useMemo(() => new Intl.NumberFormat(lang, { style: 'currency', currency: 'USD' }), [lang]);
+  const currency = getCurrencyForLang(lang);
+  const nf = useMemo(() => new Intl.NumberFormat(lang, { style: 'currency', currency }), [lang, currency]);
   const result = useMemo(() => calcMortgage(principal, rate, years, closing), [principal, rate, years, closing]);
 
   return (
     <div className="card" style={{marginTop: 12}}>
       <div className="form-row">
         <div>
-          <div className="label">{t(lang, 'principal')}</div>
-          <input className="input" type="number" min={0} value={principal} onChange={(e) => setPrincipal(parseFloat(e.target.value || '0'))} />
+          <label className="label" htmlFor="mortgage-principal">{t(lang, 'principal')}</label>
+          <input id="mortgage-principal" className="input" type="number" min={0} value={principal} onChange={(e) => setPrincipal(parseFloat(e.target.value || '0'))} />
         </div>
         <div>
-          <div className="label">{t(lang, 'interestRate')}</div>
-          <input className="input" type="number" min={0} step={0.01} value={rate} onChange={(e) => setRate(parseFloat(e.target.value || '0'))} />
+          <label className="label" htmlFor="mortgage-rate">{t(lang, 'interestRate')}</label>
+          <input id="mortgage-rate" className="input" type="number" min={0} step={0.01} value={rate} onChange={(e) => setRate(parseFloat(e.target.value || '0'))} />
         </div>
       </div>
       <div className="form-row">
         <div>
-          <div className="label">{t(lang, 'years')}</div>
-          <input className="input" type="number" min={0} step={1} value={years} onChange={(e) => setYears(parseFloat(e.target.value || '0'))} />
+          <label className="label" htmlFor="mortgage-years">{t(lang, 'years')}</label>
+          <input id="mortgage-years" className="input" type="number" min={0} step={1} value={years} onChange={(e) => setYears(parseFloat(e.target.value || '0'))} />
         </div>
         <div>
-          <div className="label">{t(lang, 'closingCosts')}</div>
-          <input className="input" type="number" min={0} step={1} value={closing} onChange={(e) => setClosing(parseFloat(e.target.value || '0'))} />
+          <label className="label" htmlFor="mortgage-closing">{t(lang, 'closingCosts')}</label>
+          <input id="mortgage-closing" className="input" type="number" min={0} step={1} value={closing} onChange={(e) => setClosing(parseFloat(e.target.value || '0'))} />
         </div>
       </div>
       <div className="result">

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { getAllLocales, t } from '@/lib/i18n';
+import { getAllLocales, t, getCurrencyForLang } from '@/lib/i18n';
 import Link from 'next/link';
 import LoanClient from '@/lib/clients/LoanClient';
 
@@ -12,14 +12,20 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   const { lang } = params;
   const year = new Date().getFullYear();
+  const origin = process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com';
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+  const url = `${origin}${basePath}/${lang}/loan`;
+  const languages = Object.fromEntries(getAllLocales().map((lc) => [lc, `${origin}${basePath}/${lc}/loan`]));
   return {
     title: `${t(lang, 'loanCalc')} – ${year}`,
-    description: `${t(lang, 'loanCalc')} to estimate monthly payments, total, and interest.`
+    description: `${t(lang, 'loanCalc')} to estimate monthly payments, total, and interest.`,
+    alternates: { canonical: url, languages }
   };
 }
 
 export default function LoanPage({ params }: { params: { lang: string } }) {
   const { lang } = params;
+  const currency = getCurrencyForLang(lang);
 
   return (
     <div className="page-enter page-enter-active">
