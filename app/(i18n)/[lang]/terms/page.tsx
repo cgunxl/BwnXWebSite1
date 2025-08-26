@@ -33,7 +33,7 @@ export default function TermsPage({ params }: { params: { lang: string } }) {
         <h2>Use of Service</h2>
         <p>By using this site, you agree not to rely on calculators as professional financial, tax, or insurance advice.</p>
         <h2 style={{marginTop: 12}}>Liability</h2>
-        <p>We provide the site "as is" without warranties; we are not liable for any damages resulting from its use.</p>
+        <p>We provide the site &quot;as is&quot; without warranties; we are not liable for any damages resulting from its use.</p>
       </section>
       <nav className="footer-nav">
         <Link className="button ghost" href={`/${lang}/privacy`}>{t(lang, 'privacy')}</Link>
