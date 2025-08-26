@@ -5,7 +5,7 @@ export const revalidate = 86400;
 
 function buildUrls(origin: string, basePath: string) {
   const langs = getAllLocales();
-  const paths = ['', 'loan', 'mortgage', 'tax', 'insurance'];
+  const paths = ['', 'loan', 'mortgage', 'tax', 'insurance', 'privacy', 'terms', 'contact'];
   const urls: string[] = [];
   for (const lang of langs) {
     for (const p of paths) {

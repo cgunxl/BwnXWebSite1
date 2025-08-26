@@ -2,6 +2,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import HeaderClient from '@/lib/HeaderClient';
 import { getAllLocales } from '@/lib/i18n';
+import FooterClient from '@/lib/FooterClient';
 
 export const revalidate = 86400;
 
@@ -68,6 +69,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </main>
         {/* Ad Slot Bottom */}
         <div id="ad-bottom" style={{minHeight:'90px'}}></div>
+        <FooterClient />
       </body>
     </html>
   );
