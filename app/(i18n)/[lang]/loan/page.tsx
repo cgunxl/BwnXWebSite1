@@ -1,52 +1,51 @@
 import type { Metadata } from 'next';
+import { getAllLocales, t } from '@/lib/i18n';
 import Link from 'next/link';
-import { SUPPORTED_LANGS, t } from '../../../../lib/i18n';
-import LoanCalculator from '../../../components/LoanCalculator';
+import LoanClient from '@/lib/clients/LoanClient';
 
 export const revalidate = 86400;
 
-export function generateStaticParams() {
-  return SUPPORTED_LANGS.map((lang) => ({ lang }));
+export async function generateStaticParams() {
+  return getAllLocales().map((lang) => ({ lang }));
 }
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   const { lang } = params;
+  const year = new Date().getFullYear();
   return {
-    title: `${t(lang,'loanCalc')} – ${new Date().getFullYear()}`,
-    description: t(lang,'loanDesc')
+    title: `${t(lang, 'loanCalc')} – ${year}`,
+    description: `${t(lang, 'loanCalc')} to estimate monthly payments, total, and interest.`
   };
 }
 
 export default function LoanPage({ params }: { params: { lang: string } }) {
   const { lang } = params;
+
   return (
-    <section className="fade-in">
-      <div className="card">
-        <h1 className="title">{t(lang,'loanCalc')}</h1>
-        <p className="muted">{t(lang,'loanDesc')}</p>
-      </div>
+    <div className="page-enter page-enter-active">
+      <h1>{t(lang, 'loanCalc')}</h1>
+      <p className="muted">{t(lang, 'disclaimer')}</p>
 
-      <LoanCalculator lang={lang} />
+      <LoanClient lang={lang} />
 
-      <div className="card">
-        <h2 className="title">{t(lang,'whyMatters')}</h2>
+      <section className="card" style={{marginTop: 16}}>
+        <h2>{t(lang, 'whyMatters')}</h2>
         <p>
-          Predatory lending often hides true costs behind opaque terms, add-on products, and complex fee structures, making it difficult for borrowers to compare offers or understand long-term obligations. High interest rates and fees can snowball, turning an emergency cash need into a months-long cycle of debt when payments mostly cover interest and not principal. <sup>[1]</sup> Households facing income volatility, medical bills, or job loss frequently have limited options and accept expensive credit out of necessity, not choice. <sup>[2]</sup> A transparent loan calculator helps reveal the full repayment and interest burden upfront so borrowers can weigh alternatives—such as negotiating payment plans, seeking nonprofit counseling, or building savings buffers—before costs become unmanageable.
+          Predatory lending thrives on complexity and urgency. Many high-cost loans advertise quick approvals but obscure the true cost of credit through opaque disclosures, excessive fees, and triple‑digit APRs. These products are designed to be refinanced repeatedly rather than repaid, trapping borrowers in a cycle of debt and overdraft fees.<sup>[1]</sup> People often turn to these loans not because they misjudge the price, but because they face emergencies—rent due, a medical bill, or a car repair—and have few alternatives due to low income or thin credit files.<sup>[2]</sup> Clear amortization math helps reveal the real monthly burden and how much of each payment goes to interest versus principal. Understanding the total repayment and lifetime interest makes it easier to compare options and push back on junk fees, add‑ons, or refinance pitches that only extend the debt. Using a simple calculator before signing can help borrowers ask better questions, budget realistically, and avoid high‑cost debt spirals.
         </p>
-        <h3 className="title" style={{fontSize:'1.2rem'}}>Sources</h3>
-        <p className="muted">
-          [1] [oai_citation:1‡civilrights.org](https://civilrights.org/edfund/resource/these-are-the-significant-costs-of-predatory-loans/#:~:text=loans%20from%20responsible%20ones%C2%A0is%20a,an%20endless%20cycle%20of%20debt)
-          <br/>
-          [2] [oai_citation:2‡pewtrusts.org](https://www.pewtrusts.org/research-and-analysis/issue-briefs/2012/07/19/payday-lending-in-america-who-borrows-where-they-borrow-and-why)
-        </p>
-      </div>
+        <h3 style={{marginTop: 12}}>{t(lang, 'sources')}</h3>
+        <ol>
+          <li>[1] [oai_citation:1‡civilrights.org](https://civilrights.org/edfund/resource/these-are-the-significant-costs-of-predatory-loans/)</li>
+          <li>[2] [oai_citation:2‡pewtrusts.org](https://www.pewtrusts.org/en/research-and-analysis/fact-sheets/2012/07/19/payday-lending-in-america-who-borrows-where-they-borrow-and-why)</li>
+        </ol>
+      </section>
 
-      <div className="bottom-nav">
-        <Link className="nav-link" href={`/${lang}/mortgage`}>{t(lang,'mortgage')}</Link>
-        <Link className="nav-link" href={`/${lang}/tax`}>{t(lang,'tax')}</Link>
-        <Link className="nav-link" href={`/${lang}/insurance`}>{t(lang,'insurance')}</Link>
-      </div>
-    </section>
+      <nav className="footer-nav">
+        <Link className="button ghost" href={`/${lang}/mortgage`}>{t(lang, 'navMortgage')}</Link>
+        <Link className="button ghost" href={`/${lang}/tax`}>{t(lang, 'navTax')}</Link>
+        <Link className="button ghost" href={`/${lang}/insurance`}>{t(lang, 'navInsurance')}</Link>
+      </nav>
+    </div>
   );
 }
 

@@ -1,26 +1,29 @@
 import './globals.css';
 import type { Metadata } from 'next';
-import { ReactNode } from 'react';
-import Header from './components/Header';
-
-export const revalidate = 86400;
+import HeaderClient from '@/lib/HeaderClient';
 
 export const metadata: Metadata = {
   title: 'Finance Hub',
-  description: 'High-CPC financial calculators with multilingual support and dark mode.',
-  metadataBase: new URL('https://example.com')
+  description: 'Multi-language finance calculators for loans, mortgages, taxes, and insurance.'
 };
 
-export default function RootLayout({ children }: { children: ReactNode }) {
+export const revalidate = 86400;
+
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <body>
-        <Header />
-        <main className="page container fade-in">{children}</main>
-        <footer className="container" style={{padding:'24px 0', color:'var(--muted)'}}>
-          <div id="ad-bottom" className="ad-slot"></div>
-          <p style={{marginTop:12}}>© {new Date().getFullYear()} Finance Hub</p>
-        </footer>
+        <HeaderClient />
+        {/* Ad Slot Top */}
+        <div id="ad-top" style={{minHeight:'90px'}}></div>
+        {/* TODO: paste your ad script here */}
+        {/* Google Analytics */}
+        {/* TODO: paste GA4 script here */}
+        <main className="container">
+          {children}
+        </main>
+        {/* Ad Slot Bottom */}
+        <div id="ad-bottom" style={{minHeight:'90px'}}></div>
       </body>
     </html>
   );

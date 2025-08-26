@@ -1,48 +1,50 @@
 import type { Metadata } from 'next';
+import { getAllLocales, t } from '@/lib/i18n';
 import Link from 'next/link';
-import { SUPPORTED_LANGS, t } from '../../../../lib/i18n';
-import TaxCalculator from '../../../components/TaxCalculator';
+import TaxClient from '@/lib/clients/TaxClient';
 
 export const revalidate = 86400;
 
-export function generateStaticParams() {
-  return SUPPORTED_LANGS.map((lang) => ({ lang }));
+export async function generateStaticParams() {
+  return getAllLocales().map((lang) => ({ lang }));
 }
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   const { lang } = params;
+  const year = new Date().getFullYear();
   return {
-    title: `${t(lang,'taxCalc')} – ${new Date().getFullYear()}`,
-    description: t(lang,'taxDesc')
+    title: `${t(lang, 'taxCalc')} – ${year}`,
+    description: `${t(lang, 'taxCalc')} using simple progressive brackets.`
   };
 }
 
 export default function TaxPage({ params }: { params: { lang: string } }) {
   const { lang } = params;
+
   return (
-    <section className="fade-in">
-      <div className="card">
-        <h1 className="title">{t(lang,'taxCalc')}</h1>
-        <p className="muted">{t(lang,'taxDesc')}</p>
-      </div>
+    <div className="page-enter page-enter-active">
+      <h1>{t(lang, 'taxCalc')}</h1>
+      <p className="muted">{t(lang, 'taxDisclaimer')}</p>
 
-      <TaxCalculator lang={lang} />
+      <TaxClient lang={lang} />
 
-      <div className="card">
-        <h2 className="title">{t(lang,'whyMatters')}</h2>
+      <section className="card" style={{marginTop: 16}}>
+        <h2>{t(lang, 'whyMatters')}</h2>
         <p>
-          Progressive tax systems use multiple brackets, deductions, and credits. For households and small businesses, this complexity creates planning uncertainty and compliance burdens—collecting documents, interpreting rules, and filing accurately takes time. Errors can lead to penalties or audits, while over‑withholding reduces cash flow. A simple estimator helps set expectations by translating annual income into an approximate liability and effective rate. It is not a substitute for professional advice but can guide budgeting, withholding adjustments, or quarterly estimates when circumstances change mid‑year.
+          Progressive systems use multiple brackets, credits, and deductions that interact in ways most households only encounter once per year. Employers withhold based on a worksheet, but actual liability depends on filing status, dependents, above‑the‑line adjustments, and phase‑outs. Complexity raises the time and stress cost of compliance and increases the risk of misreporting. Incorrect filings can trigger penalties or refund delays, while over‑withholding effectively acts as an interest‑free loan to the government. A simple estimator helps households sanity‑check whether their withholding is on track and what their effective rate looks like at different income levels. That, in turn, informs savings plans, charitable giving, and timing income or deductions. If your finances involve self‑employment income, equity compensation, rental losses, or international considerations, professional advice is warranted. For everyone else, a quick preview like this can reduce surprises and make paycheck decisions more deliberate.
         </p>
-        <h3 className="title" style={{fontSize:'1.2rem'}}>Sources</h3>
-        <p className="muted">General guidance; consult a professional for personalized advice.</p>
-      </div>
+        <h3 style={{marginTop: 12}}>{t(lang, 'sources')}</h3>
+        <ol>
+          <li>[1] Common tax guidance: consult a qualified tax professional for personal advice.</li>
+        </ol>
+      </section>
 
-      <div className="bottom-nav">
-        <Link className="nav-link" href={`/${lang}/loan`}>{t(lang,'loan')}</Link>
-        <Link className="nav-link" href={`/${lang}/mortgage`}>{t(lang,'mortgage')}</Link>
-        <Link className="nav-link" href={`/${lang}/insurance`}>{t(lang,'insurance')}</Link>
-      </div>
-    </section>
+      <nav className="footer-nav">
+        <Link className="button ghost" href={`/${lang}/loan`}>{t(lang, 'navLoan')}</Link>
+        <Link className="button ghost" href={`/${lang}/mortgage`}>{t(lang, 'navMortgage')}</Link>
+        <Link className="button ghost" href={`/${lang}/insurance`}>{t(lang, 'navInsurance')}</Link>
+      </nav>
+    </div>
   );
 }
 

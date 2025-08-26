@@ -1,52 +1,52 @@
 import type { Metadata } from 'next';
+import { getAllLocales, t } from '@/lib/i18n';
 import Link from 'next/link';
-import { SUPPORTED_LANGS, t } from '../../../../lib/i18n';
-import MortgageCalculator from '../../../components/MortgageCalculator';
+import MortgageClient from '@/lib/clients/MortgageClient';
 
 export const revalidate = 86400;
 
-export function generateStaticParams() {
-  return SUPPORTED_LANGS.map((lang) => ({ lang }));
+export async function generateStaticParams() {
+  return getAllLocales().map((lang) => ({ lang }));
 }
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   const { lang } = params;
+  const year = new Date().getFullYear();
   return {
-    title: `${t(lang,'mortgageCalc')} – ${new Date().getFullYear()}`,
-    description: t(lang,'mortgageDesc')
+    title: `${t(lang, 'mortgageCalc')} – ${year}`,
+    description: `${t(lang, 'mortgageCalc')} including optional closing costs.`
   };
 }
 
 export default function MortgagePage({ params }: { params: { lang: string } }) {
   const { lang } = params;
+
   return (
-    <section className="fade-in">
-      <div className="card">
-        <h1 className="title">{t(lang,'mortgageCalc')}</h1>
-        <p className="muted">{t(lang,'mortgageDesc')}</p>
-      </div>
+    <div className="page-enter page-enter-active">
+      <h1>{t(lang, 'mortgageCalc')}</h1>
+      <p className="muted">{t(lang, 'disclaimer')}</p>
 
-      <MortgageCalculator lang={lang} />
+      <MortgageClient lang={lang} />
 
-      <div className="card">
-        <h2 className="title">{t(lang,'whyMatters')}</h2>
+      <section className="card" style={{marginTop: 16}}>
+        <h2>{t(lang, 'whyMatters')}</h2>
         <p>
-          Closing costs cover services from title insurance and appraisals to credit reports and loan origination, and they often catch first-time buyers off guard. Median total loan costs jumped 21.8% from 2021 to 2022 and neared $6,000 in 2022, intensifying affordability pressures when rates were rising. <sup>[1]</sup> Some lenders advertise “no‑closing‑cost” options, but they typically offset the upfront expense by raising the interest rate, which increases the monthly payment and total interest over time. <sup>[2]</sup> Modeling these tradeoffs helps buyers decide whether to pay more now or spread costs over the life of the loan and to budget for ancillary fees like prepaid taxes and insurance.
+          Closing costs are not just a line item—they bundle fees for title insurance, appraisal, credit reports, origination, recording and more, which can surprise first‑time buyers at the closing table.<sup>[1]</sup> In 2022, the median total loan costs on new mortgages jumped 21.8% from 2021 and hovered near $6,000, driven by higher interest rates and third‑party fees.<sup>[2]</sup> Some lenders advertise “no‑closing‑cost” mortgages, but they typically offset that concession with a higher interest rate via lender credits, which raises the monthly payment and increases total interest over time.<sup>[3]</sup> Running the numbers with a calculator helps borrowers decide whether to pay costs upfront, accept credits, or negotiate. Even a small change in rate can add thousands over a 30‑year term. Including closing costs in the modeled principal reveals the true “all‑in” monthly burden and prevents under‑budgeting for homeownership.
         </p>
-        <h3 className="title" style={{fontSize:'1.2rem'}}>Sources</h3>
-        <p className="muted">
-          [1] [oai_citation:3‡consumerfinance.gov](https://www.consumerfinance.gov/data-research/research-reports/2018-mortgage-market-activity-and-trends/#:~:text=median%20total%20loan%20costs%20increased%2021.8%20percent%20from%202021%20to%202022%2C%20to%20%246%2C000%20in%202022)
-          <br/>
-          [2] [oai_citation:4‡nerdwallet.com](https://www.nerdwallet.com/article/mortgages/no-closing-cost-mortgage)
-        </p>
-      </div>
+        <h3 style={{marginTop: 12}}>{t(lang, 'sources')}</h3>
+        <ol>
+          <li>[1] [oai_citation:3‡cfpb.gov](https://www.consumerfinance.gov/ask-cfpb/what-are-mortgage-closing-costs-en-120/)</li>
+          <li>[2] [oai_citation:4‡cfpb.gov](https://www.consumerfinance.gov/about-us/blog/the-cost-of-taking-out-a-mortgage-soared-in-2022/)</li>
+          <li>[3] [oai_citation:5‡cfpb.gov](https://www.consumerfinance.gov/ask-cfpb/what-are-lender-credits-and-how-do-they-work-en-114/)</li>
+        </ol>
+      </section>
 
-      <div className="bottom-nav">
-        <Link className="nav-link" href={`/${lang}/loan`}>{t(lang,'loan')}</Link>
-        <Link className="nav-link" href={`/${lang}/tax`}>{t(lang,'tax')}</Link>
-        <Link className="nav-link" href={`/${lang}/insurance`}>{t(lang,'insurance')}</Link>
-      </div>
-    </section>
+      <nav className="footer-nav">
+        <Link className="button ghost" href={`/${lang}/loan`}>{t(lang, 'navLoan')}</Link>
+        <Link className="button ghost" href={`/${lang}/tax`}>{t(lang, 'navTax')}</Link>
+        <Link className="button ghost" href={`/${lang}/insurance`}>{t(lang, 'navInsurance')}</Link>
+      </nav>
+    </div>
   );
 }
 

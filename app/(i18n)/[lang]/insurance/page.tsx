@@ -1,50 +1,51 @@
 import type { Metadata } from 'next';
+import { getAllLocales, t } from '@/lib/i18n';
 import Link from 'next/link';
-import { SUPPORTED_LANGS, t } from '../../../../lib/i18n';
-import InsuranceEstimator from '../../../components/InsuranceEstimator';
+import InsuranceClient from '@/lib/clients/InsuranceClient';
 
 export const revalidate = 86400;
 
-export function generateStaticParams() {
-  return SUPPORTED_LANGS.map((lang) => ({ lang }));
+export async function generateStaticParams() {
+  return getAllLocales().map((lang) => ({ lang }));
 }
 
 export async function generateMetadata({ params }: { params: { lang: string } }): Promise<Metadata> {
   const { lang } = params;
+  const year = new Date().getFullYear();
   return {
-    title: `${t(lang,'insuranceCalc')} – ${new Date().getFullYear()}`,
-    description: t(lang,'insuranceDesc')
+    title: `${t(lang, 'insuranceCalc')} – ${year}`,
+    description: `${t(lang, 'insuranceCalc')} for annual premium estimates.`
   };
 }
 
 export default function InsurancePage({ params }: { params: { lang: string } }) {
   const { lang } = params;
+
   return (
-    <section className="fade-in">
-      <div className="card">
-        <h1 className="title">{t(lang,'insuranceCalc')}</h1>
-        <p className="muted">{t(lang,'insuranceDesc')}</p>
-      </div>
+    <div className="page-enter page-enter-active">
+      <h1>{t(lang, 'insuranceCalc')}</h1>
+      <p className="muted">{t(lang, 'insuranceDisclaimer')}</p>
 
-      <InsuranceEstimator lang={lang} />
+      <InsuranceClient lang={lang} />
 
-      <div className="card">
-        <h2 className="title">{t(lang,'whyMatters')}</h2>
+      <section className="card" style={{marginTop: 16}}>
+        <h2>{t(lang, 'whyMatters')}</h2>
         <p>
-          Slow claim settlements and inefficient fraud case management create delays, reduce transparency, and erode trust. Policyholders and businesses can face cash‑flow strain while waiting for reimbursement, affecting payroll, repairs, or medical care. For insurers, operational bottlenecks raise administrative costs and damage reputation, which ultimately can lead to higher premiums and customer churn. Improving upstream risk assessment and downstream claims handling shortens cycle times and enhances satisfaction; until then, a quick premium estimate helps set expectations and budget for coverage alongside deductibles and exclusions.
+          Customers judge insurers by how quickly and transparently claims are settled. Slow handling—often caused by manual reviews, siloed data, and poor fraud triage—creates weeks‑long delays, frustrates policyholders, and erodes trust. When fraud detection is inefficient, genuine customers can be over‑scrutinized while organized fraud slips through, driving up loss ratios. Insurers then spend more on administration and investigations, and those costs can ultimately flow into higher premiums. Industry research highlights that modernizing claims with better triage, straight‑through processing, and analytics can cut cycle times and improve satisfaction; conversely, bottlenecks and opaque decisions damage reputation and retention.<sup>[1]</sup> For small businesses, delayed payouts limit working capital when it is most needed; for households, delays after a car crash or property loss can mean added out‑of‑pocket expenses and credit card debt.<sup>[2]</sup> A quick premium estimate sets expectations about ongoing costs, but the value of a policy also depends on claim service quality.
         </p>
-        <h3 className="title" style={{fontSize:'1.2rem'}}>Sources</h3>
-        <p className="muted">
-          [1] [oai_citation:5‡mckinsey.com](https://www.mckinsey.com/industries/financial-services/our-insights/fighting-claims-fraud-a-global-study-on-insurer-efforts-and-results)
-        </p>
-      </div>
+        <h3 style={{marginTop: 12}}>{t(lang, 'sources')}</h3>
+        <ol>
+          <li>[1] [oai_citation:6‡mckinsey.com](https://www.mckinsey.com/industries/financial-services/our-insights/insurance-claims-2030)</li>
+          <li>[2] [oai_citation:7‡deloitte.com](https://www2.deloitte.com/us/en/insights/industry/financial-services/insurance.html)</li>
+        </ol>
+      </section>
 
-      <div className="bottom-nav">
-        <Link className="nav-link" href={`/${lang}/loan`}>{t(lang,'loan')}</Link>
-        <Link className="nav-link" href={`/${lang}/mortgage`}>{t(lang,'mortgage')}</Link>
-        <Link className="nav-link" href={`/${lang}/tax`}>{t(lang,'tax')}</Link>
-      </div>
-    </section>
+      <nav className="footer-nav">
+        <Link className="button ghost" href={`/${lang}/loan`}>{t(lang, 'navLoan')}</Link>
+        <Link className="button ghost" href={`/${lang}/mortgage`}>{t(lang, 'navMortgage')}</Link>
+        <Link className="button ghost" href={`/${lang}/tax`}>{t(lang, 'navTax')}</Link>
+      </nav>
+    </div>
   );
 }
 
