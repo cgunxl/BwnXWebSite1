@@ -43,16 +43,9 @@ npm run start
 - Optionally set `NEXT_PUBLIC_SITE_URL` in project settings for canonical sitemap origins.
 
 ### GitHub Pages
-- Enable GitHub Pages to serve from the `out/` directory published by your CI.
-- Example GitHub Actions step after `npm run build`:
-```yaml
-- name: Upload artifact
-  uses: actions/upload-pages-artifact@v3
-  with:
-    path: out
-- name: Deploy to GitHub Pages
-  uses: actions/deploy-pages@v4
-```
+- Enable GitHub Pages to serve from the `GitHub Actions` deployment source.
+- This repository includes a workflow that builds and deploys the `out/` directory.
+- If deploying as a project page (`https://<user>.github.io/<repo>`), set env `NEXT_PUBLIC_BASE_PATH=/<repo>` in the workflow.
 
 ## Customization
 
