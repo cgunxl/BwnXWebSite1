@@ -243,3 +243,30 @@ export function getAllLocales(): LangCode[] {
   return SUPPORTED_LANGS;
 }
 
+export function isRtlLang(lang: string): boolean {
+  return lang === 'ar' || lang === 'fa';
+}
+
+export function getCurrencyForLang(lang: string): string {
+  switch (lang as LangCode) {
+    case 'en': return 'USD';
+    case 'es': return 'EUR';
+    case 'pt': return 'BRL';
+    case 'de': return 'EUR';
+    case 'fr': return 'EUR';
+    case 'ja': return 'JPY';
+    case 'ko': return 'KRW';
+    case 'zh': return 'CNY';
+    case 'th': return 'THB';
+    case 'ar': return 'AED';
+    case 'hi': return 'INR';
+    case 'id': return 'IDR';
+    case 'ru': return 'RUB';
+    case 'it': return 'EUR';
+    case 'nl': return 'EUR';
+    case 'vi': return 'VND';
+    case 'fa': return 'IRR';
+    default: return 'USD';
+  }
+}
+

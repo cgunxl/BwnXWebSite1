@@ -2,35 +2,36 @@
 
 import { useMemo, useState } from 'react';
 import { calcLoan } from '@/lib/calculators';
-import { t } from '@/lib/i18n';
+import { t, getCurrencyForLang } from '@/lib/i18n';
 
 export default function LoanClient({ lang }: { lang: string }) {
   const [principal, setPrincipal] = useState<number>(10000);
   const [rate, setRate] = useState<number>(7.5);
   const [years, setYears] = useState<number>(3);
 
-  const nf = useMemo(() => new Intl.NumberFormat(lang, { style: 'currency', currency: 'USD' }), [lang]);
+  const currency = getCurrencyForLang(lang);
+  const nf = useMemo(() => new Intl.NumberFormat(lang, { style: 'currency', currency }), [lang, currency]);
   const result = useMemo(() => calcLoan(principal, rate, years), [principal, rate, years]);
 
   return (
     <div className="card" style={{marginTop: 12}}>
       <div className="form-row">
         <div>
-          <div className="label">{t(lang, 'principal')}</div>
-          <input className="input" type="number" min={0} value={principal} onChange={(e) => setPrincipal(parseFloat(e.target.value || '0'))} />
+          <label className="label" htmlFor="loan-principal">{t(lang, 'principal')}</label>
+          <input id="loan-principal" className="input" type="number" min={0} value={principal} onChange={(e) => setPrincipal(parseFloat(e.target.value || '0'))} />
         </div>
         <div>
-          <div className="label">{t(lang, 'interestRate')}</div>
-          <input className="input" type="number" min={0} step={0.01} value={rate} onChange={(e) => setRate(parseFloat(e.target.value || '0'))} />
+          <label className="label" htmlFor="loan-rate">{t(lang, 'interestRate')}</label>
+          <input id="loan-rate" className="input" type="number" min={0} step={0.01} value={rate} onChange={(e) => setRate(parseFloat(e.target.value || '0'))} />
         </div>
       </div>
       <div className="form-row">
         <div>
-          <div className="label">{t(lang, 'years')}</div>
-          <input className="input" type="number" min={0} step={1} value={years} onChange={(e) => setYears(parseFloat(e.target.value || '0'))} />
+          <label className="label" htmlFor="loan-years">{t(lang, 'years')}</label>
+          <input id="loan-years" className="input" type="number" min={0} step={1} value={years} onChange={(e) => setYears(parseFloat(e.target.value || '0'))} />
         </div>
-        <div style={{display:'flex', alignItems:'flex-end'}}>
-          <button className="button" type="button">{t(lang, 'calculate')}</button>
+        <div style={{display:'flex', alignItems:'flex-end'}} aria-hidden>
+          <button className="button" type="button" disabled>{t(lang, 'results')}</button>
         </div>
       </div>
       <div className="result">
