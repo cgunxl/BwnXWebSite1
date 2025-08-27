@@ -89,6 +89,12 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,bmiCalc: 'BMI Calculator'
     ,bmrCalc: 'BMR Calculator'
     ,tdeeCalc: 'TDEE Calculator'
+    ,macroCalc: 'Macro Calculator'
+    ,waterIntakeCalc: 'Water Intake Calculator'
+    ,idealWeightCalc: 'Ideal Weight Calculator'
+    ,bodyFatCalc: 'Body Fat Calculator'
+    ,runningPaceCalc: 'Running Pace Calculator'
+    ,marathonTimeCalc: 'Marathon Time Calculator'
   },
   es: {
     siteTitle: 'Centro Financiero',
@@ -347,6 +353,12 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,bmiCalc: 'คำนวณ BMI'
     ,bmrCalc: 'คำนวณ BMR'
     ,tdeeCalc: 'คำนวณ TDEE'
+    ,macroCalc: 'คำนวณสัดส่วนสารอาหาร (Macro)'
+    ,waterIntakeCalc: 'คำนวณปริมาณน้ำที่ควรดื่ม'
+    ,idealWeightCalc: 'คำนวณน้ำหนักเหมาะสม'
+    ,bodyFatCalc: 'คำนวณเปอร์เซ็นต์ไขมัน'
+    ,runningPaceCalc: 'คำนวณเพซวิ่ง'
+    ,marathonTimeCalc: 'คาดการณ์เวลา Marathon'
   },
   ar: { ...{} as any },
   hi: { ...{} as any },
