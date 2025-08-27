@@ -113,6 +113,12 @@ main { padding: 20px 0; }
   transition: opacity 400ms ease, transform 400ms ease;
 }
 
+/* Subtle hover lift for cards (GPU-friendly, avoids layout shifts) */
+.card:hover {
+  transform: translateY(-2px);
+  transition: transform 180ms ease;
+}
+
 .card-grid {
   display: grid;
   grid-template-columns: repeat(1, minmax(0, 1fr));

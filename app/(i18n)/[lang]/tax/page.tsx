@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { getAllLocales, t } from '@/lib/i18n';
 import Link from 'next/link';
 import TaxClient from '@/lib/clients/TaxClient';
+import { getDefaultCountryForLang } from '@/lib/countries';
 
 export const revalidate = 86400;
 
@@ -28,13 +29,14 @@ export async function generateMetadata({ params }: { params: { lang: string } })
 
 export default function TaxPage({ params }: { params: { lang: string } }) {
   const { lang } = params;
+  const country = getDefaultCountryForLang(lang);
 
   return (
     <div className="page-enter page-enter-active">
       <h1>{t(lang, 'taxCalc')}</h1>
       <p className="muted">{t(lang, 'taxDisclaimer')}</p>
 
-      <TaxClient lang={lang} />
+      <TaxClient lang={lang} country={country} />
 
       <section className="card" style={{marginTop: 16}}>
         <h2>{t(lang, 'whyMatters')}</h2>

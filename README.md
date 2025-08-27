@@ -4,6 +4,7 @@ Production‑ready, static‑exportable finance calculators with multilingual ro
 
 ## Features
 - 17 languages via URL segment: en, es, pt, de, fr, ja, ko, zh, th, ar, hi, id, ru, it, nl, vi, fa
+- 18 countries (country-aware defaults): TH, US, GB, CA, AU, SG, MY, ID, VN, PH, KH, LA, MM, CN, JP, KR, IN, TW
 - App Router (Next.js 14), Static Site Generation with revalidate 86400
 - Four calculators: Loan, Mortgage (with closing costs), Progressive Tax, Insurance Premium
 - Localized UI strings with graceful English fallback
@@ -64,7 +65,8 @@ Edit `lib/i18n.ts` to add or refine translations. The `t(lang,key)` helper falls
 Calculator logic lives in `lib/calculators.ts`:
 - calcLoan(principal, ratePercent, years)
 - calcMortgage(principal, ratePercent, years, closing)
-- calcTax(income)
+- calcTax(income, brackets)
+  - Country brackets provided by `lib/countries.ts`
 - calcInsurance(amount, annualRate)
 
 ### SEO

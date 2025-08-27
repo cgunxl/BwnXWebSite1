@@ -1,13 +1,23 @@
 import type { MetadataRoute } from 'next';
 import { getAllLocales } from '@/lib/i18n';
+import { getAllCountries } from '@/lib/countries';
 
 export const revalidate = 86400;
 
 function buildUrls(origin: string, basePath: string) {
   const langs = getAllLocales();
+  const countries = getAllCountries();
   const paths = ['', 'loan', 'mortgage', 'tax', 'insurance', 'privacy', 'terms', 'contact'];
   const urls: string[] = [];
   for (const lang of langs) {
+    for (const country of countries) {
+      // country-specific hubs
+      const hubPath = `${basePath}/${lang}/${country}`;
+      urls.push(`${origin}${hubPath}`);
+      for (const p of ['loan','mortgage','tax']) {
+        urls.push(`${origin}${hubPath}/${p}`);
+      }
+    }
     for (const p of paths) {
       const path = p ? `${basePath}/${lang}/${p}` : `${basePath}/${lang}`;
       urls.push(`${origin}${path}`);
