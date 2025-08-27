@@ -22,9 +22,10 @@ export async function generateMetadata(): Promise<Metadata> {
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
   const siteUrl = new URL(basePath || '/', origin).toString().replace(/\/$/, '');
 
-  const languages = Object.fromEntries(
+  const languages: Record<string, string> = Object.fromEntries(
     getAllLocales().map((lc) => [lc, `${origin}${basePath}/${lc}`])
   );
+  languages['x-default'] = `${origin}${basePath}/en`;
 
   const ogImage = `${origin}${basePath}/og.png`;
 
@@ -61,8 +62,12 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
+  const origin = process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com';
+  const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
+  const siteUrl = new URL(basePath || '/', origin).toString().replace(/\/$/, '');
+
   return (
-    <html lang="en">
+    <html lang="en" dir="ltr" suppressHydrationWarning>
       <body>
         <a href="#main" className="sr-only skip-link">Skip to content</a>
         <HeaderClient />
@@ -78,6 +83,25 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </main>
         {/* Ad Slot Bottom */}
         <div id="ad-bottom" style={{minHeight:'90px'}}></div>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'WebSite',
+            name: 'Finance Hub',
+            url: siteUrl,
+            inLanguage: getAllLocales().join(',')
+          }) }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'Organization',
+            name: 'Finance Hub',
+            url: siteUrl
+          }) }}
+        />
         <FooterClient />
       </body>
     </html>

@@ -21,5 +21,5 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
   const urls = buildUrls(origin, basePath);
   const lastmod = new Date().toISOString();
-  return urls.map((u) => ({ url: u, lastModified: lastmod }));
+  return urls.map((u) => ({ url: u, lastModified: lastmod, changeFrequency: 'weekly', priority: 0.7 }));
 }
