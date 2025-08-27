@@ -1,6 +1,9 @@
 "use client";
 
 import { useEffect, useState } from 'react';
+import { usePathname } from 'next/navigation';
+import { t } from '@/lib/i18n';
+import { getLangFromPath } from '@/lib/path';
 
 const CONSENT_KEY = "fh-consent";
 
@@ -11,6 +14,8 @@ type Props = { onChange?: (consented: boolean) => void };
 export default function ConsentBannerClient({ onChange }: Props) {
 	const [choice, setChoice] = useState<ConsentValue>(null);
 	const [visible, setVisible] = useState(false);
+	const pathname = usePathname() || '/';
+	const lang = getLangFromPath(pathname);
 
 	useEffect(() => {
 		if (typeof window === "undefined") return;
@@ -38,10 +43,10 @@ export default function ConsentBannerClient({ onChange }: Props) {
 		<div style={{ position: 'fixed', bottom: 12, left: 12, right: 12, zIndex: 1000 }}>
 			<div style={{ maxWidth: 960, margin: '0 auto' }}>
 				<div className="card" role="dialog" aria-live="polite" aria-label="Consent">
-					<p style={{ marginTop: 0, marginBottom: 8 }}>We use anonymized analytics after consent. You can change your choice anytime.</p>
+					<p style={{ marginTop: 0, marginBottom: 8 }}>{t(lang, 'consentMessage')}</p>
 					<div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-						<button className="button" onClick={() => decide("accepted")}>Accept</button>
-						<button className="button ghost" onClick={() => decide("declined")}>Decline</button>
+						<button className="button" onClick={() => decide("accepted")}>{t(lang, 'accept')}</button>
+						<button className="button ghost" onClick={() => decide("declined")}>{t(lang, 'decline')}</button>
 					</div>
 				</div>
 			</div>
