@@ -44,6 +44,12 @@ export const REGISTRY: CalculatorEntry[] = [
   { id: 'body-fat' as any, path: (lang) => `/${lang}/body-fat`, titleKey: 'bodyFatCalc', description: 'Body fat percentage estimate', category: 'health', keywords: ['body fat','bf%'] },
   { id: 'running-pace' as any, path: (lang) => `/${lang}/running-pace`, titleKey: 'runningPaceCalc', description: 'Pace per km from distance and time', category: 'health', keywords: ['running','pace'] },
   { id: 'marathon-time' as any, path: (lang) => `/${lang}/marathon-time`, titleKey: 'marathonTimeCalc', description: 'Estimated marathon time from pace', category: 'health', keywords: ['marathon','race time'] }
+  ,{ id: 'vo2max' as any, path: (lang) => `/${lang}/vo2max`, titleKey: 'vo2maxCalc', description: 'VO2 Max via Cooper test', category: 'health', keywords: ['vo2','cooper'] }
+  ,{ id: 'heart-rate' as any, path: (lang) => `/${lang}/heart-rate`, titleKey: 'heartRateCalc', description: 'Max HR and HR reserve', category: 'health', keywords: ['heart rate','hr'] }
+  ,{ id: 'target-hr' as any, path: (lang) => `/${lang}/target-hr`, titleKey: 'targetHrCalc', description: 'Target heart rate zones', category: 'health', keywords: ['karvonen','zones'] }
+  ,{ id: 'bac' as any, path: (lang) => `/${lang}/bac`, titleKey: 'bacCalc', description: 'Blood alcohol concentration estimate', category: 'health', keywords: ['bac','alcohol'] }
+  ,{ id: 'sleep' as any, path: (lang) => `/${lang}/sleep`, titleKey: 'sleepCalc', description: 'Suggested bedtime from cycles', category: 'health', keywords: ['sleep','cycles'] }
+  ,{ id: 'cholesterol-ratio' as any, path: (lang) => `/${lang}/cholesterol-ratio`, titleKey: 'cholesterolRatioCalc', description: 'Total to HDL ratio', category: 'health', keywords: ['cholesterol','hdl'] }
   // More entries are added progressively in batches
 ];
 

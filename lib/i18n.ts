@@ -95,6 +95,12 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,bodyFatCalc: 'Body Fat Calculator'
     ,runningPaceCalc: 'Running Pace Calculator'
     ,marathonTimeCalc: 'Marathon Time Calculator'
+    ,vo2maxCalc: 'VO2 Max Calculator'
+    ,heartRateCalc: 'Heart Rate Calculator'
+    ,targetHrCalc: 'Target Heart Rate Calculator'
+    ,bacCalc: 'BAC Calculator'
+    ,sleepCalc: 'Sleep Calculator'
+    ,cholesterolRatioCalc: 'Cholesterol Ratio Calculator'
   },
   es: {
     siteTitle: 'Centro Financiero',
@@ -359,6 +365,12 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,bodyFatCalc: 'คำนวณเปอร์เซ็นต์ไขมัน'
     ,runningPaceCalc: 'คำนวณเพซวิ่ง'
     ,marathonTimeCalc: 'คาดการณ์เวลา Marathon'
+    ,vo2maxCalc: 'คำนวณ VO2 Max'
+    ,heartRateCalc: 'คำนวณอัตราการเต้นหัวใจ'
+    ,targetHrCalc: 'คำนวณโซนอัตราการเต้นหัวใจ'
+    ,bacCalc: 'คำนวณแอลกอฮอล์ในเลือด (BAC)'
+    ,sleepCalc: 'คำนวณเวลานอน'
+    ,cholesterolRatioCalc: 'คำนวณอัตราส่วนคอเลสเตอรอล'
   },
   ar: { ...{} as any },
   hi: { ...{} as any },
