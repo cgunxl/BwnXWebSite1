@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
-import { SUPPORTED_LANGS, t, isRtlLang } from './i18n';
+import { SUPPORTED_LANGS, t, isRtlLang, getNativeName } from './i18n';
 import { getLangFromPath, replaceLang } from './path';
 
 export default function HeaderClient() {
@@ -56,7 +56,7 @@ export default function HeaderClient() {
               style={{ background: 'transparent', border: 'none', outline: 'none' }}
             >
               {SUPPORTED_LANGS.map((lc) => (
-                <option key={lc} value={lc}>{lc}</option>
+                <option key={lc} value={lc}>{getNativeName(lc)}</option>
               ))}
             </select>
           </label>

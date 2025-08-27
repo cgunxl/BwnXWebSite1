@@ -349,3 +349,28 @@ export function getCurrencyForLang(lang: string): string {
   }
 }
 
+const NATIVE_NAMES: Record<LangCode, string> = {
+  en: 'English',
+  es: 'Español',
+  pt: 'Português',
+  de: 'Deutsch',
+  fr: 'Français',
+  ja: '日本語',
+  ko: '한국어',
+  zh: '中文',
+  th: 'ไทย',
+  ar: 'العربية',
+  hi: 'हिन्दी',
+  id: 'Bahasa Indonesia',
+  ru: 'Русский',
+  it: 'Italiano',
+  nl: 'Nederlands',
+  vi: 'Tiếng Việt',
+  fa: 'فارسی'
+};
+
+export function getNativeName(lang: string): string {
+  const l = (SUPPORTED_LANGS as string[]).includes(lang) ? (lang as LangCode) : 'en';
+  return NATIVE_NAMES[l];
+}
+

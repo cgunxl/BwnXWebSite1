@@ -199,3 +199,69 @@ small.muted { color: var(--muted); }
   margin: 0;
   white-space: normal;
 }
+
+/* Enhanced interactions & animations */
+.card, .button, .input, .nav a, .select select {
+  transition: transform 200ms ease, box-shadow 200ms ease, background-color 200ms ease, color 200ms ease, border-color 200ms ease, opacity 200ms ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px var(--shadow);
+}
+
+.button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--shadow);
+}
+
+.button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px var(--shadow);
+}
+
+.input:focus, select:focus, .button:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.35);
+  border-color: var(--accent);
+}
+
+@keyframes fadeSlideInUp {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.lang-grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 12px;
+}
+
+@media (min-width: 700px) {
+  .lang-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+
+.lang-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  animation: fadeSlideInUp 500ms ease both;
+}
+
+.lang-name {
+  font-weight: 600;
+}
+
+.lang-code {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card, .button, .input, .nav a, .select select {
+    transition: none;
+  }
+  .lang-card {
+    animation: none;
+  }
+}
