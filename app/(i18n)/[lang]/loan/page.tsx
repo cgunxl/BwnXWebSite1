@@ -15,7 +15,10 @@ export async function generateMetadata({ params }: { params: { lang: string } })
   const origin = process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com';
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
   const url = `${origin}${basePath}/${lang}/loan`;
-  const languages = Object.fromEntries(getAllLocales().map((lc) => [lc, `${origin}${basePath}/${lc}/loan`]));
+  const languages: Record<string, string> = Object.fromEntries(
+    getAllLocales().map((lc) => [lc, `${origin}${basePath}/${lc}/loan`])
+  );
+  languages['x-default'] = `${origin}${basePath}/en/loan`;
   return {
     title: `${t(lang, 'loanCalc')} – ${year}`,
     description: `${t(lang, 'loanCalc')} to estimate monthly payments, total, and interest.`,
