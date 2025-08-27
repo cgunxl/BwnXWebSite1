@@ -6,6 +6,9 @@ import { useEffect, useMemo, useState } from 'react';
 import { SUPPORTED_LANGS, t, isRtlLang, getNativeName } from './i18n';
 import { getLangFromPath, replaceLang, getCountryFromPath, replaceCountry } from './path';
 import { SUPPORTED_COUNTRIES } from './countries';
+import dynamic from 'next/dynamic';
+
+const SearchClient = dynamic(() => import('./SearchClient'), { ssr: false });
 
 export default function HeaderClient() {
   const pathname = usePathname() || '/';
@@ -49,6 +52,9 @@ export default function HeaderClient() {
           <Link href={`/${currentLang}/insurance`}>{t(currentLang, 'navInsurance')}</Link>
         </nav>
         <div className="controls">
+          <div className="hide-on-mobile" style={{ minWidth: 220 }}>
+            <SearchClient lang={currentLang} />
+          </div>
           <label className="select" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
             <span className="sr-only">{t(currentLang, 'language')}</span>
             <select

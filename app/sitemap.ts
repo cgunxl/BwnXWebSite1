@@ -7,14 +7,14 @@ export const revalidate = 86400;
 function buildUrls(origin: string, basePath: string) {
   const langs = getAllLocales();
   const countries = getAllCountries();
-  const paths = ['', 'loan', 'mortgage', 'tax', 'insurance', 'privacy', 'terms', 'contact'];
+  const paths = ['', 'loan', 'mortgage', 'tax', 'insurance', 'vat', 'paycheck', 'currency', 'compound', 'savings-goal', 'credit-card', 'privacy', 'terms', 'contact'];
   const urls: string[] = [];
   for (const lang of langs) {
     for (const country of countries) {
       // country-specific hubs
       const hubPath = `${basePath}/${lang}/${country}`;
       urls.push(`${origin}${hubPath}`);
-      for (const p of ['loan','mortgage','tax']) {
+      for (const p of ['loan','mortgage','tax','vat']) {
         urls.push(`${origin}${hubPath}/${p}`);
       }
     }

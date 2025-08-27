@@ -62,7 +62,15 @@ const dict: Record<LangCode, Record<string, string>> = {
     rateUnit: 'Rate Unit',
     percent: 'Percent',
     decimal: 'Decimal',
-    currency: 'Currency'
+    currency: 'Currency',
+    search: 'Search',
+    searchPlaceholder: 'Search calculators... ',
+    vatCalc: 'VAT Calculator',
+    paycheckCalc: 'Paycheck Calculator',
+    currencyConverter: 'Currency Converter',
+    compoundCalc: 'Compound Interest Calculator',
+    savingsGoalCalc: 'Savings Goal Calculator',
+    creditCardCalc: 'Credit Card Interest Calculator'
   },
   es: {
     siteTitle: 'Centro Financiero',
@@ -294,7 +302,15 @@ const dict: Record<LangCode, Record<string, string>> = {
     rateUnit: 'หน่วยอัตรา',
     percent: 'เปอร์เซ็นต์',
     decimal: 'ทศนิยม',
-    currency: 'สกุลเงิน'
+    currency: 'สกุลเงิน',
+    search: 'ค้นหา',
+    searchPlaceholder: 'ค้นหาเครื่องคิดเลข...',
+    vatCalc: 'เครื่องคิดเลขภาษีมูลค่าเพิ่ม',
+    paycheckCalc: 'เครื่องคำนวณเงินเข้าบัญชี',
+    currencyConverter: 'ตัวแปลงสกุลเงิน',
+    compoundCalc: 'เครื่องคิดเลขดอกเบี้ยทบต้น',
+    savingsGoalCalc: 'เครื่องคำนวณเป้าหมายการออม',
+    creditCardCalc: 'ดอกเบี้ยบัตรเครดิต'
   },
   ar: { ...{} as any },
   hi: { ...{} as any },
