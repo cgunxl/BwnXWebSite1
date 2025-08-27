@@ -9,14 +9,17 @@ export type CalculatorId =
   | 'compound'
   | 'savings'
   | 'credit-card'
-  | 'car-loan';
+  | 'car-loan'
+  | 'bmi'
+  | 'bmr'
+  | 'tdee';
 
 export type CalculatorEntry = {
   id: CalculatorId;
   path: (lang: string) => string;
   titleKey: string;
   description?: string;
-  category: 'finance' | 'tax' | 'insurance' | 'conversion' | 'savings';
+  category: 'finance' | 'tax' | 'insurance' | 'conversion' | 'savings' | 'health';
   keywords: string[];
 };
 
@@ -31,7 +34,10 @@ export const REGISTRY: CalculatorEntry[] = [
   { id: 'compound', path: (lang) => `/${lang}/compound`, titleKey: 'compoundCalc', description: 'Compound interest with contributions', category: 'savings', keywords: ['compound interest','investment','apy'] },
   { id: 'savings', path: (lang) => `/${lang}/savings-goal`, titleKey: 'savingsGoalCalc', description: 'How much to save to reach a goal', category: 'savings', keywords: ['savings','goal','future value'] },
   { id: 'credit-card', path: (lang) => `/${lang}/credit-card`, titleKey: 'creditCardCalc', description: 'Credit card interest and payoff time', category: 'finance', keywords: ['credit card','apr','payoff','interest'] },
-  { id: 'car-loan', path: (lang) => `/${lang}/car-loan`, titleKey: 'carLoanCalc', description: 'Car loan with down payment, taxes and fees', category: 'finance', keywords: ['car loan','auto loan','vehicle','sales tax'] }
+  { id: 'car-loan', path: (lang) => `/${lang}/car-loan`, titleKey: 'carLoanCalc', description: 'Car loan with down payment, taxes and fees', category: 'finance', keywords: ['car loan','auto loan','vehicle','sales tax'] },
+  { id: 'bmi', path: (lang) => `/${lang}/bmi`, titleKey: 'bmiCalc', description: 'Body Mass Index based on height and weight', category: 'health', keywords: ['bmi','body mass index','health'] },
+  { id: 'bmr', path: (lang) => `/${lang}/bmr`, titleKey: 'bmrCalc', description: 'Basal Metabolic Rate (Mifflin–St Jeor)', category: 'health', keywords: ['bmr','basal metabolic rate'] },
+  { id: 'tdee', path: (lang) => `/${lang}/tdee`, titleKey: 'tdeeCalc', description: 'Total Daily Energy Expenditure', category: 'health', keywords: ['tdee','calories','energy'] }
   // More entries are added progressively in batches
 ];
 

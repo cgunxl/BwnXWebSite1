@@ -86,6 +86,9 @@ const dict: Record<LangCode, Record<string, string>> = {
     nftProfitCalc: 'NFT Profit Calculator',
     sipCalc: 'SIP Calculator',
     mutualFundCalc: 'Mutual Fund Calculator'
+    ,bmiCalc: 'BMI Calculator'
+    ,bmrCalc: 'BMR Calculator'
+    ,tdeeCalc: 'TDEE Calculator'
   },
   es: {
     siteTitle: 'Centro Financiero',
@@ -341,6 +344,9 @@ const dict: Record<LangCode, Record<string, string>> = {
     nftProfitCalc: 'คำนวณกำไร NFT',
     sipCalc: 'คำนวณ SIP (อินเดีย)',
     mutualFundCalc: 'คำนวณกองทุนรวม'
+    ,bmiCalc: 'คำนวณ BMI'
+    ,bmrCalc: 'คำนวณ BMR'
+    ,tdeeCalc: 'คำนวณ TDEE'
   },
   ar: { ...{} as any },
   hi: { ...{} as any },

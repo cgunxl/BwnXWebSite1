@@ -7,7 +7,7 @@ export const revalidate = 86400;
 function buildUrls(origin: string, basePath: string) {
   const langs = getAllLocales();
   const countries = getAllCountries();
-  const paths = ['', 'loan', 'mortgage', 'tax', 'insurance', 'vat', 'paycheck', 'currency', 'compound', 'savings-goal', 'credit-card', 'car-loan', 'property-tax', 'inflation', 'roi', 'stock-return', 'dividend', 'tip', 'discount', 'sales-tax', 'crypto-profit', 'bitcoin-mining', 'eth-gas', 'nft-profit', 'sip', 'mutual-fund', 'hourly-wage', 'overtime', 'freelancer-rate', 'business-loan', 'refinance', 'debt-payoff', 'amortization', 'lease', 'break-even', 'profit-margin', 'markup', 'bmi', 'privacy', 'terms', 'contact'];
+  const paths = ['', 'loan', 'mortgage', 'tax', 'insurance', 'vat', 'paycheck', 'currency', 'compound', 'savings-goal', 'credit-card', 'car-loan', 'property-tax', 'inflation', 'roi', 'stock-return', 'dividend', 'tip', 'discount', 'sales-tax', 'crypto-profit', 'bitcoin-mining', 'eth-gas', 'nft-profit', 'sip', 'mutual-fund', 'hourly-wage', 'overtime', 'freelancer-rate', 'business-loan', 'refinance', 'debt-payoff', 'amortization', 'lease', 'break-even', 'profit-margin', 'markup', 'bmi', 'bmr', 'tdee', 'privacy', 'terms', 'contact'];
   const urls: string[] = [];
   for (const lang of langs) {
     for (const country of countries) {
