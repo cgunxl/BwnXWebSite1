@@ -70,7 +70,8 @@ const dict: Record<LangCode, Record<string, string>> = {
     currencyConverter: 'Currency Converter',
     compoundCalc: 'Compound Interest Calculator',
     savingsGoalCalc: 'Savings Goal Calculator',
-    creditCardCalc: 'Credit Card Interest Calculator'
+    creditCardCalc: 'Credit Card Interest Calculator',
+    carLoanCalc: 'Car Loan Calculator'
   },
   es: {
     siteTitle: 'Centro Financiero',
@@ -310,7 +311,8 @@ const dict: Record<LangCode, Record<string, string>> = {
     currencyConverter: 'ตัวแปลงสกุลเงิน',
     compoundCalc: 'เครื่องคิดเลขดอกเบี้ยทบต้น',
     savingsGoalCalc: 'เครื่องคำนวณเป้าหมายการออม',
-    creditCardCalc: 'ดอกเบี้ยบัตรเครดิต'
+    creditCardCalc: 'ดอกเบี้ยบัตรเครดิต',
+    carLoanCalc: 'เครื่องคำนวณค่างวดรถยนต์'
   },
   ar: { ...{} as any },
   hi: { ...{} as any },
