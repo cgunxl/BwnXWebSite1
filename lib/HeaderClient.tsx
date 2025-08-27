@@ -4,12 +4,14 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useEffect, useMemo, useState } from 'react';
 import { SUPPORTED_LANGS, t, isRtlLang, getNativeName } from './i18n';
-import { getLangFromPath, replaceLang } from './path';
+import { getLangFromPath, replaceLang, getCountryFromPath, replaceCountry } from './path';
+import { SUPPORTED_COUNTRIES } from './countries';
 
 export default function HeaderClient() {
   const pathname = usePathname() || '/';
   const router = useRouter();
   const currentLang = useMemo(() => getLangFromPath(pathname), [pathname]);
+  const currentCountry = useMemo(() => getCountryFromPath(pathname) || 'th', [pathname]);
 
   const [isDark, setIsDark] = useState(false);
 
@@ -57,6 +59,19 @@ export default function HeaderClient() {
             >
               {SUPPORTED_LANGS.map((lc) => (
                 <option key={lc} value={lc}>{getNativeName(lc)}</option>
+              ))}
+            </select>
+          </label>
+          <label className="select" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            <span className="sr-only">Country</span>
+            <select
+              aria-label="Country"
+              value={currentCountry}
+              onChange={(e) => router.push(replaceCountry(pathname, e.target.value) as any)}
+              style={{ background: 'transparent', border: 'none', outline: 'none' }}
+            >
+              {SUPPORTED_COUNTRIES.map((cc) => (
+                <option key={cc} value={cc}>{cc.toUpperCase()}</option>
               ))}
             </select>
           </label>

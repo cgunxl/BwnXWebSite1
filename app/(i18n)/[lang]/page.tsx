@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import type { Metadata } from 'next';
 import { getAllLocales, t } from '@/lib/i18n';
+import { getAllCountries } from '@/lib/countries';
 
 export const revalidate = 86400;
 
@@ -54,6 +55,18 @@ export default function HubPage({ params }: { params: { lang: string } }) {
           <Link className="button" href={`/${lang}/insurance`} style={{display:'inline-block', marginTop: 8}}>{t(lang, 'explore')}</Link>
         </div>
       </div>
+
+      <section className="card" style={{marginTop: 16}}>
+        <h2>Browse by country</h2>
+        <div className="lang-grid" style={{ marginTop: 8 }}>
+          {getAllCountries().map((cc) => (
+            <Link key={cc} href={`/${lang}/${cc}`} className="card lang-card">
+              <span className="lang-name">{cc.toUpperCase()}</span>
+              <span className="lang-code">{cc}</span>
+            </Link>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

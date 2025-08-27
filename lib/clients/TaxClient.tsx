@@ -3,15 +3,17 @@
 import { useMemo, useState } from 'react';
 import { TAX_BRACKETS, calcTax } from '@/lib/calculators';
 import { t, getCurrencyForLang } from '@/lib/i18n';
+import { getCurrencyForCountry, getTaxBracketsForCountry } from '@/lib/countries';
 import { toNumberSafe } from '@/lib/number';
 
-export default function TaxClient({ lang }: { lang: string }) {
+export default function TaxClient({ lang, country }: { lang: string, country?: string }) {
   const [income, setIncome] = useState<number>(120000);
 
-  const currency = getCurrencyForLang(lang);
+  const currency = country ? getCurrencyForCountry(country) : getCurrencyForLang(lang);
   const nf = useMemo(() => new Intl.NumberFormat(lang, { style: 'currency', currency }), [lang, currency]);
   const pf = useMemo(() => new Intl.NumberFormat(lang, { style: 'percent', maximumFractionDigits: 2 }), [lang]);
-  const result = useMemo(() => calcTax(income), [income]);
+  const brackets = useMemo(() => getTaxBracketsForCountry(country), [country]);
+  const result = useMemo(() => calcTax(income, brackets), [income, brackets]);
 
   return (
     <div className="card" style={{marginTop: 12}}>
@@ -28,7 +30,7 @@ export default function TaxClient({ lang }: { lang: string }) {
         <div><strong>{t(lang, 'totalTax')}:</strong> {nf.format(result.tax || 0)}</div>
         <div><strong>{t(lang, 'effectiveTaxRate')}:</strong> {pf.format(result.effectiveRate || 0)}</div>
       </div>
-      <small className="muted" style={{display:'block', marginTop: 8}}>Brackets: {TAX_BRACKETS.map((b, i) => `${i === 0 ? 0 : TAX_BRACKETS[i-1].limit}–${b.limit === Number.POSITIVE_INFINITY ? '∞' : b.limit} @ ${(b.rate*100).toFixed(0)}%`).join('; ')}</small>
+      <small className="muted" style={{display:'block', marginTop: 8}}>Brackets: {brackets.map((b, i) => `${i === 0 ? 0 : brackets[i-1].limit}–${b.limit === Number.POSITIVE_INFINITY ? '∞' : b.limit} @ ${(b.rate*100).toFixed(0)}%`).join('; ')}</small>
     </div>
   );
 }
