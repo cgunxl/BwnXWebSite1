@@ -392,11 +392,11 @@ export const FAQ_CONTENT: FaqContentMap = {
 };
 
 export const COUNTRY_LABELS: Record<CountryCode, string> = {
-  GLOBAL: 'Global',
-  US: 'United States',
-  UK: 'United Kingdom',
-  TH: 'Thailand',
-  IN: 'India',
-  EU: 'European Union'
+  GLOBAL: '🌐 Global',
+  US: '🇺🇸 United States',
+  UK: '🇬🇧 United Kingdom',
+  TH: '🇹🇭 Thailand',
+  IN: '🇮🇳 India',
+  EU: '🇪🇺 European Union'
 };
 

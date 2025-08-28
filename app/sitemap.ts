@@ -11,7 +11,6 @@ function buildUrls(origin: string, basePath: string) {
   const urls: string[] = [];
   for (const lang of langs) {
     for (const country of countries) {
-      // country-specific hubs
       const hubPath = `${basePath}/${lang}/${country}`;
       urls.push(`${origin}${hubPath}`);
       for (const p of ['loan','mortgage','tax','vat']) {

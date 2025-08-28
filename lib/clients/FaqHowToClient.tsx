@@ -41,12 +41,25 @@ export default function FaqHowToClient({ lang, slug, defaultCountry = 'GLOBAL' }
   }
 
   return (
-    <section className="card" style={{ marginTop: 16 }}>
+    <section className="card fade-swap" style={{ marginTop: 16, position: 'relative' }}>
       {available.length > 1 ? (
         <div className="form-row" style={{ alignItems: 'center', marginBottom: 8 }}>
           <div>
             <label className="label" htmlFor={`country-${slug}`}>{t(lang, 'selectCountry')}</label>
-            <select id={`country-${slug}`} className="input" value={country} onChange={(e) => setCountry(e.target.value as CountryCode)}>
+            <select
+              id={`country-${slug}`}
+              className="input"
+              value={country}
+              onChange={(e) => setCountry(e.target.value as CountryCode)}
+              onClick={(e) => {
+                const el = (e.currentTarget as HTMLElement).closest('section');
+                if (el) {
+                  el.classList.remove('fade-swap');
+                  void el.offsetWidth;
+                  el.classList.add('fade-swap');
+                }
+              }}
+            >
               {available.map((c) => (
                 <option key={c} value={c}>{COUNTRY_LABELS[c]}</option>
               ))}
