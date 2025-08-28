@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { getAllLocales, t } from '@/lib/i18n';
 import Link from 'next/link';
 import PropertyTaxClient from '@/lib/clients/PropertyTaxClient';
+import FaqHowToClient from '@/lib/clients/FaqHowToClient';
 
 export const revalidate = 86400;
 
@@ -32,12 +33,7 @@ export default function PropertyTaxPage({ params }: { params: { lang: string } }
     <div className="page-enter page-enter-active">
       <h1>Property Tax Calculator</h1>
       <PropertyTaxClient lang={lang} />
-      <section className="card" style={{marginTop: 16}}>
-        <h2>{t(lang, 'sources')}</h2>
-        <ol>
-          <li>[1] Local property tax rates and exemptions vary; consult municipal resources.</li>
-        </ol>
-      </section>
+      <FaqHowToClient lang={lang} slug="property-tax" />
       <nav className="footer-nav">
         <Link className="button ghost" href={`/${lang}/mortgage`}>{t(lang, 'mortgageCalc')}</Link>
       </nav>

@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getAllLocales } from '@/lib/i18n';
 import DebtPayoffClient from '@/lib/clients/DebtPayoffClient';
+import FaqHowToClient from '@/lib/clients/FaqHowToClient';
 
 export const revalidate = 86400;
 
@@ -24,6 +25,7 @@ export default function DebtPayoffPage({ params }: { params: { lang: string } })
     <div className="page-enter page-enter-active">
       <h1>Debt Payoff Calculator</h1>
       <DebtPayoffClient lang={lang} />
+      <FaqHowToClient lang={lang} slug="debt-payoff" />
     </div>
   );
 }

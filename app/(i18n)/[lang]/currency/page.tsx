@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { getAllLocales, t } from '@/lib/i18n';
 import Link from 'next/link';
 import CurrencyClient from '@/lib/clients/CurrencyClient';
+import FaqHowToClient from '@/lib/clients/FaqHowToClient';
 
 export const revalidate = 3600; // rates change more often
 
@@ -33,13 +34,7 @@ export default function CurrencyPage({ params }: { params: { lang: string } }) {
       <h1>{t(lang, 'currencyConverter')}</h1>
       <p className="muted">Powered by ECB reference rates via exchangerate.host.</p>
       <CurrencyClient lang={lang} />
-      <section className="card" style={{marginTop: 16}}>
-        <h2>{t(lang, 'sources')}</h2>
-        <ol>
-          <li>[1] ECB reference rates: [oai_citation:10‡ecb.europa.eu](https://www.ecb.europa.eu/stats/eurofxref)</li>
-          <li>[2] exchangerate.host free API: [oai_citation:11‡exchangerate.host](https://exchangerate.host/)</li>
-        </ol>
-      </section>
+      <FaqHowToClient lang={lang} slug="currency" />
       <nav className="footer-nav">
         <Link className="button ghost" href={`/${lang}/loan`}>{t(lang, 'navLoan')}</Link>
         <Link className="button ghost" href={`/${lang}/tax`}>{t(lang, 'navTax')}</Link>

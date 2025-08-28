@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getAllLocales } from '@/lib/i18n';
 import TdeeClient from '@/lib/clients/TdeeClient';
+import FaqHowToClient from '@/lib/clients/FaqHowToClient';
 
 export const revalidate = 86400;
 
@@ -24,6 +25,7 @@ export default function TdeePage({ params }: { params: { lang: string } }) {
     <div className="page-enter page-enter-active">
       <h1>TDEE Calculator</h1>
       <TdeeClient lang={lang} />
+      <FaqHowToClient lang={lang} slug="tdee" />
     </div>
   );
 }

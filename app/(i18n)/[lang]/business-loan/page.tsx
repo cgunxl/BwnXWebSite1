@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getAllLocales } from '@/lib/i18n';
 import BusinessLoanClient from '@/lib/clients/BusinessLoanClient';
+import FaqHowToClient from '@/lib/clients/FaqHowToClient';
 
 export const revalidate = 86400;
 
@@ -24,6 +25,7 @@ export default function BusinessLoanPage({ params }: { params: { lang: string } 
     <div className="page-enter page-enter-active">
       <h1>Business Loan Calculator</h1>
       <BusinessLoanClient lang={lang} />
+      <FaqHowToClient lang={lang} slug="business-loan" />
     </div>
   );
 }
