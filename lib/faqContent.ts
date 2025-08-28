@@ -226,6 +226,40 @@ export const FAQ_CONTENT: FaqContentMap = {
     }
   },
 
+  // Health: Pregnancy calculators
+  'pregnancy-due-date': {
+    GLOBAL: {
+      useCases: [ 'คำนวณวันกำหนดคลอด (EDD)', 'ประเมินช่วงไตรมาสและนัดตรวจ' ],
+      howTo: [ 'ใส่วันแรกของประจำเดือนครั้งสุดท้าย (LMP)', 'ระบุความยาวรอบเดือน', 'ดู EDD โดยอิงกฎ Naegele' ],
+      faqs: [ { question: 'รอบเดือนต่างจาก 28 วันทำยังไง?', answer: 'ตัวคำนวณจะชดเชยความยาวรอบเดือน (+/-) จาก 28 วัน' } ],
+      references: [ { label: 'ACOG – Determining Due Date', url: 'https://www.acog.org' } ]
+    }
+  },
+  ovulation: {
+    GLOBAL: {
+      useCases: [ 'ประเมินวันไข่ตก', 'หาช่วง fertile window' ],
+      howTo: [ 'ใส่ LMP และความยาวรอบเดือน', 'ดูช่วงไข่ตกและช่วง fertile window' ],
+      faqs: [ { question: 'ผลแม่นยำแค่ไหน?', answer: 'เป็นการประมาณ อาจใช้ชุดตรวจ LH หรืออุณหภูมิร่างกายประกอบ' } ],
+      references: [ { label: 'NHS – Ovulation and fertility', url: 'https://www.nhs.uk' } ]
+    }
+  },
+  conception: {
+    GLOBAL: {
+      useCases: [ 'ประมาณวันปฏิสนธิจากกำหนดคลอด (EDD)' ],
+      howTo: [ 'กรอก EDD', 'ระบบจะคำนวณย้อนกลับ ~266 วัน' ],
+      faqs: [ { question: 'ต่างจากวันมีเพศสัมพันธ์ไหม?', answer: 'เป็นค่าโดยประมาณ ปัจจัยไข่ตก/การปฏิสนธิจริงอาจต่างกัน' } ],
+      references: [ { label: 'Mayo Clinic – Pregnancy due date', url: 'https://www.mayoclinic.org' } ]
+    }
+  },
+  'pregnancy-weight-gain': {
+    GLOBAL: {
+      useCases: [ 'ดูคำแนะนำการเพิ่มน้ำหนักระหว่างตั้งครรภ์ตาม BMI ก่อนตั้งครรภ์' ],
+      howTo: [ 'ใส่ BMI ก่อนตั้งครรภ์และอายุครรภ์ (สัปดาห์)', 'ดูช่วงแนะนำและค่าโดยประมาณ' ],
+      faqs: [ { question: 'ครรภ์แฝดใช้เกณฑ์เดียวกันไหม?', answer: 'ไม่ เกณฑ์ต่างกัน ควรปรึกษาแพทย์' } ],
+      references: [ { label: 'IOM/NAM – Weight Gain During Pregnancy', url: 'https://www.nationalacademies.org' } ]
+    }
+  },
+
   // Finance: Credit Card Interest
   'credit-card': {
     GLOBAL: {
