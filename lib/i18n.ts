@@ -79,6 +79,7 @@ const dict: Record<LangCode, Record<string, string>> = {
     propertyTaxCalc: 'Property Tax Calculator',
     inflationCalc: 'Inflation Calculator',
     roiCalc: 'ROI Calculator',
+    roiMarketingCalc: 'ROI Marketing Calculator',
     stockReturnCalc: 'Stock Return Calculator',
     dividendCalc: 'Dividend Calculator',
     salesTaxCalc: 'Sales Tax Calculator',
@@ -124,7 +125,9 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,bmiCalc: 'BMI Calculator'
     ,bmrCalc: 'BMR Calculator'
     ,tdeeCalc: 'TDEE Calculator'
+    ,calorieCalc: 'Calorie Calculator'
     ,macroCalc: 'Macro Calculator'
+    ,proteinIntakeCalc: 'Protein Intake Calculator'
     ,waterIntakeCalc: 'Water Intake Calculator'
     ,idealWeightCalc: 'Ideal Weight Calculator'
     ,bodyFatCalc: 'Body Fat Calculator'
@@ -164,11 +167,26 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,rothIraCalc: 'Roth IRA Calculator'
     ,currencyArbCalc: 'Currency Arbitrage Calculator'
     ,npvIrrCalc: 'NPV & IRR Calculator'
+    ,cagrCalc: 'CAGR Calculator'
+    ,churnRateCalc: 'Churn Rate Calculator'
+    ,conversionRateCalc: 'Conversion Rate Calculator'
+    ,subscriptionRevenueCalc: 'Subscription Revenue Calculator'
+    ,cpmCalc: 'CPM Calculator'
+    ,affiliateEarningsCalc: 'Affiliate Earnings Calculator'
     ,annuityCalc: 'Annuity Calculator'
     ,bondPriceCalc: 'Bond Price Calculator'
     ,bondYieldCalc: 'Bond Yield (YTM) Calculator'
     ,waccCalc: 'WACC Calculator'
     ,dscrCalc: 'DSCR Calculator'
+    ,cacCalc: 'CAC Calculator'
+    ,ltvCustomerCalc: 'Customer LTV Calculator'
+    ,ebitdaMarginCalc: 'EBITDA Margin Calculator'
+    ,enterpriseValueCalc: 'Enterprise Value Calculator'
+    ,rentVsBuyCalc: 'Rent vs Buy Calculator'
+    ,annuityVsLumpCalc: 'Annuity vs Lump Sum Calculator'
+    ,pensionCalc: 'Pension Calculator'
+    ,paydayLoanCalc: 'Payday Loan Calculator'
+    ,tuitionLoanCalc: 'Tuition Loan Calculator'
     ,aprApyCalc: 'APR ↔ APY Converter'
     ,rule72Calc: 'Rule of 72 Calculator'
     ,simpleInterestCalc: 'Simple Interest Calculator'
@@ -180,6 +198,7 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,evChargingCalc: 'EV Charging Calculator'
     ,rectangleAreaCalc: 'Rectangle Area Calculator'
     ,pythagoreanCalc: 'Pythagorean Theorem Calculator'
+    ,relatedCalcs: 'Related calculators'
   },
   es: {
     siteTitle: 'Centro Financiero',
@@ -428,6 +447,7 @@ const dict: Record<LangCode, Record<string, string>> = {
     propertyTaxCalc: 'คำนวณภาษีที่ดินและสิ่งปลูกสร้าง',
     inflationCalc: 'คำนวณเงินด้อยค่า (เงินเฟ้อ)',
     roiCalc: 'คำนวณ ROI',
+    roiMarketingCalc: 'คำนวณ ROI การตลาด',
     stockReturnCalc: 'คำนวณกำไรหุ้น',
     dividendCalc: 'คำนวณเงินปันผล',
     salesTaxCalc: 'คำนวณภาษีขาย',
@@ -473,7 +493,9 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,bmiCalc: 'คำนวณ BMI'
     ,bmrCalc: 'คำนวณ BMR'
     ,tdeeCalc: 'คำนวณ TDEE'
+    ,calorieCalc: 'คำนวณแคลอรี่ต่อวัน'
     ,macroCalc: 'คำนวณสัดส่วนสารอาหาร (Macro)'
+    ,proteinIntakeCalc: 'คำนวณโปรตีนที่ควรได้รับต่อวัน'
     ,waterIntakeCalc: 'คำนวณปริมาณน้ำที่ควรดื่ม'
     ,idealWeightCalc: 'คำนวณน้ำหนักเหมาะสม'
     ,bodyFatCalc: 'คำนวณเปอร์เซ็นต์ไขมัน'
@@ -485,6 +507,7 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,bacCalc: 'คำนวณแอลกอฮอล์ในเลือด (BAC)'
     ,sleepCalc: 'คำนวณเวลานอน'
     ,cholesterolRatioCalc: 'คำนวณอัตราส่วนคอเลสเตอรอล'
+    ,relatedCalcs: 'เครื่องคิดเลขที่เกี่ยวข้อง'
     ,ohmsLawCalc: 'คำนวณกฎของโอห์ม'
     ,permutationCalc: 'คำนวณการจัดเรียง (Permutation)'
     ,combinationCalc: 'คำนวณการเลือก (Combination)'
@@ -513,11 +536,26 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,rothIraCalc: 'คำนวณ Roth IRA'
     ,currencyArbCalc: 'คำนวณอาร์บิทราจค่าเงิน'
     ,npvIrrCalc: 'คำนวณ NPV และ IRR'
+    ,cagrCalc: 'คำนวณ CAGR'
+    ,churnRateCalc: 'คำนวณ Churn Rate'
+    ,conversionRateCalc: 'คำนวณ Conversion Rate'
+    ,subscriptionRevenueCalc: 'คำนวณรายได้แบบสมาชิก (MRR/ARR)'
+    ,cpmCalc: 'คำนวณ CPM'
+    ,affiliateEarningsCalc: 'คำนวณรายได้จาก Affiliate'
     ,annuityCalc: 'คำนวณเงินงวด (Annuity)'
     ,bondPriceCalc: 'คำนวณราคา Bond'
     ,bondYieldCalc: 'คำนวณอัตราผลตอบแทนพันธบัตร (YTM)'
     ,waccCalc: 'คำนวณ WACC'
     ,dscrCalc: 'คำนวณ DSCR'
+    ,cacCalc: 'คำนวณ CAC'
+    ,ltvCustomerCalc: 'คำนวณ LTV ของลูกค้า'
+    ,ebitdaMarginCalc: 'คำนวณ EBITDA Margin'
+    ,enterpriseValueCalc: 'คำนวณ Enterprise Value'
+    ,rentVsBuyCalc: 'คำนวณเช่าบ้าน vs ซื้อบ้าน'
+    ,annuityVsLumpCalc: 'คำนวณรับรายปี vs รับเงินก้อน'
+    ,pensionCalc: 'คำนวณเงินบำนาญต่อเดือน'
+    ,paydayLoanCalc: 'คำนวณสินเชื่อด่วน (Payday Loan)'
+    ,tuitionLoanCalc: 'คำนวณกู้ยืมค่าเล่าเรียน'
     ,aprApyCalc: 'ตัวแปลง APR ↔ APY'
     ,rule72Calc: 'คำนวณกฎ 72'
     ,simpleInterestCalc: 'คำนวณดอกเบี้ยแบบง่าย'

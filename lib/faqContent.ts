@@ -8,6 +8,9 @@ export type FaqHowTo = {
   howTo: string[];
   faqs: QA[];
   references: Ref[];
+  keywords?: string[];
+  seoHtml?: string; // Optional rich HTML with H2/H3 sections for SEO
+  examples?: { headers: string[]; rows: string[][] };
 };
 
 export type FaqContentMap = Record<string, Partial<Record<CountryCode, FaqHowTo>>>;
@@ -178,6 +181,169 @@ export const FAQ_CONTENT: FaqContentMap = {
     }
   },
 
+  // Business: ROI Marketing
+  'roi-marketing': {
+    GLOBAL: {
+      useCases: [ 'วัดผลตอบแทนงบการตลาดจากรายได้เพิ่มขึ้น', 'เทียบประสิทธิภาพแคมเปญโดยคำนึงถึง gross margin' ],
+      howTo: [ 'ใส่งบการตลาดและรายได้เพิ่มขึ้น (incremental)', 'ระบุ % กำไรขั้นต้น เพื่อแปลงรายได้เป็นกำไร', 'อ่านค่า ROI (%)' ],
+      faqs: [ { question: 'ทำไมต้องใช้ gross margin?', answer: 'รายได้ที่เพิ่มต้องแปลงเป็นกำไรเพื่อสะท้อนผลตอบแทนที่แท้จริงหลังต้นทุนสินค้า/บริการ' } ],
+      references: [ { label: 'HubSpot – Marketing ROI', url: 'https://blog.hubspot.com/marketing/marketing-roi' } ]
+    }
+  },
+
+  // Business: CAC
+  cac: {
+    GLOBAL: {
+      useCases: [ 'หาต้นทุนเฉลี่ยต่อการได้ลูกค้าใหม่หนึ่งราย', 'เทียบ CAC กับ LTV' ],
+      howTo: [ 'ใส่งบการตลาดช่วงเวลาหนึ่ง', 'ใส่จำนวนลูกค้าใหม่ที่ได้ในช่วงเดียวกัน', 'อ่าน CAC = ต้นทุน/ลูกค้า' ],
+      faqs: [ { question: 'CAC ควรเทียบกับอะไร?', answer: 'ควรเทียบกับ LTV (อัตราส่วน LTV:CAC) เพื่อดูความคุ้มค่าในการลงทุนการตลาด' } ],
+      references: [ { label: 'Profitwell – CAC', url: 'https://www.profitwell.com' } ]
+    }
+  },
+
+  // Business: LTV
+  'ltv-customer': {
+    GLOBAL: {
+      useCases: [ 'ประเมินมูลค่าตลอดอายุลูกค้า (LTV) แบบง่าย', 'เปรียบเทียบกับ CAC' ],
+      howTo: [ 'ใส่ ARPU ต่อเดือน', 'ใส่ % กำไรขั้นต้น', 'ใส่ churn ต่อเดือน (%)', 'อ่าน LTV = ARPU × margin ÷ churn' ],
+      faqs: [ { question: 'สูตรนี้เหมาะเมื่อไร?', answer: 'ใช้กับโมเดลสมัครสมาชิกที่มี churn คงที่และ ARPU สม่ำเสมอ เป็นการประมาณเชิงเส้น' } ],
+      references: [ { label: 'Reforge – SaaS LTV', url: 'https://www.reforge.com' } ]
+    }
+  },
+
+  // Business: Churn Rate
+  'churn-rate': {
+    GLOBAL: {
+      useCases: [ 'คำนวณ Churn รายเดือนจากลูกค้าที่เริ่ม/จบและลูกค้าใหม่', 'ประเมิน Retention รายเดือนเพื่อดูสุขภาพธุรกิจ SaaS' ],
+      howTo: [ 'ใส่จำนวนลูกค้าเมื่อเริ่มเดือน', 'ใส่จำนวนลูกค้าสิ้นเดือนและจำนวนลูกค้าใหม่ที่เพิ่มระหว่างเดือน', 'อ่านค่า Churn (%) และ Retention (%)' ],
+      faqs: [
+        { question: 'สูตรคำนวณ Churn คืออะไร?', answer: 'Churn = (ลูกค้าที่หายไป ÷ ลูกค้าที่มีตอนต้นงวด) × 100 โดยลูกค้าที่หายไป = ลูกค้าตอนต้น + ลูกค้าใหม่ − ลูกค้าตอนปลาย' },
+        { question: 'Churn เท่าไรถึงดี?', answer: 'ขึ้นกับธุรกิจ สำหรับ SaaS รายเดือน Churn < 3%/เดือน มักถือว่าดีมาก ส่วน B2C อาจสูงกว่า' },
+        { question: 'ควรใช้ Net หรือ Gross Churn?', answer: 'Gross Churn วัดเฉพาะการสูญเสียลูกค้า Net Revenue Churn รวมการขยายรายได้จากลูกค้าเดิม เลือกตามวัตถุประสงค์' },
+        { question: 'Retention คิดอย่างไร?', answer: 'Retention = 100% − Churn (%)' },
+        { question: 'วัดรายไตรมาส/รายปีได้ไหม?', answer: 'ได้ แต่ควรระบุช่วงเวลาให้ชัดเจนและแปลงอัตราให้เทียบเคียงกัน' }
+      ],
+      references: [
+        { label: 'OpenView – SaaS Benchmarks', url: 'https://openviewpartners.com' },
+        { label: 'ProfitWell – Churn Benchmarks', url: 'https://www.profitwell.com' }
+      ],
+      keywords: [ 'Churn Rate', 'อัตราการเลิกใช้', 'Retention', 'SaaS', 'LTV' ],
+      seoHtml: '<h2>Churn Rate คืออะไร</h2><p>Churn บอกสัดส่วนลูกค้าที่เลิกใช้งานในช่วงเวลาที่กำหนด ยิ่งต่ำยิ่งดี</p><h3>ทำไมสำคัญ</h3><p>Churn กำหนดอายุลูกค้าเฉลี่ยและส่งผลโดยตรงต่อ LTV และการเติบโต</p>'
+    }
+  },
+
+  // Business: Conversion Rate
+  'conversion-rate': {
+    GLOBAL: {
+      useCases: [ 'คำนวณ Conversion จากจำนวน Visit และ Conversions', 'เทียบประสิทธิภาพแคมเปญและหน้า Landing' ],
+      howTo: [ 'กรอกจำนวน Visits', 'กรอกจำนวน Conversions', 'อ่าน Conversion Rate (%) และ Leads ต่อ 1,000 Visits' ],
+      faqs: [
+        { question: 'Conversion Rate คืออะไร?', answer: 'อัตราส่วนผู้ที่ทำกิจกรรมเป้าหมายเทียบกับจำนวนผู้เยี่ยมชมทั้งหมด (เป็น %)' },
+        { question: 'ค่า CR เท่าไรถึงดี?', answer: 'ขึ้นกับอุตสาหกรรม 1–5% พบได้ทั่วไป E‑commerce ชั้นนำอาจสูงกว่านี้' },
+        { question: 'ควร A/B Test อย่างไร?', answer: 'ทดสอบทีละตัวแปร เช่น Headline หรือปุ่ม CTA เก็บสถิติให้พอเพื่อความน่าเชื่อถือ' },
+        { question: 'CTR ต่างจาก CR ยังไง?', answer: 'CTR คืออัตราการคลิกต่อการแสดงผล ส่วน CR คือการแปลงเป็นเป้าหมายสุดท้าย' },
+        { question: 'Leads ต่อ 1,000 visits คืออะไร?', answer: 'เป็นตัวช่วยแปลผลให้เข้าใจง่าย ว่าทุก ๆ พันคนจะได้ Leads กี่ราย' }
+      ],
+      references: [ { label: 'Google – Conversion modeling', url: 'https://support.google.com/analytics' } ],
+      keywords: [ 'Conversion Rate', 'CR', 'อัตราแปลง', 'A/B Testing', 'Landing Page' ],
+      seoHtml: '<h2>Conversion Rate คืออะไร</h2><p>ชี้วัดคุณภาพทราฟฟิกและความเหมาะสมของข้อเสนอ</p><h3>เทคนิคเพิ่ม Conversion</h3><ul><li>ปรับข้อความและข้อเสนอให้ชัด</li><li>เพิ่มความไว้วางใจ (รีวิว/การรับประกัน)</li><li>ลดฟอร์มที่ไม่จำเป็น</li></ul>'
+    }
+  },
+
+  // Business: Subscription Revenue
+  'subscription-revenue': {
+    GLOBAL: {
+      useCases: [ 'คำนวณ MRR และ ARR จากจำนวนสมาชิกและราคา', 'ประมาณผลกระทบจากส่วนลดหรือโค้ดโปรโมชั่น' ],
+      howTo: [ 'กรอกจำนวนผู้สมัครใช้งานปัจจุบัน', 'กรอกราคาต่อเดือน และส่วนลด (%) ถ้ามี', 'อ่านค่า MRR และ ARR' ],
+      faqs: [
+        { question: 'MRR กับ ARR ต่างกันอย่างไร?', answer: 'MRR คือรายได้ประจำต่อเดือน ส่วน ARR = MRR × 12 ใช้ดูแนวโน้มรายปี' },
+        { question: 'รวมภาษีหรือค่าธรรมเนียมดีไหม?', answer: 'เครื่องมือนี้โฟกัสรายได้สุทธิจากสมาชิก ราคาไม่รวมภาษี/ค่าธรรมเนียม' },
+        { question: 'ส่วนลดส่งผลกับ MRR ยังไง?', answer: 'ส่วนลดลดรายได้ต่อสมาชิกโดยตรง ควรระบุเป็น % เพื่อดูผลกระทบ' },
+        { question: 'เกี่ยวข้องกับ LTV อย่างไร?', answer: 'เมื่อรู้ ARPU และ Churn สามารถคำนวณ LTV ได้ (LTV = ARPU × Margin ÷ Churn)' },
+        { question: 'ควรใช้กับธุรกิจแบบไหน?', answer: 'เหมาะกับธุรกิจ Subscription เช่น SaaS, สตรีมมิ่ง หรือสมาชิกแบบรายเดือน' }
+      ],
+      references: [ { label: 'Baremetrics – MRR/ARR', url: 'https://baremetrics.com' } ],
+      keywords: [ 'Subscription Revenue', 'MRR', 'ARR', 'รายได้ประจำ', 'SaaS' ],
+      seoHtml: '<h2>รายได้แบบสมาชิก (Subscription)</h2><p>ตัวชี้วัดหลักของธุรกิจที่มีรายได้ประจำ</p><h3>การใช้งาน</h3><p>กรอกจำนวนสมาชิก ราคา และส่วนลด เพื่อประเมิน MRR/ARR ได้ทันที</p>',
+      examples: { headers: ['Subscribers','Price','Discount','MRR'], rows: [['1,000','15','0%','15,000'],['2,500','9.99','10%','22,477.5']] }
+    }
+  },
+
+  
+
+  // Business: CPM
+  cpm: {
+    GLOBAL: {
+      useCases: [ 'หาค่า CPM จากต้นทุนและจำนวนการแสดงผล', 'เปรียบเทียบสื่อเน้น Reach/Branding' ],
+      howTo: [ 'ใส่ต้นทุนรวม', 'ใส่จำนวน impressions', 'อ่านค่า CPM = ต้นทุน/Impressions×1000' ],
+      faqs: [
+        { question: 'CPM ใช้เมื่อไร?', answer: 'ใช้กับแคมเปญเน้นการรับรู้แบรนด์หรือการเข้าถึง' },
+        { question: 'CPM ต่ำเสมอดีไหม?', answer: 'ขึ้นกับคุณภาพผู้ชมและความสอดคล้องของกลุ่มเป้าหมาย' }
+      ],
+      references: [ { label: 'IAB – Digital Ad Metrics', url: 'https://www.iab.com' } ],
+      keywords: [ 'CPM', 'Cost per Mille', 'Impressions', 'Brand awareness' ],
+      seoHtml: '<h2>CPM คืออะไร</h2><p>ต้นทุนต่อ 1,000 การแสดงผล</p><h3>การใช้งาน</h3><p>ใช้เทียบราคา media buy ข้ามแพลตฟอร์ม</p>'
+    }
+  },
+
+  // Business: Affiliate Earnings
+  'affiliate-earnings': {
+    GLOBAL: {
+      useCases: [ 'ประเมินรายได้จากแคมเปญ Affiliate', 'จำลองผลจากการปรับ CR, AOV หรือ Commission%' ],
+      howTo: [ 'ใส่จำนวนคลิก', 'ใส่ Conversion Rate (%)', 'ใส่ Average Order Value', 'ใส่ Commission (%) แล้วอ่านค่ารายได้' ],
+      faqs: [
+        { question: 'CR เท่าไรถึงดี?', answer: 'ขึ้นกับสินค้า/ช่องทาง ค่า 1–5% พบได้ทั่วไปในหลาย vertical' },
+        { question: 'AOV ส่งผลอย่างไร?', answer: 'AOV สูงขึ้นทำให้รายได้คอมมิชชั่นสูงขึ้นตามสัดส่วน' },
+        { question: 'ควรดู KPI อื่นอะไรอีก?', answer: 'ดู EPC (earning per click) และ Refund/Chargeback rate' }
+      ],
+      references: [ { label: 'CJ/Impact – Affiliate marketing basics', url: 'https://www.cj.com' } ],
+      keywords: [ 'Affiliate', 'Commission', 'Earnings', 'CR', 'AOV' ],
+      seoHtml: '<h2>คำนวณรายได้จาก Affiliate</h2><p>ประเมินรายได้จากพารามิเตอร์หลัก CR, AOV และ Commission%</p><h3>แนวทางเพิ่มรายได้</h3><ul><li>เพิ่มความเหมาะสมของข้อเสนอ</li><li>ปรับปรุง Conversion Rate</li><li>เจรจา Commission ที่สูงขึ้น</li></ul>'
+    }
+  },
+
+  // Health: Calorie
+  calorie: {
+    GLOBAL: {
+      useCases: [
+        'ประเมินปริมาณแคลอรี่ต่อวันที่ควรกินจาก BMR และ TDEE',
+        'ตั้งเป้าลด/เพิ่มน้ำหนักอย่างปลอดภัยด้วยแคลอรี่ขาด/เกิน'
+      ],
+      howTo: [
+        'ใส่เพศ อายุ ส่วนสูง และน้ำหนักเพื่อคำนวณ BMR',
+        'เลือกระดับกิจกรรมเพื่อได้ TDEE',
+        'เลือกเป้าหมาย (รักษาน้ำหนัก/ลด/เพิ่ม) เพื่อดูแคลอรี่ต่อวัน'
+      ],
+      faqs: [
+        { question: 'BMR กับ TDEE ต่างกันอย่างไร?', answer: 'BMR คือพลังงานพื้นฐานขณะพัก ส่วน TDEE คือพลังงานที่ใช้จริงต่อวันเมื่อรวมกิจกรรม' }
+      ],
+      references: [
+        { label: 'Mifflin–St Jeor Equation', url: 'https://en.wikipedia.org/wiki/Basal_metabolic_rate#BMR_estimation_formulas' }
+      ]
+    }
+  },
+
+  // Health: Protein Intake
+  'protein-intake': {
+    GLOBAL: {
+      useCases: [
+        'คำนวณโปรตีนต่อวันตามน้ำหนักตัวและเป้าหมาย',
+        'วางแผนโภชนาการร่วมกับการออกกำลังกาย'
+      ],
+      howTo: [
+        'ใส่น้ำหนักตัว (กก.)',
+        'เลือกเป้าหมาย (สุขภาพทั่วไป/ลดน้ำหนัก/เพิ่มกล้าม/นักกีฬา)',
+        'อ่านโปรตีนที่แนะนำเป็นกรัมต่อวัน'
+      ],
+      faqs: [
+        { question: 'ควรกินโปรตีนต่อวันเท่าไร?', answer: 'ขึ้นกับเป้าหมายและกิจกรรม ช่วงทั่วไป ~1.2–2.0 กรัม/กก./วัน' }
+      ],
+      references: [
+        { label: 'ISSN Position Stand – Protein and Exercise', url: 'https://jissn.biomedcentral.com/articles/10.1186/1550-2783-4-8' }
+      ]
+    }
+  },
+
   // Finance: NPV & IRR
   'npv-irr': {
     GLOBAL: {
@@ -197,6 +363,86 @@ export const FAQ_CONTENT: FaqContentMap = {
       references: [
         { label: 'Investopedia – NPV vs IRR', url: 'https://www.investopedia.com/ask/answers/042415/what-are-differences-between-net-present-value-and-internal-rate-return.asp' }
       ]
+    }
+  },
+
+  // Finance: CAGR
+  cagr: {
+    GLOBAL: {
+      useCases: [ 'หาค่า CAGR จากมูลค่าเริ่ม มูลค่าปลายงวด และจำนวนปี', 'เทียบการเติบโตเฉลี่ยต่อปีกับตัวเลือกการลงทุนอื่น' ],
+      howTo: [ 'ใส่มูลค่าเริ่ม มูลค่าปลายงวด และจำนวนปี', 'อ่าน CAGR (%/ปี) และ Total return (%)' ],
+      faqs: [ { question: 'CAGR คืออะไร?', answer: 'อัตราการเติบโตเฉลี่ยต่อปีที่ทำให้มูลค่าเริ่มกลายเป็นมูลค่าปลายงวดในช่วงเวลาที่กำหนด' } ],
+      references: [ { label: 'Investopedia – CAGR', url: 'https://www.investopedia.com/terms/c/cagr.asp' } ]
+    }
+  },
+
+  // Finance: EBITDA Margin
+  'ebitda-margin': {
+    GLOBAL: {
+      useCases: [ 'วัดความสามารถทำกำไรก่อนดอกเบี้ย ภาษี ค่าเสื่อมและค่าตัดจำหน่าย', 'เทียบประสิทธิภาพการดำเนินงานระหว่างบริษัท' ],
+      howTo: [ 'ใส่รายได้ (Revenue) และ EBITDA', 'อ่าน EBITDA margin (%)' ],
+      faqs: [ { question: 'ทำไม EBITDA margin สำคัญ?', answer: 'ช่วยเปรียบเทียบประสิทธิภาพแกนหลักของธุรกิจ โดยลดผลของโครงสร้างเงินทุนและนโยบายบัญชี' } ],
+      references: [ { label: 'CFA Institute – EBITDA', url: 'https://www.cfainstitute.org' } ]
+    }
+  },
+
+  // Finance: Enterprise Value
+  'enterprise-value': {
+    GLOBAL: {
+      useCases: [ 'ประเมินมูลค่ากิจการสำหรับการเปรียบเทียบอุตสาหกรรม', 'ใช้ EV ในอัตราส่วน EV/EBITDA' ],
+      howTo: [ 'ใส่มาร์เก็ตแคป ยอดหนี้รวม และเงินสด', 'อ่าน Enterprise Value' ],
+      faqs: [ { question: 'EV ต่างจาก Market Cap ยังไง?', answer: 'EV รวมโครงสร้างหนี้และเงินสด ทำให้สะท้อนมูลค่ากิจการที่ผู้ซื้อต้องจ่ายจริงมากกว่า' } ],
+      references: [ { label: 'Investopedia – Enterprise Value (EV)', url: 'https://www.investopedia.com/terms/e/enterprisevalue.asp' } ]
+    }
+  },
+
+  // Finance: Rent vs Buy
+  'rent-vs-buy': {
+    GLOBAL: {
+      useCases: [ 'เทียบค่าใช้จ่ายรายเดือนระหว่างเช่ากับซื้อ', 'ประมาณผลกระทบของภาษีทรัพย์สินและค่าบำรุงรักษา' ],
+      howTo: [ 'ใส่ราคาบ้าน เงินดาวน์ ดอกเบี้ย และปีผ่อน', 'กำหนดภาษีทรัพย์สินและค่าบำรุงรักษา (เป็น %/ปี)', 'เปรียบเทียบกับค่าเช่าต่อเดือน' ],
+      faqs: [ { question: 'ควรเช่าหรือซื้อดี?', answer: 'ขึ้นกับระยะเวลาพำนัก อัตราดอกเบี้ย ภาษี และค่าโอกาสของเงินดาวน์ เครื่องมือนี้ช่วยเทียบค่าใช้จ่ายรายเดือนพื้นฐาน' } ],
+      references: [ { label: 'Investopedia – Rent vs. Buy', url: 'https://www.investopedia.com/rent-vs-buy-5072237' } ]
+    }
+  },
+
+  // Finance: Annuity vs Lump Sum
+  'annuity-vs-lump-sum': {
+    GLOBAL: {
+      useCases: [ 'ตัดสินใจเลือกรับรายปีหรือรับเงินก้อน', 'ใช้ส่วนลดอัตราผลตอบแทนเพื่อเทียบมูลค่าปัจจุบัน' ],
+      howTo: [ 'ใส่ยอดจ่ายรายเดือน จำนวนปี และอัตราคิดลด (APR %)', 'เปรียบเทียบมูลค่าปัจจุบันของรายปี กับเงินก้อนที่เสนอ' ],
+      faqs: [ { question: 'อัตราคิดลดคืออะไร?', answer: 'อัตราผลตอบแทนขั้นต่ำที่ต้องการหรือค่าใช้จ่ายเงินทุนที่ใช้แปลงกระแสเงินสดอนาคตกลับมาเป็นปัจจุบัน' } ],
+      references: [ { label: 'CFA Institute – Time Value of Money', url: 'https://www.cfainstitute.org' } ]
+    }
+  },
+
+  // Finance: Pension
+  pension: {
+    GLOBAL: {
+      useCases: [ 'วางแผนเงินบำนาญต่อเดือนจากเงินสะสมและผลตอบแทน', 'ประมาณระยะเวลารับเงินบำนาญจากกองทุนที่มี' ],
+      howTo: [ 'ใส่อายุปัจจุบัน อายุเกษียณ ยอดออมรายเดือน และอัตราผลตอบแทน', 'กำหนดจำนวนปีที่ต้องการรับเงินบำนาญ' ],
+      faqs: [ { question: 'ผลตอบแทนควรใช้เท่าไร?', answer: 'ขึ้นกับสินทรัพย์ที่ลงทุน ระวังใช้สมมติฐานอนุรักษ์นิยมเพื่อความปลอดภัย' } ],
+      references: [ { label: 'Vanguard – Investment returns', url: 'https://investor.vanguard.com' } ]
+    }
+  },
+
+  // Finance: Payday Loan
+  'payday-loan': {
+    GLOBAL: {
+      useCases: [ 'คำนวณ APR โดยประมาณจากค่าธรรมเนียมและจำนวนวัน', 'ทำความเข้าใจค่าใช้จ่ายที่แท้จริงของสินเชื่อด่วน' ],
+      howTo: [ 'ใส่วงเงิน ค่าธรรมเนียม และจำนวนวันของสัญญา', 'อ่านค่าประมาณ APR (แบบง่าย)' ],
+      faqs: [ { question: 'APR ทำไมสูง?', answer: 'แม้ค่าธรรมเนียมดูน้อย แต่เมื่อปรับเป็นรายปีตามระยะเวลาสั้น ๆ APR จะสูงมาก' } ],
+      references: [ { label: 'CFPB – Payday loans', url: 'https://www.consumerfinance.gov' } ]
+    }
+  },
+
+  // Finance: Tuition Loan
+  'tuition-loan': {
+    GLOBAL: {
+      useCases: [ 'ประมาณค่างวดกู้ยืมการศึกษาและดอกเบี้ยรวม', 'คำนวณดอกเบี้ยช่วงพักชำระ (deferment)' ],
+      howTo: [ 'ใส่ยอดกู้ อัตราดอกเบี้ย และระยะเวลากู้', 'ถ้ามี ใส่จำนวนเดือนพักชำระเพื่อดูดอกเบี้ยที่งอกจากพักชำระ' ],
+      faqs: [ { question: 'พักชำระมีผลยังไง?', answer: 'ช่วงพักชำระดอกเบี้ยยังคงงอกและถูกบวกเข้ายอดหนี้ ทำให้จ่ายรวมสูงขึ้น' } ],
+      references: [ { label: 'Studentaid.gov – Interest capitalization', url: 'https://studentaid.gov/help-center/answers/article/interest-capitalization' } ]
     }
   },
 

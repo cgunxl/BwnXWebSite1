@@ -18,6 +18,8 @@ export type CalculatorId =
   | 'bmi'
   | 'bmr'
   | 'tdee'
+  | 'calorie'
+  | 'protein-intake'
   // Additional ids progressively added
   | 'roi'
   | 'break-even'
@@ -72,6 +74,20 @@ export type CalculatorId =
   | 'roth-ira'
   | 'currency-arbitrage'
   | 'npv-irr'
+  | 'cagr'
+  | 'ebitda-margin'
+  | 'enterprise-value'
+  | 'rent-vs-buy'
+  | 'annuity-vs-lump-sum'
+  | 'ltv-customer'
+  | 'churn-rate'
+  | 'conversion-rate'
+  | 'subscription-revenue'
+  | 'cpm'
+  | 'affiliate-earnings'
+  | 'pension'
+  | 'payday-loan'
+  | 'tuition-loan'
   | 'annuity'
   | 'bond-price'
   | 'bond-yield'
@@ -166,7 +182,9 @@ export const REGISTRY: CalculatorEntry[] = [
   { id: 'bmi', path: (lang) => `/${lang}/bmi`, titleKey: 'bmiCalc', description: 'Body Mass Index based on height and weight', category: 'health', keywords: ['bmi','body mass index','health'] },
   { id: 'bmr', path: (lang) => `/${lang}/bmr`, titleKey: 'bmrCalc', description: 'Basal Metabolic Rate (Mifflin–St Jeor)', category: 'health', keywords: ['bmr','basal metabolic rate'] },
   { id: 'tdee', path: (lang) => `/${lang}/tdee`, titleKey: 'tdeeCalc', description: 'Total Daily Energy Expenditure', category: 'health', keywords: ['tdee','calories','energy'] },
+  { id: 'calorie' as any, path: (lang) => `/${lang}/calorie`, titleKey: 'calorieCalc' as any, description: 'Daily calories from BMR, TDEE and goal', category: 'health' as any, keywords: ['calories','bmr','tdee'] },
   { id: 'macro' as any, path: (lang) => `/${lang}/macro`, titleKey: 'macroCalc', description: 'Protein/Fat/Carbs grams from calorie split', category: 'health', keywords: ['macros','protein','fat','carbs'] },
+  { id: 'protein-intake' as any, path: (lang) => `/${lang}/protein-intake`, titleKey: 'proteinIntakeCalc' as any, description: 'Daily protein needs by goal and body weight', category: 'health' as any, keywords: ['protein','intake','g/kg'] },
   { id: 'water-intake' as any, path: (lang) => `/${lang}/water-intake`, titleKey: 'waterIntakeCalc', description: 'Daily water requirement', category: 'health', keywords: ['water','hydration'] },
   { id: 'ideal-weight' as any, path: (lang) => `/${lang}/ideal-weight`, titleKey: 'idealWeightCalc', description: 'Ideal weight estimate', category: 'health', keywords: ['ideal weight','devine'] },
   { id: 'body-fat' as any, path: (lang) => `/${lang}/body-fat`, titleKey: 'bodyFatCalc', description: 'Body fat percentage estimate', category: 'health', keywords: ['body fat','bf%'] },
@@ -208,14 +226,30 @@ export const REGISTRY: CalculatorEntry[] = [
   ,{ id: '401k' as any, path: (lang) => `/${lang}/401k`, titleKey: 'k401Calc' as any, description: '401(k) plan with employer match', category: 'savings' as any, keywords: ['401k','match','contribution'] }
   ,{ id: 'roth-ira' as any, path: (lang) => `/${lang}/roth-ira`, titleKey: 'rothIraCalc' as any, description: 'Roth IRA growth projection', category: 'savings' as any, keywords: ['roth ira','retirement'] }
   ,{ id: 'currency-arbitrage' as any, path: (lang) => `/${lang}/currency-arbitrage`, titleKey: 'currencyArbCalc' as any, description: 'FX triangular arbitrage simulator', category: 'finance' as any, keywords: ['currency','arbitrage','fx'] }
+  ,{ id: 'roi-marketing' as any, path: (lang) => `/${lang}/roi-marketing`, titleKey: 'roiMarketingCalc' as any, description: 'Marketing ROI using incremental revenue and margin', category: 'finance' as any, keywords: ['marketing','roi','romi'] }
+  ,{ id: 'cpm' as any, path: (lang) => `/${lang}/cpm`, titleKey: 'cpmCalc' as any, description: 'CPM from total cost and impressions', category: 'finance' as any, keywords: ['cpm','cost per mille','impressions'] }
+  ,{ id: 'affiliate-earnings' as any, path: (lang) => `/${lang}/affiliate-earnings`, titleKey: 'affiliateEarningsCalc' as any, description: 'Estimated affiliate earnings from clicks, CR, AOV, commission', category: 'finance' as any, keywords: ['affiliate','commission','earnings'] }
+  ,{ id: 'churn-rate' as any, path: (lang) => `/${lang}/churn-rate`, titleKey: 'churnRateCalc' as any, description: 'Customer churn rate from start, end, and new customers', category: 'finance' as any, keywords: ['churn','retention','saas'] }
+  ,{ id: 'conversion-rate' as any, path: (lang) => `/${lang}/conversion-rate`, titleKey: 'conversionRateCalc' as any, description: 'Conversion rate from visits and conversions', category: 'finance' as any, keywords: ['conversion','rate','cr','website'] }
+  ,{ id: 'subscription-revenue' as any, path: (lang) => `/${lang}/subscription-revenue`, titleKey: 'subscriptionRevenueCalc' as any, description: 'MRR and ARR from subscribers and price', category: 'finance' as any, keywords: ['subscription','mrr','arr','saas'] }
   ,{ id: 'npv-irr' as any, path: (lang) => `/${lang}/npv-irr`, titleKey: 'npvIrrCalc' as any, description: 'NPV and IRR from cash flows', category: 'finance' as any, keywords: ['npv','irr','discount rate','cash flow'] }
+  ,{ id: 'cagr' as any, path: (lang) => `/${lang}/cagr`, titleKey: 'cagrCalc' as any, description: 'Compound annual growth rate', category: 'finance' as any, keywords: ['cagr','growth'] }
   ,{ id: 'annuity' as any, path: (lang) => `/${lang}/annuity`, titleKey: 'annuityCalc' as any, description: 'Present and future value of annuities', category: 'finance' as any, keywords: ['annuity','pv','fv'] }
   ,{ id: 'bond-price' as any, path: (lang) => `/${lang}/bond-price`, titleKey: 'bondPriceCalc' as any, description: 'Bond price from yield, coupon, and term', category: 'finance' as any, keywords: ['bond','price','ytm'] }
   ,{ id: 'bond-yield' as any, path: (lang) => `/${lang}/bond-yield`, titleKey: 'bondYieldCalc' as any, description: 'Solve yield to maturity from bond price', category: 'finance' as any, keywords: ['bond','yield','ytm'] }
   ,{ id: 'wacc' as any, path: (lang) => `/${lang}/wacc`, titleKey: 'waccCalc' as any, description: 'Weighted average cost of capital', category: 'finance' as any, keywords: ['wacc','cost of capital'] }
   ,{ id: 'dscr' as any, path: (lang) => `/${lang}/dscr`, titleKey: 'dscrCalc' as any, description: 'Debt service coverage ratio', category: 'finance' as any, keywords: ['dscr','coverage','noi'] }
+  ,{ id: 'ebitda-margin' as any, path: (lang) => `/${lang}/ebitda-margin`, titleKey: 'ebitdaMarginCalc' as any, description: 'EBITDA margin from revenue and EBITDA', category: 'finance' as any, keywords: ['ebitda','margin'] }
+  ,{ id: 'enterprise-value' as any, path: (lang) => `/${lang}/enterprise-value`, titleKey: 'enterpriseValueCalc' as any, description: 'EV = Market cap + Debt - Cash', category: 'finance' as any, keywords: ['enterprise value','ev'] }
+  ,{ id: 'rent-vs-buy' as any, path: (lang) => `/${lang}/rent-vs-buy`, titleKey: 'rentVsBuyCalc' as any, description: 'Compare renting vs buying', category: 'finance' as any, keywords: ['rent','buy','mortgage','property tax'] }
+  ,{ id: 'annuity-vs-lump-sum' as any, path: (lang) => `/${lang}/annuity-vs-lump-sum`, titleKey: 'annuityVsLumpCalc' as any, description: 'Present value of annuity vs lump sum', category: 'finance' as any, keywords: ['annuity','lump sum','present value'] }
+  ,{ id: 'ltv-customer' as any, path: (lang) => `/${lang}/ltv-customer`, titleKey: 'ltvCustomerCalc' as any, description: 'Customer lifetime value from ARPU, margin, churn', category: 'finance' as any, keywords: ['ltv','customer','saas'] }
+  ,{ id: 'pension' as any, path: (lang) => `/${lang}/pension`, titleKey: 'pensionCalc' as any, description: 'Monthly pension estimate from contributions and returns', category: 'finance' as any, keywords: ['pension','annuity','retirement'] }
+  ,{ id: 'payday-loan' as any, path: (lang) => `/${lang}/payday-loan`, titleKey: 'paydayLoanCalc' as any, description: 'Payday loan APR from fee and term', category: 'finance' as any, keywords: ['payday','apr','fee'] }
+  ,{ id: 'tuition-loan' as any, path: (lang) => `/${lang}/tuition-loan`, titleKey: 'tuitionLoanCalc' as any, description: 'Student loan with deferment interest', category: 'finance' as any, keywords: ['student loan','tuition','deferment'] }
   // Existing pages not yet listed above
   ,{ id: 'roi' as any, path: (lang) => `/${lang}/roi`, titleKey: 'roiCalc' as any, description: 'Return on Investment and CAGR', category: 'finance' as any, keywords: ['roi','return','cagr'] }
+  ,{ id: 'cac' as any, path: (lang) => `/${lang}/cac`, titleKey: 'cacCalc' as any, description: 'Customer Acquisition Cost', category: 'finance' as any, keywords: ['cac','marketing'] }
   ,{ id: 'stock-return' as any, path: (lang) => `/${lang}/stock-return`, titleKey: 'stockReturnCalc' as any, description: 'Stock total return with dividends', category: 'finance' as any, keywords: ['stock','return','dividend'] }
   ,{ id: 'dividend' as any, path: (lang) => `/${lang}/dividend`, titleKey: 'dividendCalc' as any, description: 'Dividend income and yield', category: 'finance' as any, keywords: ['dividend','yield','income'] }
   ,{ id: 'sales-tax' as any, path: (lang) => `/${lang}/sales-tax`, titleKey: 'salesTaxCalc' as any, description: 'Sales tax from rate and price', category: 'tax' as any, keywords: ['sales tax','vat','gst'] }
