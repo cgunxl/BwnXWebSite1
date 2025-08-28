@@ -312,16 +312,34 @@ function getRelated(slug: string): RelatedItem[] {
     case 'roi-marketing':
       return [
         { id: 'roi', reason: 'Compare profit-based vs simple ROI' },
-        { id: 'cac', reason: 'Relate ROI to acquisition costs' }
+        { id: 'cac', reason: 'Relate ROI to acquisition costs' },
+        { id: 'conversion-rate', reason: 'CR drives marketing efficiency' }
       ];
     case 'cac':
       return [
-        { id: 'roi-marketing', reason: 'Link cost to campaign return' }
+        { id: 'roi-marketing', reason: 'Link cost to campaign return' },
+        { id: 'ltv-customer', reason: 'Track LTV:CAC ratio' }
       ];
     case 'ltv-customer':
       return [
         { id: 'cac', reason: 'Compare LTV:CAC ratio' },
-        { id: 'roi-marketing', reason: 'Connect lifetime value to ROI goals' }
+        { id: 'roi-marketing', reason: 'Connect lifetime value to ROI goals' },
+        { id: 'churn-rate', reason: 'Churn directly determines LTV' }
+      ];
+    case 'churn-rate':
+      return [
+        { id: 'ltv-customer', reason: 'Lower churn increases LTV dramatically' },
+        { id: 'subscription-revenue', reason: 'Churn impacts MRR trajectory' }
+      ];
+    case 'conversion-rate':
+      return [
+        { id: 'roi-marketing', reason: 'Higher CR boosts campaign ROI' },
+        { id: 'cac', reason: 'Better CR can reduce CAC' }
+      ];
+    case 'subscription-revenue':
+      return [
+        { id: 'ltv-customer', reason: 'Combine ARPU, margin, churn for LTV' },
+        { id: 'churn-rate', reason: 'Retention stabilizes MRR/ARR' }
       ];
     case 'cagr':
       return [

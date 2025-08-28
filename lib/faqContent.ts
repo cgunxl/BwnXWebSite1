@@ -211,6 +211,64 @@ export const FAQ_CONTENT: FaqContentMap = {
     }
   },
 
+  // Business: Churn Rate
+  'churn-rate': {
+    GLOBAL: {
+      useCases: [ 'คำนวณ Churn รายเดือนจากลูกค้าที่เริ่ม/จบและลูกค้าใหม่', 'ประเมิน Retention รายเดือนเพื่อดูสุขภาพธุรกิจ SaaS' ],
+      howTo: [ 'ใส่จำนวนลูกค้าเมื่อเริ่มเดือน', 'ใส่จำนวนลูกค้าสิ้นเดือนและจำนวนลูกค้าใหม่ที่เพิ่มระหว่างเดือน', 'อ่านค่า Churn (%) และ Retention (%)' ],
+      faqs: [
+        { question: 'สูตรคำนวณ Churn คืออะไร?', answer: 'Churn = (ลูกค้าที่หายไป ÷ ลูกค้าที่มีตอนต้นงวด) × 100 โดยลูกค้าที่หายไป = ลูกค้าตอนต้น + ลูกค้าใหม่ − ลูกค้าตอนปลาย' },
+        { question: 'Churn เท่าไรถึงดี?', answer: 'ขึ้นกับธุรกิจ สำหรับ SaaS รายเดือน Churn < 3%/เดือน มักถือว่าดีมาก ส่วน B2C อาจสูงกว่า' },
+        { question: 'ควรใช้ Net หรือ Gross Churn?', answer: 'Gross Churn วัดเฉพาะการสูญเสียลูกค้า Net Revenue Churn รวมการขยายรายได้จากลูกค้าเดิม เลือกตามวัตถุประสงค์' },
+        { question: 'Retention คิดอย่างไร?', answer: 'Retention = 100% − Churn (%)' },
+        { question: 'วัดรายไตรมาส/รายปีได้ไหม?', answer: 'ได้ แต่ควรระบุช่วงเวลาให้ชัดเจนและแปลงอัตราให้เทียบเคียงกัน' }
+      ],
+      references: [
+        { label: 'OpenView – SaaS Benchmarks', url: 'https://openviewpartners.com' },
+        { label: 'ProfitWell – Churn Benchmarks', url: 'https://www.profitwell.com' }
+      ],
+      keywords: [ 'Churn Rate', 'อัตราการเลิกใช้', 'Retention', 'SaaS', 'LTV' ],
+      seoHtml: '<h2>Churn Rate คืออะไร</h2><p>Churn บอกสัดส่วนลูกค้าที่เลิกใช้งานในช่วงเวลาที่กำหนด ยิ่งต่ำยิ่งดี</p><h3>ทำไมสำคัญ</h3><p>Churn กำหนดอายุลูกค้าเฉลี่ยและส่งผลโดยตรงต่อ LTV และการเติบโต</p>'
+    }
+  },
+
+  // Business: Conversion Rate
+  'conversion-rate': {
+    GLOBAL: {
+      useCases: [ 'คำนวณ Conversion จากจำนวน Visit และ Conversions', 'เทียบประสิทธิภาพแคมเปญและหน้า Landing' ],
+      howTo: [ 'กรอกจำนวน Visits', 'กรอกจำนวน Conversions', 'อ่าน Conversion Rate (%) และ Leads ต่อ 1,000 Visits' ],
+      faqs: [
+        { question: 'Conversion Rate คืออะไร?', answer: 'อัตราส่วนผู้ที่ทำกิจกรรมเป้าหมายเทียบกับจำนวนผู้เยี่ยมชมทั้งหมด (เป็น %)' },
+        { question: 'ค่า CR เท่าไรถึงดี?', answer: 'ขึ้นกับอุตสาหกรรม 1–5% พบได้ทั่วไป E‑commerce ชั้นนำอาจสูงกว่านี้' },
+        { question: 'ควร A/B Test อย่างไร?', answer: 'ทดสอบทีละตัวแปร เช่น Headline หรือปุ่ม CTA เก็บสถิติให้พอเพื่อความน่าเชื่อถือ' },
+        { question: 'CTR ต่างจาก CR ยังไง?', answer: 'CTR คืออัตราการคลิกต่อการแสดงผล ส่วน CR คือการแปลงเป็นเป้าหมายสุดท้าย' },
+        { question: 'Leads ต่อ 1,000 visits คืออะไร?', answer: 'เป็นตัวช่วยแปลผลให้เข้าใจง่าย ว่าทุก ๆ พันคนจะได้ Leads กี่ราย' }
+      ],
+      references: [ { label: 'Google – Conversion modeling', url: 'https://support.google.com/analytics' } ],
+      keywords: [ 'Conversion Rate', 'CR', 'อัตราแปลง', 'A/B Testing', 'Landing Page' ],
+      seoHtml: '<h2>Conversion Rate คืออะไร</h2><p>ชี้วัดคุณภาพทราฟฟิกและความเหมาะสมของข้อเสนอ</p><h3>เทคนิคเพิ่ม Conversion</h3><ul><li>ปรับข้อความและข้อเสนอให้ชัด</li><li>เพิ่มความไว้วางใจ (รีวิว/การรับประกัน)</li><li>ลดฟอร์มที่ไม่จำเป็น</li></ul>'
+    }
+  },
+
+  // Business: Subscription Revenue
+  'subscription-revenue': {
+    GLOBAL: {
+      useCases: [ 'คำนวณ MRR และ ARR จากจำนวนสมาชิกและราคา', 'ประมาณผลกระทบจากส่วนลดหรือโค้ดโปรโมชั่น' ],
+      howTo: [ 'กรอกจำนวนผู้สมัครใช้งานปัจจุบัน', 'กรอกราคาต่อเดือน และส่วนลด (%) ถ้ามี', 'อ่านค่า MRR และ ARR' ],
+      faqs: [
+        { question: 'MRR กับ ARR ต่างกันอย่างไร?', answer: 'MRR คือรายได้ประจำต่อเดือน ส่วน ARR = MRR × 12 ใช้ดูแนวโน้มรายปี' },
+        { question: 'รวมภาษีหรือค่าธรรมเนียมดีไหม?', answer: 'เครื่องมือนี้โฟกัสรายได้สุทธิจากสมาชิก ราคาไม่รวมภาษี/ค่าธรรมเนียม' },
+        { question: 'ส่วนลดส่งผลกับ MRR ยังไง?', answer: 'ส่วนลดลดรายได้ต่อสมาชิกโดยตรง ควรระบุเป็น % เพื่อดูผลกระทบ' },
+        { question: 'เกี่ยวข้องกับ LTV อย่างไร?', answer: 'เมื่อรู้ ARPU และ Churn สามารถคำนวณ LTV ได้ (LTV = ARPU × Margin ÷ Churn)' },
+        { question: 'ควรใช้กับธุรกิจแบบไหน?', answer: 'เหมาะกับธุรกิจ Subscription เช่น SaaS, สตรีมมิ่ง หรือสมาชิกแบบรายเดือน' }
+      ],
+      references: [ { label: 'Baremetrics – MRR/ARR', url: 'https://baremetrics.com' } ],
+      keywords: [ 'Subscription Revenue', 'MRR', 'ARR', 'รายได้ประจำ', 'SaaS' ],
+      seoHtml: '<h2>รายได้แบบสมาชิก (Subscription)</h2><p>ตัวชี้วัดหลักของธุรกิจที่มีรายได้ประจำ</p><h3>การใช้งาน</h3><p>กรอกจำนวนสมาชิก ราคา และส่วนลด เพื่อประเมิน MRR/ARR ได้ทันที</p>',
+      examples: { headers: ['Subscribers','Price','Discount','MRR'], rows: [['1,000','15','0%','15,000'],['2,500','9.99','10%','22,477.5']] }
+    }
+  },
+
   // Health: Calorie
   calorie: {
     GLOBAL: {
