@@ -105,6 +105,9 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,bacCalc: 'BAC Calculator'
     ,sleepCalc: 'Sleep Calculator'
     ,cholesterolRatioCalc: 'Cholesterol Ratio Calculator'
+    ,ohmsLawCalc: 'Ohm’s Law Calculator'
+    ,permutationCalc: 'Permutation Calculator'
+    ,combinationCalc: 'Combination Calculator'
   },
   es: {
     siteTitle: 'Centro Financiero',
@@ -379,6 +382,9 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,bacCalc: 'คำนวณแอลกอฮอล์ในเลือด (BAC)'
     ,sleepCalc: 'คำนวณเวลานอน'
     ,cholesterolRatioCalc: 'คำนวณอัตราส่วนคอเลสเตอรอล'
+    ,ohmsLawCalc: 'คำนวณกฎของโอห์ม'
+    ,permutationCalc: 'คำนวณการจัดเรียง (Permutation)'
+    ,combinationCalc: 'คำนวณการเลือก (Combination)'
   },
   ar: { ...{} as any },
   hi: { ...{} as any },

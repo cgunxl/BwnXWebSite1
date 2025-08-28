@@ -50,6 +50,9 @@ export const REGISTRY: CalculatorEntry[] = [
   ,{ id: 'bac' as any, path: (lang) => `/${lang}/bac`, titleKey: 'bacCalc', description: 'Blood alcohol concentration estimate', category: 'health', keywords: ['bac','alcohol'] }
   ,{ id: 'sleep' as any, path: (lang) => `/${lang}/sleep`, titleKey: 'sleepCalc', description: 'Suggested bedtime from cycles', category: 'health', keywords: ['sleep','cycles'] }
   ,{ id: 'cholesterol-ratio' as any, path: (lang) => `/${lang}/cholesterol-ratio`, titleKey: 'cholesterolRatioCalc', description: 'Total to HDL ratio', category: 'health', keywords: ['cholesterol','hdl'] }
+  ,{ id: 'ohms-law' as any, path: (lang) => `/${lang}/ohms-law`, titleKey: 'ohmsLawCalc' as any, description: 'Solve V, I, R, P', category: 'engineering' as any, keywords: ['ohm','voltage','current','resistance','power'] }
+  ,{ id: 'permutation' as any, path: (lang) => `/${lang}/permutation`, titleKey: 'permutationCalc' as any, description: 'nPr permutations', category: 'math' as any, keywords: ['permutation','nPr','arrangements'] }
+  ,{ id: 'combination' as any, path: (lang) => `/${lang}/combination`, titleKey: 'combinationCalc' as any, description: 'nCr combinations', category: 'math' as any, keywords: ['combination','nCr','binomial'] }
   // More entries are added progressively in batches
 ];
 
