@@ -55,19 +55,17 @@ export default function HeaderClient() {
           <div className="hide-on-mobile" style={{ minWidth: 220 }}>
             <SearchClient lang={currentLang} />
           </div>
-          <label className="select" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
-            <span className="sr-only">{t(currentLang, 'language')}</span>
-            <select
-              aria-label={t(currentLang, 'language')}
-              value={currentLang}
-              onChange={(e) => router.push(replaceLang(pathname, e.target.value) as any)}
-              style={{ background: 'transparent', border: 'none', outline: 'none' }}
-            >
-              {SUPPORTED_LANGS.map((lc) => (
-                <option key={lc} value={lc}>{getNativeName(lc)}</option>
-              ))}
-            </select>
-          </label>
+          <button
+            className="button ghost"
+            aria-label={t(currentLang, 'language')}
+            onClick={() => {
+              const nextLang = currentLang === 'th' ? 'en' : 'th';
+              router.push(replaceLang(pathname, nextLang) as any);
+            }}
+            title={getNativeName(currentLang === 'th' ? 'en' : 'th')}
+          >
+            {currentLang === 'th' ? 'EN' : 'TH'}
+          </button>
           <label className="select" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
             <span className="sr-only">Country</span>
             <select
