@@ -60,6 +60,9 @@ export const REGISTRY: CalculatorEntry[] = [
   ,{ id: 'lcm' as any, path: (lang) => `/${lang}/lcm`, titleKey: 'lcmCalc' as any, description: 'Least common multiple', category: 'math' as any, keywords: ['lcm','least common multiple'] }
   ,{ id: 'age' as any, path: (lang) => `/${lang}/age`, titleKey: 'ageCalc' as any, description: 'Exact age and next birthday', category: 'lifestyle' as any, keywords: ['age','birthday','date'] }
   ,{ id: 'date-difference' as any, path: (lang) => `/${lang}/date-difference`, titleKey: 'dateDiffCalc' as any, description: 'Days/weeks/months between dates', category: 'lifestyle' as any, keywords: ['date difference','days between','duration'] }
+  ,{ id: 'fuel-cost' as any, path: (lang) => `/${lang}/fuel-cost`, titleKey: 'fuelCostCalc' as any, description: 'Trip fuel and cost estimate', category: 'lifestyle' as any, keywords: ['fuel','gas','trip cost'] }
+  ,{ id: 'electricity-bill' as any, path: (lang) => `/${lang}/electricity-bill`, titleKey: 'electricityBillCalc' as any, description: 'Monthly electricity bill estimate', category: 'household' as any, keywords: ['electricity','bill','kwh'] }
+  ,{ id: 'download-time' as any, path: (lang) => `/${lang}/download-time`, titleKey: 'downloadTimeCalc' as any, description: 'Download time from size and speed', category: 'tech' as any, keywords: ['download time','throughput','network'] }
   // More entries are added progressively in batches
 ];
 

@@ -115,6 +115,9 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,lcmCalc: 'LCM Calculator'
     ,ageCalc: 'Age Calculator'
     ,dateDiffCalc: 'Date Difference Calculator'
+    ,fuelCostCalc: 'Fuel Cost Calculator'
+    ,electricityBillCalc: 'Electricity Bill Calculator'
+    ,downloadTimeCalc: 'Download Time Calculator'
   },
   es: {
     siteTitle: 'Centro Financiero',
@@ -399,6 +402,9 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,lcmCalc: 'คำนวณ ค.ร.น.'
     ,ageCalc: 'คำนวณอายุ'
     ,dateDiffCalc: 'นับวันระหว่างสองวัน'
+    ,fuelCostCalc: 'คำนวณค่าน้ำมัน'
+    ,electricityBillCalc: 'คำนวณค่าไฟฟ้า'
+    ,downloadTimeCalc: 'คำนวณเวลาโหลดไฟล์'
   },
   ar: { ...{} as any },
   hi: { ...{} as any },
