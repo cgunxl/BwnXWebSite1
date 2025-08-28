@@ -180,6 +180,7 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,evChargingCalc: 'EV Charging Calculator'
     ,rectangleAreaCalc: 'Rectangle Area Calculator'
     ,pythagoreanCalc: 'Pythagorean Theorem Calculator'
+    ,relatedCalcs: 'Related calculators'
   },
   es: {
     siteTitle: 'Centro Financiero',
@@ -485,6 +486,7 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,bacCalc: 'คำนวณแอลกอฮอล์ในเลือด (BAC)'
     ,sleepCalc: 'คำนวณเวลานอน'
     ,cholesterolRatioCalc: 'คำนวณอัตราส่วนคอเลสเตอรอล'
+    ,relatedCalcs: 'เครื่องคิดเลขที่เกี่ยวข้อง'
     ,ohmsLawCalc: 'คำนวณกฎของโอห์ม'
     ,permutationCalc: 'คำนวณการจัดเรียง (Permutation)'
     ,combinationCalc: 'คำนวณการเลือก (Combination)'
