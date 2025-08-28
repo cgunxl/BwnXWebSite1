@@ -123,6 +123,10 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,diceCalc: 'Dice Roller'
     ,coinFlipCalc: 'Coin Flip Simulator'
     ,countdownCalc: 'Countdown Timer'
+    ,websiteBandwidthCalc: 'Website Bandwidth Calculator'
+    ,dataTransferCalc: 'Data Transfer Calculator'
+    ,streamingBandwidthCalc: 'Streaming Bandwidth Calculator'
+    ,apiUsageCalc: 'API Usage Calculator'
   },
   es: {
     siteTitle: 'Centro Financiero',
@@ -415,6 +419,10 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,diceCalc: 'ทอยลูกเต๋า'
     ,coinFlipCalc: 'จำลองโยนเหรียญ'
     ,countdownCalc: 'จับเวลานับถอยหลัง'
+    ,websiteBandwidthCalc: 'คำนวณแบนด์วิดธ์เว็บไซต์'
+    ,dataTransferCalc: 'คำนวณอัตราการโอนข้อมูล'
+    ,streamingBandwidthCalc: 'คำนวณแบนด์วิดธ์สตรีมมิ่ง'
+    ,apiUsageCalc: 'คำนวณการใช้งาน API'
   },
   ar: { ...{} as any },
   hi: { ...{} as any },

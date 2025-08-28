@@ -68,6 +68,10 @@ export const REGISTRY: CalculatorEntry[] = [
   ,{ id: 'dice' as any, path: (lang) => `/${lang}/dice`, titleKey: 'diceCalc' as any, description: 'Dice roller', category: 'fun' as any, keywords: ['dice','roll'] }
   ,{ id: 'coin-flip' as any, path: (lang) => `/${lang}/coin-flip`, titleKey: 'coinFlipCalc' as any, description: 'Coin flip simulator', category: 'fun' as any, keywords: ['coin','flip'] }
   ,{ id: 'countdown' as any, path: (lang) => `/${lang}/countdown`, titleKey: 'countdownCalc' as any, description: 'Countdown to a date', category: 'lifestyle' as any, keywords: ['countdown','timer'] }
+  ,{ id: 'website-bandwidth' as any, path: (lang) => `/${lang}/website-bandwidth`, titleKey: 'websiteBandwidthCalc' as any, description: 'Estimate site bandwidth needs', category: 'tech' as any, keywords: ['bandwidth','website','traffic'] }
+  ,{ id: 'data-transfer' as any, path: (lang) => `/${lang}/data-transfer`, titleKey: 'dataTransferCalc' as any, description: 'Throughput from data and time', category: 'tech' as any, keywords: ['data transfer','throughput'] }
+  ,{ id: 'streaming-bandwidth' as any, path: (lang) => `/${lang}/streaming-bandwidth`, titleKey: 'streamingBandwidthCalc' as any, description: 'Streaming capacity planner', category: 'tech' as any, keywords: ['streaming','bandwidth','bitrate'] }
+  ,{ id: 'api-usage' as any, path: (lang) => `/${lang}/api-usage`, titleKey: 'apiUsageCalc' as any, description: 'API request cost estimate', category: 'tech' as any, keywords: ['api','requests','cost'] }
   // More entries are added progressively in batches
 ];
 
