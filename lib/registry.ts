@@ -83,7 +83,6 @@ export type CalculatorId =
   | 'churn-rate'
   | 'conversion-rate'
   | 'subscription-revenue'
-  | 'cpc'
   | 'cpm'
   | 'affiliate-earnings'
   | 'pension'
@@ -228,7 +227,6 @@ export const REGISTRY: CalculatorEntry[] = [
   ,{ id: 'roth-ira' as any, path: (lang) => `/${lang}/roth-ira`, titleKey: 'rothIraCalc' as any, description: 'Roth IRA growth projection', category: 'savings' as any, keywords: ['roth ira','retirement'] }
   ,{ id: 'currency-arbitrage' as any, path: (lang) => `/${lang}/currency-arbitrage`, titleKey: 'currencyArbCalc' as any, description: 'FX triangular arbitrage simulator', category: 'finance' as any, keywords: ['currency','arbitrage','fx'] }
   ,{ id: 'roi-marketing' as any, path: (lang) => `/${lang}/roi-marketing`, titleKey: 'roiMarketingCalc' as any, description: 'Marketing ROI using incremental revenue and margin', category: 'finance' as any, keywords: ['marketing','roi','romi'] }
-  ,{ id: 'cpc' as any, path: (lang) => `/${lang}/cpc`, titleKey: 'cpcCalc' as any, description: 'Cost per click from total cost and clicks', category: 'finance' as any, keywords: ['cpc','cost per click','ads'] }
   ,{ id: 'cpm' as any, path: (lang) => `/${lang}/cpm`, titleKey: 'cpmCalc' as any, description: 'CPM from total cost and impressions', category: 'finance' as any, keywords: ['cpm','cost per mille','impressions'] }
   ,{ id: 'affiliate-earnings' as any, path: (lang) => `/${lang}/affiliate-earnings`, titleKey: 'affiliateEarningsCalc' as any, description: 'Estimated affiliate earnings from clicks, CR, AOV, commission', category: 'finance' as any, keywords: ['affiliate','commission','earnings'] }
   ,{ id: 'churn-rate' as any, path: (lang) => `/${lang}/churn-rate`, titleKey: 'churnRateCalc' as any, description: 'Customer churn rate from start, end, and new customers', category: 'finance' as any, keywords: ['churn','retention','saas'] }

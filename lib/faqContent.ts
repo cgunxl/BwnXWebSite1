@@ -269,21 +269,7 @@ export const FAQ_CONTENT: FaqContentMap = {
     }
   },
 
-  // Business: CPC
-  cpc: {
-    GLOBAL: {
-      useCases: [ 'หาค่า CPC จากต้นทุนรวมและจำนวนคลิก', 'เปรียบเทียบช่องทาง/แคมเปญตามต้นทุนต่อคลิก' ],
-      howTo: [ 'ใส่ต้นทุนรวมช่วงเวลาหนึ่ง', 'ใส่จำนวนคลิกทั้งหมด', 'อ่านค่า CPC = ต้นทุน/คลิก' ],
-      faqs: [
-        { question: 'CPC ดีแค่ไหน?', answer: 'ขึ้นกับอุตสาหกรรมและคุณภาพผู้ชม ให้เทียบควบคู่กับ Conversion Rate และ CPA' },
-        { question: 'CPC ต่ำเสมอดีไหม?', answer: 'ไม่เสมอไป ถ้า CR ต่ำอาจทำให้ CPA สูง ควรดูทั้งฟันเนล' },
-        { question: 'ต่างจาก CPM อย่างไร?', answer: 'CPC คิดต่อต้นทุนต่อคลิก ส่วน CPM คิดต่อต้นทุนต่อ 1,000 การแสดงผล' }
-      ],
-      references: [ { label: 'Google Ads Help – CPC', url: 'https://support.google.com/google-ads' } ],
-      keywords: [ 'CPC', 'Cost per Click', 'โฆษณา', 'แคมเปญ' ],
-      seoHtml: '<h2>CPC คืออะไร</h2><p>ชี้วัดต้นทุนต่อคลิก เหมาะสำหรับแคมเปญเน้นทราฟฟิก</p><h3>การใช้งาน</h3><p>เปรียบเทียบช่องทางและคำค้นที่คุ้มค่าที่สุด</p>'
-    }
-  },
+  
 
   // Business: CPM
   cpm: {
