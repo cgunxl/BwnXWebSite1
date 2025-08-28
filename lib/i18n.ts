@@ -113,6 +113,8 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,triangleAreaCalc: 'Triangle Area Calculator'
     ,gcfCalc: 'GCF Calculator'
     ,lcmCalc: 'LCM Calculator'
+    ,ageCalc: 'Age Calculator'
+    ,dateDiffCalc: 'Date Difference Calculator'
   },
   es: {
     siteTitle: 'Centro Financiero',
@@ -395,6 +397,8 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,triangleAreaCalc: 'คำนวณพื้นที่สามเหลี่ยม'
     ,gcfCalc: 'คำนวณ ห.ร.ม.'
     ,lcmCalc: 'คำนวณ ค.ร.น.'
+    ,ageCalc: 'คำนวณอายุ'
+    ,dateDiffCalc: 'นับวันระหว่างสองวัน'
   },
   ar: { ...{} as any },
   hi: { ...{} as any },

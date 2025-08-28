@@ -58,6 +58,8 @@ export const REGISTRY: CalculatorEntry[] = [
   ,{ id: 'triangle-area' as any, path: (lang) => `/${lang}/triangle-area`, titleKey: 'triangleAreaCalc' as any, description: 'Triangle area by base/height or sides', category: 'math' as any, keywords: ['triangle','area','heron'] }
   ,{ id: 'gcf' as any, path: (lang) => `/${lang}/gcf`, titleKey: 'gcfCalc' as any, description: 'Greatest common factor', category: 'math' as any, keywords: ['gcf','gcd','hcf'] }
   ,{ id: 'lcm' as any, path: (lang) => `/${lang}/lcm`, titleKey: 'lcmCalc' as any, description: 'Least common multiple', category: 'math' as any, keywords: ['lcm','least common multiple'] }
+  ,{ id: 'age' as any, path: (lang) => `/${lang}/age`, titleKey: 'ageCalc' as any, description: 'Exact age and next birthday', category: 'lifestyle' as any, keywords: ['age','birthday','date'] }
+  ,{ id: 'date-difference' as any, path: (lang) => `/${lang}/date-difference`, titleKey: 'dateDiffCalc' as any, description: 'Days/weeks/months between dates', category: 'lifestyle' as any, keywords: ['date difference','days between','duration'] }
   // More entries are added progressively in batches
 ];
 
