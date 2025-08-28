@@ -178,6 +178,26 @@ export const FAQ_CONTENT: FaqContentMap = {
     }
   },
 
+  // Business: ROI Marketing
+  'roi-marketing': {
+    GLOBAL: {
+      useCases: [ 'วัดผลตอบแทนงบการตลาดจากรายได้เพิ่มขึ้น', 'เทียบประสิทธิภาพแคมเปญโดยคำนึงถึง gross margin' ],
+      howTo: [ 'ใส่งบการตลาดและรายได้เพิ่มขึ้น (incremental)', 'ระบุ % กำไรขั้นต้น เพื่อแปลงรายได้เป็นกำไร', 'อ่านค่า ROI (%)' ],
+      faqs: [ { question: 'ทำไมต้องใช้ gross margin?', answer: 'รายได้ที่เพิ่มต้องแปลงเป็นกำไรเพื่อสะท้อนผลตอบแทนที่แท้จริงหลังต้นทุนสินค้า/บริการ' } ],
+      references: [ { label: 'HubSpot – Marketing ROI', url: 'https://blog.hubspot.com/marketing/marketing-roi' } ]
+    }
+  },
+
+  // Business: CAC
+  cac: {
+    GLOBAL: {
+      useCases: [ 'หาต้นทุนเฉลี่ยต่อการได้ลูกค้าใหม่หนึ่งราย', 'เทียบ CAC กับ LTV' ],
+      howTo: [ 'ใส่งบการตลาดช่วงเวลาหนึ่ง', 'ใส่จำนวนลูกค้าใหม่ที่ได้ในช่วงเดียวกัน', 'อ่าน CAC = ต้นทุน/ลูกค้า' ],
+      faqs: [ { question: 'CAC ควรเทียบกับอะไร?', answer: 'ควรเทียบกับ LTV (อัตราส่วน LTV:CAC) เพื่อดูความคุ้มค่าในการลงทุนการตลาด' } ],
+      references: [ { label: 'Profitwell – CAC', url: 'https://www.profitwell.com' } ]
+    }
+  },
+
   // Health: Calorie
   calorie: {
     GLOBAL: {

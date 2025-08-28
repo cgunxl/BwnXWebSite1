@@ -220,6 +220,7 @@ export const REGISTRY: CalculatorEntry[] = [
   ,{ id: '401k' as any, path: (lang) => `/${lang}/401k`, titleKey: 'k401Calc' as any, description: '401(k) plan with employer match', category: 'savings' as any, keywords: ['401k','match','contribution'] }
   ,{ id: 'roth-ira' as any, path: (lang) => `/${lang}/roth-ira`, titleKey: 'rothIraCalc' as any, description: 'Roth IRA growth projection', category: 'savings' as any, keywords: ['roth ira','retirement'] }
   ,{ id: 'currency-arbitrage' as any, path: (lang) => `/${lang}/currency-arbitrage`, titleKey: 'currencyArbCalc' as any, description: 'FX triangular arbitrage simulator', category: 'finance' as any, keywords: ['currency','arbitrage','fx'] }
+  ,{ id: 'roi-marketing' as any, path: (lang) => `/${lang}/roi-marketing`, titleKey: 'roiMarketingCalc' as any, description: 'Marketing ROI using incremental revenue and margin', category: 'finance' as any, keywords: ['marketing','roi','romi'] }
   ,{ id: 'npv-irr' as any, path: (lang) => `/${lang}/npv-irr`, titleKey: 'npvIrrCalc' as any, description: 'NPV and IRR from cash flows', category: 'finance' as any, keywords: ['npv','irr','discount rate','cash flow'] }
   ,{ id: 'cagr' as any, path: (lang) => `/${lang}/cagr`, titleKey: 'cagrCalc' as any, description: 'Compound annual growth rate', category: 'finance' as any, keywords: ['cagr','growth'] }
   ,{ id: 'annuity' as any, path: (lang) => `/${lang}/annuity`, titleKey: 'annuityCalc' as any, description: 'Present and future value of annuities', category: 'finance' as any, keywords: ['annuity','pv','fv'] }
@@ -236,6 +237,7 @@ export const REGISTRY: CalculatorEntry[] = [
   ,{ id: 'tuition-loan' as any, path: (lang) => `/${lang}/tuition-loan`, titleKey: 'tuitionLoanCalc' as any, description: 'Student loan with deferment interest', category: 'finance' as any, keywords: ['student loan','tuition','deferment'] }
   // Existing pages not yet listed above
   ,{ id: 'roi' as any, path: (lang) => `/${lang}/roi`, titleKey: 'roiCalc' as any, description: 'Return on Investment and CAGR', category: 'finance' as any, keywords: ['roi','return','cagr'] }
+  ,{ id: 'cac' as any, path: (lang) => `/${lang}/cac`, titleKey: 'cacCalc' as any, description: 'Customer Acquisition Cost', category: 'finance' as any, keywords: ['cac','marketing'] }
   ,{ id: 'stock-return' as any, path: (lang) => `/${lang}/stock-return`, titleKey: 'stockReturnCalc' as any, description: 'Stock total return with dividends', category: 'finance' as any, keywords: ['stock','return','dividend'] }
   ,{ id: 'dividend' as any, path: (lang) => `/${lang}/dividend`, titleKey: 'dividendCalc' as any, description: 'Dividend income and yield', category: 'finance' as any, keywords: ['dividend','yield','income'] }
   ,{ id: 'sales-tax' as any, path: (lang) => `/${lang}/sales-tax`, titleKey: 'salesTaxCalc' as any, description: 'Sales tax from rate and price', category: 'tax' as any, keywords: ['sales tax','vat','gst'] }

@@ -276,6 +276,15 @@ function getRelated(slug: string): RelatedItem[] {
         { id: 'wacc', reason: 'Choose discount rate baseline' },
         { id: 'cagr', reason: 'Compare with annualized growth' }
       ];
+    case 'roi-marketing':
+      return [
+        { id: 'roi', reason: 'Compare profit-based vs simple ROI' },
+        { id: 'cac', reason: 'Relate ROI to acquisition costs' }
+      ];
+    case 'cac':
+      return [
+        { id: 'roi-marketing', reason: 'Link cost to campaign return' }
+      ];
     case 'cagr':
       return [
         { id: 'roi', reason: 'Compare total vs annualized returns' },

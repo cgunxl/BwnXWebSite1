@@ -79,6 +79,7 @@ const dict: Record<LangCode, Record<string, string>> = {
     propertyTaxCalc: 'Property Tax Calculator',
     inflationCalc: 'Inflation Calculator',
     roiCalc: 'ROI Calculator',
+    roiMarketingCalc: 'ROI Marketing Calculator',
     stockReturnCalc: 'Stock Return Calculator',
     dividendCalc: 'Dividend Calculator',
     salesTaxCalc: 'Sales Tax Calculator',
@@ -172,6 +173,7 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,bondYieldCalc: 'Bond Yield (YTM) Calculator'
     ,waccCalc: 'WACC Calculator'
     ,dscrCalc: 'DSCR Calculator'
+    ,cacCalc: 'CAC Calculator'
     ,ebitdaMarginCalc: 'EBITDA Margin Calculator'
     ,enterpriseValueCalc: 'Enterprise Value Calculator'
     ,rentVsBuyCalc: 'Rent vs Buy Calculator'
@@ -439,6 +441,7 @@ const dict: Record<LangCode, Record<string, string>> = {
     propertyTaxCalc: 'คำนวณภาษีที่ดินและสิ่งปลูกสร้าง',
     inflationCalc: 'คำนวณเงินด้อยค่า (เงินเฟ้อ)',
     roiCalc: 'คำนวณ ROI',
+    roiMarketingCalc: 'คำนวณ ROI การตลาด',
     stockReturnCalc: 'คำนวณกำไรหุ้น',
     dividendCalc: 'คำนวณเงินปันผล',
     salesTaxCalc: 'คำนวณภาษีขาย',
@@ -533,6 +536,7 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,bondYieldCalc: 'คำนวณอัตราผลตอบแทนพันธบัตร (YTM)'
     ,waccCalc: 'คำนวณ WACC'
     ,dscrCalc: 'คำนวณ DSCR'
+    ,cacCalc: 'คำนวณ CAC'
     ,ebitdaMarginCalc: 'คำนวณ EBITDA Margin'
     ,enterpriseValueCalc: 'คำนวณ Enterprise Value'
     ,rentVsBuyCalc: 'คำนวณเช่าบ้าน vs ซื้อบ้าน'
