@@ -189,6 +189,16 @@ function getRelated(slug: string): RelatedItem[] {
         { id: 'ltv', reason: 'See loan-to-value and equity' },
         { id: 'amortization', reason: 'Get full mortgage schedule' }
       ];
+    case 'rent-vs-buy':
+      return [
+        { id: 'mortgage', reason: 'Compare mortgage payment components' },
+        { id: 'property-tax', reason: 'Include taxes in ownership cost' }
+      ];
+    case 'annuity-vs-lump-sum':
+      return [
+        { id: 'annuity', reason: 'Understand annuity PV/FV math' },
+        { id: 'npv-irr', reason: 'Discount cash flows consistently' }
+      ];
     case 'car-loan':
       return [
         { id: 'loan', reason: 'Compare with generic loan terms' },
@@ -213,6 +223,21 @@ function getRelated(slug: string): RelatedItem[] {
       return [
         { id: '401k', reason: 'Add employer match to plan' },
         { id: 'roth-ira', reason: 'Tax-advantaged growth scenario' }
+      ];
+    case 'pension':
+      return [
+        { id: 'annuity', reason: 'Convert pension to annuity math' },
+        { id: 'retirement', reason: 'Combine with other accounts' }
+      ];
+    case 'payday-loan':
+      return [
+        { id: 'loan', reason: 'Compare with traditional loans' },
+        { id: 'simple-interest', reason: 'Understand fee vs interest' }
+      ];
+    case 'tuition-loan':
+      return [
+        { id: 'amortization', reason: 'See full repayment schedule' },
+        { id: 'loan', reason: 'Compare term and payment options' }
       ];
     case '401k':
       return [

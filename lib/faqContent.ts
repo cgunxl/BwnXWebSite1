@@ -272,6 +272,56 @@ export const FAQ_CONTENT: FaqContentMap = {
     }
   },
 
+  // Finance: Rent vs Buy
+  'rent-vs-buy': {
+    GLOBAL: {
+      useCases: [ 'เทียบค่าใช้จ่ายรายเดือนระหว่างเช่ากับซื้อ', 'ประมาณผลกระทบของภาษีทรัพย์สินและค่าบำรุงรักษา' ],
+      howTo: [ 'ใส่ราคาบ้าน เงินดาวน์ ดอกเบี้ย และปีผ่อน', 'กำหนดภาษีทรัพย์สินและค่าบำรุงรักษา (เป็น %/ปี)', 'เปรียบเทียบกับค่าเช่าต่อเดือน' ],
+      faqs: [ { question: 'ควรเช่าหรือซื้อดี?', answer: 'ขึ้นกับระยะเวลาพำนัก อัตราดอกเบี้ย ภาษี และค่าโอกาสของเงินดาวน์ เครื่องมือนี้ช่วยเทียบค่าใช้จ่ายรายเดือนพื้นฐาน' } ],
+      references: [ { label: 'Investopedia – Rent vs. Buy', url: 'https://www.investopedia.com/rent-vs-buy-5072237' } ]
+    }
+  },
+
+  // Finance: Annuity vs Lump Sum
+  'annuity-vs-lump-sum': {
+    GLOBAL: {
+      useCases: [ 'ตัดสินใจเลือกรับรายปีหรือรับเงินก้อน', 'ใช้ส่วนลดอัตราผลตอบแทนเพื่อเทียบมูลค่าปัจจุบัน' ],
+      howTo: [ 'ใส่ยอดจ่ายรายเดือน จำนวนปี และอัตราคิดลด (APR %)', 'เปรียบเทียบมูลค่าปัจจุบันของรายปี กับเงินก้อนที่เสนอ' ],
+      faqs: [ { question: 'อัตราคิดลดคืออะไร?', answer: 'อัตราผลตอบแทนขั้นต่ำที่ต้องการหรือค่าใช้จ่ายเงินทุนที่ใช้แปลงกระแสเงินสดอนาคตกลับมาเป็นปัจจุบัน' } ],
+      references: [ { label: 'CFA Institute – Time Value of Money', url: 'https://www.cfainstitute.org' } ]
+    }
+  },
+
+  // Finance: Pension
+  pension: {
+    GLOBAL: {
+      useCases: [ 'วางแผนเงินบำนาญต่อเดือนจากเงินสะสมและผลตอบแทน', 'ประมาณระยะเวลารับเงินบำนาญจากกองทุนที่มี' ],
+      howTo: [ 'ใส่อายุปัจจุบัน อายุเกษียณ ยอดออมรายเดือน และอัตราผลตอบแทน', 'กำหนดจำนวนปีที่ต้องการรับเงินบำนาญ' ],
+      faqs: [ { question: 'ผลตอบแทนควรใช้เท่าไร?', answer: 'ขึ้นกับสินทรัพย์ที่ลงทุน ระวังใช้สมมติฐานอนุรักษ์นิยมเพื่อความปลอดภัย' } ],
+      references: [ { label: 'Vanguard – Investment returns', url: 'https://investor.vanguard.com' } ]
+    }
+  },
+
+  // Finance: Payday Loan
+  'payday-loan': {
+    GLOBAL: {
+      useCases: [ 'คำนวณ APR โดยประมาณจากค่าธรรมเนียมและจำนวนวัน', 'ทำความเข้าใจค่าใช้จ่ายที่แท้จริงของสินเชื่อด่วน' ],
+      howTo: [ 'ใส่วงเงิน ค่าธรรมเนียม และจำนวนวันของสัญญา', 'อ่านค่าประมาณ APR (แบบง่าย)' ],
+      faqs: [ { question: 'APR ทำไมสูง?', answer: 'แม้ค่าธรรมเนียมดูน้อย แต่เมื่อปรับเป็นรายปีตามระยะเวลาสั้น ๆ APR จะสูงมาก' } ],
+      references: [ { label: 'CFPB – Payday loans', url: 'https://www.consumerfinance.gov' } ]
+    }
+  },
+
+  // Finance: Tuition Loan
+  'tuition-loan': {
+    GLOBAL: {
+      useCases: [ 'ประมาณค่างวดกู้ยืมการศึกษาและดอกเบี้ยรวม', 'คำนวณดอกเบี้ยช่วงพักชำระ (deferment)' ],
+      howTo: [ 'ใส่ยอดกู้ อัตราดอกเบี้ย และระยะเวลากู้', 'ถ้ามี ใส่จำนวนเดือนพักชำระเพื่อดูดอกเบี้ยที่งอกจากพักชำระ' ],
+      faqs: [ { question: 'พักชำระมีผลยังไง?', answer: 'ช่วงพักชำระดอกเบี้ยยังคงงอกและถูกบวกเข้ายอดหนี้ ทำให้จ่ายรวมสูงขึ้น' } ],
+      references: [ { label: 'Studentaid.gov – Interest capitalization', url: 'https://studentaid.gov/help-center/answers/article/interest-capitalization' } ]
+    }
+  },
+
   // Finance: Annuity
   annuity: {
     GLOBAL: {

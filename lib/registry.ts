@@ -77,6 +77,11 @@ export type CalculatorId =
   | 'cagr'
   | 'ebitda-margin'
   | 'enterprise-value'
+  | 'rent-vs-buy'
+  | 'annuity-vs-lump-sum'
+  | 'pension'
+  | 'payday-loan'
+  | 'tuition-loan'
   | 'annuity'
   | 'bond-price'
   | 'bond-yield'
@@ -224,6 +229,11 @@ export const REGISTRY: CalculatorEntry[] = [
   ,{ id: 'dscr' as any, path: (lang) => `/${lang}/dscr`, titleKey: 'dscrCalc' as any, description: 'Debt service coverage ratio', category: 'finance' as any, keywords: ['dscr','coverage','noi'] }
   ,{ id: 'ebitda-margin' as any, path: (lang) => `/${lang}/ebitda-margin`, titleKey: 'ebitdaMarginCalc' as any, description: 'EBITDA margin from revenue and EBITDA', category: 'finance' as any, keywords: ['ebitda','margin'] }
   ,{ id: 'enterprise-value' as any, path: (lang) => `/${lang}/enterprise-value`, titleKey: 'enterpriseValueCalc' as any, description: 'EV = Market cap + Debt - Cash', category: 'finance' as any, keywords: ['enterprise value','ev'] }
+  ,{ id: 'rent-vs-buy' as any, path: (lang) => `/${lang}/rent-vs-buy`, titleKey: 'rentVsBuyCalc' as any, description: 'Compare renting vs buying', category: 'finance' as any, keywords: ['rent','buy','mortgage','property tax'] }
+  ,{ id: 'annuity-vs-lump-sum' as any, path: (lang) => `/${lang}/annuity-vs-lump-sum`, titleKey: 'annuityVsLumpCalc' as any, description: 'Present value of annuity vs lump sum', category: 'finance' as any, keywords: ['annuity','lump sum','present value'] }
+  ,{ id: 'pension' as any, path: (lang) => `/${lang}/pension`, titleKey: 'pensionCalc' as any, description: 'Monthly pension estimate from contributions and returns', category: 'finance' as any, keywords: ['pension','annuity','retirement'] }
+  ,{ id: 'payday-loan' as any, path: (lang) => `/${lang}/payday-loan`, titleKey: 'paydayLoanCalc' as any, description: 'Payday loan APR from fee and term', category: 'finance' as any, keywords: ['payday','apr','fee'] }
+  ,{ id: 'tuition-loan' as any, path: (lang) => `/${lang}/tuition-loan`, titleKey: 'tuitionLoanCalc' as any, description: 'Student loan with deferment interest', category: 'finance' as any, keywords: ['student loan','tuition','deferment'] }
   // Existing pages not yet listed above
   ,{ id: 'roi' as any, path: (lang) => `/${lang}/roi`, titleKey: 'roiCalc' as any, description: 'Return on Investment and CAGR', category: 'finance' as any, keywords: ['roi','return','cagr'] }
   ,{ id: 'stock-return' as any, path: (lang) => `/${lang}/stock-return`, titleKey: 'stockReturnCalc' as any, description: 'Stock total return with dividends', category: 'finance' as any, keywords: ['stock','return','dividend'] }
