@@ -198,6 +198,16 @@ export const FAQ_CONTENT: FaqContentMap = {
     }
   },
 
+  // Business: LTV
+  'ltv-customer': {
+    GLOBAL: {
+      useCases: [ 'ประเมินมูลค่าตลอดอายุลูกค้า (LTV) แบบง่าย', 'เปรียบเทียบกับ CAC' ],
+      howTo: [ 'ใส่ ARPU ต่อเดือน', 'ใส่ % กำไรขั้นต้น', 'ใส่ churn ต่อเดือน (%)', 'อ่าน LTV = ARPU × margin ÷ churn' ],
+      faqs: [ { question: 'สูตรนี้เหมาะเมื่อไร?', answer: 'ใช้กับโมเดลสมัครสมาชิกที่มี churn คงที่และ ARPU สม่ำเสมอ เป็นการประมาณเชิงเส้น' } ],
+      references: [ { label: 'Reforge – SaaS LTV', url: 'https://www.reforge.com' } ]
+    }
+  },
+
   // Health: Calorie
   calorie: {
     GLOBAL: {

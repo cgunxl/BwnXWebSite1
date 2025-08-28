@@ -285,6 +285,11 @@ function getRelated(slug: string): RelatedItem[] {
       return [
         { id: 'roi-marketing', reason: 'Link cost to campaign return' }
       ];
+    case 'ltv-customer':
+      return [
+        { id: 'cac', reason: 'Compare LTV:CAC ratio' },
+        { id: 'roi-marketing', reason: 'Connect lifetime value to ROI goals' }
+      ];
     case 'cagr':
       return [
         { id: 'roi', reason: 'Compare total vs annualized returns' },

@@ -79,6 +79,10 @@ export type CalculatorId =
   | 'enterprise-value'
   | 'rent-vs-buy'
   | 'annuity-vs-lump-sum'
+  | 'ltv-customer'
+  | 'churn-rate'
+  | 'conversion-rate'
+  | 'subscription-revenue'
   | 'pension'
   | 'payday-loan'
   | 'tuition-loan'
@@ -232,6 +236,7 @@ export const REGISTRY: CalculatorEntry[] = [
   ,{ id: 'enterprise-value' as any, path: (lang) => `/${lang}/enterprise-value`, titleKey: 'enterpriseValueCalc' as any, description: 'EV = Market cap + Debt - Cash', category: 'finance' as any, keywords: ['enterprise value','ev'] }
   ,{ id: 'rent-vs-buy' as any, path: (lang) => `/${lang}/rent-vs-buy`, titleKey: 'rentVsBuyCalc' as any, description: 'Compare renting vs buying', category: 'finance' as any, keywords: ['rent','buy','mortgage','property tax'] }
   ,{ id: 'annuity-vs-lump-sum' as any, path: (lang) => `/${lang}/annuity-vs-lump-sum`, titleKey: 'annuityVsLumpCalc' as any, description: 'Present value of annuity vs lump sum', category: 'finance' as any, keywords: ['annuity','lump sum','present value'] }
+  ,{ id: 'ltv-customer' as any, path: (lang) => `/${lang}/ltv-customer`, titleKey: 'ltvCustomerCalc' as any, description: 'Customer lifetime value from ARPU, margin, churn', category: 'finance' as any, keywords: ['ltv','customer','saas'] }
   ,{ id: 'pension' as any, path: (lang) => `/${lang}/pension`, titleKey: 'pensionCalc' as any, description: 'Monthly pension estimate from contributions and returns', category: 'finance' as any, keywords: ['pension','annuity','retirement'] }
   ,{ id: 'payday-loan' as any, path: (lang) => `/${lang}/payday-loan`, titleKey: 'paydayLoanCalc' as any, description: 'Payday loan APR from fee and term', category: 'finance' as any, keywords: ['payday','apr','fee'] }
   ,{ id: 'tuition-loan' as any, path: (lang) => `/${lang}/tuition-loan`, titleKey: 'tuitionLoanCalc' as any, description: 'Student loan with deferment interest', category: 'finance' as any, keywords: ['student loan','tuition','deferment'] }
