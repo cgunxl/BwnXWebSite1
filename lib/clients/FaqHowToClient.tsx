@@ -248,7 +248,23 @@ function getRelated(slug: string): RelatedItem[] {
     case 'roi':
       return [
         { id: 'npv-irr', reason: 'Evaluate projects with cash flows' },
-        { id: 'wacc', reason: 'Choose discount rate baseline' }
+        { id: 'wacc', reason: 'Choose discount rate baseline' },
+        { id: 'cagr', reason: 'Compare with annualized growth' }
+      ];
+    case 'cagr':
+      return [
+        { id: 'roi', reason: 'Compare total vs annualized returns' },
+        { id: 'npv-irr', reason: 'Cash-flow based project analysis' }
+      ];
+    case 'ebitda-margin':
+      return [
+        { id: 'profit-margin', reason: 'Compare margin definitions' },
+        { id: 'enterprise-value', reason: 'Use EV/EBITDA multiples' }
+      ];
+    case 'enterprise-value':
+      return [
+        { id: 'wacc', reason: 'Use in valuation models' },
+        { id: 'ebitda-margin', reason: 'Build EV/EBITDA' }
       ];
     case 'stock-return':
       return [

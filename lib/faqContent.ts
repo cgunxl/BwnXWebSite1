@@ -242,6 +242,36 @@ export const FAQ_CONTENT: FaqContentMap = {
     }
   },
 
+  // Finance: CAGR
+  cagr: {
+    GLOBAL: {
+      useCases: [ 'หาค่า CAGR จากมูลค่าเริ่ม มูลค่าปลายงวด และจำนวนปี', 'เทียบการเติบโตเฉลี่ยต่อปีกับตัวเลือกการลงทุนอื่น' ],
+      howTo: [ 'ใส่มูลค่าเริ่ม มูลค่าปลายงวด และจำนวนปี', 'อ่าน CAGR (%/ปี) และ Total return (%)' ],
+      faqs: [ { question: 'CAGR คืออะไร?', answer: 'อัตราการเติบโตเฉลี่ยต่อปีที่ทำให้มูลค่าเริ่มกลายเป็นมูลค่าปลายงวดในช่วงเวลาที่กำหนด' } ],
+      references: [ { label: 'Investopedia – CAGR', url: 'https://www.investopedia.com/terms/c/cagr.asp' } ]
+    }
+  },
+
+  // Finance: EBITDA Margin
+  'ebitda-margin': {
+    GLOBAL: {
+      useCases: [ 'วัดความสามารถทำกำไรก่อนดอกเบี้ย ภาษี ค่าเสื่อมและค่าตัดจำหน่าย', 'เทียบประสิทธิภาพการดำเนินงานระหว่างบริษัท' ],
+      howTo: [ 'ใส่รายได้ (Revenue) และ EBITDA', 'อ่าน EBITDA margin (%)' ],
+      faqs: [ { question: 'ทำไม EBITDA margin สำคัญ?', answer: 'ช่วยเปรียบเทียบประสิทธิภาพแกนหลักของธุรกิจ โดยลดผลของโครงสร้างเงินทุนและนโยบายบัญชี' } ],
+      references: [ { label: 'CFA Institute – EBITDA', url: 'https://www.cfainstitute.org' } ]
+    }
+  },
+
+  // Finance: Enterprise Value
+  'enterprise-value': {
+    GLOBAL: {
+      useCases: [ 'ประเมินมูลค่ากิจการสำหรับการเปรียบเทียบอุตสาหกรรม', 'ใช้ EV ในอัตราส่วน EV/EBITDA' ],
+      howTo: [ 'ใส่มาร์เก็ตแคป ยอดหนี้รวม และเงินสด', 'อ่าน Enterprise Value' ],
+      faqs: [ { question: 'EV ต่างจาก Market Cap ยังไง?', answer: 'EV รวมโครงสร้างหนี้และเงินสด ทำให้สะท้อนมูลค่ากิจการที่ผู้ซื้อต้องจ่ายจริงมากกว่า' } ],
+      references: [ { label: 'Investopedia – Enterprise Value (EV)', url: 'https://www.investopedia.com/terms/e/enterprisevalue.asp' } ]
+    }
+  },
+
   // Finance: Annuity
   annuity: {
     GLOBAL: {

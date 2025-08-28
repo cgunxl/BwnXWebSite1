@@ -74,6 +74,9 @@ export type CalculatorId =
   | 'roth-ira'
   | 'currency-arbitrage'
   | 'npv-irr'
+  | 'cagr'
+  | 'ebitda-margin'
+  | 'enterprise-value'
   | 'annuity'
   | 'bond-price'
   | 'bond-yield'
@@ -213,11 +216,14 @@ export const REGISTRY: CalculatorEntry[] = [
   ,{ id: 'roth-ira' as any, path: (lang) => `/${lang}/roth-ira`, titleKey: 'rothIraCalc' as any, description: 'Roth IRA growth projection', category: 'savings' as any, keywords: ['roth ira','retirement'] }
   ,{ id: 'currency-arbitrage' as any, path: (lang) => `/${lang}/currency-arbitrage`, titleKey: 'currencyArbCalc' as any, description: 'FX triangular arbitrage simulator', category: 'finance' as any, keywords: ['currency','arbitrage','fx'] }
   ,{ id: 'npv-irr' as any, path: (lang) => `/${lang}/npv-irr`, titleKey: 'npvIrrCalc' as any, description: 'NPV and IRR from cash flows', category: 'finance' as any, keywords: ['npv','irr','discount rate','cash flow'] }
+  ,{ id: 'cagr' as any, path: (lang) => `/${lang}/cagr`, titleKey: 'cagrCalc' as any, description: 'Compound annual growth rate', category: 'finance' as any, keywords: ['cagr','growth'] }
   ,{ id: 'annuity' as any, path: (lang) => `/${lang}/annuity`, titleKey: 'annuityCalc' as any, description: 'Present and future value of annuities', category: 'finance' as any, keywords: ['annuity','pv','fv'] }
   ,{ id: 'bond-price' as any, path: (lang) => `/${lang}/bond-price`, titleKey: 'bondPriceCalc' as any, description: 'Bond price from yield, coupon, and term', category: 'finance' as any, keywords: ['bond','price','ytm'] }
   ,{ id: 'bond-yield' as any, path: (lang) => `/${lang}/bond-yield`, titleKey: 'bondYieldCalc' as any, description: 'Solve yield to maturity from bond price', category: 'finance' as any, keywords: ['bond','yield','ytm'] }
   ,{ id: 'wacc' as any, path: (lang) => `/${lang}/wacc`, titleKey: 'waccCalc' as any, description: 'Weighted average cost of capital', category: 'finance' as any, keywords: ['wacc','cost of capital'] }
   ,{ id: 'dscr' as any, path: (lang) => `/${lang}/dscr`, titleKey: 'dscrCalc' as any, description: 'Debt service coverage ratio', category: 'finance' as any, keywords: ['dscr','coverage','noi'] }
+  ,{ id: 'ebitda-margin' as any, path: (lang) => `/${lang}/ebitda-margin`, titleKey: 'ebitdaMarginCalc' as any, description: 'EBITDA margin from revenue and EBITDA', category: 'finance' as any, keywords: ['ebitda','margin'] }
+  ,{ id: 'enterprise-value' as any, path: (lang) => `/${lang}/enterprise-value`, titleKey: 'enterpriseValueCalc' as any, description: 'EV = Market cap + Debt - Cash', category: 'finance' as any, keywords: ['enterprise value','ev'] }
   // Existing pages not yet listed above
   ,{ id: 'roi' as any, path: (lang) => `/${lang}/roi`, titleKey: 'roiCalc' as any, description: 'Return on Investment and CAGR', category: 'finance' as any, keywords: ['roi','return','cagr'] }
   ,{ id: 'stock-return' as any, path: (lang) => `/${lang}/stock-return`, titleKey: 'stockReturnCalc' as any, description: 'Stock total return with dividends', category: 'finance' as any, keywords: ['stock','return','dividend'] }
