@@ -118,6 +118,11 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,fuelCostCalc: 'Fuel Cost Calculator'
     ,electricityBillCalc: 'Electricity Bill Calculator'
     ,downloadTimeCalc: 'Download Time Calculator'
+    ,ageGapCalc: 'Age Gap Calculator'
+    ,rngCalc: 'Random Number Generator'
+    ,diceCalc: 'Dice Roller'
+    ,coinFlipCalc: 'Coin Flip Simulator'
+    ,countdownCalc: 'Countdown Timer'
   },
   es: {
     siteTitle: 'Centro Financiero',
@@ -405,6 +410,11 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,fuelCostCalc: 'คำนวณค่าน้ำมัน'
     ,electricityBillCalc: 'คำนวณค่าไฟฟ้า'
     ,downloadTimeCalc: 'คำนวณเวลาโหลดไฟล์'
+    ,ageGapCalc: 'คำนวณความต่างอายุ'
+    ,rngCalc: 'เครื่องสุ่มตัวเลข'
+    ,diceCalc: 'ทอยลูกเต๋า'
+    ,coinFlipCalc: 'จำลองโยนเหรียญ'
+    ,countdownCalc: 'จับเวลานับถอยหลัง'
   },
   ar: { ...{} as any },
   hi: { ...{} as any },

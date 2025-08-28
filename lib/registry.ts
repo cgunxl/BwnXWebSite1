@@ -63,6 +63,11 @@ export const REGISTRY: CalculatorEntry[] = [
   ,{ id: 'fuel-cost' as any, path: (lang) => `/${lang}/fuel-cost`, titleKey: 'fuelCostCalc' as any, description: 'Trip fuel and cost estimate', category: 'lifestyle' as any, keywords: ['fuel','gas','trip cost'] }
   ,{ id: 'electricity-bill' as any, path: (lang) => `/${lang}/electricity-bill`, titleKey: 'electricityBillCalc' as any, description: 'Monthly electricity bill estimate', category: 'household' as any, keywords: ['electricity','bill','kwh'] }
   ,{ id: 'download-time' as any, path: (lang) => `/${lang}/download-time`, titleKey: 'downloadTimeCalc' as any, description: 'Download time from size and speed', category: 'tech' as any, keywords: ['download time','throughput','network'] }
+  ,{ id: 'age-gap' as any, path: (lang) => `/${lang}/age-gap`, titleKey: 'ageGapCalc' as any, description: 'Age difference between two people', category: 'lifestyle' as any, keywords: ['age gap','difference','dates'] }
+  ,{ id: 'random-number' as any, path: (lang) => `/${lang}/random-number`, titleKey: 'rngCalc' as any, description: 'Random numbers in a range', category: 'lifestyle' as any, keywords: ['random','rng'] }
+  ,{ id: 'dice' as any, path: (lang) => `/${lang}/dice`, titleKey: 'diceCalc' as any, description: 'Dice roller', category: 'fun' as any, keywords: ['dice','roll'] }
+  ,{ id: 'coin-flip' as any, path: (lang) => `/${lang}/coin-flip`, titleKey: 'coinFlipCalc' as any, description: 'Coin flip simulator', category: 'fun' as any, keywords: ['coin','flip'] }
+  ,{ id: 'countdown' as any, path: (lang) => `/${lang}/countdown`, titleKey: 'countdownCalc' as any, description: 'Countdown to a date', category: 'lifestyle' as any, keywords: ['countdown','timer'] }
   // More entries are added progressively in batches
 ];
 
