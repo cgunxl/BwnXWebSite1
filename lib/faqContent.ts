@@ -13,6 +13,106 @@ export type FaqHowTo = {
 export type FaqContentMap = Record<string, Partial<Record<CountryCode, FaqHowTo>>>;
 
 export const FAQ_CONTENT: FaqContentMap = {
+  // Finance: House Affordability
+  'house-affordability': {
+    GLOBAL: {
+      useCases: [
+        'ประเมินงบซื้อบ้านสูงสุดจากรายได้ต่อปีและหนี้ปัจจุบัน',
+        'ดูผลกระทบของอัตราดอกเบี้ย ภาษีที่ดิน และประกันบ้านต่อค่างวด',
+        'ใช้กำหนดกรอบงบประมาณก่อนหาบ้านจริง'
+      ],
+      howTo: [
+        'กรอกเงินเดือนต่อปี เงินดาวน์ และอัตราดอกเบี้ย',
+        'กรอกอัตราภาษีทรัพย์สิน (% ต่อปี) และค่าใช้จ่ายรายเดือน (ประกัน/ค่าส่วนกลาง)',
+        'ระบุเพดาน DTI (%) เพื่อจำกัดสัดส่วนหนี้ต่อรายได้',
+        'อ่านราคาบ้านสูงสุด วงเงินกู้ และค่างวดโดยประมาณ'
+      ],
+      faqs: [
+        { question: 'DTI คืออะไร?', answer: 'Debt-to-Income คือสัดส่วนหนี้ต่อรายได้ต่อเดือน ธนาคารใช้กำหนดความสามารถในการผ่อน' },
+        { question: 'Property tax ส่งผลยังไง?', answer: 'ภาษีทรัพย์สินคิดจากมูลค่าบ้านต่อปีและรวมในค่าใช้จ่ายรายเดือน ทำให้วงเงินผ่อนเปลี่ยน' }
+      ],
+      references: [
+        { label: 'Fannie Mae – Qualifying Ratios (DTI)', url: 'https://singlefamily.fanniemae.com' },
+        { label: 'Investopedia – Debt-to-Income Ratio (DTI)', url: 'https://www.investopedia.com/terms/d/dti.asp' }
+      ]
+    },
+    TH: {
+      useCases: [ 'ประมาณงบซื้อบ้านตามเกณฑ์ธนาคารไทย', 'ดูผลของดอกเบี้ยและภาษีที่ดิน/สิ่งปลูกสร้าง' ],
+      howTo: [ 'กรอกข้อมูลรายได้และหนี้', 'ใช้อัตราภาษีท้องถิ่นโดยประมาณ', 'เปรียบเทียบหลายสถานการณ์' ],
+      faqs: [ { question: 'DTI ไทยใช้เท่าไร?', answer: 'ขึ้นกับธนาคารและนโยบาย กรณีทั่วไปไม่ควรเกิน ~40–50% สำหรับหนี้ทั้งหมด' } ],
+      references: [ { label: 'ธนาคารแห่งประเทศไทย – เกณฑ์สินเชื่อที่อยู่อาศัย', url: 'https://www.bot.or.th' } ]
+    }
+  },
+
+  // Finance: LTV
+  ltv: {
+    GLOBAL: {
+      useCases: [ 'ประเมิน LTV ของสินเชื่อที่อยู่อาศัย', 'คำนวณส่วนทุน (equity) ปัจจุบัน' ],
+      howTo: [ 'กรอกมูลค่าทรัพย์สินและวงเงินกู้', 'อ่านค่า LTV (%) และ Equity (%)' ],
+      faqs: [ { question: 'LTV สำคัญอย่างไร?', answer: 'LTV สูง = ความเสี่ยงสูง ผู้ปล่อยกู้อาจคิดดอกสูงหรือกำหนดเงินดาวน์มากขึ้น' } ],
+      references: [ { label: 'Investopedia – Loan-to-Value (LTV) Ratio', url: 'https://www.investopedia.com/terms/l/loantovalue.asp' } ]
+    }
+  },
+
+  // Finance: DTI
+  dti: {
+    GLOBAL: {
+      useCases: [ 'ประเมินความสามารถในการเป็นหนี้', 'ใช้เป็นเกณฑ์เบื้องต้นก่อนยื่นกู้' ],
+      howTo: [ 'กรอกหนี้รวมรายเดือนและรายได้รวมรายเดือน', 'อ่านค่า DTI (%) และเกณฑ์ความเสี่ยง' ],
+      faqs: [ { question: 'DTI เท่าไรถือว่าดี?', answer: 'โดยทั่วไป <36% ถือว่าดี 36–43% พอรับได้ >43% สูง ควรลดหนี้หรือเพิ่มรายได้' } ],
+      references: [ { label: 'CFPB – Debt-to-Income Ratio', url: 'https://www.consumerfinance.gov' } ]
+    }
+  },
+
+  // Savings: Emergency Fund
+  'emergency-fund': {
+    GLOBAL: {
+      useCases: [ 'ตั้งเป้าเงินสำรองฉุกเฉิน 3–12 เดือนของค่าใช้จ่าย', 'วางแผนสะสมเงินสำรองเป็นรายเดือน' ],
+      howTo: [ 'กรอกค่าใช้จ่ายต่อเดือนและจำนวนเดือนเป้าหมาย', 'กรอกเงินออมปัจจุบันและยอดออมต่อเดือน', 'อ่านจำนวนเดือนที่คาดว่าจะถึงเป้า' ],
+      faqs: [ { question: 'ควรเก็บกี่เดือน?', answer: 'ขึ้นกับความเสี่ยงงาน/ครอบครัว 3–6 เดือนทั่วไป 9–12 เดือนสำหรับอาชีพเสี่ยง/ผู้มีภาระ' } ],
+      references: [ { label: 'Investopedia – Emergency Fund', url: 'https://www.investopedia.com/terms/e/emergency_fund.asp' } ]
+    }
+  },
+
+  // Household/Energy: Solar Panel
+  'solar-panel': {
+    GLOBAL: {
+      useCases: [ 'ประมาณจำนวนแผงและขนาดระบบจากการใช้ไฟ', 'วางแผนระบบโซลาร์บนหลังคาเบื้องต้น' ],
+      howTo: [ 'ใส่ kWh ต่อเดือน ชั่วโมงแดดเฉลี่ยต่อวัน และกำลังแผง (W)', 'กรอก % การสูญเสียของระบบ', 'อ่านจำนวนแผงและขนาดระบบ (kW)' ],
+      faqs: [ { question: 'System losses คืออะไร?', answer: 'รวมความสูญเสียจากอินเวอร์เตอร์ สายไฟ มุมเอียง เงาบดบัง อุณหภูมิ ฯลฯ' } ],
+      references: [ { label: 'NREL – PVWatts Calculator', url: 'https://pvwatts.nrel.gov' } ]
+    }
+  },
+
+  // Tech/EV: Charging
+  'ev-charging': {
+    GLOBAL: {
+      useCases: [ 'คำนวณเวลาชาร์จ EV และค่าไฟโดยประมาณ', 'เปรียบเทียบหัวชาร์จ AC ระดับต่าง ๆ' ],
+      howTo: [ 'กรอกขนาดแบตเตอรี่ (kWh) ระดับชาร์จเริ่ม/เป้า (%)', 'กรอกกำลังเครื่องชาร์จ (kW) และประสิทธิภาพ (%)', 'ถ้ามี ใส่อัตราค่าไฟต่อ kWh' ],
+      faqs: [ { question: 'DC fast charge ต่างจาก AC ยังไง?', answer: 'DC ให้กำลังสูงกว่าอย่างมาก แต่ประสิทธิภาพและ taper ทำให้เวลาไม่เป็นเส้นตรง' } ],
+      references: [ { label: 'U.S. DOE – Alternative Fuels Data Center', url: 'https://afdc.energy.gov' } ]
+    }
+  },
+
+  // Math: Rectangle Area
+  'rectangle-area': {
+    GLOBAL: {
+      useCases: [ 'หาพื้นที่และเส้นรอบรูปสี่เหลี่ยมผืนผ้า', 'คำนวณเส้นทแยงมุมจากกว้างและยาว' ],
+      howTo: [ 'กรอกความกว้างและความยาว', 'อ่านพื้นที่ เส้นรอบรูป และเส้นทแยงมุม' ],
+      faqs: [ { question: 'หน่วยของผลลัพธ์?', answer: 'พื้นที่เป็นหน่วยกำลังสอง (เช่น m²) เส้นรอบรูปและเส้นทแยงมุมเป็นหน่วยความยาว' } ],
+      references: [ { label: 'Rectangle – geometry', url: 'https://en.wikipedia.org/wiki/Rectangle' } ]
+    }
+  },
+
+  // Math: Pythagorean
+  pythagorean: {
+    GLOBAL: {
+      useCases: [ 'หาด้านที่หายไปของสามเหลี่ยมมุมฉาก', 'ตรวจสอบความเป็นสามเหลี่ยมมุมฉากจากความยาวสามด้าน' ],
+      howTo: [ 'ป้อนค่าอย่างน้อยสองด้านใน a,b,c', 'ใช้สูตร a² + b² = c² เพื่อหาด้านที่ขาด' ],
+      faqs: [ { question: 'ใช้กับสามเหลี่ยมทั่วไปได้ไหม?', answer: 'สูตรนี้ใช้เฉพาะสามเหลี่ยมมุมฉาก หากไม่ใช่มุมฉากให้ใช้กฎโคไซน์' } ],
+      references: [ { label: 'Pythagorean theorem', url: 'https://en.wikipedia.org/wiki/Pythagorean_theorem' } ]
+    }
+  },
   // Finance: ROI
   roi: {
     GLOBAL: {

@@ -172,6 +172,14 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,aprApyCalc: 'APR ↔ APY Converter'
     ,rule72Calc: 'Rule of 72 Calculator'
     ,simpleInterestCalc: 'Simple Interest Calculator'
+    ,houseAffordabilityCalc: 'House Affordability Calculator'
+    ,ltvCalc: 'LTV Calculator'
+    ,dtiCalc: 'DTI Calculator'
+    ,emergencyFundCalc: 'Emergency Fund Calculator'
+    ,solarPanelCalc: 'Solar Panel Calculator'
+    ,evChargingCalc: 'EV Charging Calculator'
+    ,rectangleAreaCalc: 'Rectangle Area Calculator'
+    ,pythagoreanCalc: 'Pythagorean Theorem Calculator'
   },
   es: {
     siteTitle: 'Centro Financiero',
@@ -513,6 +521,14 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,aprApyCalc: 'ตัวแปลง APR ↔ APY'
     ,rule72Calc: 'คำนวณกฎ 72'
     ,simpleInterestCalc: 'คำนวณดอกเบี้ยแบบง่าย'
+    ,houseAffordabilityCalc: 'คำนวณงบซื้อบ้านที่เหมาะสม'
+    ,ltvCalc: 'คำนวณ LTV'
+    ,dtiCalc: 'คำนวณ DTI'
+    ,emergencyFundCalc: 'คำนวณเงินสำรองฉุกเฉิน'
+    ,solarPanelCalc: 'คำนวณแผงโซลาร์เซลล์ที่ต้องใช้'
+    ,evChargingCalc: 'คำนวณชาร์จรถ EV'
+    ,rectangleAreaCalc: 'คำนวณพื้นที่สี่เหลี่ยมผืนผ้า'
+    ,pythagoreanCalc: 'คำนวณทฤษฎีพีทาโกรัส'
   },
   ar: { ...{} as any },
   hi: { ...{} as any },

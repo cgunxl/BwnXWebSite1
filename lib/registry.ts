@@ -112,7 +112,18 @@ export type CalculatorId =
   | 'ideal-weight'
   | 'water-intake'
   | 'macro'
-  | 'currency';
+  | 'currency'
+  | 'house-affordability'
+  | 'ltv'
+  | 'dti'
+  | 'emergency-fund'
+  | 'solar-panel'
+  | 'ev-charging'
+  | 'rectangle-area'
+  | 'pythagorean';
+
+// Newly added ids (appended for type support)
+export type _ExtendedCalculatorId = CalculatorId | 'house-affordability' | 'ltv' | 'dti' | 'emergency-fund' | 'solar-panel' | 'ev-charging' | 'rectangle-area' | 'pythagorean';
 
 export type CalculatorEntry = {
   id: CalculatorId;
@@ -220,6 +231,14 @@ export const REGISTRY: CalculatorEntry[] = [
   ,{ id: 'inflation' as any, path: (lang) => `/${lang}/inflation`, titleKey: 'inflationCalc' as any, description: 'Adjust values for inflation', category: 'finance' as any, keywords: ['inflation','cpi','purchasing power'] }
   ,{ id: 'profit-margin' as any, path: (lang) => `/${lang}/profit-margin`, titleKey: 'profitMarginCalc' as any, description: 'Gross/operating profit margins', category: 'finance' as any, keywords: ['margin','gross','operating'] }
   ,{ id: 'business-loan' as any, path: (lang) => `/${lang}/business-loan`, titleKey: 'businessLoanCalc' as any, description: 'Business loan payment and totals', category: 'finance' as any, keywords: ['business loan','emi','payment'] }
+  ,{ id: 'house-affordability' as any, path: (lang) => `/${lang}/house-affordability`, titleKey: 'houseAffordabilityCalc' as any, description: 'Max affordable home price from income, DTI, rate, and taxes', category: 'finance' as any, keywords: ['house','affordability','mortgage','dti'] }
+  ,{ id: 'ltv' as any, path: (lang) => `/${lang}/ltv`, titleKey: 'ltvCalc' as any, description: 'Loan-to-Value and equity percent from value and loan', category: 'finance' as any, keywords: ['ltv','loan to value','equity'] }
+  ,{ id: 'dti' as any, path: (lang) => `/${lang}/dti`, titleKey: 'dtiCalc' as any, description: 'Debt-to-income ratio with basic categorization', category: 'finance' as any, keywords: ['dti','debt to income','affordability'] }
+  ,{ id: 'emergency-fund' as any, path: (lang) => `/${lang}/emergency-fund`, titleKey: 'emergencyFundCalc' as any, description: 'Target emergency fund and months to reach goal', category: 'savings' as any, keywords: ['emergency fund','safety net','savings'] }
+  ,{ id: 'solar-panel' as any, path: (lang) => `/${lang}/solar-panel`, titleKey: 'solarPanelCalc' as any, description: 'Estimate panels and system size from usage and sun hours', category: 'household' as any, keywords: ['solar','panel','pv','renewable'] }
+  ,{ id: 'ev-charging' as any, path: (lang) => `/${lang}/ev-charging`, titleKey: 'evChargingCalc' as any, description: 'EV charging time and cost from battery, charger, and efficiency', category: 'tech' as any, keywords: ['ev','charging','battery','kwh'] }
+  ,{ id: 'rectangle-area' as any, path: (lang) => `/${lang}/rectangle-area`, titleKey: 'rectangleAreaCalc' as any, description: 'Rectangle area, perimeter, and diagonal', category: 'math' as any, keywords: ['rectangle','area','perimeter','diagonal'] }
+  ,{ id: 'pythagorean' as any, path: (lang) => `/${lang}/pythagorean`, titleKey: 'pythagoreanCalc' as any, description: 'Solve right triangle sides using a²+b²=c²', category: 'math' as any, keywords: ['pythagorean','right triangle','hypotenuse'] }
   
   ,{ id: 'average' as any, path: (lang) => `/${lang}/average`, titleKey: 'averageCalc' as any, description: 'Compute mean from numbers', category: 'math' as any, keywords: ['average','mean'] }
   ,{ id: 'median-mode' as any, path: (lang) => `/${lang}/median-mode`, titleKey: 'medianModeCalc' as any, description: 'Compute median and mode', category: 'math' as any, keywords: ['median','mode'] }
