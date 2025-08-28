@@ -10,11 +10,14 @@ export type CalculatorId =
   | 'savings'
   | 'credit-card'
   | 'car-loan'
+  | 'lease'
+  | 'refinance'
   | 'bmi'
   | 'bmr'
   | 'tdee'
   // Additional ids progressively added
   | 'roi'
+  | 'break-even'
   | 'stock-return'
   | 'dividend'
   | 'sales-tax'
@@ -59,6 +62,7 @@ export type CalculatorId =
   | 'data-transfer'
   | 'streaming-bandwidth'
   | 'api-usage'
+  | 'debt-payoff'
   | 'salary'
   | 'retirement'
   | '401k'
@@ -86,6 +90,8 @@ export type CalculatorId =
   | 'area'
   | 'volume'
   | 'energy'
+  | 'amortization'
+  | 'cooking'
   | 'blood-sugar'
   | 'fuel-efficiency'
   | 'prime'
@@ -132,6 +138,8 @@ export const REGISTRY: CalculatorEntry[] = [
   { id: 'savings', path: (lang) => `/${lang}/savings-goal`, titleKey: 'savingsGoalCalc', description: 'How much to save to reach a goal', category: 'savings', keywords: ['savings','goal','future value'] },
   { id: 'credit-card', path: (lang) => `/${lang}/credit-card`, titleKey: 'creditCardCalc', description: 'Credit card interest and payoff time', category: 'finance', keywords: ['credit card','apr','payoff','interest'] },
   { id: 'car-loan', path: (lang) => `/${lang}/car-loan`, titleKey: 'carLoanCalc', description: 'Car loan with down payment, taxes and fees', category: 'finance', keywords: ['car loan','auto loan','vehicle','sales tax'] },
+  { id: 'lease', path: (lang) => `/${lang}/lease`, titleKey: 'leaseCalc', description: 'Lease payment from cap cost, residual, money factor and fees', category: 'finance', keywords: ['lease','money factor','residual','cap cost'] },
+  { id: 'refinance', path: (lang) => `/${lang}/refinance`, titleKey: 'refinanceCalc', description: 'Compare current payment vs new refi terms including closing costs', category: 'finance', keywords: ['refinance','refi','closing costs','monthly payment'] },
   { id: 'bmi', path: (lang) => `/${lang}/bmi`, titleKey: 'bmiCalc', description: 'Body Mass Index based on height and weight', category: 'health', keywords: ['bmi','body mass index','health'] },
   { id: 'bmr', path: (lang) => `/${lang}/bmr`, titleKey: 'bmrCalc', description: 'Basal Metabolic Rate (Mifflin–St Jeor)', category: 'health', keywords: ['bmr','basal metabolic rate'] },
   { id: 'tdee', path: (lang) => `/${lang}/tdee`, titleKey: 'tdeeCalc', description: 'Total Daily Energy Expenditure', category: 'health', keywords: ['tdee','calories','energy'] },
@@ -169,6 +177,9 @@ export const REGISTRY: CalculatorEntry[] = [
   ,{ id: 'data-transfer' as any, path: (lang) => `/${lang}/data-transfer`, titleKey: 'dataTransferCalc' as any, description: 'Throughput from data and time', category: 'tech' as any, keywords: ['data transfer','throughput'] }
   ,{ id: 'streaming-bandwidth' as any, path: (lang) => `/${lang}/streaming-bandwidth`, titleKey: 'streamingBandwidthCalc' as any, description: 'Streaming capacity planner', category: 'tech' as any, keywords: ['streaming','bandwidth','bitrate'] }
   ,{ id: 'api-usage' as any, path: (lang) => `/${lang}/api-usage`, titleKey: 'apiUsageCalc' as any, description: 'API request cost estimate', category: 'tech' as any, keywords: ['api','requests','cost'] }
+  ,{ id: 'debt-payoff' as any, path: (lang) => `/${lang}/debt-payoff`, titleKey: 'debtPayoffCalc' as any, description: 'Estimate payoff time and total interest for revolving debt', category: 'finance' as any, keywords: ['debt','payoff','interest','avalanche','snowball'] }
+  ,{ id: 'amortization' as any, path: (lang) => `/${lang}/amortization`, titleKey: 'amortizationCalc' as any, description: 'Build an amortization schedule and download CSV', category: 'finance' as any, keywords: ['amortization','schedule','csv','mortgage'] }
+  ,{ id: 'cooking' as any, path: (lang) => `/${lang}/cooking`, titleKey: 'cookingConverter' as any, description: 'Convert teaspoons, tablespoons, cups, mL, and liters', category: 'conversion' as any, keywords: ['cooking','tsp','tbsp','cup','ml','l'] }
   ,{ id: 'salary' as any, path: (lang) => `/${lang}/salary`, titleKey: 'salaryCalc', description: 'Net salary after taxes and contributions', category: 'tax' as any, keywords: ['salary','net pay','take home'] }
   ,{ id: 'retirement' as any, path: (lang) => `/${lang}/retirement`, titleKey: 'retirementCalc' as any, description: 'Retirement savings projection', category: 'savings' as any, keywords: ['retirement','nest egg','4% rule'] }
   ,{ id: '401k' as any, path: (lang) => `/${lang}/401k`, titleKey: 'k401Calc' as any, description: '401(k) plan with employer match', category: 'savings' as any, keywords: ['401k','match','contribution'] }
