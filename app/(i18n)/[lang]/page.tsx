@@ -54,6 +54,36 @@ export default function HubPage({ params }: { params: { lang: string } }) {
           <p>{t(lang, 'insurance')}: Estimate annual premium from insured amount and rate.</p>
           <Link className="button" href={`/${lang}/insurance`} style={{display:'inline-block', marginTop: 8}}>{t(lang, 'explore')}</Link>
         </div>
+        <div className="card">
+          <h2>{t(lang, 'vatCalc')}</h2>
+          <p>Compute VAT from net or gross and net VAT payable.</p>
+          <Link className="button" href={`/${lang}/vat`} style={{display:'inline-block', marginTop: 8}}>{t(lang, 'explore')}</Link>
+        </div>
+        <div className="card">
+          <h2>{t(lang, 'paycheckCalc')}</h2>
+          <p>Estimate take‑home pay after income tax and social contributions.</p>
+          <Link className="button" href={`/${lang}/paycheck`} style={{display:'inline-block', marginTop: 8}}>{t(lang, 'explore')}</Link>
+        </div>
+        <div className="card">
+          <h2>{t(lang, 'currencyConverter')}</h2>
+          <p>Convert between currencies with live ECB reference rates.</p>
+          <Link className="button" href={`/${lang}/currency`} style={{display:'inline-block', marginTop: 8}}>{t(lang, 'explore')}</Link>
+        </div>
+        <div className="card">
+          <h2>{t(lang, 'compoundCalc')}</h2>
+          <p>Project future value with compounding and regular contributions.</p>
+          <Link className="button" href={`/${lang}/compound`} style={{display:'inline-block', marginTop: 8}}>{t(lang, 'explore')}</Link>
+        </div>
+        <div className="card">
+          <h2>{t(lang, 'savingsGoalCalc')}</h2>
+          <p>How much to save per period to reach a target amount.</p>
+          <Link className="button" href={`/${lang}/savings-goal`} style={{display:'inline-block', marginTop: 8}}>{t(lang, 'explore')}</Link>
+        </div>
+        <div className="card">
+          <h2>{t(lang, 'creditCardCalc')}</h2>
+          <p>Credit card payoff time and total interest given APR and payment.</p>
+          <Link className="button" href={`/${lang}/credit-card`} style={{display:'inline-block', marginTop: 8}}>{t(lang, 'explore')}</Link>
+        </div>
       </div>
 
       <section className="card" style={{marginTop: 16}}>

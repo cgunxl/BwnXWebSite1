@@ -80,6 +80,32 @@ header {
   align-items: center;
 }
 
+.search { position: relative; }
+.search input { width: 100%; }
+.search-results {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  right: 0;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: 0 6px 20px var(--shadow);
+  max-height: 320px;
+  overflow-y: auto;
+  z-index: 1000;
+}
+.search-item {
+  display: block;
+  padding: 8px 10px;
+  color: var(--text);
+  text-decoration: none;
+}
+.search-item:hover { background: var(--card); }
+
+.hide-on-mobile { display: none; }
+@media (min-width: 700px) { .hide-on-mobile { display: block; } }
+
 .select, .button, .input {
   background: var(--card);
   color: var(--text);

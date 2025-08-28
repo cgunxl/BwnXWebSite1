@@ -62,7 +62,45 @@ const dict: Record<LangCode, Record<string, string>> = {
     rateUnit: 'Rate Unit',
     percent: 'Percent',
     decimal: 'Decimal',
-    currency: 'Currency'
+    currency: 'Currency',
+    search: 'Search',
+    searchPlaceholder: 'Search calculators... ',
+    vatCalc: 'VAT Calculator',
+    paycheckCalc: 'Paycheck Calculator',
+    currencyConverter: 'Currency Converter',
+    compoundCalc: 'Compound Interest Calculator',
+    savingsGoalCalc: 'Savings Goal Calculator',
+    creditCardCalc: 'Credit Card Interest Calculator',
+    carLoanCalc: 'Car Loan Calculator',
+    propertyTaxCalc: 'Property Tax Calculator',
+    inflationCalc: 'Inflation Calculator',
+    roiCalc: 'ROI Calculator',
+    stockReturnCalc: 'Stock Return Calculator',
+    dividendCalc: 'Dividend Calculator',
+    salesTaxCalc: 'Sales Tax Calculator',
+    tipCalc: 'Tip Calculator',
+    discountCalc: 'Discount Calculator',
+    cryptoProfitCalc: 'Crypto Profit Calculator',
+    bitcoinMiningCalc: 'Bitcoin Mining Calculator',
+    ethGasCalc: 'Ethereum Gas Fee Calculator',
+    nftProfitCalc: 'NFT Profit Calculator',
+    sipCalc: 'SIP Calculator',
+    mutualFundCalc: 'Mutual Fund Calculator'
+    ,bmiCalc: 'BMI Calculator'
+    ,bmrCalc: 'BMR Calculator'
+    ,tdeeCalc: 'TDEE Calculator'
+    ,macroCalc: 'Macro Calculator'
+    ,waterIntakeCalc: 'Water Intake Calculator'
+    ,idealWeightCalc: 'Ideal Weight Calculator'
+    ,bodyFatCalc: 'Body Fat Calculator'
+    ,runningPaceCalc: 'Running Pace Calculator'
+    ,marathonTimeCalc: 'Marathon Time Calculator'
+    ,vo2maxCalc: 'VO2 Max Calculator'
+    ,heartRateCalc: 'Heart Rate Calculator'
+    ,targetHrCalc: 'Target Heart Rate Calculator'
+    ,bacCalc: 'BAC Calculator'
+    ,sleepCalc: 'Sleep Calculator'
+    ,cholesterolRatioCalc: 'Cholesterol Ratio Calculator'
   },
   es: {
     siteTitle: 'Centro Financiero',
@@ -294,7 +332,45 @@ const dict: Record<LangCode, Record<string, string>> = {
     rateUnit: 'หน่วยอัตรา',
     percent: 'เปอร์เซ็นต์',
     decimal: 'ทศนิยม',
-    currency: 'สกุลเงิน'
+    currency: 'สกุลเงิน',
+    search: 'ค้นหา',
+    searchPlaceholder: 'ค้นหาเครื่องคิดเลข...',
+    vatCalc: 'เครื่องคิดเลขภาษีมูลค่าเพิ่ม',
+    paycheckCalc: 'เครื่องคำนวณเงินเข้าบัญชี',
+    currencyConverter: 'ตัวแปลงสกุลเงิน',
+    compoundCalc: 'เครื่องคิดเลขดอกเบี้ยทบต้น',
+    savingsGoalCalc: 'เครื่องคำนวณเป้าหมายการออม',
+    creditCardCalc: 'ดอกเบี้ยบัตรเครดิต',
+    carLoanCalc: 'เครื่องคำนวณค่างวดรถยนต์',
+    propertyTaxCalc: 'คำนวณภาษีที่ดินและสิ่งปลูกสร้าง',
+    inflationCalc: 'คำนวณเงินด้อยค่า (เงินเฟ้อ)',
+    roiCalc: 'คำนวณ ROI',
+    stockReturnCalc: 'คำนวณกำไรหุ้น',
+    dividendCalc: 'คำนวณเงินปันผล',
+    salesTaxCalc: 'คำนวณภาษีขาย',
+    tipCalc: 'คำนวณทิป',
+    discountCalc: 'คำนวณราคาหลังลด',
+    cryptoProfitCalc: 'คำนวณกำไรคริปโต',
+    bitcoinMiningCalc: 'คำนวณขุด Bitcoin',
+    ethGasCalc: 'คำนวณค่าธรรมเนียม ETH',
+    nftProfitCalc: 'คำนวณกำไร NFT',
+    sipCalc: 'คำนวณ SIP (อินเดีย)',
+    mutualFundCalc: 'คำนวณกองทุนรวม'
+    ,bmiCalc: 'คำนวณ BMI'
+    ,bmrCalc: 'คำนวณ BMR'
+    ,tdeeCalc: 'คำนวณ TDEE'
+    ,macroCalc: 'คำนวณสัดส่วนสารอาหาร (Macro)'
+    ,waterIntakeCalc: 'คำนวณปริมาณน้ำที่ควรดื่ม'
+    ,idealWeightCalc: 'คำนวณน้ำหนักเหมาะสม'
+    ,bodyFatCalc: 'คำนวณเปอร์เซ็นต์ไขมัน'
+    ,runningPaceCalc: 'คำนวณเพซวิ่ง'
+    ,marathonTimeCalc: 'คาดการณ์เวลา Marathon'
+    ,vo2maxCalc: 'คำนวณ VO2 Max'
+    ,heartRateCalc: 'คำนวณอัตราการเต้นหัวใจ'
+    ,targetHrCalc: 'คำนวณโซนอัตราการเต้นหัวใจ'
+    ,bacCalc: 'คำนวณแอลกอฮอล์ในเลือด (BAC)'
+    ,sleepCalc: 'คำนวณเวลานอน'
+    ,cholesterolRatioCalc: 'คำนวณอัตราส่วนคอเลสเตอรอล'
   },
   ar: { ...{} as any },
   hi: { ...{} as any },
