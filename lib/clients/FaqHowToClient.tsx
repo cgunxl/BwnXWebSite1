@@ -119,6 +119,39 @@ export default function FaqHowToClient({ lang, slug, defaultCountry = 'GLOBAL' }
         </div>
       ) : null}
 
+      {content?.keywords?.length ? (
+        <div style={{ marginTop: 12 }}>
+          <h2 style={{ marginBottom: 8 }}>Keywords</h2>
+          <p className="muted">{content.keywords.join(', ')}</p>
+        </div>
+      ) : null}
+
+      {content?.seoHtml ? (
+        <div style={{ marginTop: 12 }}>
+          <div dangerouslySetInnerHTML={{ __html: content.seoHtml }} />
+        </div>
+      ) : null}
+
+      {content?.examples ? (
+        <div style={{ marginTop: 12 }}>
+          <h2 style={{ marginBottom: 8 }}>Examples</h2>
+          <div className="table-wrap">
+            <table className="table">
+              <thead>
+                <tr>
+                  {content.examples.headers.map((h, i) => <th key={i}>{h}</th>)}
+                </tr>
+              </thead>
+              <tbody>
+                {content.examples.rows.map((row, i) => (
+                  <tr key={i}>{row.map((c, j) => <td key={j}>{c}</td>)}</tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      ) : null}
+
       {related?.length ? (
         <div style={{ marginTop: 12 }}>
           <h2 style={{ marginBottom: 8 }}>{t(lang, 'relatedCalcs')}</h2>

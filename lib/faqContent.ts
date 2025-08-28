@@ -8,6 +8,9 @@ export type FaqHowTo = {
   howTo: string[];
   faqs: QA[];
   references: Ref[];
+  keywords?: string[];
+  seoHtml?: string; // Optional rich HTML with H2/H3 sections for SEO
+  examples?: { headers: string[]; rows: string[][] };
 };
 
 export type FaqContentMap = Record<string, Partial<Record<CountryCode, FaqHowTo>>>;
