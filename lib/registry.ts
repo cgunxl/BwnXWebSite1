@@ -73,6 +73,10 @@ export const REGISTRY: CalculatorEntry[] = [
   ,{ id: 'streaming-bandwidth' as any, path: (lang) => `/${lang}/streaming-bandwidth`, titleKey: 'streamingBandwidthCalc' as any, description: 'Streaming capacity planner', category: 'tech' as any, keywords: ['streaming','bandwidth','bitrate'] }
   ,{ id: 'api-usage' as any, path: (lang) => `/${lang}/api-usage`, titleKey: 'apiUsageCalc' as any, description: 'API request cost estimate', category: 'tech' as any, keywords: ['api','requests','cost'] }
   ,{ id: 'salary' as any, path: (lang) => `/${lang}/salary`, titleKey: 'salaryCalc', description: 'Net salary after taxes and contributions', category: 'tax' as any, keywords: ['salary','net pay','take home'] }
+  ,{ id: 'retirement' as any, path: (lang) => `/${lang}/retirement`, titleKey: 'retirementCalc' as any, description: 'Retirement savings projection', category: 'savings' as any, keywords: ['retirement','nest egg','4% rule'] }
+  ,{ id: '401k' as any, path: (lang) => `/${lang}/401k`, titleKey: 'k401Calc' as any, description: '401(k) plan with employer match', category: 'savings' as any, keywords: ['401k','match','contribution'] }
+  ,{ id: 'roth-ira' as any, path: (lang) => `/${lang}/roth-ira`, titleKey: 'rothIraCalc' as any, description: 'Roth IRA growth projection', category: 'savings' as any, keywords: ['roth ira','retirement'] }
+  ,{ id: 'currency-arbitrage' as any, path: (lang) => `/${lang}/currency-arbitrage`, titleKey: 'currencyArbCalc' as any, description: 'FX triangular arbitrage simulator', category: 'finance' as any, keywords: ['currency','arbitrage','fx'] }
   // More entries are added progressively in batches
 ];
 

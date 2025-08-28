@@ -128,6 +128,10 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,streamingBandwidthCalc: 'Streaming Bandwidth Calculator'
     ,apiUsageCalc: 'API Usage Calculator'
     ,salaryCalc: 'Salary Calculator'
+    ,retirementCalc: 'Retirement Calculator'
+    ,k401Calc: '401(k) Calculator'
+    ,rothIraCalc: 'Roth IRA Calculator'
+    ,currencyArbCalc: 'Currency Arbitrage Calculator'
   },
   es: {
     siteTitle: 'Centro Financiero',
@@ -425,6 +429,10 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,streamingBandwidthCalc: 'คำนวณแบนด์วิดธ์สตรีมมิ่ง'
     ,apiUsageCalc: 'คำนวณการใช้งาน API'
     ,salaryCalc: 'คำนวณเงินเดือนสุทธิ'
+    ,retirementCalc: 'คำนวณเงินเกษียณ'
+    ,k401Calc: 'คำนวณ 401(k)'
+    ,rothIraCalc: 'คำนวณ Roth IRA'
+    ,currencyArbCalc: 'คำนวณอาร์บิทราจค่าเงิน'
   },
   ar: { ...{} as any },
   hi: { ...{} as any },
