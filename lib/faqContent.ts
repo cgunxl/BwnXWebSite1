@@ -78,6 +78,78 @@ export const FAQ_CONTENT: FaqContentMap = {
     }
   },
 
+  // Finance: NPV & IRR
+  'npv-irr': {
+    GLOBAL: {
+      useCases: [
+        'ประเมินความคุ้มค่าของโครงการด้วย NPV',
+        'หา IRR เพื่อเทียบกับค่าใช้จ่ายเงินทุน (WACC)'
+      ],
+      howTo: [
+        'ใส่อัตราคิดลด (discount rate) เป็น %',
+        'ใส่กระแสเงินสดเริ่มต้น (t=0) และกระแสเงินสดในอนาคต',
+        'ดูผล NPV และ IRR ทันที'
+      ],
+      faqs: [
+        { question: 'NPV กับ IRR ต่างกันอย่างไร?', answer: 'NPV ให้มูลค่าปัจจุบันสุทธิเป็นจำนวนเงิน ส่วน IRR ให้ผลตอบแทนเป็นเปอร์เซ็นต์ที่ทำให้ NPV = 0' },
+        { question: 'ใช้ rate เท่าไรดี?', answer: 'มักใช้ต้นทุนเงินทุนถัวเฉลี่ยถ่วงน้ำหนัก (WACC) ของกิจการหรืออัตราขั้นต่ำที่ยอมรับ' }
+      ],
+      references: [
+        { label: 'Investopedia – NPV vs IRR', url: 'https://www.investopedia.com/ask/answers/042415/what-are-differences-between-net-present-value-and-internal-rate-return.asp' }
+      ]
+    }
+  },
+
+  // Finance: Annuity
+  annuity: {
+    GLOBAL: {
+      useCases: [ 'หามูลค่าปัจจุบัน/อนาคตของเงินงวดรายงวด', 'วางแผนเงินบำนาญ/เงินผ่อน' ],
+      howTo: [ 'ใส่ยอดชำระต่อรอบ อัตราดอกเบี้ยต่อรอบ และจำนวนรอบ', 'เลือกชนิด ordinary/due' ],
+      faqs: [ { question: 'Ordinary กับ Annuity due ต่างกัน?', answer: 'Ordinary ชำระท้ายรอบ ส่วน due ชำระต้นรอบ ทำให้มูลค่ามากกว่า' } ],
+      references: [ { label: 'CFA Institute – Time Value of Money', url: 'https://www.cfainstitute.org' } ]
+    }
+  },
+
+  // Finance: Bond Price
+  'bond-price': {
+    GLOBAL: {
+      useCases: [ 'ประเมินราคาพันธบัตรจาก YTM', 'เทียบพรีเมียม/ดิสเคานต์พันธบัตร' ],
+      howTo: [ 'ใส่มูลค่าที่ตราไว้ อัตราคูปอง YTM ปี และอายุคงเหลือ', 'เลือกความถี่คูปอง' ],
+      faqs: [ { question: 'ทำไมราคาเปลี่ยนตาม YTM?', answer: 'ยีลด์สูงขึ้นทำให้มูลค่าปัจจุบันของกระแสเงินสดต่ำลง จึงราคาต่ำลง' } ],
+      references: [ { label: 'Investopedia – Bond Pricing', url: 'https://www.investopedia.com/terms/b/bond-valuation.asp' } ]
+    }
+  },
+
+  // Finance: Bond Yield (YTM)
+  'bond-yield': {
+    GLOBAL: {
+      useCases: [ 'แก้หา YTM จากราคาตลาด', 'เปรียบเทียบยีลด์พันธบัตรต่าง ๆ' ],
+      howTo: [ 'ใส่ราคา มูลค่าที่ตราไว้ อัตราคูปอง อายุ และความถี่คูปอง', 'ระบบจะคำนวณ YTM โดยประมาณ' ],
+      faqs: [ { question: 'YTM คืออะไร?', answer: 'ผลตอบแทนต่อปีโดยสมมติว่าถือจนถึงกำหนดและนำคูปองไปลงทุนซ้ำในอัตราเดียวกัน' } ],
+      references: [ { label: 'FRED – Interest Rates', url: 'https://fred.stlouisfed.org' } ]
+    }
+  },
+
+  // Finance: WACC
+  wacc: {
+    GLOBAL: {
+      useCases: [ 'หาต้นทุนเงินทุนเฉลี่ยถ่วงน้ำหนักของกิจการ', 'ใช้เป็น discount rate สำหรับ NPV' ],
+      howTo: [ 'ใส่น้ำหนัก Equity/Debt/Preferred และต้นทุนของแต่ละส่วน', 'ระบุอัตราภาษีเพื่อคำนวณภาษีของหนี้' ],
+      faqs: [ { question: 'ทำไมต้องปรับภาษีของหนี้?', answer: 'ดอกเบี้ยเป็นค่าใช้จ่ายลดหย่อนภาษี ทำให้ต้นทุนหนี้หลังภาษีต่ำลง' } ],
+      references: [ { label: 'Investopedia – WACC', url: 'https://www.investopedia.com/terms/w/wacc.asp' } ]
+    }
+  },
+
+  // Finance: DSCR
+  dscr: {
+    GLOBAL: {
+      useCases: [ 'ประเมินความสามารถชำระหนี้ของโครงการ/ธุรกิจ', 'ใช้ประกอบการอนุมัติสินเชื่อ' ],
+      howTo: [ 'ใส่ NOI และยอดชำระหนี้ต่อปี', 'ดูค่า DSCR และการตีความเบื้องต้น' ],
+      faqs: [ { question: 'เกณฑ์ DSCR ที่ดีคือเท่าไร?', answer: 'ขึ้นกับสถาบันการเงินและประเภทโครงการ หลายแห่งต้องการ ≥ 1.2' } ],
+      references: [ { label: 'World Bank – Project Finance Basics', url: 'https://www.worldbank.org' } ]
+    }
+  },
+
   // Finance: Stock Return
   'stock-return': {
     GLOBAL: {
