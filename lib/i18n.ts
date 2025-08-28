@@ -111,6 +111,8 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,zScoreCalc: 'Z-Score Calculator'
     ,circleAreaCalc: 'Circle Area Calculator'
     ,triangleAreaCalc: 'Triangle Area Calculator'
+    ,gcfCalc: 'GCF Calculator'
+    ,lcmCalc: 'LCM Calculator'
   },
   es: {
     siteTitle: 'Centro Financiero',
@@ -391,6 +393,8 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,zScoreCalc: 'คำนวณค่า Z-Score'
     ,circleAreaCalc: 'คำนวณพื้นที่วงกลม'
     ,triangleAreaCalc: 'คำนวณพื้นที่สามเหลี่ยม'
+    ,gcfCalc: 'คำนวณ ห.ร.ม.'
+    ,lcmCalc: 'คำนวณ ค.ร.น.'
   },
   ar: { ...{} as any },
   hi: { ...{} as any },

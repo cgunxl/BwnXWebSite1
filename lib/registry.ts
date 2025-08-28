@@ -56,6 +56,8 @@ export const REGISTRY: CalculatorEntry[] = [
   ,{ id: 'z-score' as any, path: (lang) => `/${lang}/z-score`, titleKey: 'zScoreCalc' as any, description: 'z-score and normal CDF', category: 'math' as any, keywords: ['z-score','standard score','normal cdf'] }
   ,{ id: 'circle-area' as any, path: (lang) => `/${lang}/circle-area`, titleKey: 'circleAreaCalc' as any, description: 'Circle area and circumference', category: 'math' as any, keywords: ['circle','area','circumference'] }
   ,{ id: 'triangle-area' as any, path: (lang) => `/${lang}/triangle-area`, titleKey: 'triangleAreaCalc' as any, description: 'Triangle area by base/height or sides', category: 'math' as any, keywords: ['triangle','area','heron'] }
+  ,{ id: 'gcf' as any, path: (lang) => `/${lang}/gcf`, titleKey: 'gcfCalc' as any, description: 'Greatest common factor', category: 'math' as any, keywords: ['gcf','gcd','hcf'] }
+  ,{ id: 'lcm' as any, path: (lang) => `/${lang}/lcm`, titleKey: 'lcmCalc' as any, description: 'Least common multiple', category: 'math' as any, keywords: ['lcm','least common multiple'] }
   // More entries are added progressively in batches
 ];
 
