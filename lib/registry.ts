@@ -7,6 +7,9 @@ export type CalculatorId =
   | 'paycheck'
   | 'currency'
   | 'compound'
+  | 'apr-apy'
+  | 'rule-72'
+  | 'simple-interest'
   | 'savings'
   | 'credit-card'
   | 'car-loan'
@@ -135,6 +138,9 @@ export const REGISTRY: CalculatorEntry[] = [
   { id: 'paycheck', path: (lang) => `/${lang}/paycheck`, titleKey: 'paycheckCalc', description: 'Net pay after tax and social contributions', category: 'tax', keywords: ['paycheck','take home','salary','net pay'] },
   { id: 'currency', path: (lang) => `/${lang}/currency`, titleKey: 'currencyConverter', description: 'Convert between currencies', category: 'conversion', keywords: ['currency','fx','exchange','forex'] },
   { id: 'compound', path: (lang) => `/${lang}/compound`, titleKey: 'compoundCalc', description: 'Compound interest with contributions', category: 'savings', keywords: ['compound interest','investment','apy'] },
+  { id: 'apr-apy' as any, path: (lang) => `/${lang}/apr-apy`, titleKey: 'aprApyCalc' as any, description: 'Convert APR and APY given compounding frequency', category: 'finance' as any, keywords: ['apr','apy','compounding','rate'] },
+  { id: 'rule-72' as any, path: (lang) => `/${lang}/rule-72`, titleKey: 'rule72Calc' as any, description: 'Rule of 72: doubling time or required rate', category: 'finance' as any, keywords: ['rule of 72','doubling time','heuristic'] },
+  { id: 'simple-interest' as any, path: (lang) => `/${lang}/simple-interest`, titleKey: 'simpleInterestCalc' as any, description: 'Simple interest using I = P × r × t', category: 'finance' as any, keywords: ['simple interest','I=Prt','interest'] },
   { id: 'savings', path: (lang) => `/${lang}/savings-goal`, titleKey: 'savingsGoalCalc', description: 'How much to save to reach a goal', category: 'savings', keywords: ['savings','goal','future value'] },
   { id: 'credit-card', path: (lang) => `/${lang}/credit-card`, titleKey: 'creditCardCalc', description: 'Credit card interest and payoff time', category: 'finance', keywords: ['credit card','apr','payoff','interest'] },
   { id: 'car-loan', path: (lang) => `/${lang}/car-loan`, titleKey: 'carLoanCalc', description: 'Car loan with down payment, taxes and fees', category: 'finance', keywords: ['car loan','auto loan','vehicle','sales tax'] },

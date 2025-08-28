@@ -482,6 +482,47 @@ export const FAQ_CONTENT: FaqContentMap = {
   , '401k': { GLOBAL: { useCases: ['วางแผนเงินออมพร้อมเงินสมทบบริษัท'], howTo: ['ใส่อัตราออมพนักงานและอัตราสมทบ/เพดาน','ดูยอดเงินปลายทาง'], faqs: [{ question: 'ข้อจำกัดเพดาน?', answer: 'มีเพดานรายปีและเงื่อนไขภาษี ตรวจสอบกับ IRS' }], references: [{ label: 'IRS – 401(k) resource', url: 'https://www.irs.gov/retirement-plans/plan-sponsor/401k-plan' }] } }
   , 'roth-ira': { GLOBAL: { useCases: ['ประเมินการเติบโตของ Roth IRA'], howTo: ['ใส่เงินออมปัจจุบันและออมต่อปี','กำหนดอัตราผลตอบแทนและจำนวนปี'], faqs: [{ question: 'ขีดจำกัด/เงื่อนไขอะไรบ้าง?', answer: 'มีเพดานเงินออมและ phase-out ตามรายได้ ตรวจสอบกับ IRS' }], references: [{ label: 'IRS – Roth IRA', url: 'https://www.irs.gov/retirement-plans/roth-iras' }] } }
   , 'currency-arbitrage': { GLOBAL: { useCases: ['ทดสอบอาร์บิทราจสามสกุล','ดูผลตอบแทนหลังหักค่าธรรมเนียม'], howTo: ['ใส่อัตรา A→B, B→C, C→A และค่าธรรมเนียม','อ่านกำไร/ROI'], faqs: [{ question: 'ทำได้จริงไหม?', answer: 'ตลาดจริงมีสเปรด/สลิปเพจ ทำให้โอกาสลดลง' }], references: [{ label: 'Triangular arbitrage', url: 'https://en.wikipedia.org/wiki/Triangular_arbitrage' }] } }
+  , 'simple-interest': {
+    GLOBAL: {
+      useCases: [ 'คำนวณดอกเบี้ยแบบง่ายสำหรับเงินกู้ระยะสั้น', 'ประเมินดอกเบี้ยเงินกู้ที่คิดแบบ I = P×r×t' ],
+      howTo: [ 'ใส่เงินต้น (P)', 'ใส่อัตราดอกเบี้ยต่อปี (r)', 'ใส่ระยะเวลาเป็นปี (t)', 'ดูดอกเบี้ย (I) และยอดรวม (P+I)' ],
+      faqs: [
+        { question: 'Simple interest ต่างจาก compound interest อย่างไร?', answer: 'Simple interest คิดดอกเฉพาะจากเงินต้นเดิมเท่านั้น ส่วน compound interest ทบต้น ดอกทบดอก' },
+        { question: 'ควรใช้เมื่อไร?', answer: 'มักใช้กับเงินกู้ระยะสั้น สินเชื่อรายย่อย หรือกรณีที่ไม่ทบต้นตามรอบ' }
+      ],
+      references: [
+        { label: 'Investopedia – Simple Interest', url: 'https://www.investopedia.com/terms/s/simple_interest.asp' }
+      ]
+    },
+    TH: {
+      useCases: [ 'คำนวณดอกเบี้ยกู้ยืมส่วนบุคคลที่ไม่ทบต้น', 'เปรียบเทียบกับดอกเบี้ยทบต้นเพื่อเห็นผลต่าง' ],
+      howTo: [ 'กรอกเงินต้น อัตราต่อปี และเวลาเป็นปี', 'อ่านค่าดอกเบี้ยและยอดรวม' ],
+      faqs: [ { question: 'อัตราดอกเบี้ยรายเดือนทำอย่างไร?', answer: 'แปลงอัตรารายเดือนเป็นรายปีโดยคูณ 12 (สำหรับ simple interest)' } ],
+      references: [ { label: 'ธนาคารแห่งประเทศไทย – อัตราดอกเบี้ยพื้นฐาน', url: 'https://www.bot.or.th' } ]
+    }
+  }
+  , 'apr-apy': {
+    GLOBAL: {
+      useCases: [ 'แปลง APR เป็น APY หรือกลับกัน', 'เทียบอัตราระหว่างธนาคาร/กองทุนที่คอมพาวด์ต่างกัน' ],
+      howTo: [ 'เลือกโหมด APR→APY หรือ APY→APR', 'กรอกอัตรา', 'เลือกจำนวนครั้งที่ทบต่อปี (m)', 'อ่านผลลัพธ์' ],
+      faqs: [
+        { question: 'APR กับ APY ต่างกัน?', answer: 'APR คืออัตราต่อปีแบบไม่ทบต้น ส่วน APY คืออัตราผลตอบแทนที่แท้จริงเมื่อคำนึงถึงการทบต้น' },
+        { question: 'ควรใช้ค่า m เท่าไร?', answer: 'ขึ้นกับผลิตภัณฑ์การเงิน เช่น รายเดือน m=12, รายไตรมาส m=4, รายวัน m=365' }
+      ],
+      references: [ { label: 'Investopedia – APY vs APR', url: 'https://www.investopedia.com/ask/answers/040115/what-difference-between-annual-percentage-rate-apr-and-apy.asp' } ]
+    }
+  }
+  , 'rule-72': {
+    GLOBAL: {
+      useCases: [ 'ประมาณเวลาที่เงินจะเพิ่มเป็นสองเท้าอย่างรวดเร็ว', 'ประมาณอัตราที่ต้องการเพื่อให้เงินเพิ่มเป็นสองเท้าภายในเวลาที่กำหนด' ],
+      howTo: [ 'เลือกว่าจะหาเวลาหรือหาอัตรา', 'ใส่อัตราเป็น % ต่อปีหรือจำนวนปี', 'อ่านผลจากสูตร 72 ÷ อัตรา% หรือ 72 ÷ ปี' ],
+      faqs: [
+        { question: 'ความแม่นยำเป็นอย่างไร?', answer: 'แม่นยำโดยประมาณสำหรับอัตรา 6–10% หากอัตราเบี่ยงมาก ควรใช้สูตรทบต้นจริง' },
+        { question: 'ทำไมใช้เลข 72?', answer: '72 แบ่งลงตัวด้วยหลายจำนวน (2,3,4,6,8,9,12) จึงสะดวกในการคำนวณคร่าว ๆ' }
+      ],
+      references: [ { label: 'Investopedia – Rule of 72', url: 'https://www.investopedia.com/terms/r/ruleof72.asp' } ]
+    }
+  }
 };
 
 export const COUNTRY_LABELS: Record<CountryCode, string> = {

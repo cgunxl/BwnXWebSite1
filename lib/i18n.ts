@@ -163,6 +163,9 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,k401Calc: '401(k) Calculator'
     ,rothIraCalc: 'Roth IRA Calculator'
     ,currencyArbCalc: 'Currency Arbitrage Calculator'
+    ,aprApyCalc: 'APR ↔ APY Converter'
+    ,rule72Calc: 'Rule of 72 Calculator'
+    ,simpleInterestCalc: 'Simple Interest Calculator'
   },
   es: {
     siteTitle: 'Centro Financiero',
@@ -495,6 +498,9 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,k401Calc: 'คำนวณ 401(k)'
     ,rothIraCalc: 'คำนวณ Roth IRA'
     ,currencyArbCalc: 'คำนวณอาร์บิทราจค่าเงิน'
+    ,aprApyCalc: 'ตัวแปลง APR ↔ APY'
+    ,rule72Calc: 'คำนวณกฎ 72'
+    ,simpleInterestCalc: 'คำนวณดอกเบี้ยแบบง่าย'
   },
   ar: { ...{} as any },
   hi: { ...{} as any },
