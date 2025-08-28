@@ -53,6 +53,9 @@ export const REGISTRY: CalculatorEntry[] = [
   ,{ id: 'ohms-law' as any, path: (lang) => `/${lang}/ohms-law`, titleKey: 'ohmsLawCalc' as any, description: 'Solve V, I, R, P', category: 'engineering' as any, keywords: ['ohm','voltage','current','resistance','power'] }
   ,{ id: 'permutation' as any, path: (lang) => `/${lang}/permutation`, titleKey: 'permutationCalc' as any, description: 'nPr permutations', category: 'math' as any, keywords: ['permutation','nPr','arrangements'] }
   ,{ id: 'combination' as any, path: (lang) => `/${lang}/combination`, titleKey: 'combinationCalc' as any, description: 'nCr combinations', category: 'math' as any, keywords: ['combination','nCr','binomial'] }
+  ,{ id: 'z-score' as any, path: (lang) => `/${lang}/z-score`, titleKey: 'zScoreCalc' as any, description: 'z-score and normal CDF', category: 'math' as any, keywords: ['z-score','standard score','normal cdf'] }
+  ,{ id: 'circle-area' as any, path: (lang) => `/${lang}/circle-area`, titleKey: 'circleAreaCalc' as any, description: 'Circle area and circumference', category: 'math' as any, keywords: ['circle','area','circumference'] }
+  ,{ id: 'triangle-area' as any, path: (lang) => `/${lang}/triangle-area`, titleKey: 'triangleAreaCalc' as any, description: 'Triangle area by base/height or sides', category: 'math' as any, keywords: ['triangle','area','heron'] }
   // More entries are added progressively in batches
 ];
 

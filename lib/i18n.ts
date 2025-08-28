@@ -108,6 +108,9 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,ohmsLawCalc: 'Ohm’s Law Calculator'
     ,permutationCalc: 'Permutation Calculator'
     ,combinationCalc: 'Combination Calculator'
+    ,zScoreCalc: 'Z-Score Calculator'
+    ,circleAreaCalc: 'Circle Area Calculator'
+    ,triangleAreaCalc: 'Triangle Area Calculator'
   },
   es: {
     siteTitle: 'Centro Financiero',
@@ -385,6 +388,9 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,ohmsLawCalc: 'คำนวณกฎของโอห์ม'
     ,permutationCalc: 'คำนวณการจัดเรียง (Permutation)'
     ,combinationCalc: 'คำนวณการเลือก (Combination)'
+    ,zScoreCalc: 'คำนวณค่า Z-Score'
+    ,circleAreaCalc: 'คำนวณพื้นที่วงกลม'
+    ,triangleAreaCalc: 'คำนวณพื้นที่สามเหลี่ยม'
   },
   ar: { ...{} as any },
   hi: { ...{} as any },
