@@ -334,12 +334,28 @@ function getRelated(slug: string): RelatedItem[] {
     case 'conversion-rate':
       return [
         { id: 'roi-marketing', reason: 'Higher CR boosts campaign ROI' },
-        { id: 'cac', reason: 'Better CR can reduce CAC' }
+        { id: 'cac', reason: 'Better CR can reduce CAC' },
+        { id: 'cpc', reason: 'CR×CPC → CPA' }
       ];
     case 'subscription-revenue':
       return [
         { id: 'ltv-customer', reason: 'Combine ARPU, margin, churn for LTV' },
         { id: 'churn-rate', reason: 'Retention stabilizes MRR/ARR' }
+      ];
+    case 'cpc':
+      return [
+        { id: 'conversion-rate', reason: 'CR with CPC gives CPA' },
+        { id: 'roi-marketing', reason: 'Link traffic cost to ROI' }
+      ];
+    case 'cpm':
+      return [
+        { id: 'cpc', reason: 'Compare CPM vs CPC buys' },
+        { id: 'conversion-rate', reason: 'Reach quality affects CR' }
+      ];
+    case 'affiliate-earnings':
+      return [
+        { id: 'conversion-rate', reason: 'CR drives orders' },
+        { id: 'roi-marketing', reason: 'Evaluate partner ROI' }
       ];
     case 'cagr':
       return [

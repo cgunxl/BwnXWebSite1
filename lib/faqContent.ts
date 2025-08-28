@@ -269,6 +269,53 @@ export const FAQ_CONTENT: FaqContentMap = {
     }
   },
 
+  // Business: CPC
+  cpc: {
+    GLOBAL: {
+      useCases: [ 'หาค่า CPC จากต้นทุนรวมและจำนวนคลิก', 'เปรียบเทียบช่องทาง/แคมเปญตามต้นทุนต่อคลิก' ],
+      howTo: [ 'ใส่ต้นทุนรวมช่วงเวลาหนึ่ง', 'ใส่จำนวนคลิกทั้งหมด', 'อ่านค่า CPC = ต้นทุน/คลิก' ],
+      faqs: [
+        { question: 'CPC ดีแค่ไหน?', answer: 'ขึ้นกับอุตสาหกรรมและคุณภาพผู้ชม ให้เทียบควบคู่กับ Conversion Rate และ CPA' },
+        { question: 'CPC ต่ำเสมอดีไหม?', answer: 'ไม่เสมอไป ถ้า CR ต่ำอาจทำให้ CPA สูง ควรดูทั้งฟันเนล' },
+        { question: 'ต่างจาก CPM อย่างไร?', answer: 'CPC คิดต่อต้นทุนต่อคลิก ส่วน CPM คิดต่อต้นทุนต่อ 1,000 การแสดงผล' }
+      ],
+      references: [ { label: 'Google Ads Help – CPC', url: 'https://support.google.com/google-ads' } ],
+      keywords: [ 'CPC', 'Cost per Click', 'โฆษณา', 'แคมเปญ' ],
+      seoHtml: '<h2>CPC คืออะไร</h2><p>ชี้วัดต้นทุนต่อคลิก เหมาะสำหรับแคมเปญเน้นทราฟฟิก</p><h3>การใช้งาน</h3><p>เปรียบเทียบช่องทางและคำค้นที่คุ้มค่าที่สุด</p>'
+    }
+  },
+
+  // Business: CPM
+  cpm: {
+    GLOBAL: {
+      useCases: [ 'หาค่า CPM จากต้นทุนและจำนวนการแสดงผล', 'เปรียบเทียบสื่อเน้น Reach/Branding' ],
+      howTo: [ 'ใส่ต้นทุนรวม', 'ใส่จำนวน impressions', 'อ่านค่า CPM = ต้นทุน/Impressions×1000' ],
+      faqs: [
+        { question: 'CPM ใช้เมื่อไร?', answer: 'ใช้กับแคมเปญเน้นการรับรู้แบรนด์หรือการเข้าถึง' },
+        { question: 'CPM ต่ำเสมอดีไหม?', answer: 'ขึ้นกับคุณภาพผู้ชมและความสอดคล้องของกลุ่มเป้าหมาย' }
+      ],
+      references: [ { label: 'IAB – Digital Ad Metrics', url: 'https://www.iab.com' } ],
+      keywords: [ 'CPM', 'Cost per Mille', 'Impressions', 'Brand awareness' ],
+      seoHtml: '<h2>CPM คืออะไร</h2><p>ต้นทุนต่อ 1,000 การแสดงผล</p><h3>การใช้งาน</h3><p>ใช้เทียบราคา media buy ข้ามแพลตฟอร์ม</p>'
+    }
+  },
+
+  // Business: Affiliate Earnings
+  'affiliate-earnings': {
+    GLOBAL: {
+      useCases: [ 'ประเมินรายได้จากแคมเปญ Affiliate', 'จำลองผลจากการปรับ CR, AOV หรือ Commission%' ],
+      howTo: [ 'ใส่จำนวนคลิก', 'ใส่ Conversion Rate (%)', 'ใส่ Average Order Value', 'ใส่ Commission (%) แล้วอ่านค่ารายได้' ],
+      faqs: [
+        { question: 'CR เท่าไรถึงดี?', answer: 'ขึ้นกับสินค้า/ช่องทาง ค่า 1–5% พบได้ทั่วไปในหลาย vertical' },
+        { question: 'AOV ส่งผลอย่างไร?', answer: 'AOV สูงขึ้นทำให้รายได้คอมมิชชั่นสูงขึ้นตามสัดส่วน' },
+        { question: 'ควรดู KPI อื่นอะไรอีก?', answer: 'ดู EPC (earning per click) และ Refund/Chargeback rate' }
+      ],
+      references: [ { label: 'CJ/Impact – Affiliate marketing basics', url: 'https://www.cj.com' } ],
+      keywords: [ 'Affiliate', 'Commission', 'Earnings', 'CR', 'AOV' ],
+      seoHtml: '<h2>คำนวณรายได้จาก Affiliate</h2><p>ประเมินรายได้จากพารามิเตอร์หลัก CR, AOV และ Commission%</p><h3>แนวทางเพิ่มรายได้</h3><ul><li>เพิ่มความเหมาะสมของข้อเสนอ</li><li>ปรับปรุง Conversion Rate</li><li>เจรจา Commission ที่สูงขึ้น</li></ul>'
+    }
+  },
+
   // Health: Calorie
   calorie: {
     GLOBAL: {
