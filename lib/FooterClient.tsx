@@ -18,7 +18,7 @@ export default function FooterClient() {
           <Link className="button ghost" href={`/${currentLang}/terms`}>{t(currentLang, 'terms')}</Link>
           <Link className="button ghost" href={`/${currentLang}/contact`}>{t(currentLang, 'contact')}</Link>
         </nav>
-        <small className="muted">© {new Date().getFullYear()} Finance Hub</small>
+        <small className="muted">© {new Date().getFullYear()} BwnX Free Calculator</small>
       </div>
     </footer>
   );

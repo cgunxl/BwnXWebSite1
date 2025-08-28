@@ -4,8 +4,10 @@ import { useMemo, useState } from 'react';
 import Link from 'next/link';
 import { REGISTRY } from './registry';
 import { t } from './i18n';
+import { useRouter } from 'next/navigation';
 
 export default function SearchClient({ lang }: { lang: string }) {
+  const router = useRouter();
   const [query, setQuery] = useState('');
   const list = useMemo(() => {
     const q = query.trim().toLowerCase();
@@ -32,9 +34,19 @@ export default function SearchClient({ lang }: { lang: string }) {
       {list.length > 0 && (
         <div className="search-results">
           {list.map((r) => (
-            <Link key={r.id} href={r.path(lang) as any} className="search-item">
+            <a
+              key={r.id}
+              href={r.path(lang) as any}
+              className="search-item"
+              onClick={(e) => {
+                e.preventDefault();
+                const href = r.path(lang) as any;
+                setQuery('');
+                router.push(href);
+              }}
+            >
               {t(lang, r.titleKey)}
-            </Link>
+            </a>
           ))}
         </div>
       )}

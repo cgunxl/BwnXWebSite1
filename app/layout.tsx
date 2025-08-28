@@ -31,8 +31,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
   return {
     metadataBase: new URL(origin),
-    title: 'Finance Hub',
-    description: 'Multi-language finance calculators for loans, mortgages, taxes, and insurance.',
+    title: 'BwnX Free Calculator',
+    description: 'Beautiful, fast calculators for finance, health, science, and more in 17 languages.',
     alternates: {
       canonical: siteUrl,
       languages
@@ -40,15 +40,15 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       type: 'website',
       url: siteUrl,
-      siteName: 'Finance Hub',
-      title: 'Finance Hub',
-      description: 'Multi-language finance calculators for loans, mortgages, taxes, and insurance.',
+      siteName: 'BwnX Free Calculator',
+      title: 'BwnX Free Calculator',
+      description: 'Beautiful, fast calculators for finance, health, science, and more in 17 languages.',
       images: [ogImage]
     },
     twitter: {
       card: 'summary_large_image',
-      title: 'Finance Hub',
-      description: 'Multi-language finance calculators for loans, mortgages, taxes, and insurance.',
+      title: 'BwnX Free Calculator',
+      description: 'Beautiful, fast calculators for finance, health, science, and more in 17 languages.',
       images: [ogImage]
     },
     icons: {
@@ -88,7 +88,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'WebSite',
-            name: 'Finance Hub',
+            name: 'BwnX Free Calculator',
             url: siteUrl,
             inLanguage: getAllLocales().join(',')
           }) }}
@@ -98,7 +98,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           dangerouslySetInnerHTML={{ __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'Organization',
-            name: 'Finance Hub',
+            name: 'BwnX Free Calculator',
             url: siteUrl
           }) }}
         />

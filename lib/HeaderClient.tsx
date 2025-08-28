@@ -42,7 +42,7 @@ export default function HeaderClient() {
     <header>
       <div className="container header-inner">
         <div className="brand">
-          <span aria-hidden>💹</span>
+          <span aria-hidden>🧮</span>
           <Link href={`/${currentLang}`} style={{ textDecoration: 'none', color: 'inherit' }}>{t(currentLang, 'siteTitle')}</Link>
         </div>
         <nav className="nav" aria-label="Primary">
@@ -55,17 +55,19 @@ export default function HeaderClient() {
           <div className="hide-on-mobile" style={{ minWidth: 220 }}>
             <SearchClient lang={currentLang} />
           </div>
-          <button
-            className="button ghost"
-            aria-label={t(currentLang, 'language')}
-            onClick={() => {
-              const nextLang = currentLang === 'th' ? 'en' : 'th';
-              router.push(replaceLang(pathname, nextLang) as any);
-            }}
-            title={getNativeName(currentLang === 'th' ? 'en' : 'th')}
-          >
-            {currentLang === 'th' ? 'EN' : 'TH'}
-          </button>
+          <label className="select" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            <span className="sr-only">Language</span>
+            <select
+              aria-label="Language"
+              value={currentLang}
+              onChange={(e) => router.push(replaceLang(pathname, e.target.value) as any)}
+              style={{ background: 'transparent', border: 'none', outline: 'none' }}
+            >
+              {SUPPORTED_LANGS.map((lc) => (
+                <option key={lc} value={lc}>{getNativeName(lc)}</option>
+              ))}
+            </select>
+          </label>
           <label className="select" style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
             <span className="sr-only">Country</span>
             <select

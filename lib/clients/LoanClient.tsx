@@ -5,6 +5,7 @@ import { calcLoan, buildAmortizationSchedule, scheduleToCsv } from '@/lib/calcul
 import { t, getCurrencyForLang } from '@/lib/i18n';
 import { getCurrencyForCountry } from '@/lib/countries';
 import { toNumberSafe } from '@/lib/number';
+import FaqHowToClient from './FaqHowToClient';
 
 export default function LoanClient({ lang, country }: { lang: string, country?: string }) {
   const [principal, setPrincipal] = useState<number>(10000);
@@ -74,6 +75,7 @@ export default function LoanClient({ lang, country }: { lang: string, country?: 
         </div>
         <a className="button ghost" download="schedule.csv" href={csvHref} style={{ marginTop: 8 }}>{t(lang, 'downloadCsv')}</a>
       </details>
+      <FaqHowToClient lang={lang} slug="loan" />
     </div>
   );
 }

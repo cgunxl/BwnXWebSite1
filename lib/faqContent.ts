@@ -16,6 +16,40 @@ export type FaqHowTo = {
 export type FaqContentMap = Record<string, Partial<Record<CountryCode, FaqHowTo>>>;
 
 export const FAQ_CONTENT: FaqContentMap = {
+  // Health: BMI
+  bmi: {
+    GLOBAL: {
+      useCases: [
+        'Estimate BMI quickly and compare to WHO global categories',
+        'Track changes over time alongside TDEE and calorie targets'
+      ],
+      howTo: [
+        'Enter your height in centimeters and weight in kilograms',
+        'Read BMI and category instantly (results update as you type)',
+        'Use related calculators to set daily calorie and macro goals'
+      ],
+      faqs: [
+        { question: 'What is BMI?', answer: 'Body Mass Index is weight (kg) divided by height (m) squared. It is a population‑level screening metric, not a diagnosis.' },
+        { question: 'How are categories defined?', answer: 'WHO global: Underweight <18.5, Normal 18.5–24.9, Overweight 25–29.9, Obesity ≥30.' },
+        { question: 'Is BMI accurate for athletes?', answer: 'BMI can misclassify high‑muscle individuals. Consider body fat and waist‑to‑height ratio as complements.' }
+      ],
+      references: [
+        { label: 'WHO – BMI classification', url: 'https://www.who.int/data/gho/indicator-metadata-registry/imr-details/26' }
+      ],
+      keywords: ['BMI calculator','WHO BMI','Body Mass Index','BMI table'],
+      examples: { headers: ['Height (cm)','Weight (kg)','BMI','Category'], rows: [ ['170','70','24.2','Normal'], ['160','80','31.3','Obesity'] ] }
+    },
+    TH: {
+      useCases: [ 'คำนวณ BMI และเทียบเกณฑ์สำหรับเอเชีย (WHO Asia)', 'ใช้ประกอบกับ TDEE/แคลอรี่รายวัน' ],
+      howTo: [ 'กรอกส่วนสูง (ซม.) และน้ำหนัก (กก.)', 'อ่านค่า BMI และหมวดหมู่ทันที', 'ดูเครื่องคิดเลขที่เกี่ยวข้องเพื่อวางเป้าแคลอรี่' ],
+      faqs: [
+        { question: 'BMI คืออะไร?', answer: 'น้ำหนัก (กก.) หารด้วยส่วนสูง (ม.) ยกกำลังสอง ใช้เป็นตัวชี้วัดภาพรวม ไม่ใช่การวินิจฉัยโรค' },
+        { question: 'เกณฑ์เอเชียต่างจากสากลยังไง?', answer: 'WHO Asia ใช้เกณฑ์ต่ำกว่า: ปกติ <23, น้ำหนักเกิน 23–27.4, อ้วน ≥27.5' }
+      ],
+      references: [ { label: 'WHO Expert Consultation (Asia BMI)', url: 'https://www.who.int/publications/i/item/9789290223553' } ],
+      keywords: ['คำนวณ BMI','ตาราง BMI ไทย','ค่า BMI เอเชีย']
+    }
+  },
   // Finance: House Affordability
   'house-affordability': {
     GLOBAL: {
@@ -44,6 +78,20 @@ export const FAQ_CONTENT: FaqContentMap = {
       howTo: [ 'กรอกข้อมูลรายได้และหนี้', 'ใช้อัตราภาษีท้องถิ่นโดยประมาณ', 'เปรียบเทียบหลายสถานการณ์' ],
       faqs: [ { question: 'DTI ไทยใช้เท่าไร?', answer: 'ขึ้นกับธนาคารและนโยบาย กรณีทั่วไปไม่ควรเกิน ~40–50% สำหรับหนี้ทั้งหมด' } ],
       references: [ { label: 'ธนาคารแห่งประเทศไทย – เกณฑ์สินเชื่อที่อยู่อาศัย', url: 'https://www.bot.or.th' } ]
+    }
+  },
+
+  // Finance: Loan
+  loan: {
+    GLOBAL: {
+      useCases: [ 'คำนวณค่างวดเงินกู้', 'ดูดอกเบี้ยรวมและตารางผ่อนชำระ (CSV)' ],
+      howTo: [ 'กรอกเงินต้น อัตราดอกเบี้ยต่อปี และจำนวนปี', 'อ่านค่างวด ดอกเบี้ยรวม และดาวน์โหลดตารางผ่อนชำระ' ],
+      faqs: [
+        { question: 'สูตรค่างวดคืออะไร?', answer: 'ค่างวด = P × r × (1+r)^n / ((1+r)^n − 1) โดย r คืออัตราดอกเบี้ยต่อเดือน n คือจำนวนงวด' },
+        { question: 'รีไฟแนนซ์ช่วยอะไร?', answer: 'ถ้าดอกเบี้ยลดลง ค่างวดอาจลดลง แต่ระยะเวลาที่นานขึ้นอาจทำให้ดอกเบี้ยรวมสูงขึ้น' }
+      ],
+      references: [ { label: 'Investopedia – Amortization', url: 'https://www.investopedia.com/terms/a/amortization.asp' } ],
+      keywords: ['คำนวณเงินกู้','ตารางผ่อนชำระ','ดอกเบี้ยทบต้น']
     }
   },
 
