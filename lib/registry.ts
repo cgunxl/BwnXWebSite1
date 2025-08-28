@@ -18,6 +18,8 @@ export type CalculatorId =
   | 'bmi'
   | 'bmr'
   | 'tdee'
+  | 'calorie'
+  | 'protein-intake'
   // Additional ids progressively added
   | 'roi'
   | 'break-even'
@@ -166,7 +168,9 @@ export const REGISTRY: CalculatorEntry[] = [
   { id: 'bmi', path: (lang) => `/${lang}/bmi`, titleKey: 'bmiCalc', description: 'Body Mass Index based on height and weight', category: 'health', keywords: ['bmi','body mass index','health'] },
   { id: 'bmr', path: (lang) => `/${lang}/bmr`, titleKey: 'bmrCalc', description: 'Basal Metabolic Rate (Mifflin–St Jeor)', category: 'health', keywords: ['bmr','basal metabolic rate'] },
   { id: 'tdee', path: (lang) => `/${lang}/tdee`, titleKey: 'tdeeCalc', description: 'Total Daily Energy Expenditure', category: 'health', keywords: ['tdee','calories','energy'] },
+  { id: 'calorie' as any, path: (lang) => `/${lang}/calorie`, titleKey: 'calorieCalc' as any, description: 'Daily calories from BMR, TDEE and goal', category: 'health' as any, keywords: ['calories','bmr','tdee'] },
   { id: 'macro' as any, path: (lang) => `/${lang}/macro`, titleKey: 'macroCalc', description: 'Protein/Fat/Carbs grams from calorie split', category: 'health', keywords: ['macros','protein','fat','carbs'] },
+  { id: 'protein-intake' as any, path: (lang) => `/${lang}/protein-intake`, titleKey: 'proteinIntakeCalc' as any, description: 'Daily protein needs by goal and body weight', category: 'health' as any, keywords: ['protein','intake','g/kg'] },
   { id: 'water-intake' as any, path: (lang) => `/${lang}/water-intake`, titleKey: 'waterIntakeCalc', description: 'Daily water requirement', category: 'health', keywords: ['water','hydration'] },
   { id: 'ideal-weight' as any, path: (lang) => `/${lang}/ideal-weight`, titleKey: 'idealWeightCalc', description: 'Ideal weight estimate', category: 'health', keywords: ['ideal weight','devine'] },
   { id: 'body-fat' as any, path: (lang) => `/${lang}/body-fat`, titleKey: 'bodyFatCalc', description: 'Body fat percentage estimate', category: 'health', keywords: ['body fat','bf%'] },

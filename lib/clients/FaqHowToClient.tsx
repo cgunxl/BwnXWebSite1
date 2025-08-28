@@ -126,7 +126,7 @@ export default function FaqHowToClient({ lang, slug, defaultCountry = 'GLOBAL' }
             {related.map((r, i) => {
               const entry = REGISTRY.find(e => e.id === r.id);
               if (!entry) return null;
-              const href = entry.path(lang);
+              const href = entry.path(lang) as any;
               return (
                 <li key={i}>
                   <Link href={href}>{t(lang, entry.titleKey)}</Link>
@@ -145,6 +145,37 @@ type RelatedItem = { id: any; reason?: string };
 
 function getRelated(slug: string): RelatedItem[] {
   switch (slug) {
+    // Health cross-links
+    case 'bmi':
+      return [
+        { id: 'tdee', reason: 'Use BMI inputs to estimate daily energy' },
+        { id: 'calorie', reason: 'Turn TDEE into daily calorie targets' }
+      ];
+    case 'bmr':
+      return [
+        { id: 'tdee', reason: 'Multiply BMR by activity to get TDEE' },
+        { id: 'calorie', reason: 'Apply goal to set daily calories' }
+      ];
+    case 'tdee':
+      return [
+        { id: 'calorie', reason: 'Convert TDEE to goals (loss/gain/maintain)' },
+        { id: 'macro', reason: 'Split calories into protein, fat, carbs' }
+      ];
+    case 'calorie':
+      return [
+        { id: 'macro', reason: 'Translate calories into macro grams' },
+        { id: 'protein-intake', reason: 'Ensure adequate daily protein' }
+      ];
+    case 'macro':
+      return [
+        { id: 'calorie', reason: 'Confirm total calorie target' },
+        { id: 'protein-intake', reason: 'Set minimum protein for results' }
+      ];
+    case 'protein-intake':
+      return [
+        { id: 'macro', reason: 'Balance fat and carbs around protein' },
+        { id: 'tdee', reason: 'Confirm energy needs for your activity' }
+      ];
     // Finance cross-links
     case 'loan':
       return [

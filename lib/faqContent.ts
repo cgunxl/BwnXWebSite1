@@ -178,6 +178,48 @@ export const FAQ_CONTENT: FaqContentMap = {
     }
   },
 
+  // Health: Calorie
+  calorie: {
+    GLOBAL: {
+      useCases: [
+        'ประเมินปริมาณแคลอรี่ต่อวันที่ควรกินจาก BMR และ TDEE',
+        'ตั้งเป้าลด/เพิ่มน้ำหนักอย่างปลอดภัยด้วยแคลอรี่ขาด/เกิน'
+      ],
+      howTo: [
+        'ใส่เพศ อายุ ส่วนสูง และน้ำหนักเพื่อคำนวณ BMR',
+        'เลือกระดับกิจกรรมเพื่อได้ TDEE',
+        'เลือกเป้าหมาย (รักษาน้ำหนัก/ลด/เพิ่ม) เพื่อดูแคลอรี่ต่อวัน'
+      ],
+      faqs: [
+        { question: 'BMR กับ TDEE ต่างกันอย่างไร?', answer: 'BMR คือพลังงานพื้นฐานขณะพัก ส่วน TDEE คือพลังงานที่ใช้จริงต่อวันเมื่อรวมกิจกรรม' }
+      ],
+      references: [
+        { label: 'Mifflin–St Jeor Equation', url: 'https://en.wikipedia.org/wiki/Basal_metabolic_rate#BMR_estimation_formulas' }
+      ]
+    }
+  },
+
+  // Health: Protein Intake
+  'protein-intake': {
+    GLOBAL: {
+      useCases: [
+        'คำนวณโปรตีนต่อวันตามน้ำหนักตัวและเป้าหมาย',
+        'วางแผนโภชนาการร่วมกับการออกกำลังกาย'
+      ],
+      howTo: [
+        'ใส่น้ำหนักตัว (กก.)',
+        'เลือกเป้าหมาย (สุขภาพทั่วไป/ลดน้ำหนัก/เพิ่มกล้าม/นักกีฬา)',
+        'อ่านโปรตีนที่แนะนำเป็นกรัมต่อวัน'
+      ],
+      faqs: [
+        { question: 'ควรกินโปรตีนต่อวันเท่าไร?', answer: 'ขึ้นกับเป้าหมายและกิจกรรม ช่วงทั่วไป ~1.2–2.0 กรัม/กก./วัน' }
+      ],
+      references: [
+        { label: 'ISSN Position Stand – Protein and Exercise', url: 'https://jissn.biomedcentral.com/articles/10.1186/1550-2783-4-8' }
+      ]
+    }
+  },
+
   // Finance: NPV & IRR
   'npv-irr': {
     GLOBAL: {
