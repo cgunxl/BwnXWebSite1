@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getAllLocales } from '@/lib/i18n';
 import BacClient from '@/lib/clients/BacClient';
+import FaqHowToClient from '@/lib/clients/FaqHowToClient';
 
 export const revalidate = 86400;
 
@@ -24,6 +25,7 @@ export default function BacPage({ params }: { params: { lang: string } }) {
     <div className="page-enter page-enter-active">
       <h1>BAC Calculator</h1>
       <BacClient lang={lang} />
+      <FaqHowToClient lang={lang} slug="bac" />
     </div>
   );
 }

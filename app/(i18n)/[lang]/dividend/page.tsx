@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { getAllLocales } from '@/lib/i18n';
 import Link from 'next/link';
 import DividendClient from '@/lib/clients/DividendClient';
+import FaqHowToClient from '@/lib/clients/FaqHowToClient';
 
 export const revalidate = 86400;
 
@@ -32,6 +33,7 @@ export default function DividendPage({ params }: { params: { lang: string } }) {
     <div className="page-enter page-enter-active">
       <h1>Dividend Calculator</h1>
       <DividendClient lang={lang} />
+      <FaqHowToClient lang={lang} slug="dividend" />
       <nav className="footer-nav">
         <Link className="button ghost" href={`/${lang}/stock-return`}>Stock Return</Link>
       </nav>

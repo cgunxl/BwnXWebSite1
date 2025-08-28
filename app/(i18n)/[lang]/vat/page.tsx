@@ -3,6 +3,7 @@ import { getAllLocales, t } from '@/lib/i18n';
 import Link from 'next/link';
 import VatClient from '@/lib/clients/VatClient';
 import { getDefaultCountryForLang } from '@/lib/countries';
+import FaqHowToClient from '@/lib/clients/FaqHowToClient';
 
 export const revalidate = 86400;
 
@@ -38,13 +39,7 @@ export default function VatPage({ params }: { params: { lang: string } }) {
 
       <VatClient lang={lang} country={country} />
 
-      <section className="card" style={{marginTop: 16}}>
-        <h2>{t(lang, 'sources')}</h2>
-        <ol>
-          <li>[1] Thailand VAT 7% rate: [oai_citation:8‡rd.go.th](https://www.rd.go.th/english/6043.html)</li>
-          <li>[2] EU VAT overview: [oai_citation:9‡ec.europa.eu](https://taxation-customs.ec.europa.eu/taxation-1/value-added-tax-vat_en)</li>
-        </ol>
-      </section>
+      <FaqHowToClient lang={lang} slug="vat" />
 
       <nav className="footer-nav">
         <Link className="button ghost" href={`/${lang}/loan`}>{t(lang, 'navLoan')}</Link>

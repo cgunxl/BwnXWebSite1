@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { getAllLocales, t } from '@/lib/i18n';
 import Link from 'next/link';
 import VatClient from '@/lib/clients/VatClient';
+import FaqHowToClient from '@/lib/clients/FaqHowToClient';
 
 export const revalidate = 86400;
 
@@ -32,12 +33,7 @@ export default function SalesTaxPage({ params }: { params: { lang: string } }) {
     <div className="page-enter page-enter-active">
       <h1>Sales Tax Calculator</h1>
       <VatClient lang={lang} />
-      <section className="card" style={{marginTop: 16}}>
-        <h2>{t(lang, 'sources')}</h2>
-        <ol>
-          <li>[1] Sales tax/VAT/GST rates vary by jurisdiction; consult official resources.</li>
-        </ol>
-      </section>
+      <FaqHowToClient lang={lang} slug="sales-tax" />
       <nav className="footer-nav">
         <Link className="button ghost" href={`/${lang}/vat`}>{t(lang, 'vatCalc')}</Link>
       </nav>

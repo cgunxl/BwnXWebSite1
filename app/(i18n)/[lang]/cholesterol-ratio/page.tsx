@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getAllLocales } from '@/lib/i18n';
 import CholesterolRatioClient from '@/lib/clients/CholesterolRatioClient';
+import FaqHowToClient from '@/lib/clients/FaqHowToClient';
 
 export const revalidate = 86400;
 
@@ -24,6 +25,7 @@ export default function CholesterolRatioPage({ params }: { params: { lang: strin
     <div className="page-enter page-enter-active">
       <h1>Cholesterol Ratio Calculator</h1>
       <CholesterolRatioClient lang={lang} />
+      <FaqHowToClient lang={lang} slug="cholesterol-ratio" />
     </div>
   );
 }

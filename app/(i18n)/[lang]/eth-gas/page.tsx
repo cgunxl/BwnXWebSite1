@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getAllLocales } from '@/lib/i18n';
 import EthGasClient from '@/lib/clients/EthGasClient';
+import FaqHowToClient from '@/lib/clients/FaqHowToClient';
 
 export const revalidate = 3600;
 
@@ -31,6 +32,7 @@ export default function EthGasPage({ params }: { params: { lang: string } }) {
     <div className="page-enter page-enter-active">
       <h1>Ethereum Gas Fee Calculator</h1>
       <EthGasClient lang={lang} />
+      <FaqHowToClient lang={lang} slug="eth-gas" />
     </div>
   );
 }

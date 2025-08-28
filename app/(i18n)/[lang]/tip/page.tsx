@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getAllLocales } from '@/lib/i18n';
 import TipClient from '@/lib/clients/TipClient';
+import FaqHowToClient from '@/lib/clients/FaqHowToClient';
 
 export const revalidate = 86400;
 
@@ -31,6 +32,7 @@ export default function TipPage({ params }: { params: { lang: string } }) {
     <div className="page-enter page-enter-active">
       <h1>Tip Calculator</h1>
       <TipClient lang={lang} />
+      <FaqHowToClient lang={lang} slug="tip" />
     </div>
   );
 }

@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { getAllLocales, t } from '@/lib/i18n';
 import MortgageClient from '@/lib/clients/MortgageClient';
 import { getDefaultCountryForLang } from '@/lib/countries';
+import FaqHowToClient from '@/lib/clients/FaqHowToClient';
 
 export const revalidate = 86400;
 
@@ -26,6 +27,7 @@ export default function AmortizationPage({ params }: { params: { lang: string } 
     <div className="page-enter page-enter-active">
       <h1>{t(lang, 'amortizationSchedule')}</h1>
       <MortgageClient lang={lang} country={country} />
+      <FaqHowToClient lang={lang} slug="amortization" />
     </div>
   );
 }

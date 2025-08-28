@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getAllLocales } from '@/lib/i18n';
 import ProfitMarginClient from '@/lib/clients/ProfitMarginClient';
+import FaqHowToClient from '@/lib/clients/FaqHowToClient';
 
 export const revalidate = 86400;
 
@@ -24,6 +25,7 @@ export default function ProfitMarginPage({ params }: { params: { lang: string } 
     <div className="page-enter page-enter-active">
       <h1>Profit Margin Calculator</h1>
       <ProfitMarginClient lang={lang} />
+      <FaqHowToClient lang={lang} slug="profit-margin" />
     </div>
   );
 }

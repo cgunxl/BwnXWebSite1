@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getAllLocales } from '@/lib/i18n';
 import BitcoinMiningClient from '@/lib/clients/BitcoinMiningClient';
+import FaqHowToClient from '@/lib/clients/FaqHowToClient';
 
 export const revalidate = 86400;
 
@@ -31,6 +32,7 @@ export default function BitcoinMiningPage({ params }: { params: { lang: string }
     <div className="page-enter page-enter-active">
       <h1>Bitcoin Mining Calculator</h1>
       <BitcoinMiningClient lang={lang} />
+      <FaqHowToClient lang={lang} slug="bitcoin-mining" />
     </div>
   );
 }

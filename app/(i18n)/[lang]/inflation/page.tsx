@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { getAllLocales, t } from '@/lib/i18n';
 import Link from 'next/link';
 import InflationClient from '@/lib/clients/InflationClient';
+import FaqHowToClient from '@/lib/clients/FaqHowToClient';
 
 export const revalidate = 86400;
 
@@ -32,12 +33,7 @@ export default function InflationPage({ params }: { params: { lang: string } }) 
     <div className="page-enter page-enter-active">
       <h1>Inflation Calculator</h1>
       <InflationClient lang={lang} />
-      <section className="card" style={{marginTop: 16}}>
-        <h2>{t(lang, 'sources')}</h2>
-        <ol>
-          <li>[1] Price level changes measured via CPI; consult each country&apos;s statistics agency.</li>
-        </ol>
-      </section>
+      <FaqHowToClient lang={lang} slug="inflation" />
       <nav className="footer-nav">
         <Link className="button ghost" href={`/${lang}/compound`}>{t(lang, 'compoundCalc')}</Link>
       </nav>

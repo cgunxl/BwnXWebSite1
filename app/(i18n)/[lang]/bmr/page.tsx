@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { getAllLocales } from '@/lib/i18n';
 import BmrClient from '@/lib/clients/BmrClient';
+import FaqHowToClient from '@/lib/clients/FaqHowToClient';
 
 export const revalidate = 86400;
 
@@ -24,6 +25,7 @@ export default function BmrPage({ params }: { params: { lang: string } }) {
     <div className="page-enter page-enter-active">
       <h1>BMR Calculator</h1>
       <BmrClient lang={lang} />
+      <FaqHowToClient lang={lang} slug="bmr" />
     </div>
   );
 }
