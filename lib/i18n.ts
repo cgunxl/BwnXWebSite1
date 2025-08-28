@@ -127,6 +127,7 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,dataTransferCalc: 'Data Transfer Calculator'
     ,streamingBandwidthCalc: 'Streaming Bandwidth Calculator'
     ,apiUsageCalc: 'API Usage Calculator'
+    ,salaryCalc: 'Salary Calculator'
   },
   es: {
     siteTitle: 'Centro Financiero',
@@ -423,6 +424,7 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,dataTransferCalc: 'คำนวณอัตราการโอนข้อมูล'
     ,streamingBandwidthCalc: 'คำนวณแบนด์วิดธ์สตรีมมิ่ง'
     ,apiUsageCalc: 'คำนวณการใช้งาน API'
+    ,salaryCalc: 'คำนวณเงินเดือนสุทธิ'
   },
   ar: { ...{} as any },
   hi: { ...{} as any },

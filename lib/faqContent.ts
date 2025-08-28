@@ -469,6 +469,7 @@ export const FAQ_CONTENT: FaqContentMap = {
   , 'data-transfer': { GLOBAL: { useCases: ['คำนวณอัตราโอนข้อมูลเฉลี่ย','ประเมินเวลา/ความเร็วที่ต้องใช้'], howTo: ['ใส่ขนาดข้อมูลและระยะเวลา'], faqs: [{ question: 'MB/s กับ Mbps?', answer: '1 MB/s = 8 Mbps' }], references: [{ label: 'Networking basics', url: 'https://en.wikipedia.org/wiki/Throughput' }] } }
   , 'streaming-bandwidth': { GLOBAL: { useCases: ['วางแผนกำลังส่งสำหรับสตรีม','ประเมินค่าส่งออกรายเดือน'], howTo: ['ใส่ bitrate และจำนวนผู้ชมพร้อมกัน','เพิ่ม headroom'], faqs: [{ question: 'ABR ทำอย่างไร?', answer: 'ใช้ค่าเฉลี่ยถ่วงน้ำหนักตามสัดส่วนความละเอียดที่ใช้จริง' }], references: [{ label: 'Adaptive bitrate streaming', url: 'https://en.wikipedia.org/wiki/Adaptive_bitrate_streaming' }] } }
   , 'api-usage': { GLOBAL: { useCases: ['ประเมินค่าบริการ API','ประมาณ compute time รวม'], howTo: ['ใส่จำนวน request/เดือนและราคา/1,000','ใส่ latency เฉลี่ย'], faqs: [{ question: 'ฟรีทีเยอร์?', answer: 'หักโควตาฟรีก่อนคำนวณค่าใช้จ่ายจริง' }], references: [{ label: 'API pricing examples', url: 'https://openai.com/pricing' }] } }
+  , salary: { GLOBAL: { useCases: ['คำนวณเงินเดือนสุทธิ','วางแผนภาษี/ประกันสังคม'], howTo: ['ใส่รายได้ต่อปี','ปรับอัตราส่งประกันสังคม/กองทุนตามประเทศ'], faqs: [{ question: 'อัตราภาษี?', answer: 'ขึ้นกับประเทศ ใช้วงเล็บภาษีพื้นฐานเป็นค่าเริ่มต้น' }], references: [{ label: 'OECD – Taxing wages', url: 'https://www.oecd.org/tax/tax-policy/taxing-wages.htm' }] } }
 };
 
 export const COUNTRY_LABELS: Record<CountryCode, string> = {
