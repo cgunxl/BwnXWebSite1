@@ -12,14 +12,111 @@ export type CalculatorId =
   | 'car-loan'
   | 'bmi'
   | 'bmr'
-  | 'tdee';
+  | 'tdee'
+  // Additional ids progressively added
+  | 'roi'
+  | 'stock-return'
+  | 'dividend'
+  | 'sales-tax'
+  | 'tip'
+  | 'discount'
+  | 'crypto-profit'
+  | 'bitcoin-mining'
+  | 'eth-gas'
+  | 'nft-profit'
+  | 'sip'
+  | 'mutual-fund'
+  | 'property-tax'
+  | 'inflation'
+  | 'profit-margin'
+  | 'business-loan'
+  | 'tdee' // keep for type compatibility
+  | 'vo2max'
+  | 'heart-rate'
+  | 'target-hr'
+  | 'bac'
+  | 'sleep'
+  | 'cholesterol-ratio'
+  | 'ohms-law'
+  | 'permutation'
+  | 'combination'
+  | 'z-score'
+  | 'circle-area'
+  | 'triangle-area'
+  | 'gcf'
+  | 'lcm'
+  | 'age'
+  | 'date-difference'
+  | 'fuel-cost'
+  | 'electricity-bill'
+  | 'download-time'
+  | 'age-gap'
+  | 'random-number'
+  | 'dice'
+  | 'coin-flip'
+  | 'countdown'
+  | 'website-bandwidth'
+  | 'data-transfer'
+  | 'streaming-bandwidth'
+  | 'api-usage'
+  | 'salary'
+  | 'retirement'
+  | '401k'
+  | 'roth-ira'
+  | 'currency-arbitrage'
+  | 'average'
+  | 'median-mode'
+  | 'std-dev'
+  | 'exponent'
+  | 'ratio'
+  | 'percentage'
+  | 'overtime'
+  | 'markup'
+  | 'hourly-wage'
+  | 'freelancer-rate'
+  | 'time'
+  | 'power'
+  | 'frequency'
+  | 'length'
+  | 'weight'
+  | 'speed'
+  | 'temperature'
+  | 'pressure'
+  | 'angle'
+  | 'area'
+  | 'volume'
+  | 'energy'
+  | 'blood-sugar'
+  | 'fuel-efficiency'
+  | 'prime'
+  | 'factorial'
+  | 'ovulation'
+  | 'pregnancy-due-date'
+  | 'pregnancy-weight-gain'
+  | 'marathon-time'
+  | 'ideal-weight'
+  | 'water-intake'
+  | 'macro'
+  | 'currency';
 
 export type CalculatorEntry = {
   id: CalculatorId;
   path: (lang: string) => string;
   titleKey: string;
   description?: string;
-  category: 'finance' | 'tax' | 'insurance' | 'conversion' | 'savings' | 'health';
+  category:
+    | 'finance'
+    | 'tax'
+    | 'insurance'
+    | 'conversion'
+    | 'savings'
+    | 'health'
+    | 'tech'
+    | 'engineering'
+    | 'math'
+    | 'lifestyle'
+    | 'household'
+    | 'fun';
   keywords: string[];
 };
 
@@ -77,6 +174,54 @@ export const REGISTRY: CalculatorEntry[] = [
   ,{ id: '401k' as any, path: (lang) => `/${lang}/401k`, titleKey: 'k401Calc' as any, description: '401(k) plan with employer match', category: 'savings' as any, keywords: ['401k','match','contribution'] }
   ,{ id: 'roth-ira' as any, path: (lang) => `/${lang}/roth-ira`, titleKey: 'rothIraCalc' as any, description: 'Roth IRA growth projection', category: 'savings' as any, keywords: ['roth ira','retirement'] }
   ,{ id: 'currency-arbitrage' as any, path: (lang) => `/${lang}/currency-arbitrage`, titleKey: 'currencyArbCalc' as any, description: 'FX triangular arbitrage simulator', category: 'finance' as any, keywords: ['currency','arbitrage','fx'] }
+  // Existing pages not yet listed above
+  ,{ id: 'roi' as any, path: (lang) => `/${lang}/roi`, titleKey: 'roiCalc' as any, description: 'Return on Investment and CAGR', category: 'finance' as any, keywords: ['roi','return','cagr'] }
+  ,{ id: 'stock-return' as any, path: (lang) => `/${lang}/stock-return`, titleKey: 'stockReturnCalc' as any, description: 'Stock total return with dividends', category: 'finance' as any, keywords: ['stock','return','dividend'] }
+  ,{ id: 'dividend' as any, path: (lang) => `/${lang}/dividend`, titleKey: 'dividendCalc' as any, description: 'Dividend income and yield', category: 'finance' as any, keywords: ['dividend','yield','income'] }
+  ,{ id: 'sales-tax' as any, path: (lang) => `/${lang}/sales-tax`, titleKey: 'salesTaxCalc' as any, description: 'Sales tax from rate and price', category: 'tax' as any, keywords: ['sales tax','vat','gst'] }
+  ,{ id: 'tip' as any, path: (lang) => `/${lang}/tip`, titleKey: 'tipCalc' as any, description: 'Bill tip and split per person', category: 'lifestyle' as any, keywords: ['tip','gratuity','bill split'] }
+  ,{ id: 'discount' as any, path: (lang) => `/${lang}/discount`, titleKey: 'discountCalc' as any, description: 'Final price after discount', category: 'lifestyle' as any, keywords: ['discount','sale','markdown'] }
+  ,{ id: 'crypto-profit' as any, path: (lang) => `/${lang}/crypto-profit`, titleKey: 'cryptoProfitCalc' as any, description: 'Crypto trade profit after fees', category: 'finance' as any, keywords: ['crypto','profit','fees'] }
+  ,{ id: 'bitcoin-mining' as any, path: (lang) => `/${lang}/bitcoin-mining`, titleKey: 'bitcoinMiningCalc' as any, description: 'Bitcoin mining revenue and cost', category: 'tech' as any, keywords: ['bitcoin','mining','hashrate'] }
+  ,{ id: 'eth-gas' as any, path: (lang) => `/${lang}/eth-gas`, titleKey: 'ethGasCalc' as any, description: 'Ethereum transaction fee from gas', category: 'tech' as any, keywords: ['ethereum','gas','fee'] }
+  ,{ id: 'nft-profit' as any, path: (lang) => `/${lang}/nft-profit`, titleKey: 'nftProfitCalc' as any, description: 'NFT trade profit after fees', category: 'finance' as any, keywords: ['nft','profit','royalty'] }
+  ,{ id: 'sip' as any, path: (lang) => `/${lang}/sip`, titleKey: 'sipCalc' as any, description: 'SIP returns (India)', category: 'savings' as any, keywords: ['sip','india','investment'] }
+  ,{ id: 'mutual-fund' as any, path: (lang) => `/${lang}/mutual-fund`, titleKey: 'mutualFundCalc' as any, description: 'Mutual fund return after expense ratio', category: 'finance' as any, keywords: ['mutual fund','nav','expense ratio'] }
+  ,{ id: 'property-tax' as any, path: (lang) => `/${lang}/property-tax`, titleKey: 'propertyTaxCalc' as any, description: 'Property tax estimate', category: 'tax' as any, keywords: ['property tax','assessment','levy'] }
+  ,{ id: 'inflation' as any, path: (lang) => `/${lang}/inflation`, titleKey: 'inflationCalc' as any, description: 'Adjust values for inflation', category: 'finance' as any, keywords: ['inflation','cpi','purchasing power'] }
+  ,{ id: 'profit-margin' as any, path: (lang) => `/${lang}/profit-margin`, titleKey: 'profitMarginCalc' as any, description: 'Gross/operating profit margins', category: 'finance' as any, keywords: ['margin','gross','operating'] }
+  ,{ id: 'business-loan' as any, path: (lang) => `/${lang}/business-loan`, titleKey: 'businessLoanCalc' as any, description: 'Business loan payment and totals', category: 'finance' as any, keywords: ['business loan','emi','payment'] }
+  
+  ,{ id: 'average' as any, path: (lang) => `/${lang}/average`, titleKey: 'averageCalc' as any, description: 'Compute mean from numbers', category: 'math' as any, keywords: ['average','mean'] }
+  ,{ id: 'median-mode' as any, path: (lang) => `/${lang}/median-mode`, titleKey: 'medianModeCalc' as any, description: 'Compute median and mode', category: 'math' as any, keywords: ['median','mode'] }
+  ,{ id: 'std-dev' as any, path: (lang) => `/${lang}/std-dev`, titleKey: 'stdDevCalc' as any, description: 'Standard deviation and variance', category: 'math' as any, keywords: ['std dev','variance'] }
+  ,{ id: 'exponent' as any, path: (lang) => `/${lang}/exponent`, titleKey: 'exponentCalc' as any, description: 'Exponent and logarithm tools', category: 'math' as any, keywords: ['exponent','logarithm'] }
+  ,{ id: 'ratio' as any, path: (lang) => `/${lang}/ratio`, titleKey: 'ratioCalc' as any, description: 'Simplify and scale ratios', category: 'math' as any, keywords: ['ratio','proportion'] }
+  ,{ id: 'percentage' as any, path: (lang) => `/${lang}/percentage`, titleKey: 'percentageCalc' as any, description: 'Percent increase/decrease and parts', category: 'math' as any, keywords: ['percent','percentage'] }
+  ,{ id: 'overtime' as any, path: (lang) => `/${lang}/overtime`, titleKey: 'overtimeCalc' as any, description: 'Overtime pay and total weekly pay', category: 'finance' as any, keywords: ['overtime','ot','pay'] }
+  ,{ id: 'markup' as any, path: (lang) => `/${lang}/markup`, titleKey: 'markupCalc' as any, description: 'Price from cost and markup', category: 'finance' as any, keywords: ['markup','margin','pricing'] }
+  ,{ id: 'hourly-wage' as any, path: (lang) => `/${lang}/hourly-wage`, titleKey: 'hourlyWageCalc' as any, description: 'Hourly wage and annual salary', category: 'finance' as any, keywords: ['hourly','wage','salary'] }
+  ,{ id: 'freelancer-rate' as any, path: (lang) => `/${lang}/freelancer-rate`, titleKey: 'freelancerRateCalc' as any, description: 'Freelancer target rate', category: 'finance' as any, keywords: ['freelancer','rate','pricing'] }
+  ,{ id: 'time' as any, path: (lang) => `/${lang}/time`, titleKey: 'timeCalc' as any, description: 'Time unit converter', category: 'conversion' as any, keywords: ['time','seconds','minutes'] }
+  ,{ id: 'power' as any, path: (lang) => `/${lang}/power`, titleKey: 'powerCalc' as any, description: 'Power unit converter', category: 'conversion' as any, keywords: ['power','watt','kw'] }
+  ,{ id: 'frequency' as any, path: (lang) => `/${lang}/frequency`, titleKey: 'frequencyCalc' as any, description: 'Frequency unit converter', category: 'conversion' as any, keywords: ['frequency','hz','khz'] }
+  ,{ id: 'length' as any, path: (lang) => `/${lang}/length`, titleKey: 'lengthConverter' as any, description: 'Length unit converter', category: 'conversion' as any, keywords: ['length','meter','inch'] }
+  ,{ id: 'weight' as any, path: (lang) => `/${lang}/weight`, titleKey: 'weightConverter' as any, description: 'Weight unit converter', category: 'conversion' as any, keywords: ['weight','kg','lb'] }
+  ,{ id: 'speed' as any, path: (lang) => `/${lang}/speed`, titleKey: 'speedConverter' as any, description: 'Speed unit converter', category: 'conversion' as any, keywords: ['speed','kmh','mph'] }
+  ,{ id: 'temperature' as any, path: (lang) => `/${lang}/temperature`, titleKey: 'temperatureConverter' as any, description: 'Temperature unit converter', category: 'conversion' as any, keywords: ['temperature','celsius','fahrenheit'] }
+  ,{ id: 'pressure' as any, path: (lang) => `/${lang}/pressure`, titleKey: 'pressureConverter' as any, description: 'Pressure unit converter', category: 'conversion' as any, keywords: ['pressure','bar','psi'] }
+  ,{ id: 'angle' as any, path: (lang) => `/${lang}/angle`, titleKey: 'angleConverter' as any, description: 'Angle unit converter', category: 'conversion' as any, keywords: ['angle','degree','radian'] }
+  ,{ id: 'area' as any, path: (lang) => `/${lang}/area`, titleKey: 'areaConverter' as any, description: 'Area unit converter', category: 'conversion' as any, keywords: ['area','m2','ft2'] }
+  ,{ id: 'volume' as any, path: (lang) => `/${lang}/volume`, titleKey: 'volumeConverter' as any, description: 'Volume unit converter', category: 'conversion' as any, keywords: ['volume','litre','gallon'] }
+  ,{ id: 'energy' as any, path: (lang) => `/${lang}/energy`, titleKey: 'energyConverter' as any, description: 'Energy unit converter', category: 'conversion' as any, keywords: ['energy','joule','calorie'] }
+  ,{ id: 'blood-sugar' as any, path: (lang) => `/${lang}/blood-sugar`, titleKey: 'bloodSugarCalc' as any, description: 'Blood sugar unit converter', category: 'health' as any, keywords: ['blood sugar','glucose','diabetes'] }
+  ,{ id: 'fuel-efficiency' as any, path: (lang) => `/${lang}/fuel-efficiency`, titleKey: 'fuelEfficiencyCalc' as any, description: 'Fuel efficiency converter', category: 'conversion' as any, keywords: ['fuel','efficiency','mpg'] }
+  ,{ id: 'prime' as any, path: (lang) => `/${lang}/prime`, titleKey: 'primeCalc' as any, description: 'Prime check and list', category: 'math' as any, keywords: ['prime','primality'] }
+  ,{ id: 'factorial' as any, path: (lang) => `/${lang}/factorial`, titleKey: 'factorialCalc' as any, description: 'Factorial and permutations', category: 'math' as any, keywords: ['factorial','n!'] }
+  ,{ id: 'ovulation' as any, path: (lang) => `/${lang}/ovulation`, titleKey: 'ovulationCalc' as any, description: 'Ovulation window estimate', category: 'health' as any, keywords: ['ovulation','fertility'] }
+  ,{ id: 'pregnancy-due-date' as any, path: (lang) => `/${lang}/pregnancy-due-date`, titleKey: 'pregnancyDueDateCalc' as any, description: 'Estimated due date (Naegeles rule)', category: 'health' as any, keywords: ['pregnancy','due date'] }
+  ,{ id: 'pregnancy-weight-gain' as any, path: (lang) => `/${lang}/pregnancy-weight-gain`, titleKey: 'pregnancyWeightGainCalc' as any, description: 'Recommended weight gain during pregnancy', category: 'health' as any, keywords: ['pregnancy','weight gain'] }
+  
   // More entries are added progressively in batches
 ];
 
