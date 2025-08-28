@@ -13,6 +13,106 @@ export type FaqHowTo = {
 export type FaqContentMap = Record<string, Partial<Record<CountryCode, FaqHowTo>>>;
 
 export const FAQ_CONTENT: FaqContentMap = {
+  // Finance: House Affordability
+  'house-affordability': {
+    GLOBAL: {
+      useCases: [
+        'ประเมินงบซื้อบ้านสูงสุดจากรายได้ต่อปีและหนี้ปัจจุบัน',
+        'ดูผลกระทบของอัตราดอกเบี้ย ภาษีที่ดิน และประกันบ้านต่อค่างวด',
+        'ใช้กำหนดกรอบงบประมาณก่อนหาบ้านจริง'
+      ],
+      howTo: [
+        'กรอกเงินเดือนต่อปี เงินดาวน์ และอัตราดอกเบี้ย',
+        'กรอกอัตราภาษีทรัพย์สิน (% ต่อปี) และค่าใช้จ่ายรายเดือน (ประกัน/ค่าส่วนกลาง)',
+        'ระบุเพดาน DTI (%) เพื่อจำกัดสัดส่วนหนี้ต่อรายได้',
+        'อ่านราคาบ้านสูงสุด วงเงินกู้ และค่างวดโดยประมาณ'
+      ],
+      faqs: [
+        { question: 'DTI คืออะไร?', answer: 'Debt-to-Income คือสัดส่วนหนี้ต่อรายได้ต่อเดือน ธนาคารใช้กำหนดความสามารถในการผ่อน' },
+        { question: 'Property tax ส่งผลยังไง?', answer: 'ภาษีทรัพย์สินคิดจากมูลค่าบ้านต่อปีและรวมในค่าใช้จ่ายรายเดือน ทำให้วงเงินผ่อนเปลี่ยน' }
+      ],
+      references: [
+        { label: 'Fannie Mae – Qualifying Ratios (DTI)', url: 'https://singlefamily.fanniemae.com' },
+        { label: 'Investopedia – Debt-to-Income Ratio (DTI)', url: 'https://www.investopedia.com/terms/d/dti.asp' }
+      ]
+    },
+    TH: {
+      useCases: [ 'ประมาณงบซื้อบ้านตามเกณฑ์ธนาคารไทย', 'ดูผลของดอกเบี้ยและภาษีที่ดิน/สิ่งปลูกสร้าง' ],
+      howTo: [ 'กรอกข้อมูลรายได้และหนี้', 'ใช้อัตราภาษีท้องถิ่นโดยประมาณ', 'เปรียบเทียบหลายสถานการณ์' ],
+      faqs: [ { question: 'DTI ไทยใช้เท่าไร?', answer: 'ขึ้นกับธนาคารและนโยบาย กรณีทั่วไปไม่ควรเกิน ~40–50% สำหรับหนี้ทั้งหมด' } ],
+      references: [ { label: 'ธนาคารแห่งประเทศไทย – เกณฑ์สินเชื่อที่อยู่อาศัย', url: 'https://www.bot.or.th' } ]
+    }
+  },
+
+  // Finance: LTV
+  ltv: {
+    GLOBAL: {
+      useCases: [ 'ประเมิน LTV ของสินเชื่อที่อยู่อาศัย', 'คำนวณส่วนทุน (equity) ปัจจุบัน' ],
+      howTo: [ 'กรอกมูลค่าทรัพย์สินและวงเงินกู้', 'อ่านค่า LTV (%) และ Equity (%)' ],
+      faqs: [ { question: 'LTV สำคัญอย่างไร?', answer: 'LTV สูง = ความเสี่ยงสูง ผู้ปล่อยกู้อาจคิดดอกสูงหรือกำหนดเงินดาวน์มากขึ้น' } ],
+      references: [ { label: 'Investopedia – Loan-to-Value (LTV) Ratio', url: 'https://www.investopedia.com/terms/l/loantovalue.asp' } ]
+    }
+  },
+
+  // Finance: DTI
+  dti: {
+    GLOBAL: {
+      useCases: [ 'ประเมินความสามารถในการเป็นหนี้', 'ใช้เป็นเกณฑ์เบื้องต้นก่อนยื่นกู้' ],
+      howTo: [ 'กรอกหนี้รวมรายเดือนและรายได้รวมรายเดือน', 'อ่านค่า DTI (%) และเกณฑ์ความเสี่ยง' ],
+      faqs: [ { question: 'DTI เท่าไรถือว่าดี?', answer: 'โดยทั่วไป <36% ถือว่าดี 36–43% พอรับได้ >43% สูง ควรลดหนี้หรือเพิ่มรายได้' } ],
+      references: [ { label: 'CFPB – Debt-to-Income Ratio', url: 'https://www.consumerfinance.gov' } ]
+    }
+  },
+
+  // Savings: Emergency Fund
+  'emergency-fund': {
+    GLOBAL: {
+      useCases: [ 'ตั้งเป้าเงินสำรองฉุกเฉิน 3–12 เดือนของค่าใช้จ่าย', 'วางแผนสะสมเงินสำรองเป็นรายเดือน' ],
+      howTo: [ 'กรอกค่าใช้จ่ายต่อเดือนและจำนวนเดือนเป้าหมาย', 'กรอกเงินออมปัจจุบันและยอดออมต่อเดือน', 'อ่านจำนวนเดือนที่คาดว่าจะถึงเป้า' ],
+      faqs: [ { question: 'ควรเก็บกี่เดือน?', answer: 'ขึ้นกับความเสี่ยงงาน/ครอบครัว 3–6 เดือนทั่วไป 9–12 เดือนสำหรับอาชีพเสี่ยง/ผู้มีภาระ' } ],
+      references: [ { label: 'Investopedia – Emergency Fund', url: 'https://www.investopedia.com/terms/e/emergency_fund.asp' } ]
+    }
+  },
+
+  // Household/Energy: Solar Panel
+  'solar-panel': {
+    GLOBAL: {
+      useCases: [ 'ประมาณจำนวนแผงและขนาดระบบจากการใช้ไฟ', 'วางแผนระบบโซลาร์บนหลังคาเบื้องต้น' ],
+      howTo: [ 'ใส่ kWh ต่อเดือน ชั่วโมงแดดเฉลี่ยต่อวัน และกำลังแผง (W)', 'กรอก % การสูญเสียของระบบ', 'อ่านจำนวนแผงและขนาดระบบ (kW)' ],
+      faqs: [ { question: 'System losses คืออะไร?', answer: 'รวมความสูญเสียจากอินเวอร์เตอร์ สายไฟ มุมเอียง เงาบดบัง อุณหภูมิ ฯลฯ' } ],
+      references: [ { label: 'NREL – PVWatts Calculator', url: 'https://pvwatts.nrel.gov' } ]
+    }
+  },
+
+  // Tech/EV: Charging
+  'ev-charging': {
+    GLOBAL: {
+      useCases: [ 'คำนวณเวลาชาร์จ EV และค่าไฟโดยประมาณ', 'เปรียบเทียบหัวชาร์จ AC ระดับต่าง ๆ' ],
+      howTo: [ 'กรอกขนาดแบตเตอรี่ (kWh) ระดับชาร์จเริ่ม/เป้า (%)', 'กรอกกำลังเครื่องชาร์จ (kW) และประสิทธิภาพ (%)', 'ถ้ามี ใส่อัตราค่าไฟต่อ kWh' ],
+      faqs: [ { question: 'DC fast charge ต่างจาก AC ยังไง?', answer: 'DC ให้กำลังสูงกว่าอย่างมาก แต่ประสิทธิภาพและ taper ทำให้เวลาไม่เป็นเส้นตรง' } ],
+      references: [ { label: 'U.S. DOE – Alternative Fuels Data Center', url: 'https://afdc.energy.gov' } ]
+    }
+  },
+
+  // Math: Rectangle Area
+  'rectangle-area': {
+    GLOBAL: {
+      useCases: [ 'หาพื้นที่และเส้นรอบรูปสี่เหลี่ยมผืนผ้า', 'คำนวณเส้นทแยงมุมจากกว้างและยาว' ],
+      howTo: [ 'กรอกความกว้างและความยาว', 'อ่านพื้นที่ เส้นรอบรูป และเส้นทแยงมุม' ],
+      faqs: [ { question: 'หน่วยของผลลัพธ์?', answer: 'พื้นที่เป็นหน่วยกำลังสอง (เช่น m²) เส้นรอบรูปและเส้นทแยงมุมเป็นหน่วยความยาว' } ],
+      references: [ { label: 'Rectangle – geometry', url: 'https://en.wikipedia.org/wiki/Rectangle' } ]
+    }
+  },
+
+  // Math: Pythagorean
+  pythagorean: {
+    GLOBAL: {
+      useCases: [ 'หาด้านที่หายไปของสามเหลี่ยมมุมฉาก', 'ตรวจสอบความเป็นสามเหลี่ยมมุมฉากจากความยาวสามด้าน' ],
+      howTo: [ 'ป้อนค่าอย่างน้อยสองด้านใน a,b,c', 'ใช้สูตร a² + b² = c² เพื่อหาด้านที่ขาด' ],
+      faqs: [ { question: 'ใช้กับสามเหลี่ยมทั่วไปได้ไหม?', answer: 'สูตรนี้ใช้เฉพาะสามเหลี่ยมมุมฉาก หากไม่ใช่มุมฉากให้ใช้กฎโคไซน์' } ],
+      references: [ { label: 'Pythagorean theorem', url: 'https://en.wikipedia.org/wiki/Pythagorean_theorem' } ]
+    }
+  },
   // Finance: ROI
   roi: {
     GLOBAL: {
@@ -75,6 +175,78 @@ export const FAQ_CONTENT: FaqContentMap = {
       howTo: [ 'ใช้ตัวเลขสกุลเงินเดียวกัน', 'จัดการ VAT/ภาษีให้เป็นฐานเดียวกันก่อนเทียบ' ],
       faqs: [ { question: 'ต้อง normalize ค่าเงินหรือไม่?', answer: 'ควร แนะนำให้ใช้สกุลเงินเดียวและอัตราเงินเฟ้อที่สอดคล้องกัน' } ],
       references: [ { label: 'Eurostat – Economic indicators', url: 'https://ec.europa.eu/eurostat' } ]
+    }
+  },
+
+  // Finance: NPV & IRR
+  'npv-irr': {
+    GLOBAL: {
+      useCases: [
+        'ประเมินความคุ้มค่าของโครงการด้วย NPV',
+        'หา IRR เพื่อเทียบกับค่าใช้จ่ายเงินทุน (WACC)'
+      ],
+      howTo: [
+        'ใส่อัตราคิดลด (discount rate) เป็น %',
+        'ใส่กระแสเงินสดเริ่มต้น (t=0) และกระแสเงินสดในอนาคต',
+        'ดูผล NPV และ IRR ทันที'
+      ],
+      faqs: [
+        { question: 'NPV กับ IRR ต่างกันอย่างไร?', answer: 'NPV ให้มูลค่าปัจจุบันสุทธิเป็นจำนวนเงิน ส่วน IRR ให้ผลตอบแทนเป็นเปอร์เซ็นต์ที่ทำให้ NPV = 0' },
+        { question: 'ใช้ rate เท่าไรดี?', answer: 'มักใช้ต้นทุนเงินทุนถัวเฉลี่ยถ่วงน้ำหนัก (WACC) ของกิจการหรืออัตราขั้นต่ำที่ยอมรับ' }
+      ],
+      references: [
+        { label: 'Investopedia – NPV vs IRR', url: 'https://www.investopedia.com/ask/answers/042415/what-are-differences-between-net-present-value-and-internal-rate-return.asp' }
+      ]
+    }
+  },
+
+  // Finance: Annuity
+  annuity: {
+    GLOBAL: {
+      useCases: [ 'หามูลค่าปัจจุบัน/อนาคตของเงินงวดรายงวด', 'วางแผนเงินบำนาญ/เงินผ่อน' ],
+      howTo: [ 'ใส่ยอดชำระต่อรอบ อัตราดอกเบี้ยต่อรอบ และจำนวนรอบ', 'เลือกชนิด ordinary/due' ],
+      faqs: [ { question: 'Ordinary กับ Annuity due ต่างกัน?', answer: 'Ordinary ชำระท้ายรอบ ส่วน due ชำระต้นรอบ ทำให้มูลค่ามากกว่า' } ],
+      references: [ { label: 'CFA Institute – Time Value of Money', url: 'https://www.cfainstitute.org' } ]
+    }
+  },
+
+  // Finance: Bond Price
+  'bond-price': {
+    GLOBAL: {
+      useCases: [ 'ประเมินราคาพันธบัตรจาก YTM', 'เทียบพรีเมียม/ดิสเคานต์พันธบัตร' ],
+      howTo: [ 'ใส่มูลค่าที่ตราไว้ อัตราคูปอง YTM ปี และอายุคงเหลือ', 'เลือกความถี่คูปอง' ],
+      faqs: [ { question: 'ทำไมราคาเปลี่ยนตาม YTM?', answer: 'ยีลด์สูงขึ้นทำให้มูลค่าปัจจุบันของกระแสเงินสดต่ำลง จึงราคาต่ำลง' } ],
+      references: [ { label: 'Investopedia – Bond Pricing', url: 'https://www.investopedia.com/terms/b/bond-valuation.asp' } ]
+    }
+  },
+
+  // Finance: Bond Yield (YTM)
+  'bond-yield': {
+    GLOBAL: {
+      useCases: [ 'แก้หา YTM จากราคาตลาด', 'เปรียบเทียบยีลด์พันธบัตรต่าง ๆ' ],
+      howTo: [ 'ใส่ราคา มูลค่าที่ตราไว้ อัตราคูปอง อายุ และความถี่คูปอง', 'ระบบจะคำนวณ YTM โดยประมาณ' ],
+      faqs: [ { question: 'YTM คืออะไร?', answer: 'ผลตอบแทนต่อปีโดยสมมติว่าถือจนถึงกำหนดและนำคูปองไปลงทุนซ้ำในอัตราเดียวกัน' } ],
+      references: [ { label: 'FRED – Interest Rates', url: 'https://fred.stlouisfed.org' } ]
+    }
+  },
+
+  // Finance: WACC
+  wacc: {
+    GLOBAL: {
+      useCases: [ 'หาต้นทุนเงินทุนเฉลี่ยถ่วงน้ำหนักของกิจการ', 'ใช้เป็น discount rate สำหรับ NPV' ],
+      howTo: [ 'ใส่น้ำหนัก Equity/Debt/Preferred และต้นทุนของแต่ละส่วน', 'ระบุอัตราภาษีเพื่อคำนวณภาษีของหนี้' ],
+      faqs: [ { question: 'ทำไมต้องปรับภาษีของหนี้?', answer: 'ดอกเบี้ยเป็นค่าใช้จ่ายลดหย่อนภาษี ทำให้ต้นทุนหนี้หลังภาษีต่ำลง' } ],
+      references: [ { label: 'Investopedia – WACC', url: 'https://www.investopedia.com/terms/w/wacc.asp' } ]
+    }
+  },
+
+  // Finance: DSCR
+  dscr: {
+    GLOBAL: {
+      useCases: [ 'ประเมินความสามารถชำระหนี้ของโครงการ/ธุรกิจ', 'ใช้ประกอบการอนุมัติสินเชื่อ' ],
+      howTo: [ 'ใส่ NOI และยอดชำระหนี้ต่อปี', 'ดูค่า DSCR และการตีความเบื้องต้น' ],
+      faqs: [ { question: 'เกณฑ์ DSCR ที่ดีคือเท่าไร?', answer: 'ขึ้นกับสถาบันการเงินและประเภทโครงการ หลายแห่งต้องการ ≥ 1.2' } ],
+      references: [ { label: 'World Bank – Project Finance Basics', url: 'https://www.worldbank.org' } ]
     }
   },
 
@@ -440,6 +612,89 @@ export const FAQ_CONTENT: FaqContentMap = {
   cooking: { GLOBAL: { useCases: ['แปลง tsp/tbsp/cup ↔ mL/L'], howTo: ['เลือกหน่วยจาก/ไป','กรอกค่า'], faqs: [{ question: 'cup เท่ากับกี่ mL?', answer: 'metric ≈ 240 mL' }], references: [{ label: 'Cooking measures', url: 'https://en.wikipedia.org/wiki/Cooking_weights_and_measures' }] }, TH: { useCases: ['แปลงช้อนชา/ช้อนโต๊ะ ↔ mL'], howTo: ['1 ช้อนชา ≈ 5 mL','1 ช้อนโต๊ะ ≈ 15 mL'], faqs: [{ question: 'ช้อนตวงต่างจากช้อนกิน?', answer: 'ต่าง ควรใช้ช้อนตวงมาตรฐาน' }], references: [{ label: 'มาตรวิทยาอาหาร', url: 'https://en.wikipedia.org/wiki/Cooking_weights_and_measures' }] } },
   'blood-sugar': { GLOBAL: { useCases: ['แปลง mg/dL ↔ mmol/L'], howTo: ['ใส่ค่าแล้วเลือกหน่วยเป้าหมาย'], faqs: [{ question: '1 mmol/L = mg/dL?', answer: '≈ 18 mg/dL' }], references: [{ label: 'WHO – Diabetes', url: 'https://www.who.int/health-topics/diabetes' }] }, US: { useCases: ['บันทึกค่าตามหน่วย mg/dL'], howTo: ['กรอก mg/dL แล้วเลือก mmol/L'], faqs: [{ question: 'ค่าปกติ?', answer: 'ขึ้นกับแนวทางแพทย์' }], references: [{ label: 'CDC – Diabetes', url: 'https://www.cdc.gov/diabetes' }] } },
   'fuel-efficiency': { GLOBAL: { useCases: ['แปลง L/100km ↔ km/L ↔ mpg (US)'], howTo: ['เลือกหน่วยและกรอกค่า'], faqs: [{ question: 'ทำไมค่าไม่เท่ากัน?', answer: 'นิยามต่างกัน L/100km (ยิ่งน้อยยิ่งดี) vs mpg (ยิ่งมากยิ่งดี)' }], references: [{ label: 'EPA – Fuel economy', url: 'https://www.fueleconomy.gov' }] }, TH: { useCases: ['เทียบ km/L กับ L/100km'], howTo: ['กรอก km/L แล้วดู L/100km'], faqs: [{ question: 'km/L→mpg?', answer: 'mpg ≈ km/L × 2.352' }], references: [{ label: 'กรมธุรกิจพลังงาน', url: 'https://www.doeb.go.th' }] } }
+  , 'ohms-law': {
+    GLOBAL: {
+      useCases: ['คำนวณ V, I, R, P จากความสัมพันธ์โอห์ม','ตรวจสอบวงจรง่าย ๆ'],
+      howTo: ['กรอกค่ารู้ 2 ตัว เช่น V และ R','เครื่องมือจะคำนวณค่าที่เหลือ'],
+      faqs: [ { question: 'ใช้กับ AC ได้ไหม?', answer: 'สูตรพื้นฐานใช้กับ DC/ค่าทันที ใน AC ซับซ้อนขึ้น (อิมพีแดนซ์)' } ],
+      references: [ { label: 'Wikipedia – Ohm’s law', url: 'https://en.wikipedia.org/wiki/Ohm%27s_law' } ]
+    }
+  }
+  , 'permutation': { GLOBAL: { useCases: ['นับจำนวนการจัดเรียง','ความน่าจะเป็นแบบจัดลำดับ'], howTo: ['ใส่ n และ r','เลือกแบบซ้ำได้/ไม่ได้'], faqs: [{ question: 'ต่างจาก combination?', answer: 'permutation สนลำดับ, combination ไม่สนลำดับ' }], references: [{ label: 'Permutations and combinations', url: 'https://en.wikipedia.org/wiki/Permutation' }] } }
+  , 'combination': { GLOBAL: { useCases: ['นับจำนวนชุดที่เลือก','สถิติ/ความน่าจะเป็น'], howTo: ['ใส่ n และ r','เลือกแบบซ้ำได้/ไม่ได้'], faqs: [{ question: 'ใช้สูตรไหน?', answer: 'nCr = n! / (r!(n-r)!)' }], references: [{ label: 'Binomial coefficient', url: 'https://en.wikipedia.org/wiki/Binomial_coefficient' }] } }
+  , 'z-score': { GLOBAL: { useCases: ['คำนวณคะแนนมาตรฐาน','หาความน่าจะเป็นสะสม'], howTo: ['ใส่ค่า X, mean, sd','อ่านค่า z และ CDF'], faqs: [{ question: 'z ใช้เมื่อไร?', answer: 'เมื่อแจกแจงปกติหรือขนาดตัวอย่างใหญ่' }], references: [{ label: 'Z-score (standard score)', url: 'https://en.wikipedia.org/wiki/Standard_score' }] } }
+  , 'circle-area': { GLOBAL: { useCases: ['หาพื้นที่/เส้นรอบวงจากรัศมี'], howTo: ['ใส่ r','อ่าน πr² และ 2πr'], faqs: [{ question: 'หน่วย?', answer: 'หน่วยพื้นที่เป็นหน่วยกำลังสอง' }], references: [{ label: 'Circle', url: 'https://en.wikipedia.org/wiki/Circle' }] } }
+  , 'triangle-area': { GLOBAL: { useCases: ['หาพื้นที่จากฐานสูงหรือสามด้าน'], howTo: ['เลือกโหมด ฐาน/สูง หรือ 3 ด้าน','กรอกค่าเพื่อคำนวณ'], faqs: [{ question: 'สูตรเฮรอนคือ?', answer: 'A = √(s(s-a)(s-b)(s-c))' }], references: [{ label: 'Heron’s formula', url: 'https://en.wikipedia.org/wiki/Heron%27s_formula' }] } }
+  , gcf: { GLOBAL: { useCases: ['หาตัวหารร่วมมาก','ย่อเศษส่วน'], howTo: ['ใส่จำนวนเต็มหลายตัว','อ่านค่า GCF'], faqs: [{ question: 'ต่างจาก GCD?', answer: 'หมายถึงเรื่องเดียวกัน' }], references: [{ label: 'Greatest common divisor', url: 'https://en.wikipedia.org/wiki/Greatest_common_divisor' }] } }
+  , lcm: { GLOBAL: { useCases: ['หาคูณร่วมน้อย','จัดตารางเวลา/รอบการทำงาน'], howTo: ['ใส่จำนวนเต็มหลายตัว','อ่านค่า LCM'], faqs: [{ question: 'ศูนย์มีผลอย่างไร?', answer: 'ถ้ามีศูนย์ LCM เป็น 0' }], references: [{ label: 'Least common multiple', url: 'https://en.wikipedia.org/wiki/Least_common_multiple' }] } }
+  , age: { GLOBAL: { useCases: ['คำนวณอายุจริง','หานับวัน/ถึงวันเกิดถัดไป'], howTo: ['ใส่วันเกิดและวันอ้างอิง','อ่านผลปี/เดือน/วัน รวมวันทั้งหมด'], faqs: [{ question: 'นับแบบรวมปลายทาง?', answer: 'สามารถเลือกโหมด inclusive ได้ใน Date Difference' }], references: [{ label: 'ISO 8601 – Dates', url: 'https://en.wikipedia.org/wiki/ISO_8601' }] } }
+  , 'date-difference': { GLOBAL: { useCases: ['นับวันระหว่างสองวัน','หาจำนวนสัปดาห์/เดือน/ปี'], howTo: ['ใส่วันเริ่มและวันสิ้นสุด','เลือกนับแบบรวมปลายทางหรือไม่'], faqs: [{ question: 'เดือน/ปีต่างกันเพราะอะไร?', answer: 'จำนวนวันต่อเดือนต่างกัน จึงคำนวณแบบปฏิทิน' }], references: [{ label: 'Date arithmetic', url: 'https://en.wikipedia.org/wiki/Date_arithmetic' }] } }
+  , 'fuel-cost': { GLOBAL: { useCases: ['ประเมินค่าน้ำมันทริป','เปรียบเทียบรถต่างรุ่น'], howTo: ['ใส่ระยะทาง ราคาเชื้อเพลิงต่อ L และอัตราสิ้นเปลือง','เลือกหน่วยประสิทธิภาพเชื้อเพลิง'], faqs: [{ question: 'mpg เทียบ km/L อย่างไร?', answer: 'km/L ≈ mpg × 1.609344 / 3.785411784' }], references: [{ label: 'EPA – Fuel economy', url: 'https://www.fueleconomy.gov' }] } }
+  , 'electricity-bill': { GLOBAL: { useCases: ['ประมาณค่าไฟฟ้ารายเดือน','วางแผนลดการใช้ไฟ'], howTo: ['ใส่หน่วย kWh ต่อเดือน','ใส่ค่า energy rate, Ft, service fee และภาษี'], faqs: [{ question: 'อัตราเป็นขั้นบันได?', answer: 'เครื่องมือนี้เป็นแบบอัตราเดียว หากต้องการขั้นบันได ให้คำนวณเป็นช่วง ๆ' }], references: [{ label: 'Utility tariff basics', url: 'https://en.wikipedia.org/wiki/Electricity_pricing' }] } }
+  , 'download-time': { GLOBAL: { useCases: ['ประเมินเวลาดาวน์โหลดไฟล์','วางแผนรับไฟล์ขนาดใหญ่'], howTo: ['ใส่ขนาดไฟล์ (MB)','ใส่ความเร็วลิงก์และเลือกหน่วย','ตั้งค่า overhead (เช่น 10%)'], faqs: [{ question: 'Mbps กับ MBps ต่างกัน', answer: 'Mbps คือเมกะบิตต่อวินาที; MBps คือเมกะไบต์ต่อวินาที (1 MBps = 8 Mbps)' }], references: [{ label: 'Bandwidth vs Throughput', url: 'https://en.wikipedia.org/wiki/Throughput' }] } }
+  , 'age-gap': { GLOBAL: { useCases: ['คำนวณความต่างอายุคู่รัก/เพื่อนร่วมงาน'], howTo: ['เลือกวันเกิดสองคน','อ่านค่าต่างปี/เดือน/วัน'], faqs: [{ question: 'นับรวมปลายทาง?', answer: 'เป็นความต่างระหว่างวันเกิดสองวันแบบปฏิทิน' }], references: [{ label: 'ISO 8601 – Dates', url: 'https://en.wikipedia.org/wiki/ISO_8601' }] } }
+  , 'random-number': { GLOBAL: { useCases: ['สุ่มตัวเลขสำหรับงานทั่วไป','สุ่มตัวอย่าง'], howTo: ['กำหนดช่วง Min/Max','กำหนดจำนวนและเลือกห้ามซ้ำ'], faqs: [{ question: 'ปลอดภัยเชิงคริปโตหรือไม่?', answer: 'ไม่ เป็น RNG ทั่วไป หากต้องความปลอดภัยใช้แหล่ง CSPRNG' }], references: [{ label: 'Randomness', url: 'https://en.wikipedia.org/wiki/Random_number_generation' }] } }
+  , dice: { GLOBAL: { useCases: ['ทอยเต๋าเล่นเกม RPG/บอร์ดเกม'], howTo: ['กำหนดจำนวนเต๋าและหน้าของเต๋า','เพิ่มตัวปรับ (modifier) หากต้องการ'], faqs: [{ question: 'ยุติธรรมไหม?', answer: 'ใช้ตัวสุ่มทั่วไป ผลใกล้เคียงแบบยุติธรรมในระยะยาว' }], references: [{ label: 'Dice', url: 'https://en.wikipedia.org/wiki/Dice' }] } }
+  , 'coin-flip': { GLOBAL: { useCases: ['สุ่มเลือกอย่างง่าย','จำลองโยนเหรียญหลายครั้ง'], howTo: ['กำหนดจำนวนครั้ง','ดูจำนวนหัว/ก้อย และลำดับผล'], faqs: [{ question: 'โอกาสหัว/ก้อยเท่ากัน?', answer: 'โดยทฤษฎีเท่ากัน 50/50' }], references: [{ label: 'Coin flipping', url: 'https://en.wikipedia.org/wiki/Coin_flipping' }] } }
+  , average: { GLOBAL: { useCases: ['หาค่าเฉลี่ยจากชุดข้อมูล','สรุปตัวเลขหลายรายการ'], howTo: ['ใส่ตัวเลขคั่นด้วยจุลภาค ช่องว่าง หรือบรรทัดใหม่','อ่านผลรวมและค่าเฉลี่ย'], faqs: [{ question: 'ค่าเฉลี่ยไวต่อ outlier ไหม?', answer: 'ไว ควรดู median ร่วมเมื่อมี outlier มาก' }], references: [{ label: 'Mean (average)', url: 'https://en.wikipedia.org/wiki/Mean' }] } }
+  , 'median-mode': { GLOBAL: { useCases: ['สรุปแนวโน้มกึ่งกลางและค่าที่พบบ่อย'], howTo: ['ใส่รายการตัวเลข','อ่าน median และ mode'], faqs: [{ question: 'ถ้ามีหลาย mode?', answer: 'อาจมีหลายค่า พบได้ในข้อมูลหลายกลุ่ม' }], references: [{ label: 'Median', url: 'https://en.wikipedia.org/wiki/Median' }] } }
+  , 'std-dev': { GLOBAL: { useCases: ['วัดการกระจายของข้อมูล','เปรียบเทียบความผันผวน'], howTo: ['ใส่รายการตัวเลข','อ่านค่าเบี่ยงเบนมาตรฐานและความแปรปรวน'], faqs: [{ question: 'ใช้ sample หรือ population?', answer: 'ขึ้นกับบริบท เครื่องมือนี้คำนวณแบบทั่วไปเพื่อการศึกษา' }], references: [{ label: 'Standard deviation', url: 'https://en.wikipedia.org/wiki/Standard_deviation' }] } }
+  , overtime: { GLOBAL: { useCases: ['คำนวณค่าโอทีพนักงานรายชั่วโมง','ประเมินค่าจ้างรวมรายสัปดาห์'], howTo: ['ใส่ชั่วโมงทำงานปกติและชั่วโมง OT','กำหนดอัตรา OT เช่น 1.5x'], faqs: [{ question: 'กฎหมาย OT ต่างประเทศ?', answer: 'แตกต่างตามประเทศ/รัฐ โปรดตรวจข้อกำหนดท้องถิ่น' }], references: [{ label: 'US DOL – Overtime Pay', url: 'https://www.dol.gov/agencies/whd/overtime' }] } }
+  , percentage: { GLOBAL: { useCases: ['คำนวณเปอร์เซ็นต์เพิ่ม/ลด','หาส่วนเป็นเปอร์เซ็นต์'], howTo: ['เลือกโหมด เช่น เพิ่ม/ลด หรือ ส่วนของทั้งหมด','กรอกตัวเลขแล้วอ่านผล'], faqs: [{ question: 'ต่างจากส่วนต่อส่วน?', answer: 'เปอร์เซ็นต์คืออัตราส่วนเทียบกับ 100' }], references: [{ label: 'Percentage', url: 'https://en.wikipedia.org/wiki/Percentage' }] } }
+  , ratio: { GLOBAL: { useCases: ['ทำให้อัตราส่วนเป็นรูปอย่างง่าย','ปรับขยาย/ย่ออัตราส่วน'], howTo: ['ใส่ a:b และตัวคูณ','อ่านผลที่ย่อแล้ว'], faqs: [{ question: 'ย่ออัตราส่วนอย่างไร?', answer: 'หารด้วยตัวประกอบร่วมมาก (GCF)' }], references: [{ label: 'Ratio', url: 'https://en.wikipedia.org/wiki/Ratio' }] } }
+  , exponent: { GLOBAL: { useCases: ['คำนวณเลขยกกำลัง','แก้ปัญหาการเติบโตแบบเอ็กซ์โปเนนเชียล'], howTo: ['ใส่ฐานและชี้กำลัง','อ่านผลลัพธ์'], faqs: [{ question: 'ค่ามากเกินไปโอเวอร์โฟลว์?', answer: 'อาจปัด/จำกัดขนาดตามเบราว์เซอร์' }], references: [{ label: 'Exponentiation', url: 'https://en.wikipedia.org/wiki/Exponentiation' }] } }
+  , logarithm: { GLOBAL: { useCases: ['หาลอการิทึมฐานใด ๆ','แปลงเลขยกกำลังเป็นผลคูณ/ผลบวก'], howTo: ['ใส่ค่า x และฐาน b','ใช้สูตรเปลี่ยนฐาน log_b(x) = ln(x)/ln(b)'], faqs: [{ question: 'ฐาน 10 กับ e ต่างกัน?', answer: 'ฐาน 10 เรียก common log, ฐาน e เรียก natural log (ln)' }], references: [{ label: 'Logarithm', url: 'https://en.wikipedia.org/wiki/Logarithm' }] } }
+  , countdown: { GLOBAL: { useCases: ['นับถอยหลังกิจกรรม/เดดไลน์'], howTo: ['กำหนดวันเวลาเป้าหมาย','แสดงเวลาที่เหลือเป็น d/h/m/s'], faqs: [{ question: 'โซนเวลา?', answer: 'อิงเขตเวลาของเบราว์เซอร์ผู้ใช้' }], references: [{ label: 'Timekeeping', url: 'https://en.wikipedia.org/wiki/Time' }] } }
+  , 'website-bandwidth': { GLOBAL: { useCases: ['ประมาณแบนด์วิดธ์เว็บและทราฟฟิก','วางแผนโควต้าโฮสติ้ง/CDN'], howTo: ['ใส่น้ำหนักหน้าเว็บ (MB)','ใส่จำนวน visits/เดือน และ pages/visit','กำหนด headroom'], faqs: [{ question: 'CDN มีผลอย่างไร?', answer: 'ช่วยลดโหลดเซิร์ฟเวอร์ต้นทาง ปรับ page weight ให้สะท้อน cache hit จริง' }], references: [{ label: 'Web performance', url: 'https://web.dev/fast/' }] } }
+  , 'data-transfer': { GLOBAL: { useCases: ['คำนวณอัตราโอนข้อมูลเฉลี่ย','ประเมินเวลา/ความเร็วที่ต้องใช้'], howTo: ['ใส่ขนาดข้อมูลและระยะเวลา'], faqs: [{ question: 'MB/s กับ Mbps?', answer: '1 MB/s = 8 Mbps' }], references: [{ label: 'Networking basics', url: 'https://en.wikipedia.org/wiki/Throughput' }] } }
+  , 'streaming-bandwidth': { GLOBAL: { useCases: ['วางแผนกำลังส่งสำหรับสตรีม','ประเมินค่าส่งออกรายเดือน'], howTo: ['ใส่ bitrate และจำนวนผู้ชมพร้อมกัน','เพิ่ม headroom'], faqs: [{ question: 'ABR ทำอย่างไร?', answer: 'ใช้ค่าเฉลี่ยถ่วงน้ำหนักตามสัดส่วนความละเอียดที่ใช้จริง' }], references: [{ label: 'Adaptive bitrate streaming', url: 'https://en.wikipedia.org/wiki/Adaptive_bitrate_streaming' }] } }
+  , 'api-usage': { GLOBAL: { useCases: ['ประเมินค่าบริการ API','ประมาณ compute time รวม'], howTo: ['ใส่จำนวน request/เดือนและราคา/1,000','ใส่ latency เฉลี่ย'], faqs: [{ question: 'ฟรีทีเยอร์?', answer: 'หักโควตาฟรีก่อนคำนวณค่าใช้จ่ายจริง' }], references: [{ label: 'API pricing examples', url: 'https://openai.com/pricing' }] } }
+  , salary: { GLOBAL: { useCases: ['คำนวณเงินเดือนสุทธิ','วางแผนภาษี/ประกันสังคม'], howTo: ['ใส่รายได้ต่อปี','ปรับอัตราส่งประกันสังคม/กองทุนตามประเทศ'], faqs: [{ question: 'อัตราภาษี?', answer: 'ขึ้นกับประเทศ ใช้วงเล็บภาษีพื้นฐานเป็นค่าเริ่มต้น' }], references: [{ label: 'OECD – Taxing wages', url: 'https://www.oecd.org/tax/tax-policy/taxing-wages.htm' }] } }
+  , retirement: { GLOBAL: { useCases: ['ประมาณเงินเกษียณ','ดูผลของอัตราถอน 4%'], howTo: ['ใส่อายุ เงินออม รายเดือน อัตราผลตอบแทน/เงินเฟ้อ','อ่านมูลค่าอนาคตและรายได้ที่คาด'], faqs: [{ question: 'ปลอดภัยแค่ไหน 4%?', answer: 'เป็นกฎทั่วไป ไม่รับประกันระยะยาว ขึ้นกับตลาด' }], references: [{ label: 'Trinity Study (safe withdrawal rate)', url: 'https://en.wikipedia.org/wiki/Trinity_study' }] } }
+  , '401k': { GLOBAL: { useCases: ['วางแผนเงินออมพร้อมเงินสมทบบริษัท'], howTo: ['ใส่อัตราออมพนักงานและอัตราสมทบ/เพดาน','ดูยอดเงินปลายทาง'], faqs: [{ question: 'ข้อจำกัดเพดาน?', answer: 'มีเพดานรายปีและเงื่อนไขภาษี ตรวจสอบกับ IRS' }], references: [{ label: 'IRS – 401(k) resource', url: 'https://www.irs.gov/retirement-plans/plan-sponsor/401k-plan' }] } }
+  , 'roth-ira': { GLOBAL: { useCases: ['ประเมินการเติบโตของ Roth IRA'], howTo: ['ใส่เงินออมปัจจุบันและออมต่อปี','กำหนดอัตราผลตอบแทนและจำนวนปี'], faqs: [{ question: 'ขีดจำกัด/เงื่อนไขอะไรบ้าง?', answer: 'มีเพดานเงินออมและ phase-out ตามรายได้ ตรวจสอบกับ IRS' }], references: [{ label: 'IRS – Roth IRA', url: 'https://www.irs.gov/retirement-plans/roth-iras' }] } }
+  , 'currency-arbitrage': { GLOBAL: { useCases: ['ทดสอบอาร์บิทราจสามสกุล','ดูผลตอบแทนหลังหักค่าธรรมเนียม'], howTo: ['ใส่อัตรา A→B, B→C, C→A และค่าธรรมเนียม','อ่านกำไร/ROI'], faqs: [{ question: 'ทำได้จริงไหม?', answer: 'ตลาดจริงมีสเปรด/สลิปเพจ ทำให้โอกาสลดลง' }], references: [{ label: 'Triangular arbitrage', url: 'https://en.wikipedia.org/wiki/Triangular_arbitrage' }] } }
+  , 'simple-interest': {
+    GLOBAL: {
+      useCases: [ 'คำนวณดอกเบี้ยแบบง่ายสำหรับเงินกู้ระยะสั้น', 'ประเมินดอกเบี้ยเงินกู้ที่คิดแบบ I = P×r×t' ],
+      howTo: [ 'ใส่เงินต้น (P)', 'ใส่อัตราดอกเบี้ยต่อปี (r)', 'ใส่ระยะเวลาเป็นปี (t)', 'ดูดอกเบี้ย (I) และยอดรวม (P+I)' ],
+      faqs: [
+        { question: 'Simple interest ต่างจาก compound interest อย่างไร?', answer: 'Simple interest คิดดอกเฉพาะจากเงินต้นเดิมเท่านั้น ส่วน compound interest ทบต้น ดอกทบดอก' },
+        { question: 'ควรใช้เมื่อไร?', answer: 'มักใช้กับเงินกู้ระยะสั้น สินเชื่อรายย่อย หรือกรณีที่ไม่ทบต้นตามรอบ' }
+      ],
+      references: [
+        { label: 'Investopedia – Simple Interest', url: 'https://www.investopedia.com/terms/s/simple_interest.asp' }
+      ]
+    },
+    TH: {
+      useCases: [ 'คำนวณดอกเบี้ยกู้ยืมส่วนบุคคลที่ไม่ทบต้น', 'เปรียบเทียบกับดอกเบี้ยทบต้นเพื่อเห็นผลต่าง' ],
+      howTo: [ 'กรอกเงินต้น อัตราต่อปี และเวลาเป็นปี', 'อ่านค่าดอกเบี้ยและยอดรวม' ],
+      faqs: [ { question: 'อัตราดอกเบี้ยรายเดือนทำอย่างไร?', answer: 'แปลงอัตรารายเดือนเป็นรายปีโดยคูณ 12 (สำหรับ simple interest)' } ],
+      references: [ { label: 'ธนาคารแห่งประเทศไทย – อัตราดอกเบี้ยพื้นฐาน', url: 'https://www.bot.or.th' } ]
+    }
+  }
+  , 'apr-apy': {
+    GLOBAL: {
+      useCases: [ 'แปลง APR เป็น APY หรือกลับกัน', 'เทียบอัตราระหว่างธนาคาร/กองทุนที่คอมพาวด์ต่างกัน' ],
+      howTo: [ 'เลือกโหมด APR→APY หรือ APY→APR', 'กรอกอัตรา', 'เลือกจำนวนครั้งที่ทบต่อปี (m)', 'อ่านผลลัพธ์' ],
+      faqs: [
+        { question: 'APR กับ APY ต่างกัน?', answer: 'APR คืออัตราต่อปีแบบไม่ทบต้น ส่วน APY คืออัตราผลตอบแทนที่แท้จริงเมื่อคำนึงถึงการทบต้น' },
+        { question: 'ควรใช้ค่า m เท่าไร?', answer: 'ขึ้นกับผลิตภัณฑ์การเงิน เช่น รายเดือน m=12, รายไตรมาส m=4, รายวัน m=365' }
+      ],
+      references: [ { label: 'Investopedia – APY vs APR', url: 'https://www.investopedia.com/ask/answers/040115/what-difference-between-annual-percentage-rate-apr-and-apy.asp' } ]
+    }
+  }
+  , 'rule-72': {
+    GLOBAL: {
+      useCases: [ 'ประมาณเวลาที่เงินจะเพิ่มเป็นสองเท้าอย่างรวดเร็ว', 'ประมาณอัตราที่ต้องการเพื่อให้เงินเพิ่มเป็นสองเท้าภายในเวลาที่กำหนด' ],
+      howTo: [ 'เลือกว่าจะหาเวลาหรือหาอัตรา', 'ใส่อัตราเป็น % ต่อปีหรือจำนวนปี', 'อ่านผลจากสูตร 72 ÷ อัตรา% หรือ 72 ÷ ปี' ],
+      faqs: [
+        { question: 'ความแม่นยำเป็นอย่างไร?', answer: 'แม่นยำโดยประมาณสำหรับอัตรา 6–10% หากอัตราเบี่ยงมาก ควรใช้สูตรทบต้นจริง' },
+        { question: 'ทำไมใช้เลข 72?', answer: '72 แบ่งลงตัวด้วยหลายจำนวน (2,3,4,6,8,9,12) จึงสะดวกในการคำนวณคร่าว ๆ' }
+      ],
+      references: [ { label: 'Investopedia – Rule of 72', url: 'https://www.investopedia.com/terms/r/ruleof72.asp' } ]
+    }
+  }
 };
 
 export const COUNTRY_LABELS: Record<CountryCode, string> = {
