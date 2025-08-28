@@ -13,8 +13,8 @@ export async function generateMetadata({ params }: { params: { lang: string } })
   const origin = process.env.NEXT_PUBLIC_SITE_URL || 'https://example.com';
   const basePath = process.env.NEXT_PUBLIC_BASE_PATH || '';
   return {
-    title: `BMI Calculator – ${year}`,
-    description: `Body Mass Index (BMI) calculator based on WHO categories.`,
+    title: `BMI Calculator – ${year} | BwnX`,
+    description: `BMI with region‑specific (Asia/Global) thresholds, examples, and FAQs.`,
     alternates: { canonical: `${origin}${basePath}/${lang}/bmi` }
   };
 }

@@ -4,9 +4,9 @@ export const SUPPORTED_LANGS: LangCode[] = ['en','es','pt','de','fr','ja','ko','
 
 const dict: Record<LangCode, Record<string, string>> = {
   en: {
-    siteTitle: 'Finance Hub',
-    tagline: 'Clear calculators for smarter money decisions',
-    hubIntro: 'Explore our free calculators to estimate payments, taxes, and premiums.',
+    siteTitle: 'BwnX Free Calculator',
+    tagline: 'Beautiful, fast calculators for everyone',
+    hubIntro: 'Explore free, localized calculators for finance, health, science, and more.',
     loan: 'Loan',
     mortgage: 'Mortgage',
     tax: 'Tax',
@@ -201,7 +201,7 @@ const dict: Record<LangCode, Record<string, string>> = {
     ,relatedCalcs: 'Related calculators'
   },
   es: {
-    siteTitle: 'Centro Financiero',
+    siteTitle: 'BwnX Calculadora',
     tagline: 'Calculadoras claras para decisiones inteligentes',
     hubIntro: 'Explora nuestras calculadoras gratuitas para estimar pagos, impuestos y primas.',
     loan: 'Préstamo',
@@ -243,7 +243,7 @@ const dict: Record<LangCode, Record<string, string>> = {
     navInsurance: 'Seguro'
   },
   pt: {
-    siteTitle: 'Hub Financeiro',
+    siteTitle: 'BwnX Calculadora',
     tagline: 'Calculadoras claras para decisões melhores',
     hubIntro: 'Explore calculadoras gratuitas para estimar pagamentos, impostos e prêmios.',
     loan: 'Empréstimo',
@@ -285,7 +285,7 @@ const dict: Record<LangCode, Record<string, string>> = {
     navInsurance: 'Seguro'
   },
   de: {
-    siteTitle: 'Finanz‑Hub',
+    siteTitle: 'BwnX Rechner',
     tagline: 'Klare Rechner für bessere Entscheidungen',
     hubIntro: 'Kostenlose Rechner für Zahlungen, Steuern und Prämien.',
     loan: 'Kredit',
@@ -327,7 +327,7 @@ const dict: Record<LangCode, Record<string, string>> = {
     navInsurance: 'Versicherung'
   },
   fr: {
-    siteTitle: 'Hub Finance',
+    siteTitle: 'BwnX Calculateur',
     tagline: 'Calculatrices claires pour de meilleures décisions',
     hubIntro: 'Explorez nos calculatrices gratuites pour paiements, impôts et primes.',
     loan: 'Prêt',
@@ -372,7 +372,7 @@ const dict: Record<LangCode, Record<string, string>> = {
   ko: { ...{} as any },
   zh: { ...{} as any },
   th: {
-    siteTitle: 'ศูนย์รวมการเงิน',
+    siteTitle: 'BwnX เครื่องคิดเลขฟรี',
     tagline: 'เครื่องคิดเลขที่ชัดเจนเพื่อการตัดสินใจทางการเงินที่ดีกว่า',
     hubIntro: 'สำรวจเครื่องคิดเลขฟรีเพื่อคำนวณค่างวด ภาษี และเบี้ยประกัน',
     loan: 'เงินกู้',

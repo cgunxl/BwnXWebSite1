@@ -2,6 +2,8 @@ import Link from 'next/link';
 import type { Metadata } from 'next';
 import { getAllLocales, t } from '@/lib/i18n';
 import { getAllCountries } from '@/lib/countries';
+import { REGISTRY } from '@/lib/registry';
+import { useState } from 'react';
 
 export const revalidate = 86400;
 
@@ -28,63 +30,35 @@ export async function generateMetadata({ params }: { params: { lang: string } })
 
 export default function HubPage({ params }: { params: { lang: string } }) {
   const { lang } = params;
+  const recommended = REGISTRY.slice(0, 30);
+  const [modal, setModal] = useState<{ title: string; content: string } | null>(null) as any;
   return (
     <div className="page-enter page-enter-active">
       <h1 style={{marginBottom: 6}}>{t(lang, 'siteTitle')}</h1>
       <p className="muted" style={{marginTop: 0}}>{t(lang, 'hubIntro')}</p>
 
       <div className="card-grid" style={{marginTop: 16}}>
-        <div className="card">
-          <h2>{t(lang, 'loanCalc')}</h2>
-          <p>{t(lang, 'loan')}: Estimate monthly payment and interest for an amortizing loan.</p>
-          <Link className="button" href={`/${lang}/loan`} style={{display:'inline-block', marginTop: 8}}>{t(lang, 'explore')}</Link>
-        </div>
-        <div className="card">
-          <h2>{t(lang, 'mortgageCalc')}</h2>
-          <p>{t(lang, 'mortgage')}: Model payments and include optional closing costs.</p>
-          <Link className="button" href={`/${lang}/mortgage`} style={{display:'inline-block', marginTop: 8}}>{t(lang, 'explore')}</Link>
-        </div>
-        <div className="card">
-          <h2>{t(lang, 'taxCalc')}</h2>
-          <p>{t(lang, 'tax')}: Progressive tax estimate with total tax and effective rate.</p>
-          <Link className="button" href={`/${lang}/tax`} style={{display:'inline-block', marginTop: 8}}>{t(lang, 'explore')}</Link>
-        </div>
-        <div className="card">
-          <h2>{t(lang, 'insuranceCalc')}</h2>
-          <p>{t(lang, 'insurance')}: Estimate annual premium from insured amount and rate.</p>
-          <Link className="button" href={`/${lang}/insurance`} style={{display:'inline-block', marginTop: 8}}>{t(lang, 'explore')}</Link>
-        </div>
-        <div className="card">
-          <h2>{t(lang, 'vatCalc')}</h2>
-          <p>Compute VAT from net or gross and net VAT payable.</p>
-          <Link className="button" href={`/${lang}/vat`} style={{display:'inline-block', marginTop: 8}}>{t(lang, 'explore')}</Link>
-        </div>
-        <div className="card">
-          <h2>{t(lang, 'paycheckCalc')}</h2>
-          <p>Estimate take‑home pay after income tax and social contributions.</p>
-          <Link className="button" href={`/${lang}/paycheck`} style={{display:'inline-block', marginTop: 8}}>{t(lang, 'explore')}</Link>
-        </div>
-        <div className="card">
-          <h2>{t(lang, 'currencyConverter')}</h2>
-          <p>Convert between currencies with live ECB reference rates.</p>
-          <Link className="button" href={`/${lang}/currency`} style={{display:'inline-block', marginTop: 8}}>{t(lang, 'explore')}</Link>
-        </div>
-        <div className="card">
-          <h2>{t(lang, 'compoundCalc')}</h2>
-          <p>Project future value with compounding and regular contributions.</p>
-          <Link className="button" href={`/${lang}/compound`} style={{display:'inline-block', marginTop: 8}}>{t(lang, 'explore')}</Link>
-        </div>
-        <div className="card">
-          <h2>{t(lang, 'savingsGoalCalc')}</h2>
-          <p>How much to save per period to reach a target amount.</p>
-          <Link className="button" href={`/${lang}/savings-goal`} style={{display:'inline-block', marginTop: 8}}>{t(lang, 'explore')}</Link>
-        </div>
-        <div className="card">
-          <h2>{t(lang, 'creditCardCalc')}</h2>
-          <p>Credit card payoff time and total interest given APR and payment.</p>
-          <Link className="button" href={`/${lang}/credit-card`} style={{display:'inline-block', marginTop: 8}}>{t(lang, 'explore')}</Link>
-        </div>
+        {recommended.map((r, idx) => (
+          <div key={r.id} className="card" style={{ animationDelay: `${idx*20}ms` }}>
+            <h2>{t(lang, r.titleKey)}</h2>
+            <p className="muted" style={{marginTop: 4}}>{r.description}</p>
+            <div style={{ display:'flex', gap: 8, flexWrap: 'wrap', marginTop: 8 }}>
+              <Link className="button" href={r.path(lang) as any}>{t(lang, 'explore')}</Link>
+              <button className="button ghost" onClick={() => setModal({ title: t(lang, r.titleKey), content: `${t(lang, 'howToUse')}: ${r.keywords.slice(0,3).join(', ')}` })}>How to</button>
+            </div>
+          </div>
+        ))}
       </div>
+
+      {modal ? (
+        <div role="dialog" aria-modal="true" className="modal" onClick={() => setModal(null as any)}>
+          <div className="modal-inner" onClick={(e) => e.stopPropagation()}>
+            <h3 style={{ marginTop: 0 }}>{modal.title}</h3>
+            <p>{modal.content}</p>
+            <button className="button" onClick={() => setModal(null as any)}>Close</button>
+          </div>
+        </div>
+      ) : null}
 
       <section className="card" style={{marginTop: 16}}>
         <h2>Browse by country</h2>

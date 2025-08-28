@@ -21,8 +21,8 @@ export async function generateMetadata({ params }: { params: { lang: string } })
   );
   languages['x-default'] = `${origin}${basePath}/en/loan`;
   return {
-    title: `${t(lang, 'loanCalc')} – ${year}`,
-    description: `${t(lang, 'loanCalc')} to estimate monthly payments, total, and interest.`,
+    title: `${t(lang, 'loanCalc')} – ${year} | BwnX`,
+    description: `${t(lang, 'loanCalc')} to estimate monthly payments, amortization, and total interest with CSV schedule.`,
     alternates: { canonical: url, languages }
   };
 }

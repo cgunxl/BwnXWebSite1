@@ -1,13 +1,14 @@
 import type { MetadataRoute } from 'next';
 import { getAllLocales } from '@/lib/i18n';
 import { getAllCountries } from '@/lib/countries';
+import { REGISTRY } from '@/lib/registry';
 
 export const revalidate = 86400;
 
 function buildUrls(origin: string, basePath: string) {
   const langs = getAllLocales();
   const countries = getAllCountries();
-  const paths = ['', 'loan', 'mortgage', 'tax', 'insurance', 'vat', 'paycheck', 'currency', 'compound', 'savings-goal', 'credit-card', 'car-loan', 'property-tax', 'inflation', 'roi', 'cagr', 'stock-return', 'dividend', 'tip', 'discount', 'sales-tax', 'crypto-profit', 'bitcoin-mining', 'eth-gas', 'nft-profit', 'sip', 'mutual-fund', 'hourly-wage', 'overtime', 'freelancer-rate', 'business-loan', 'refinance', 'debt-payoff', 'amortization', 'lease', 'break-even', 'profit-margin', 'markup', 'bmi', 'bmr', 'tdee', 'calorie', 'macro', 'protein-intake', 'water-intake', 'ideal-weight', 'body-fat', 'running-pace', 'marathon-time', 'vo2max', 'heart-rate', 'target-hr', 'bac', 'sleep', 'cholesterol-ratio', 'length', 'weight', 'temperature', 'speed', 'area', 'volume', 'energy', 'power', 'pressure', 'time', 'frequency', 'angle', 'cooking', 'blood-sugar', 'fuel-efficiency', 'average', 'median-mode', 'std-dev', 'percentage', 'ratio', 'factorial', 'prime', 'exponent', 'logarithm', 'pregnancy-due-date', 'ovulation', 'conception', 'pregnancy-weight-gain', 'npv-irr', 'ebitda-margin', 'enterprise-value', 'rent-vs-buy', 'annuity-vs-lump-sum', 'pension', 'payday-loan', 'tuition-loan', 'roi-marketing', 'cac', 'ltv-customer', 'churn-rate', 'conversion-rate', 'subscription-revenue', 'cpm', 'affiliate-earnings', 'privacy', 'terms', 'contact'];
+  const paths = ['', ...REGISTRY.map(r => r.path(':lang').replace('/:lang','').replace(/^\//,'')), 'privacy', 'terms', 'contact'];
   const urls: string[] = [];
   for (const lang of langs) {
     for (const country of countries) {
