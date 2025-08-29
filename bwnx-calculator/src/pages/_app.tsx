@@ -1,6 +1,11 @@
 import "@/styles/globals.css";
-import type { AppProps } from "next/app";
+import { NextIntlClientProvider } from "next-intl";
+import { AppProps } from "next/app";
 
-export default function App({ Component, pageProps }: AppProps) {
-  return <Component {...pageProps} />;
+export default function MyApp({ Component, pageProps }: AppProps & { pageProps: { messages?: any } }) {
+  return (
+    <NextIntlClientProvider messages={pageProps.messages || {}}>
+      <Component {...pageProps} />
+    </NextIntlClientProvider>
+  );
 }
