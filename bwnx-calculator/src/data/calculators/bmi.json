@@ -1,0 +1,29 @@
+{
+  "id": "bmi",
+  "slug": "bmi-calculator",
+  "category": "health",
+  "component": "BMICalculator",
+  "locales": {
+    "en": {
+      "name": "BMI Calculator",
+      "description": "Calculate your Body Mass Index and understand your weight category.",
+      "keywords": ["BMI", "Body Mass Index", "BMI Calculator", "Weight"],
+      "faq": [
+        {"question": "What is BMI?", "answer": "Body Mass Index (BMI) is a measure that uses your height and weight to work out if your weight is healthy."},
+        {"question": "How is BMI calculated?", "answer": "BMI = weight(kg) / [height(m)]²"}
+      ],
+      "example": "If you are 170 cm tall and weigh 70 kg, your BMI is 24.2."
+    },
+    "th": {
+      "name": "เครื่องคำนวณ BMI",
+      "description": "คำนวณดัชนีมวลกาย (BMI) และดูหมวดน้ำหนักของคุณ",
+      "keywords": ["BMI", "ดัชนีมวลกาย", "เครื่องคำนวณ BMI", "น้ำหนัก"],
+      "faq": [
+        {"question": "BMI คืออะไร?", "answer": "BMI (Body Mass Index) คือดัชนีที่ใช้ส่วนสูงและน้ำหนักในการประเมินว่าอยู่ในเกณฑ์น้ำหนักใด"},
+        {"question": "คำนวณ BMI อย่างไร?", "answer": "BMI = น้ำหนัก(กก.) / [ส่วนสูง(ม.)]²"}
+      ],
+      "example": "หากคุณสูง 170 ซม. หนัก 70 กก. BMI ของคุณคือ 24.2"
+    }
+  },
+  "related": ["calorie-intake", "ideal-weight"]
+}
