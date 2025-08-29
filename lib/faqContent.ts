@@ -613,16 +613,20 @@ export const FAQ_CONTENT: FaqContentMap = {
   // Tax: VAT/Sales Tax
   'sales-tax': {
     GLOBAL: {
-      useCases: [ 'คำนวณภาษีขายจากราคาสินค้า', 'แยกราคา net/gross' ],
-      howTo: [ 'ใส่อัตราภาษีและราคาสินค้า', 'เลือกว่าเพิ่มภาษีหรือแยกภาษีออก' ],
+      useCases: [ 'คำนวณภาษีขายจากราคาสินค้า', 'แยกราคา net/gross', 'ดู Effective tax เมื่อมีหลายระดับอัตรา' ],
+      howTo: [ 'ใส่อัตราภาษีและราคาสินค้า', 'เลือกว่าเพิ่มภาษีหรือแยกภาษีออก', 'ในบางประเทศ พิจารณาอัตราท้องถิ่นเพิ่มเติม' ],
       faqs: [ { question: 'ภาษีขายกับ VAT ต่างกันไหม?', answer: 'ต่างตามประเทศ: บางที่ใช้ Sales Tax ปลายทาง ผู้ขายเก็บ บางที่ใช้ VAT แบบเครดิตภาษีหักได้' } ],
-      references: [ { label: 'OECD – Consumption taxes', url: 'https://www.oecd.org/tax/consumption-tax/' } ]
+      references: [ { label: 'OECD – Consumption taxes', url: 'https://www.oecd.org/tax/consumption-tax/' } ],
+      keywords: ['sales tax calculator','net to gross','tax inclusive price','consumption tax'],
+      seoHtml: '<h2>Sales tax vs VAT</h2><p>Sales tax is typically applied once at the final sale to consumers, while VAT applies at each stage with input tax credits. This tool helps compute tax from either net or tax-inclusive price.</p>'
     },
     US: {
       useCases: [ 'คำนวณ sales tax รายรัฐ/ท้องถิ่น', 'ราคาหลังรวมภาษี' ],
       howTo: [ 'ใส่อัตราภาษีตามรัฐ/เมือง', 'พิจารณา taxability ของสินค้า' ],
       faqs: [ { question: 'อัตราต่างเมืองต่างกัน?', answer: 'ใช่ มีทั้งอัตรารัฐ มณฑล เมือง และพิเศษ' } ],
-      references: [ { label: 'Tax Foundation – State and Local Sales Tax Rates', url: 'https://taxfoundation.org' } ]
+      references: [ { label: 'Tax Foundation – State and Local Sales Tax Rates', url: 'https://taxfoundation.org' } ],
+      keywords: ['state sales tax','local tax','us sales tax'],
+      seoHtml: '<h2>U.S. combined rates</h2><p>Combined sales tax includes state, county, city and district add-ons. Merchants must charge the destination rate for shipped orders in many states.</p>'
     },
     TH: {
       useCases: [ 'คำนวณ VAT 7% จากราคาสินค้า', 'คำนวณยอด VAT ที่ต้องชำระ' ],
@@ -655,10 +659,12 @@ export const FAQ_CONTENT: FaqContentMap = {
   // Finance: VAT (Value Added Tax)
   vat: {
     GLOBAL: {
-      useCases: [ 'คำนวณ VAT จากราคา net/gross', 'ประเมิน VAT ที่ต้องชำระสุทธิ' ],
-      howTo: [ 'ใส่อัตรา VAT และราคา', 'เลือกเพิ่ม VAT หรือแยก VAT ออกจากราคา' ],
+      useCases: [ 'คำนวณ VAT จากราคา net/gross', 'ประเมิน VAT ที่ต้องชำระสุทธิ (output – input)' ],
+      howTo: [ 'ใส่อัตรา VAT และราคา', 'เลือกเพิ่ม VAT หรือแยก VAT ออกจากราคา', 'กรณีผู้ประกอบการ ใส่ VAT ขาเข้าเพื่อคำนวณชำระสุทธิ' ],
       faqs: [ { question: 'VAT กับ Sales Tax ต่างกัน?', answer: 'VAT เก็บเป็นขั้นตอนและเครดิตภาษีได้ ส่วน Sales Tax เก็บครั้งสุดท้ายกับผู้บริโภค' } ],
-      references: [ { label: 'OECD – Value Added Tax (VAT)', url: 'https://www.oecd.org/tax/consumption-tax/' } ]
+      references: [ { label: 'OECD – Value Added Tax (VAT)', url: 'https://www.oecd.org/tax/consumption-tax/' } ],
+      keywords: ['vat calculator','net to gross','input tax credit','output tax'],
+      seoHtml: '<h2>หลักการ VAT</h2><p>VAT จัดเก็บในทุกขั้นของห่วงโซ่อุปทาน ผู้ประกอบการนำ VAT ขาเข้ามาหักออกจาก VAT ขาออก เหลือเป็น VAT ชำระสุทธิ</p>'
     },
     TH: {
       useCases: [ 'คำนวณ VAT 7% สำหรับไทย', 'คำนวน VAT ชำระสุทธิ (output - input)' ],
@@ -751,10 +757,15 @@ export const FAQ_CONTENT: FaqContentMap = {
   // Finance: Credit Card Interest
   'credit-card': {
     GLOBAL: {
-      useCases: [ 'คำนวณดอกเบี้ยบัตรเครดิต', 'ประมาณเวลาปลดหนี้ตามยอดชำระต่อเดือน' ],
-      howTo: [ 'ใส่ยอดคงค้าง อัตรา APR และยอดชำระ', 'ดูดอกเบี้ยรวมและเวลาปลดหนี้' ],
-      faqs: [ { question: 'ชำระขั้นต่ำดีไหม?', answer: 'ไม่ควรหากทำได้ เพราะดอกเบี้ยสะสมสูง ใช้ยอดชำระสูงขึ้นเพื่อลดดอกเบี้ย' } ],
-      references: [ { label: 'Investopedia – Credit Card Interest', url: 'https://www.investopedia.com/terms/c/creditcardinterest.asp' } ]
+      useCases: [ 'คำนวณดอกเบี้ยบัตรเครดิต', 'ประมาณเวลาปลดหนี้ตามยอดชำระต่อเดือน', 'จำลอง snowball/avalanche เบื้องต้น (ทีละใบ)' ],
+      howTo: [ 'ใส่ยอดคงค้าง อัตรา APR และยอดชำระ', 'ดูดอกเบี้ยรวมและเวลาปลดหนี้', 'เพิ่มยอดชำระเพื่อดูผลกระทบ' ],
+      faqs: [
+        { question: 'ชำระขั้นต่ำดีไหม?', answer: 'ไม่ควรหากทำได้ เพราะดอกเบี้ยสะสมสูง ใช้ยอดชำระสูงขึ้นเพื่อลดดอกเบี้ยรวม' },
+        { question: 'APR ต่างจากดอกเบี้ยรายวัน?', answer: 'ผู้ออกบัตรมักคิดดอกเบี้ยรายวันจาก APR/365 (หรือ 360) แล้วสะสมตลอดรอบบิล' }
+      ],
+      references: [ { label: 'Investopedia – Credit Card Interest', url: 'https://www.investopedia.com/terms/c/creditcardinterest.asp' } ],
+      keywords: ['credit card calculator','APR interest','payoff time','minimum payment'],
+      seoHtml: '<h2>เข้าใจ APR และการคิดดอกเบี้ย</h2><p>ดอกบัตรเครดิตคำนวณจาก APR รายปีที่ถูกเฉลี่ยเป็นรายวันและคูณกับยอดคงค้าง หากชำระเพียงขั้นต่ำ ยอดดอกจะสะสมและยืดเวลาปลดหนี้</p>'
     },
     US: {
       useCases: [ 'ประมาณดอกเบี้ยตาม APR และค่าธรรมเนียม', 'จำลองผลจากยอดชำระเพิ่ม' ],
