@@ -48,6 +48,42 @@ export const FAQ_CONTENT: FaqContentMap = {
     }
   },
 
+  // Work/Income: Hourly Wage
+  'hourly-wage': {
+    GLOBAL: {
+      useCases: [ 'แปลงค่าจ้างรายชั่วโมงเป็นรายปี/รายเดือน', 'เทียบรายได้กับค่าใช้จ่ายคงที่' ],
+      howTo: [ 'ใส่อัตรารายชั่วโมง', 'กำหนดชั่วโมง/สัปดาห์ และสัปดาห์/ปี', 'อ่านรายได้ต่อเดือน/ปี' ],
+      faqs: [ { question: 'OT รวมไหม?', answer: 'ส่วนนี้คำนวณจากชั่วโมงปกติเท่านั้น เพิ่ม OT ในเครื่องคำนวณ Overtime แยก' } ],
+      references: [ { label: 'US DOL – Wages', url: 'https://www.dol.gov' } ],
+      keywords: ['hourly to annual','hourly wage calculator','annualized income'],
+      seoHtml: '<h2>คำนวณรายได้จากอัตรารายชั่วโมง</h2><p>ช่วยประมาณรายได้ต่อเดือน/ปีจากอัตรารายชั่วโมง โดยกำหนดชั่วโมงต่อสัปดาห์และจำนวนสัปดาห์ต่อปี</p>'
+    }
+  },
+
+  // Work/Income: Overtime
+  overtime: {
+    GLOBAL: {
+      useCases: [ 'คำนวณค่า OT และรายได้รวมรายสัปดาห์', 'เทียบผลของอัตรา OT 1.5x/2x' ],
+      howTo: [ 'ใส่อัตราปกติและชั่วโมงปกติ', 'ใส่ชั่วโมง OT และตัวคูณ', 'อ่านรายได้รวม' ],
+      faqs: [ { question: 'OT คิดอย่างไร?', answer: 'หลายประเทศใช้อัตรา 1.5x หลังชั่วโมงเกณฑ์ ตรวจสอบกฎหมายท้องถิ่น' } ],
+      references: [ { label: 'US DOL – Overtime Pay', url: 'https://www.dol.gov/agencies/whd/overtime' } ],
+      keywords: ['overtime calculator','1.5x pay','weekly pay'],
+      seoHtml: '<h2>ค่าแรงล่วงเวลา</h2><p>ปรับตัวคูณ OT เพื่อดูผลต่อรายได้รวมรายสัปดาห์อย่างรวดเร็ว</p>'
+    }
+  },
+
+  // Freelance: Rate
+  'freelancer-rate': {
+    GLOBAL: {
+      useCases: [ 'ตั้งเรทรายชั่วโมงจากต้นทุนและเป้ารายได้', 'เทียบ utilization และวันลาพัก' ],
+      howTo: [ 'ใส่รายได้เป้าหมาย/ปี', 'กำหนดชั่วโมงบิลต่อปี', 'คำนวณเรทขั้นต่ำต่อชั่วโมง' ],
+      faqs: [ { question: 'Utilization คืออะไร?', answer: 'สัดส่วนชั่วโมงที่บิลได้จริงเทียบกับเวลาทำงานทั้งหมด' } ],
+      references: [ { label: 'Freelance rate guides', url: 'https://www.goodcalculators.com/freelance-hourly-rate-calculator/' } ],
+      keywords: ['freelancer rate','hourly target','utilization'],
+      seoHtml: '<h2>ตั้งเรทฟรีแลนซ์</h2><p>เริ่มจากรายได้เป้าหมายและชั่วโมงที่บิลได้จริง เพื่อคำนวณเรทขั้นต่ำต่อชั่วโมงที่ยั่งยืน</p>'
+    }
+  },
+
   // Finance: Mortgage
   mortgage: {
     GLOBAL: {
@@ -474,6 +510,18 @@ export const FAQ_CONTENT: FaqContentMap = {
       faqs: [ { question: 'ควรเช่าหรือซื้อดี?', answer: 'ขึ้นกับระยะเวลาพำนัก อัตราดอกเบี้ย ภาษี และค่าโอกาสของเงินดาวน์ เครื่องมือนี้ช่วยเทียบค่าใช้จ่ายรายเดือนพื้นฐาน' } ],
       references: [ { label: 'Investopedia – Rent vs. Buy', url: 'https://www.investopedia.com/rent-vs-buy-5072237' } ]
     }
+    , US: {
+      useCases: [ 'เทียบเช่า/ซื้อในบริบทสหรัฐฯ', 'รวม property tax/HOA/maintenance โดยประมาณ' ],
+      howTo: [ 'ใส่ค่าเช่า รายเดือน', 'ใส่ราคาบ้าน ดอกเบี้ย และภาษีทรัพย์สิน (%)', 'ดูรายการเปรียบเทียบรายเดือน' ],
+      faqs: [ { question: 'รวม tax benefit ไหม?', answer: 'ตัวอย่างนี้ไม่รวมผลประหยัดภาษีจากดอกเบี้ยจำนอง ซึ่งขึ้นกับรายได้และการหักรายการ' } ],
+      references: [ { label: 'CFPB – Owning a Home', url: 'https://www.consumerfinance.gov/owning-a-home/' } ]
+    }
+    , TH: {
+      useCases: [ 'เทียบเช่า/ซื้อในไทย', 'รวมค่าบำรุงรักษาและค่าส่วนกลาง (ถ้ามี)' ],
+      howTo: [ 'ใส่ค่าเช่ารายเดือน', 'ใส่ราคาบ้าน อัตราดอกเบี้ย ระยะเวลาผ่อน และค่าบำรุงรักษา/ค่าส่วนกลาง (%)', 'ดูค่าใช้จ่ายรายเดือนรวมๆ' ],
+      faqs: [ { question: 'ปัจจัยที่ควรพิจารณา?', answer: 'แนวโน้มราคาที่อยู่อาศัย ความยืดหยุ่นในการย้ายที่อยู่ ค่าธรรมเนียมวันโอนและภาษี' } ],
+      references: [ { label: 'ธนาคารแห่งประเทศไทย – อสังหาริมทรัพย์', url: 'https://www.bot.or.th' } ]
+    }
   },
 
   // Finance: Annuity vs Lump Sum
@@ -631,7 +679,7 @@ export const FAQ_CONTENT: FaqContentMap = {
     TH: {
       useCases: [ 'คำนวณ VAT 7% จากราคาสินค้า', 'คำนวณยอด VAT ที่ต้องชำระ' ],
       howTo: [ 'ใส่ราคาและเลือกเพิ่ม/แยก VAT', 'สำหรับผู้ประกอบการคำนวณ VAT ชำระสุทธิ' ],
-      faqs: [ { question: 'VAT 7% ใช้กับสินค้าทุกชนิดไหม?', answer: 'บางกรณีอาจยกเว้น/อัตราศูนย์ ดูประกาศกรมสรรพากร' } ],
+      faqs: [ { question: 'สินค้าหรือบริการยกเว้น VAT มีไหม?', answer: 'มี เช่น การส่งออกอัตราศูนย์ และบางกิจการได้รับยกเว้น โปรดดูประกาศ' } ],
       references: [ { label: 'กรมสรรพากร – VAT', url: 'https://www.rd.go.th' } ]
     }
   },
@@ -970,7 +1018,7 @@ export const FAQ_CONTENT: FaqContentMap = {
   , average: { GLOBAL: { useCases: ['หาค่าเฉลี่ยจากชุดข้อมูล','สรุปตัวเลขหลายรายการ'], howTo: ['ใส่ตัวเลขคั่นด้วยจุลภาค ช่องว่าง หรือบรรทัดใหม่','อ่านผลรวมและค่าเฉลี่ย'], faqs: [{ question: 'ค่าเฉลี่ยไวต่อ outlier ไหม?', answer: 'ไว ควรดู median ร่วมเมื่อมี outlier มาก' }], references: [{ label: 'Mean (average)', url: 'https://en.wikipedia.org/wiki/Mean' }] } }
   , 'median-mode': { GLOBAL: { useCases: ['สรุปแนวโน้มกึ่งกลางและค่าที่พบบ่อย'], howTo: ['ใส่รายการตัวเลข','อ่าน median และ mode'], faqs: [{ question: 'ถ้ามีหลาย mode?', answer: 'อาจมีหลายค่า พบได้ในข้อมูลหลายกลุ่ม' }], references: [{ label: 'Median', url: 'https://en.wikipedia.org/wiki/Median' }] } }
   , 'std-dev': { GLOBAL: { useCases: ['วัดการกระจายของข้อมูล','เปรียบเทียบความผันผวน'], howTo: ['ใส่รายการตัวเลข','อ่านค่าเบี่ยงเบนมาตรฐานและความแปรปรวน'], faqs: [{ question: 'ใช้ sample หรือ population?', answer: 'ขึ้นกับบริบท เครื่องมือนี้คำนวณแบบทั่วไปเพื่อการศึกษา' }], references: [{ label: 'Standard deviation', url: 'https://en.wikipedia.org/wiki/Standard_deviation' }] } }
-  , overtime: { GLOBAL: { useCases: ['คำนวณค่าโอทีพนักงานรายชั่วโมง','ประเมินค่าจ้างรวมรายสัปดาห์'], howTo: ['ใส่ชั่วโมงทำงานปกติและชั่วโมง OT','กำหนดอัตรา OT เช่น 1.5x'], faqs: [{ question: 'กฎหมาย OT ต่างประเทศ?', answer: 'แตกต่างตามประเทศ/รัฐ โปรดตรวจข้อกำหนดท้องถิ่น' }], references: [{ label: 'US DOL – Overtime Pay', url: 'https://www.dol.gov/agencies/whd/overtime' }] } }
+  
   , percentage: { GLOBAL: { useCases: ['คำนวณเปอร์เซ็นต์เพิ่ม/ลด','หาส่วนเป็นเปอร์เซ็นต์'], howTo: ['เลือกโหมด เช่น เพิ่ม/ลด หรือ ส่วนของทั้งหมด','กรอกตัวเลขแล้วอ่านผล'], faqs: [{ question: 'ต่างจากส่วนต่อส่วน?', answer: 'เปอร์เซ็นต์คืออัตราส่วนเทียบกับ 100' }], references: [{ label: 'Percentage', url: 'https://en.wikipedia.org/wiki/Percentage' }] } }
   , ratio: { GLOBAL: { useCases: ['ทำให้อัตราส่วนเป็นรูปอย่างง่าย','ปรับขยาย/ย่ออัตราส่วน'], howTo: ['ใส่ a:b และตัวคูณ','อ่านผลที่ย่อแล้ว'], faqs: [{ question: 'ย่ออัตราส่วนอย่างไร?', answer: 'หารด้วยตัวประกอบร่วมมาก (GCF)' }], references: [{ label: 'Ratio', url: 'https://en.wikipedia.org/wiki/Ratio' }] } }
   , exponent: { GLOBAL: { useCases: ['คำนวณเลขยกกำลัง','แก้ปัญหาการเติบโตแบบเอ็กซ์โปเนนเชียล'], howTo: ['ใส่ฐานและชี้กำลัง','อ่านผลลัพธ์'], faqs: [{ question: 'ค่ามากเกินไปโอเวอร์โฟลว์?', answer: 'อาจปัด/จำกัดขนาดตามเบราว์เซอร์' }], references: [{ label: 'Exponentiation', url: 'https://en.wikipedia.org/wiki/Exponentiation' }] } }
