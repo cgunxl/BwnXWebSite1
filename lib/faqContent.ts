@@ -797,7 +797,9 @@ export const FAQ_CONTENT: FaqContentMap = {
       useCases: [ 'ประมาณภาษีทรัพย์สินจากมูลค่าประเมิน', 'วางแผนเงินสดสำหรับชำระภาษีรายปี' ],
       howTo: [ 'ใส่มูลค่าประเมิน อัตราภาษี และยกเว้น', 'ดูภาษีที่ต้องชำระ' ],
       faqs: [ { question: 'ทำไมแต่ละเขตไม่เท่ากัน?', answer: 'ภาษีทรัพย์สินเป็นอำนาจท้องถิ่น กฎเกณฑ์และยกเว้นต่างกัน' } ],
-      references: [ { label: 'Local government resources', url: 'https://en.wikipedia.org/wiki/Property_tax' } ]
+      references: [ { label: 'Local government resources', url: 'https://en.wikipedia.org/wiki/Property_tax' } ],
+      keywords: ['property tax calculator','assessed value','mill rate','homestead exemption'],
+      seoHtml: '<h2>โครงสร้างภาษีทรัพย์สิน</h2><p>อัตราภาษี (mill rate) ถูกกำหนดโดยท้องถิ่นและคูณกับฐานภาษีหลังหักยกเว้น เช่น homestead การคำนวณช่วยให้วางแผนงบประมาณรายปีได้แม่นยำ</p>'
     }
   },
 
@@ -837,7 +839,9 @@ export const FAQ_CONTENT: FaqContentMap = {
       useCases: [ 'คำนวณค่างวดรถรวมภาษีและค่าธรรมเนียม', 'เปรียบเทียบระยะเวลาผ่อนหลายแบบ' ],
       howTo: [ 'กรอกราคารถ เงินดาวน์ ค่าธรรมเนียม และอัตราดอกเบี้ย', 'ระบุภาษีขาย (ถ้ามี) และจำนวนปี', 'ดูค่างวด ดอกเบี้ยรวม และยอดชำระทั้งหมด' ],
       faqs: [ { question: 'ภาษีขายคิดกับอะไร?', answer: 'หลายพื้นที่คิดจากราคาหลังหักเงินดาวน์ บางที่คิดจากราคารถเต็ม ตรวจสอบตามกฎหมายท้องถิ่น' } ],
-      references: [ { label: 'Investopedia – Auto Loans', url: 'https://www.investopedia.com/terms/a/auto-loan.asp' } ]
+      references: [ { label: 'Investopedia – Auto Loans', url: 'https://www.investopedia.com/terms/a/auto-loan.asp' } ],
+      keywords: ['car loan calculator','auto loan tax','dealer fees','down payment'],
+      seoHtml: '<h2>องค์ประกอบค่างวดรถ</h2><p>นอกจากดอกเบี้ยและเงินต้นแล้ว ยังมีภาษีขาย ค่าจดทะเบียน ค่าธรรมเนียมดีลเลอร์ และประกันภัยที่ส่งผลต่อภาระรายเดือน</p>'
     },
     US: {
       useCases: [ 'ประมาณค่างวดรวม Sales Tax และ DMV fees', 'เทียบเงินดาวน์ต่าง ๆ' ],
@@ -944,14 +948,14 @@ export const FAQ_CONTENT: FaqContentMap = {
       useCases: ['คำนวณ V, I, R, P จากความสัมพันธ์โอห์ม','ตรวจสอบวงจรง่าย ๆ'],
       howTo: ['กรอกค่ารู้ 2 ตัว เช่น V และ R','เครื่องมือจะคำนวณค่าที่เหลือ'],
       faqs: [ { question: 'ใช้กับ AC ได้ไหม?', answer: 'สูตรพื้นฐานใช้กับ DC/ค่าทันที ใน AC ซับซ้อนขึ้น (อิมพีแดนซ์)' } ],
-      references: [ { label: 'Wikipedia – Ohm’s law', url: 'https://en.wikipedia.org/wiki/Ohm%27s_law' } ]
+      references: [ { label: 'Wikipedia – Ohm\'s law', url: 'https://en.wikipedia.org/wiki/Ohm%27s_law' } ]
     }
   }
   , 'permutation': { GLOBAL: { useCases: ['นับจำนวนการจัดเรียง','ความน่าจะเป็นแบบจัดลำดับ'], howTo: ['ใส่ n และ r','เลือกแบบซ้ำได้/ไม่ได้'], faqs: [{ question: 'ต่างจาก combination?', answer: 'permutation สนลำดับ, combination ไม่สนลำดับ' }], references: [{ label: 'Permutations and combinations', url: 'https://en.wikipedia.org/wiki/Permutation' }] } }
   , 'combination': { GLOBAL: { useCases: ['นับจำนวนชุดที่เลือก','สถิติ/ความน่าจะเป็น'], howTo: ['ใส่ n และ r','เลือกแบบซ้ำได้/ไม่ได้'], faqs: [{ question: 'ใช้สูตรไหน?', answer: 'nCr = n! / (r!(n-r)!)' }], references: [{ label: 'Binomial coefficient', url: 'https://en.wikipedia.org/wiki/Binomial_coefficient' }] } }
   , 'z-score': { GLOBAL: { useCases: ['คำนวณคะแนนมาตรฐาน','หาความน่าจะเป็นสะสม'], howTo: ['ใส่ค่า X, mean, sd','อ่านค่า z และ CDF'], faqs: [{ question: 'z ใช้เมื่อไร?', answer: 'เมื่อแจกแจงปกติหรือขนาดตัวอย่างใหญ่' }], references: [{ label: 'Z-score (standard score)', url: 'https://en.wikipedia.org/wiki/Standard_score' }] } }
   , 'circle-area': { GLOBAL: { useCases: ['หาพื้นที่/เส้นรอบวงจากรัศมี'], howTo: ['ใส่ r','อ่าน πr² และ 2πr'], faqs: [{ question: 'หน่วย?', answer: 'หน่วยพื้นที่เป็นหน่วยกำลังสอง' }], references: [{ label: 'Circle', url: 'https://en.wikipedia.org/wiki/Circle' }] } }
-  , 'triangle-area': { GLOBAL: { useCases: ['หาพื้นที่จากฐานสูงหรือสามด้าน'], howTo: ['เลือกโหมด ฐาน/สูง หรือ 3 ด้าน','กรอกค่าเพื่อคำนวณ'], faqs: [{ question: 'สูตรเฮรอนคือ?', answer: 'A = √(s(s-a)(s-b)(s-c))' }], references: [{ label: 'Heron’s formula', url: 'https://en.wikipedia.org/wiki/Heron%27s_formula' }] } }
+  , 'triangle-area': { GLOBAL: { useCases: ['หาพื้นที่จากฐานสูงหรือสามด้าน'], howTo: ['เลือกโหมด ฐาน/สูง หรือ 3 ด้าน','กรอกค่าเพื่อคำนวณ'], faqs: [{ question: 'สูตรเฮรอนคือ?', answer: 'A = √(s(s-a)(s-b)(s-c))' }], references: [{ label: 'Heron\'s formula', url: 'https://en.wikipedia.org/wiki/Heron%27s_formula' }] } }
   , gcf: { GLOBAL: { useCases: ['หาตัวหารร่วมมาก','ย่อเศษส่วน'], howTo: ['ใส่จำนวนเต็มหลายตัว','อ่านค่า GCF'], faqs: [{ question: 'ต่างจาก GCD?', answer: 'หมายถึงเรื่องเดียวกัน' }], references: [{ label: 'Greatest common divisor', url: 'https://en.wikipedia.org/wiki/Greatest_common_divisor' }] } }
   , lcm: { GLOBAL: { useCases: ['หาคูณร่วมน้อย','จัดตารางเวลา/รอบการทำงาน'], howTo: ['ใส่จำนวนเต็มหลายตัว','อ่านค่า LCM'], faqs: [{ question: 'ศูนย์มีผลอย่างไร?', answer: 'ถ้ามีศูนย์ LCM เป็น 0' }], references: [{ label: 'Least common multiple', url: 'https://en.wikipedia.org/wiki/Least_common_multiple' }] } }
   , age: { GLOBAL: { useCases: ['คำนวณอายุจริง','หานับวัน/ถึงวันเกิดถัดไป'], howTo: ['ใส่วันเกิดและวันอ้างอิง','อ่านผลปี/เดือน/วัน รวมวันทั้งหมด'], faqs: [{ question: 'นับแบบรวมปลายทาง?', answer: 'สามารถเลือกโหมด inclusive ได้ใน Date Difference' }], references: [{ label: 'ISO 8601 – Dates', url: 'https://en.wikipedia.org/wiki/ISO_8601' }] } }
