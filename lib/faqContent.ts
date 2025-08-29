@@ -16,40 +16,7 @@ export type FaqHowTo = {
 export type FaqContentMap = Record<string, Partial<Record<CountryCode, FaqHowTo>>>;
 
 export const FAQ_CONTENT: FaqContentMap = {
-  // Health: BMI
-  bmi: {
-    GLOBAL: {
-      useCases: [
-        'Estimate BMI quickly and compare to WHO global categories',
-        'Track changes over time alongside TDEE and calorie targets'
-      ],
-      howTo: [
-        'Enter your height in centimeters and weight in kilograms',
-        'Read BMI and category instantly (results update as you type)',
-        'Use related calculators to set daily calorie and macro goals'
-      ],
-      faqs: [
-        { question: 'What is BMI?', answer: 'Body Mass Index is weight (kg) divided by height (m) squared. It is a population‑level screening metric, not a diagnosis.' },
-        { question: 'How are categories defined?', answer: 'WHO global: Underweight <18.5, Normal 18.5–24.9, Overweight 25–29.9, Obesity ≥30.' },
-        { question: 'Is BMI accurate for athletes?', answer: 'BMI can misclassify high‑muscle individuals. Consider body fat and waist‑to‑height ratio as complements.' }
-      ],
-      references: [
-        { label: 'WHO – BMI classification', url: 'https://www.who.int/data/gho/indicator-metadata-registry/imr-details/26' }
-      ],
-      keywords: ['BMI calculator','WHO BMI','Body Mass Index','BMI table'],
-      examples: { headers: ['Height (cm)','Weight (kg)','BMI','Category'], rows: [ ['170','70','24.2','Normal'], ['160','80','31.3','Obesity'] ] }
-    },
-    TH: {
-      useCases: [ 'คำนวณ BMI และเทียบเกณฑ์สำหรับเอเชีย (WHO Asia)', 'ใช้ประกอบกับ TDEE/แคลอรี่รายวัน' ],
-      howTo: [ 'กรอกส่วนสูง (ซม.) และน้ำหนัก (กก.)', 'อ่านค่า BMI และหมวดหมู่ทันที', 'ดูเครื่องคิดเลขที่เกี่ยวข้องเพื่อวางเป้าแคลอรี่' ],
-      faqs: [
-        { question: 'BMI คืออะไร?', answer: 'น้ำหนัก (กก.) หารด้วยส่วนสูง (ม.) ยกกำลังสอง ใช้เป็นตัวชี้วัดภาพรวม ไม่ใช่การวินิจฉัยโรค' },
-        { question: 'เกณฑ์เอเชียต่างจากสากลยังไง?', answer: 'WHO Asia ใช้เกณฑ์ต่ำกว่า: ปกติ <23, น้ำหนักเกิน 23–27.4, อ้วน ≥27.5' }
-      ],
-      references: [ { label: 'WHO Expert Consultation (Asia BMI)', url: 'https://www.who.int/publications/i/item/9789290223553' } ],
-      keywords: ['คำนวณ BMI','ตาราง BMI ไทย','ค่า BMI เอเชีย']
-    }
-  },
+  
   // Finance: House Affordability
   'house-affordability': {
     GLOBAL: {
@@ -78,6 +45,61 @@ export const FAQ_CONTENT: FaqContentMap = {
       howTo: [ 'กรอกข้อมูลรายได้และหนี้', 'ใช้อัตราภาษีท้องถิ่นโดยประมาณ', 'เปรียบเทียบหลายสถานการณ์' ],
       faqs: [ { question: 'DTI ไทยใช้เท่าไร?', answer: 'ขึ้นกับธนาคารและนโยบาย กรณีทั่วไปไม่ควรเกิน ~40–50% สำหรับหนี้ทั้งหมด' } ],
       references: [ { label: 'ธนาคารแห่งประเทศไทย – เกณฑ์สินเชื่อที่อยู่อาศัย', url: 'https://www.bot.or.th' } ]
+    }
+  },
+
+  // Finance: Mortgage
+  mortgage: {
+    GLOBAL: {
+      useCases: [
+        'Estimate mortgage payment with principal, interest, term, and optional closing costs',
+        'Understand total repayment and total interest over the life of the loan',
+        'Download amortization schedule (CSV) to analyze principal vs interest by month'
+      ],
+      howTo: [
+        'Enter home price or principal (after down payment)',
+        'Enter annual interest rate (%) and term (years)',
+        'Optionally include closing costs to see the true all‑in payment',
+        'Read monthly payment, total repayment, and total interest; expand amortization to inspect month by month'
+      ],
+      faqs: [
+        { question: 'What closing costs are included?', answer: 'Typical closing costs can include lender origination, underwriting, title insurance, appraisal, recording, credit report, prepaid interest and escrows. Lender credits can offset these costs in exchange for a higher interest rate.' },
+        { question: 'Is a lower rate or lower closing cost better?', answer: 'It depends on how long you will keep the loan. A lower rate reduces monthly payment and total interest, which often dominates over small upfront credits if you hold the loan for many years.' },
+        { question: 'How does term (30y vs 15y) change results?', answer: 'Shorter terms raise the monthly payment but reduce total interest substantially. The amortization schedule shows how quickly principal declines under each term.' },
+        { question: 'Should I include taxes and insurance?', answer: 'This calculator focuses on principal and interest. For a full budget, add estimated property tax, homeowners insurance and HOA dues to the monthly payment.' },
+        { question: 'What is APR vs interest rate?', answer: 'APR annualizes total borrowing cost (including certain fees) to allow comparison across lenders, while the interest rate determines the payment schedule itself.' }
+      ],
+      references: [
+        { label: 'CFPB – Mortgage closing costs', url: 'https://www.consumerfinance.gov/ask-cfpb/what-are-mortgage-closing-costs-en-120/' },
+        { label: 'CFPB – Cost of taking out a mortgage (2022)', url: 'https://www.consumerfinance.gov/about-us/blog/the-cost-of-taking-out-a-mortgage-soared-in-2022/' },
+        { label: 'CFPB – Lender credits explained', url: 'https://www.consumerfinance.gov/ask-cfpb/what-are-lender-credits-and-how-do-they-work-en-114/' }
+      ],
+      keywords: ['mortgage calculator','closing costs','amortization schedule','monthly payment','APR vs rate'],
+      seoHtml: '<h2>How mortgage payments are calculated</h2><p>A standard fixed‑rate mortgage uses an amortization formula where the monthly payment stays constant while the composition of interest and principal shifts over time. Early payments are interest‑heavy; later payments retire more principal. Including closing costs in the financed amount raises both monthly payment and total interest, which reveals the true all‑in cost of ownership.</p><h3>When to pay points or take credits</h3><p>Paying discount points trades upfront cash for a lower rate and lower lifetime interest. Lender credits do the opposite. The breakeven depends on how long you keep the loan. Use this calculator to compare scenarios and see breakeven months.</p><h3>Budgeting beyond P&I</h3><p>Principal & interest (P&I) are only part of housing cost. Property tax, homeowners insurance and HOA dues can add hundreds per month and vary widely by location. Model these in your broader budget to avoid surprises.</p>',
+      examples: { headers: ['Principal','$ Rate','Term (years)','Closing costs','$ Payment','Total Interest'], rows: [ ['300,000','6.75%','30','$6,000','$1,945','$401,000'], ['300,000','6.00%','30','$0','$1,799','$347,500'] ] }
+    },
+    US: {
+      useCases: [ 'Compare lender credits vs paying points for U.S. loans', 'Include typical U.S. closing costs and estimate APR contextually' ],
+      howTo: [ 'Enter principal, rate, term and estimated closing costs', 'Use the amortization table to see interest vs principal by month', 'Test scenarios with and without lender credits to find breakeven' ],
+      faqs: [
+        { question: 'What are common U.S. closing costs?', answer: 'Title insurance, appraisal, origination and underwriting, credit report, recording, prepaid interest, escrows for taxes/insurance and optional discount points.' },
+        { question: 'How do lender credits work?', answer: 'Credits reduce upfront cash but typically increase your rate; you pay more interest over time. They make sense if cash is tight and expected holding period is short.' }
+      ],
+      references: [
+        { label: 'CFPB – Mortgage closing costs', url: 'https://www.consumerfinance.gov/ask-cfpb/what-are-mortgage-closing-costs-en-120/' },
+        { label: 'CFPB – Lender credits', url: 'https://www.consumerfinance.gov/ask-cfpb/what-are-lender-credits-and-how-do-they-work-en-114/' }
+      ]
+    },
+    TH: {
+      useCases: [ 'เปรียบเทียบค่างวดจำนองรวมค่าใช้จ่ายวันโอน (ไทย)', 'ดูผลดอกเบี้ยรวมเมื่อระยะเวลาผ่อนต่างกัน' ],
+      howTo: [ 'ใส่วงเงินกู้ อัตราดอกเบี้ย (%) และจำนวนปี', 'หากต้องการ รวมค่าใช้จ่ายวันโอน/จดจำนอง เพื่อดูค่างวดจริง', 'เปิดตารางผ่อน (amortization) เพื่อตรวจสอบเงินต้น/ดอกเบี้ยรายเดือน' ],
+      faqs: [
+        { question: 'ค่าใช้จ่ายวันโอนมีอะไรบ้าง?', answer: 'เช่น ค่าโอน ค่าจดจำนอง อากร/อากรแสตมป์ ค่าประเมิน ค่าประกันอัคคีภัย และค่าธรรมเนียมสถาบันการเงิน ขึ้นกับโครงการและโปรโมชั่น' },
+        { question: 'ดอกเบี้ยลอยตัว (MRR/MOR/MRR) มีผลยังไง?', answer: 'เมื่ออัตราอ้างอิงเปลี่ยน ค่างวดจะปรับตาม ควรเผื่อความเสี่ยงดอกเบี้ยเพิ่มในอนาคต และทบทวนรีไฟแนนซ์เมื่อเหมาะสม' }
+      ],
+      references: [
+        { label: 'ธนาคารแห่งประเทศไทย – อัตราดอกเบี้ยอ้างอิง', url: 'https://www.bot.or.th' }
+      ]
     }
   },
 
