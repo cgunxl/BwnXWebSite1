@@ -16,40 +16,7 @@ export type FaqHowTo = {
 export type FaqContentMap = Record<string, Partial<Record<CountryCode, FaqHowTo>>>;
 
 export const FAQ_CONTENT: FaqContentMap = {
-  // Health: BMI
-  bmi: {
-    GLOBAL: {
-      useCases: [
-        'Estimate BMI quickly and compare to WHO global categories',
-        'Track changes over time alongside TDEE and calorie targets'
-      ],
-      howTo: [
-        'Enter your height in centimeters and weight in kilograms',
-        'Read BMI and category instantly (results update as you type)',
-        'Use related calculators to set daily calorie and macro goals'
-      ],
-      faqs: [
-        { question: 'What is BMI?', answer: 'Body Mass Index is weight (kg) divided by height (m) squared. It is a population‑level screening metric, not a diagnosis.' },
-        { question: 'How are categories defined?', answer: 'WHO global: Underweight <18.5, Normal 18.5–24.9, Overweight 25–29.9, Obesity ≥30.' },
-        { question: 'Is BMI accurate for athletes?', answer: 'BMI can misclassify high‑muscle individuals. Consider body fat and waist‑to‑height ratio as complements.' }
-      ],
-      references: [
-        { label: 'WHO – BMI classification', url: 'https://www.who.int/data/gho/indicator-metadata-registry/imr-details/26' }
-      ],
-      keywords: ['BMI calculator','WHO BMI','Body Mass Index','BMI table'],
-      examples: { headers: ['Height (cm)','Weight (kg)','BMI','Category'], rows: [ ['170','70','24.2','Normal'], ['160','80','31.3','Obesity'] ] }
-    },
-    TH: {
-      useCases: [ 'คำนวณ BMI และเทียบเกณฑ์สำหรับเอเชีย (WHO Asia)', 'ใช้ประกอบกับ TDEE/แคลอรี่รายวัน' ],
-      howTo: [ 'กรอกส่วนสูง (ซม.) และน้ำหนัก (กก.)', 'อ่านค่า BMI และหมวดหมู่ทันที', 'ดูเครื่องคิดเลขที่เกี่ยวข้องเพื่อวางเป้าแคลอรี่' ],
-      faqs: [
-        { question: 'BMI คืออะไร?', answer: 'น้ำหนัก (กก.) หารด้วยส่วนสูง (ม.) ยกกำลังสอง ใช้เป็นตัวชี้วัดภาพรวม ไม่ใช่การวินิจฉัยโรค' },
-        { question: 'เกณฑ์เอเชียต่างจากสากลยังไง?', answer: 'WHO Asia ใช้เกณฑ์ต่ำกว่า: ปกติ <23, น้ำหนักเกิน 23–27.4, อ้วน ≥27.5' }
-      ],
-      references: [ { label: 'WHO Expert Consultation (Asia BMI)', url: 'https://www.who.int/publications/i/item/9789290223553' } ],
-      keywords: ['คำนวณ BMI','ตาราง BMI ไทย','ค่า BMI เอเชีย']
-    }
-  },
+  
   // Finance: House Affordability
   'house-affordability': {
     GLOBAL: {
@@ -78,6 +45,97 @@ export const FAQ_CONTENT: FaqContentMap = {
       howTo: [ 'กรอกข้อมูลรายได้และหนี้', 'ใช้อัตราภาษีท้องถิ่นโดยประมาณ', 'เปรียบเทียบหลายสถานการณ์' ],
       faqs: [ { question: 'DTI ไทยใช้เท่าไร?', answer: 'ขึ้นกับธนาคารและนโยบาย กรณีทั่วไปไม่ควรเกิน ~40–50% สำหรับหนี้ทั้งหมด' } ],
       references: [ { label: 'ธนาคารแห่งประเทศไทย – เกณฑ์สินเชื่อที่อยู่อาศัย', url: 'https://www.bot.or.th' } ]
+    }
+  },
+
+  // Work/Income: Hourly Wage
+  'hourly-wage': {
+    GLOBAL: {
+      useCases: [ 'แปลงค่าจ้างรายชั่วโมงเป็นรายปี/รายเดือน', 'เทียบรายได้กับค่าใช้จ่ายคงที่' ],
+      howTo: [ 'ใส่อัตรารายชั่วโมง', 'กำหนดชั่วโมง/สัปดาห์ และสัปดาห์/ปี', 'อ่านรายได้ต่อเดือน/ปี' ],
+      faqs: [ { question: 'OT รวมไหม?', answer: 'ส่วนนี้คำนวณจากชั่วโมงปกติเท่านั้น เพิ่ม OT ในเครื่องคำนวณ Overtime แยก' } ],
+      references: [ { label: 'US DOL – Wages', url: 'https://www.dol.gov' } ],
+      keywords: ['hourly to annual','hourly wage calculator','annualized income'],
+      seoHtml: '<h2>คำนวณรายได้จากอัตรารายชั่วโมง</h2><p>ช่วยประมาณรายได้ต่อเดือน/ปีจากอัตรารายชั่วโมง โดยกำหนดชั่วโมงต่อสัปดาห์และจำนวนสัปดาห์ต่อปี</p>'
+    }
+  },
+
+  // Work/Income: Overtime
+  overtime: {
+    GLOBAL: {
+      useCases: [ 'คำนวณค่า OT และรายได้รวมรายสัปดาห์', 'เทียบผลของอัตรา OT 1.5x/2x' ],
+      howTo: [ 'ใส่อัตราปกติและชั่วโมงปกติ', 'ใส่ชั่วโมง OT และตัวคูณ', 'อ่านรายได้รวม' ],
+      faqs: [ { question: 'OT คิดอย่างไร?', answer: 'หลายประเทศใช้อัตรา 1.5x หลังชั่วโมงเกณฑ์ ตรวจสอบกฎหมายท้องถิ่น' } ],
+      references: [ { label: 'US DOL – Overtime Pay', url: 'https://www.dol.gov/agencies/whd/overtime' } ],
+      keywords: ['overtime calculator','1.5x pay','weekly pay'],
+      seoHtml: '<h2>ค่าแรงล่วงเวลา</h2><p>ปรับตัวคูณ OT เพื่อดูผลต่อรายได้รวมรายสัปดาห์อย่างรวดเร็ว</p>'
+    }
+  },
+
+  // Freelance: Rate
+  'freelancer-rate': {
+    GLOBAL: {
+      useCases: [ 'ตั้งเรทรายชั่วโมงจากต้นทุนและเป้ารายได้', 'เทียบ utilization และวันลาพัก' ],
+      howTo: [ 'ใส่รายได้เป้าหมาย/ปี', 'กำหนดชั่วโมงบิลต่อปี', 'คำนวณเรทขั้นต่ำต่อชั่วโมง' ],
+      faqs: [ { question: 'Utilization คืออะไร?', answer: 'สัดส่วนชั่วโมงที่บิลได้จริงเทียบกับเวลาทำงานทั้งหมด' } ],
+      references: [ { label: 'Freelance rate guides', url: 'https://www.goodcalculators.com/freelance-hourly-rate-calculator/' } ],
+      keywords: ['freelancer rate','hourly target','utilization'],
+      seoHtml: '<h2>ตั้งเรทฟรีแลนซ์</h2><p>เริ่มจากรายได้เป้าหมายและชั่วโมงที่บิลได้จริง เพื่อคำนวณเรทขั้นต่ำต่อชั่วโมงที่ยั่งยืน</p>'
+    }
+  },
+
+  // Finance: Mortgage
+  mortgage: {
+    GLOBAL: {
+      useCases: [
+        'Estimate mortgage payment with principal, interest, term, and optional closing costs',
+        'Understand total repayment and total interest over the life of the loan',
+        'Download amortization schedule (CSV) to analyze principal vs interest by month'
+      ],
+      howTo: [
+        'Enter home price or principal (after down payment)',
+        'Enter annual interest rate (%) and term (years)',
+        'Optionally include closing costs to see the true all‑in payment',
+        'Read monthly payment, total repayment, and total interest; expand amortization to inspect month by month'
+      ],
+      faqs: [
+        { question: 'What closing costs are included?', answer: 'Typical closing costs can include lender origination, underwriting, title insurance, appraisal, recording, credit report, prepaid interest and escrows. Lender credits can offset these costs in exchange for a higher interest rate.' },
+        { question: 'Is a lower rate or lower closing cost better?', answer: 'It depends on how long you will keep the loan. A lower rate reduces monthly payment and total interest, which often dominates over small upfront credits if you hold the loan for many years.' },
+        { question: 'How does term (30y vs 15y) change results?', answer: 'Shorter terms raise the monthly payment but reduce total interest substantially. The amortization schedule shows how quickly principal declines under each term.' },
+        { question: 'Should I include taxes and insurance?', answer: 'This calculator focuses on principal and interest. For a full budget, add estimated property tax, homeowners insurance and HOA dues to the monthly payment.' },
+        { question: 'What is APR vs interest rate?', answer: 'APR annualizes total borrowing cost (including certain fees) to allow comparison across lenders, while the interest rate determines the payment schedule itself.' }
+      ],
+      references: [
+        { label: 'CFPB – Mortgage closing costs', url: 'https://www.consumerfinance.gov/ask-cfpb/what-are-mortgage-closing-costs-en-120/' },
+        { label: 'CFPB – Cost of taking out a mortgage (2022)', url: 'https://www.consumerfinance.gov/about-us/blog/the-cost-of-taking-out-a-mortgage-soared-in-2022/' },
+        { label: 'CFPB – Lender credits explained', url: 'https://www.consumerfinance.gov/ask-cfpb/what-are-lender-credits-and-how-do-they-work-en-114/' }
+      ],
+      keywords: ['mortgage calculator','closing costs','amortization schedule','monthly payment','APR vs rate'],
+      seoHtml: '<h2>How mortgage payments are calculated</h2><p>A standard fixed‑rate mortgage uses an amortization formula where the monthly payment stays constant while the composition of interest and principal shifts over time. Early payments are interest‑heavy; later payments retire more principal. Including closing costs in the financed amount raises both monthly payment and total interest, which reveals the true all‑in cost of ownership.</p><h3>When to pay points or take credits</h3><p>Paying discount points trades upfront cash for a lower rate and lower lifetime interest. Lender credits do the opposite. The breakeven depends on how long you keep the loan. Use this calculator to compare scenarios and see breakeven months.</p><h3>Budgeting beyond P&I</h3><p>Principal & interest (P&I) are only part of housing cost. Property tax, homeowners insurance and HOA dues can add hundreds per month and vary widely by location. Model these in your broader budget to avoid surprises.</p>',
+      examples: { headers: ['Principal','$ Rate','Term (years)','Closing costs','$ Payment','Total Interest'], rows: [ ['300,000','6.75%','30','$6,000','$1,945','$401,000'], ['300,000','6.00%','30','$0','$1,799','$347,500'] ] }
+    },
+    US: {
+      useCases: [ 'Compare lender credits vs paying points for U.S. loans', 'Include typical U.S. closing costs and estimate APR contextually' ],
+      howTo: [ 'Enter principal, rate, term and estimated closing costs', 'Use the amortization table to see interest vs principal by month', 'Test scenarios with and without lender credits to find breakeven' ],
+      faqs: [
+        { question: 'What are common U.S. closing costs?', answer: 'Title insurance, appraisal, origination and underwriting, credit report, recording, prepaid interest, escrows for taxes/insurance and optional discount points.' },
+        { question: 'How do lender credits work?', answer: 'Credits reduce upfront cash but typically increase your rate; you pay more interest over time. They make sense if cash is tight and expected holding period is short.' }
+      ],
+      references: [
+        { label: 'CFPB – Mortgage closing costs', url: 'https://www.consumerfinance.gov/ask-cfpb/what-are-mortgage-closing-costs-en-120/' },
+        { label: 'CFPB – Lender credits', url: 'https://www.consumerfinance.gov/ask-cfpb/what-are-lender-credits-and-how-do-they-work-en-114/' }
+      ]
+    },
+    TH: {
+      useCases: [ 'เปรียบเทียบค่างวดจำนองรวมค่าใช้จ่ายวันโอน (ไทย)', 'ดูผลดอกเบี้ยรวมเมื่อระยะเวลาผ่อนต่างกัน' ],
+      howTo: [ 'ใส่วงเงินกู้ อัตราดอกเบี้ย (%) และจำนวนปี', 'หากต้องการ รวมค่าใช้จ่ายวันโอน/จดจำนอง เพื่อดูค่างวดจริง', 'เปิดตารางผ่อน (amortization) เพื่อตรวจสอบเงินต้น/ดอกเบี้ยรายเดือน' ],
+      faqs: [
+        { question: 'ค่าใช้จ่ายวันโอนมีอะไรบ้าง?', answer: 'เช่น ค่าโอน ค่าจดจำนอง อากร/อากรแสตมป์ ค่าประเมิน ค่าประกันอัคคีภัย และค่าธรรมเนียมสถาบันการเงิน ขึ้นกับโครงการและโปรโมชั่น' },
+        { question: 'ดอกเบี้ยลอยตัว (MRR/MOR/MRR) มีผลยังไง?', answer: 'เมื่ออัตราอ้างอิงเปลี่ยน ค่างวดจะปรับตาม ควรเผื่อความเสี่ยงดอกเบี้ยเพิ่มในอนาคต และทบทวนรีไฟแนนซ์เมื่อเหมาะสม' }
+      ],
+      references: [
+        { label: 'ธนาคารแห่งประเทศไทย – อัตราดอกเบี้ยอ้างอิง', url: 'https://www.bot.or.th' }
+      ]
     }
   },
 
@@ -452,6 +510,18 @@ export const FAQ_CONTENT: FaqContentMap = {
       faqs: [ { question: 'ควรเช่าหรือซื้อดี?', answer: 'ขึ้นกับระยะเวลาพำนัก อัตราดอกเบี้ย ภาษี และค่าโอกาสของเงินดาวน์ เครื่องมือนี้ช่วยเทียบค่าใช้จ่ายรายเดือนพื้นฐาน' } ],
       references: [ { label: 'Investopedia – Rent vs. Buy', url: 'https://www.investopedia.com/rent-vs-buy-5072237' } ]
     }
+    , US: {
+      useCases: [ 'เทียบเช่า/ซื้อในบริบทสหรัฐฯ', 'รวม property tax/HOA/maintenance โดยประมาณ' ],
+      howTo: [ 'ใส่ค่าเช่า รายเดือน', 'ใส่ราคาบ้าน ดอกเบี้ย และภาษีทรัพย์สิน (%)', 'ดูรายการเปรียบเทียบรายเดือน' ],
+      faqs: [ { question: 'รวม tax benefit ไหม?', answer: 'ตัวอย่างนี้ไม่รวมผลประหยัดภาษีจากดอกเบี้ยจำนอง ซึ่งขึ้นกับรายได้และการหักรายการ' } ],
+      references: [ { label: 'CFPB – Owning a Home', url: 'https://www.consumerfinance.gov/owning-a-home/' } ]
+    }
+    , TH: {
+      useCases: [ 'เทียบเช่า/ซื้อในไทย', 'รวมค่าบำรุงรักษาและค่าส่วนกลาง (ถ้ามี)' ],
+      howTo: [ 'ใส่ค่าเช่ารายเดือน', 'ใส่ราคาบ้าน อัตราดอกเบี้ย ระยะเวลาผ่อน และค่าบำรุงรักษา/ค่าส่วนกลาง (%)', 'ดูค่าใช้จ่ายรายเดือนรวมๆ' ],
+      faqs: [ { question: 'ปัจจัยที่ควรพิจารณา?', answer: 'แนวโน้มราคาที่อยู่อาศัย ความยืดหยุ่นในการย้ายที่อยู่ ค่าธรรมเนียมวันโอนและภาษี' } ],
+      references: [ { label: 'ธนาคารแห่งประเทศไทย – อสังหาริมทรัพย์', url: 'https://www.bot.or.th' } ]
+    }
   },
 
   // Finance: Annuity vs Lump Sum
@@ -591,21 +661,25 @@ export const FAQ_CONTENT: FaqContentMap = {
   // Tax: VAT/Sales Tax
   'sales-tax': {
     GLOBAL: {
-      useCases: [ 'คำนวณภาษีขายจากราคาสินค้า', 'แยกราคา net/gross' ],
-      howTo: [ 'ใส่อัตราภาษีและราคาสินค้า', 'เลือกว่าเพิ่มภาษีหรือแยกภาษีออก' ],
+      useCases: [ 'คำนวณภาษีขายจากราคาสินค้า', 'แยกราคา net/gross', 'ดู Effective tax เมื่อมีหลายระดับอัตรา' ],
+      howTo: [ 'ใส่อัตราภาษีและราคาสินค้า', 'เลือกว่าเพิ่มภาษีหรือแยกภาษีออก', 'ในบางประเทศ พิจารณาอัตราท้องถิ่นเพิ่มเติม' ],
       faqs: [ { question: 'ภาษีขายกับ VAT ต่างกันไหม?', answer: 'ต่างตามประเทศ: บางที่ใช้ Sales Tax ปลายทาง ผู้ขายเก็บ บางที่ใช้ VAT แบบเครดิตภาษีหักได้' } ],
-      references: [ { label: 'OECD – Consumption taxes', url: 'https://www.oecd.org/tax/consumption-tax/' } ]
+      references: [ { label: 'OECD – Consumption taxes', url: 'https://www.oecd.org/tax/consumption-tax/' } ],
+      keywords: ['sales tax calculator','net to gross','tax inclusive price','consumption tax'],
+      seoHtml: '<h2>Sales tax vs VAT</h2><p>Sales tax is typically applied once at the final sale to consumers, while VAT applies at each stage with input tax credits. This tool helps compute tax from either net or tax-inclusive price.</p>'
     },
     US: {
       useCases: [ 'คำนวณ sales tax รายรัฐ/ท้องถิ่น', 'ราคาหลังรวมภาษี' ],
       howTo: [ 'ใส่อัตราภาษีตามรัฐ/เมือง', 'พิจารณา taxability ของสินค้า' ],
       faqs: [ { question: 'อัตราต่างเมืองต่างกัน?', answer: 'ใช่ มีทั้งอัตรารัฐ มณฑล เมือง และพิเศษ' } ],
-      references: [ { label: 'Tax Foundation – State and Local Sales Tax Rates', url: 'https://taxfoundation.org' } ]
+      references: [ { label: 'Tax Foundation – State and Local Sales Tax Rates', url: 'https://taxfoundation.org' } ],
+      keywords: ['state sales tax','local tax','us sales tax'],
+      seoHtml: '<h2>U.S. combined rates</h2><p>Combined sales tax includes state, county, city and district add-ons. Merchants must charge the destination rate for shipped orders in many states.</p>'
     },
     TH: {
       useCases: [ 'คำนวณ VAT 7% จากราคาสินค้า', 'คำนวณยอด VAT ที่ต้องชำระ' ],
       howTo: [ 'ใส่ราคาและเลือกเพิ่ม/แยก VAT', 'สำหรับผู้ประกอบการคำนวณ VAT ชำระสุทธิ' ],
-      faqs: [ { question: 'VAT 7% ใช้กับสินค้าทุกชนิดไหม?', answer: 'บางกรณีอาจยกเว้น/อัตราศูนย์ ดูประกาศกรมสรรพากร' } ],
+      faqs: [ { question: 'สินค้าหรือบริการยกเว้น VAT มีไหม?', answer: 'มี เช่น การส่งออกอัตราศูนย์ และบางกิจการได้รับยกเว้น โปรดดูประกาศ' } ],
       references: [ { label: 'กรมสรรพากร – VAT', url: 'https://www.rd.go.th' } ]
     }
   },
@@ -633,10 +707,12 @@ export const FAQ_CONTENT: FaqContentMap = {
   // Finance: VAT (Value Added Tax)
   vat: {
     GLOBAL: {
-      useCases: [ 'คำนวณ VAT จากราคา net/gross', 'ประเมิน VAT ที่ต้องชำระสุทธิ' ],
-      howTo: [ 'ใส่อัตรา VAT และราคา', 'เลือกเพิ่ม VAT หรือแยก VAT ออกจากราคา' ],
+      useCases: [ 'คำนวณ VAT จากราคา net/gross', 'ประเมิน VAT ที่ต้องชำระสุทธิ (output – input)' ],
+      howTo: [ 'ใส่อัตรา VAT และราคา', 'เลือกเพิ่ม VAT หรือแยก VAT ออกจากราคา', 'กรณีผู้ประกอบการ ใส่ VAT ขาเข้าเพื่อคำนวณชำระสุทธิ' ],
       faqs: [ { question: 'VAT กับ Sales Tax ต่างกัน?', answer: 'VAT เก็บเป็นขั้นตอนและเครดิตภาษีได้ ส่วน Sales Tax เก็บครั้งสุดท้ายกับผู้บริโภค' } ],
-      references: [ { label: 'OECD – Value Added Tax (VAT)', url: 'https://www.oecd.org/tax/consumption-tax/' } ]
+      references: [ { label: 'OECD – Value Added Tax (VAT)', url: 'https://www.oecd.org/tax/consumption-tax/' } ],
+      keywords: ['vat calculator','net to gross','input tax credit','output tax'],
+      seoHtml: '<h2>หลักการ VAT</h2><p>VAT จัดเก็บในทุกขั้นของห่วงโซ่อุปทาน ผู้ประกอบการนำ VAT ขาเข้ามาหักออกจาก VAT ขาออก เหลือเป็น VAT ชำระสุทธิ</p>'
     },
     TH: {
       useCases: [ 'คำนวณ VAT 7% สำหรับไทย', 'คำนวน VAT ชำระสุทธิ (output - input)' ],
@@ -729,10 +805,15 @@ export const FAQ_CONTENT: FaqContentMap = {
   // Finance: Credit Card Interest
   'credit-card': {
     GLOBAL: {
-      useCases: [ 'คำนวณดอกเบี้ยบัตรเครดิต', 'ประมาณเวลาปลดหนี้ตามยอดชำระต่อเดือน' ],
-      howTo: [ 'ใส่ยอดคงค้าง อัตรา APR และยอดชำระ', 'ดูดอกเบี้ยรวมและเวลาปลดหนี้' ],
-      faqs: [ { question: 'ชำระขั้นต่ำดีไหม?', answer: 'ไม่ควรหากทำได้ เพราะดอกเบี้ยสะสมสูง ใช้ยอดชำระสูงขึ้นเพื่อลดดอกเบี้ย' } ],
-      references: [ { label: 'Investopedia – Credit Card Interest', url: 'https://www.investopedia.com/terms/c/creditcardinterest.asp' } ]
+      useCases: [ 'คำนวณดอกเบี้ยบัตรเครดิต', 'ประมาณเวลาปลดหนี้ตามยอดชำระต่อเดือน', 'จำลอง snowball/avalanche เบื้องต้น (ทีละใบ)' ],
+      howTo: [ 'ใส่ยอดคงค้าง อัตรา APR และยอดชำระ', 'ดูดอกเบี้ยรวมและเวลาปลดหนี้', 'เพิ่มยอดชำระเพื่อดูผลกระทบ' ],
+      faqs: [
+        { question: 'ชำระขั้นต่ำดีไหม?', answer: 'ไม่ควรหากทำได้ เพราะดอกเบี้ยสะสมสูง ใช้ยอดชำระสูงขึ้นเพื่อลดดอกเบี้ยรวม' },
+        { question: 'APR ต่างจากดอกเบี้ยรายวัน?', answer: 'ผู้ออกบัตรมักคิดดอกเบี้ยรายวันจาก APR/365 (หรือ 360) แล้วสะสมตลอดรอบบิล' }
+      ],
+      references: [ { label: 'Investopedia – Credit Card Interest', url: 'https://www.investopedia.com/terms/c/creditcardinterest.asp' } ],
+      keywords: ['credit card calculator','APR interest','payoff time','minimum payment'],
+      seoHtml: '<h2>เข้าใจ APR และการคิดดอกเบี้ย</h2><p>ดอกบัตรเครดิตคำนวณจาก APR รายปีที่ถูกเฉลี่ยเป็นรายวันและคูณกับยอดคงค้าง หากชำระเพียงขั้นต่ำ ยอดดอกจะสะสมและยืดเวลาปลดหนี้</p>'
     },
     US: {
       useCases: [ 'ประมาณดอกเบี้ยตาม APR และค่าธรรมเนียม', 'จำลองผลจากยอดชำระเพิ่ม' ],
@@ -764,7 +845,9 @@ export const FAQ_CONTENT: FaqContentMap = {
       useCases: [ 'ประมาณภาษีทรัพย์สินจากมูลค่าประเมิน', 'วางแผนเงินสดสำหรับชำระภาษีรายปี' ],
       howTo: [ 'ใส่มูลค่าประเมิน อัตราภาษี และยกเว้น', 'ดูภาษีที่ต้องชำระ' ],
       faqs: [ { question: 'ทำไมแต่ละเขตไม่เท่ากัน?', answer: 'ภาษีทรัพย์สินเป็นอำนาจท้องถิ่น กฎเกณฑ์และยกเว้นต่างกัน' } ],
-      references: [ { label: 'Local government resources', url: 'https://en.wikipedia.org/wiki/Property_tax' } ]
+      references: [ { label: 'Local government resources', url: 'https://en.wikipedia.org/wiki/Property_tax' } ],
+      keywords: ['property tax calculator','assessed value','mill rate','homestead exemption'],
+      seoHtml: '<h2>โครงสร้างภาษีทรัพย์สิน</h2><p>อัตราภาษี (mill rate) ถูกกำหนดโดยท้องถิ่นและคูณกับฐานภาษีหลังหักยกเว้น เช่น homestead การคำนวณช่วยให้วางแผนงบประมาณรายปีได้แม่นยำ</p>'
     }
   },
 
@@ -804,7 +887,9 @@ export const FAQ_CONTENT: FaqContentMap = {
       useCases: [ 'คำนวณค่างวดรถรวมภาษีและค่าธรรมเนียม', 'เปรียบเทียบระยะเวลาผ่อนหลายแบบ' ],
       howTo: [ 'กรอกราคารถ เงินดาวน์ ค่าธรรมเนียม และอัตราดอกเบี้ย', 'ระบุภาษีขาย (ถ้ามี) และจำนวนปี', 'ดูค่างวด ดอกเบี้ยรวม และยอดชำระทั้งหมด' ],
       faqs: [ { question: 'ภาษีขายคิดกับอะไร?', answer: 'หลายพื้นที่คิดจากราคาหลังหักเงินดาวน์ บางที่คิดจากราคารถเต็ม ตรวจสอบตามกฎหมายท้องถิ่น' } ],
-      references: [ { label: 'Investopedia – Auto Loans', url: 'https://www.investopedia.com/terms/a/auto-loan.asp' } ]
+      references: [ { label: 'Investopedia – Auto Loans', url: 'https://www.investopedia.com/terms/a/auto-loan.asp' } ],
+      keywords: ['car loan calculator','auto loan tax','dealer fees','down payment'],
+      seoHtml: '<h2>องค์ประกอบค่างวดรถ</h2><p>นอกจากดอกเบี้ยและเงินต้นแล้ว ยังมีภาษีขาย ค่าจดทะเบียน ค่าธรรมเนียมดีลเลอร์ และประกันภัยที่ส่งผลต่อภาระรายเดือน</p>'
     },
     US: {
       useCases: [ 'ประมาณค่างวดรวม Sales Tax และ DMV fees', 'เทียบเงินดาวน์ต่าง ๆ' ],
@@ -911,14 +996,14 @@ export const FAQ_CONTENT: FaqContentMap = {
       useCases: ['คำนวณ V, I, R, P จากความสัมพันธ์โอห์ม','ตรวจสอบวงจรง่าย ๆ'],
       howTo: ['กรอกค่ารู้ 2 ตัว เช่น V และ R','เครื่องมือจะคำนวณค่าที่เหลือ'],
       faqs: [ { question: 'ใช้กับ AC ได้ไหม?', answer: 'สูตรพื้นฐานใช้กับ DC/ค่าทันที ใน AC ซับซ้อนขึ้น (อิมพีแดนซ์)' } ],
-      references: [ { label: 'Wikipedia – Ohm’s law', url: 'https://en.wikipedia.org/wiki/Ohm%27s_law' } ]
+      references: [ { label: 'Wikipedia – Ohm\'s law', url: 'https://en.wikipedia.org/wiki/Ohm%27s_law' } ]
     }
   }
   , 'permutation': { GLOBAL: { useCases: ['นับจำนวนการจัดเรียง','ความน่าจะเป็นแบบจัดลำดับ'], howTo: ['ใส่ n และ r','เลือกแบบซ้ำได้/ไม่ได้'], faqs: [{ question: 'ต่างจาก combination?', answer: 'permutation สนลำดับ, combination ไม่สนลำดับ' }], references: [{ label: 'Permutations and combinations', url: 'https://en.wikipedia.org/wiki/Permutation' }] } }
   , 'combination': { GLOBAL: { useCases: ['นับจำนวนชุดที่เลือก','สถิติ/ความน่าจะเป็น'], howTo: ['ใส่ n และ r','เลือกแบบซ้ำได้/ไม่ได้'], faqs: [{ question: 'ใช้สูตรไหน?', answer: 'nCr = n! / (r!(n-r)!)' }], references: [{ label: 'Binomial coefficient', url: 'https://en.wikipedia.org/wiki/Binomial_coefficient' }] } }
   , 'z-score': { GLOBAL: { useCases: ['คำนวณคะแนนมาตรฐาน','หาความน่าจะเป็นสะสม'], howTo: ['ใส่ค่า X, mean, sd','อ่านค่า z และ CDF'], faqs: [{ question: 'z ใช้เมื่อไร?', answer: 'เมื่อแจกแจงปกติหรือขนาดตัวอย่างใหญ่' }], references: [{ label: 'Z-score (standard score)', url: 'https://en.wikipedia.org/wiki/Standard_score' }] } }
   , 'circle-area': { GLOBAL: { useCases: ['หาพื้นที่/เส้นรอบวงจากรัศมี'], howTo: ['ใส่ r','อ่าน πr² และ 2πr'], faqs: [{ question: 'หน่วย?', answer: 'หน่วยพื้นที่เป็นหน่วยกำลังสอง' }], references: [{ label: 'Circle', url: 'https://en.wikipedia.org/wiki/Circle' }] } }
-  , 'triangle-area': { GLOBAL: { useCases: ['หาพื้นที่จากฐานสูงหรือสามด้าน'], howTo: ['เลือกโหมด ฐาน/สูง หรือ 3 ด้าน','กรอกค่าเพื่อคำนวณ'], faqs: [{ question: 'สูตรเฮรอนคือ?', answer: 'A = √(s(s-a)(s-b)(s-c))' }], references: [{ label: 'Heron’s formula', url: 'https://en.wikipedia.org/wiki/Heron%27s_formula' }] } }
+  , 'triangle-area': { GLOBAL: { useCases: ['หาพื้นที่จากฐานสูงหรือสามด้าน'], howTo: ['เลือกโหมด ฐาน/สูง หรือ 3 ด้าน','กรอกค่าเพื่อคำนวณ'], faqs: [{ question: 'สูตรเฮรอนคือ?', answer: 'A = √(s(s-a)(s-b)(s-c))' }], references: [{ label: 'Heron\'s formula', url: 'https://en.wikipedia.org/wiki/Heron%27s_formula' }] } }
   , gcf: { GLOBAL: { useCases: ['หาตัวหารร่วมมาก','ย่อเศษส่วน'], howTo: ['ใส่จำนวนเต็มหลายตัว','อ่านค่า GCF'], faqs: [{ question: 'ต่างจาก GCD?', answer: 'หมายถึงเรื่องเดียวกัน' }], references: [{ label: 'Greatest common divisor', url: 'https://en.wikipedia.org/wiki/Greatest_common_divisor' }] } }
   , lcm: { GLOBAL: { useCases: ['หาคูณร่วมน้อย','จัดตารางเวลา/รอบการทำงาน'], howTo: ['ใส่จำนวนเต็มหลายตัว','อ่านค่า LCM'], faqs: [{ question: 'ศูนย์มีผลอย่างไร?', answer: 'ถ้ามีศูนย์ LCM เป็น 0' }], references: [{ label: 'Least common multiple', url: 'https://en.wikipedia.org/wiki/Least_common_multiple' }] } }
   , age: { GLOBAL: { useCases: ['คำนวณอายุจริง','หานับวัน/ถึงวันเกิดถัดไป'], howTo: ['ใส่วันเกิดและวันอ้างอิง','อ่านผลปี/เดือน/วัน รวมวันทั้งหมด'], faqs: [{ question: 'นับแบบรวมปลายทาง?', answer: 'สามารถเลือกโหมด inclusive ได้ใน Date Difference' }], references: [{ label: 'ISO 8601 – Dates', url: 'https://en.wikipedia.org/wiki/ISO_8601' }] } }
@@ -933,7 +1018,7 @@ export const FAQ_CONTENT: FaqContentMap = {
   , average: { GLOBAL: { useCases: ['หาค่าเฉลี่ยจากชุดข้อมูล','สรุปตัวเลขหลายรายการ'], howTo: ['ใส่ตัวเลขคั่นด้วยจุลภาค ช่องว่าง หรือบรรทัดใหม่','อ่านผลรวมและค่าเฉลี่ย'], faqs: [{ question: 'ค่าเฉลี่ยไวต่อ outlier ไหม?', answer: 'ไว ควรดู median ร่วมเมื่อมี outlier มาก' }], references: [{ label: 'Mean (average)', url: 'https://en.wikipedia.org/wiki/Mean' }] } }
   , 'median-mode': { GLOBAL: { useCases: ['สรุปแนวโน้มกึ่งกลางและค่าที่พบบ่อย'], howTo: ['ใส่รายการตัวเลข','อ่าน median และ mode'], faqs: [{ question: 'ถ้ามีหลาย mode?', answer: 'อาจมีหลายค่า พบได้ในข้อมูลหลายกลุ่ม' }], references: [{ label: 'Median', url: 'https://en.wikipedia.org/wiki/Median' }] } }
   , 'std-dev': { GLOBAL: { useCases: ['วัดการกระจายของข้อมูล','เปรียบเทียบความผันผวน'], howTo: ['ใส่รายการตัวเลข','อ่านค่าเบี่ยงเบนมาตรฐานและความแปรปรวน'], faqs: [{ question: 'ใช้ sample หรือ population?', answer: 'ขึ้นกับบริบท เครื่องมือนี้คำนวณแบบทั่วไปเพื่อการศึกษา' }], references: [{ label: 'Standard deviation', url: 'https://en.wikipedia.org/wiki/Standard_deviation' }] } }
-  , overtime: { GLOBAL: { useCases: ['คำนวณค่าโอทีพนักงานรายชั่วโมง','ประเมินค่าจ้างรวมรายสัปดาห์'], howTo: ['ใส่ชั่วโมงทำงานปกติและชั่วโมง OT','กำหนดอัตรา OT เช่น 1.5x'], faqs: [{ question: 'กฎหมาย OT ต่างประเทศ?', answer: 'แตกต่างตามประเทศ/รัฐ โปรดตรวจข้อกำหนดท้องถิ่น' }], references: [{ label: 'US DOL – Overtime Pay', url: 'https://www.dol.gov/agencies/whd/overtime' }] } }
+  
   , percentage: { GLOBAL: { useCases: ['คำนวณเปอร์เซ็นต์เพิ่ม/ลด','หาส่วนเป็นเปอร์เซ็นต์'], howTo: ['เลือกโหมด เช่น เพิ่ม/ลด หรือ ส่วนของทั้งหมด','กรอกตัวเลขแล้วอ่านผล'], faqs: [{ question: 'ต่างจากส่วนต่อส่วน?', answer: 'เปอร์เซ็นต์คืออัตราส่วนเทียบกับ 100' }], references: [{ label: 'Percentage', url: 'https://en.wikipedia.org/wiki/Percentage' }] } }
   , ratio: { GLOBAL: { useCases: ['ทำให้อัตราส่วนเป็นรูปอย่างง่าย','ปรับขยาย/ย่ออัตราส่วน'], howTo: ['ใส่ a:b และตัวคูณ','อ่านผลที่ย่อแล้ว'], faqs: [{ question: 'ย่ออัตราส่วนอย่างไร?', answer: 'หารด้วยตัวประกอบร่วมมาก (GCF)' }], references: [{ label: 'Ratio', url: 'https://en.wikipedia.org/wiki/Ratio' }] } }
   , exponent: { GLOBAL: { useCases: ['คำนวณเลขยกกำลัง','แก้ปัญหาการเติบโตแบบเอ็กซ์โปเนนเชียล'], howTo: ['ใส่ฐานและชี้กำลัง','อ่านผลลัพธ์'], faqs: [{ question: 'ค่ามากเกินไปโอเวอร์โฟลว์?', answer: 'อาจปัด/จำกัดขนาดตามเบราว์เซอร์' }], references: [{ label: 'Exponentiation', url: 'https://en.wikipedia.org/wiki/Exponentiation' }] } }
