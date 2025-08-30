@@ -6,6 +6,7 @@ import { Locale } from '@/lib/i18n/config';
 import { financeCalculatorsBatch1 } from './implementations/finance-batch1';
 import { healthCalculatorsBatch2 } from './implementations/health-batch2';
 import { educationCalculatorsBatch3 } from './implementations/education-batch3';
+import { megaBatchCalculators } from './implementations/mega-batch';
 
 // Calculator factory type
 type CalculatorFactory = (locale: Locale) => Calculator;
@@ -54,6 +55,21 @@ const educationCalculators = [
 educationCalculators.forEach((id, index) => {
   if (educationCalculatorsBatch3[index]) {
     calculatorRegistry.set(id, educationCalculatorsBatch3[index]);
+  }
+});
+
+// Register Mega Batch Calculators
+const megaBatchIds = [
+  'ohms-law-calculator',
+  'age-calculator',
+  'length-converter',
+  'break-even-calculator',
+  'roi-calculator'
+];
+
+megaBatchIds.forEach((id, index) => {
+  if (megaBatchCalculators[index]) {
+    calculatorRegistry.set(id, megaBatchCalculators[index]);
   }
 });
 
