@@ -10,6 +10,8 @@ import { retirementCalculator } from './implementations/finance/retirement-calcu
 import { bmiCalculator } from './implementations/health/bmi-calculator';
 import { calorieCalculator } from './implementations/health/calorie-calculator';
 import { createCalculator } from './factory';
+import { discoverSourcesForCalculator } from '@/lib/discovery/search';
+import { extractFromPages } from '@/lib/discovery/process';
 
 // Map of manually implemented calculators (for special cases)
 const calculatorImplementations: Record<string, Calculator> = {
@@ -29,12 +31,27 @@ const calculatorImplementations: Record<string, Calculator> = {
 export async function loadCalculatorData(slug: string): Promise<Calculator | null> {
   // Check if we have a manually implemented calculator
   if (calculatorImplementations[slug]) {
-    return calculatorImplementations[slug];
+    const calc = calculatorImplementations[slug];
+    // Enrich with references lazily (best-effort, no external SDK)
+    if (!calc.localizedContent.en.references || calc.localizedContent.en.references.length < 2) {
+      const pages = await discoverSourcesForCalculator(slug, { locale: 'en', category: calc.category, limitPerQuery: 5 });
+      const extracted = extractFromPages(pages, slug);
+      for (const loc of Object.keys(calc.localizedContent)) {
+        calc.localizedContent[loc].references = extracted.references;
+      }
+    }
+    return calc;
   }
 
   // Use factory to create calculator from definition
   const calculator = createCalculator(slug);
   if (calculator) {
+    // Enrich with references (minimum 2)
+    const pages = await discoverSourcesForCalculator(slug, { locale: 'en', category: calculator.category, limitPerQuery: 5 });
+    const extracted = extractFromPages(pages, slug);
+    for (const loc of Object.keys(calculator.localizedContent)) {
+      calculator.localizedContent[loc].references = extracted.references;
+    }
     return calculator;
   }
 
