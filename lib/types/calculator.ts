@@ -5,8 +5,8 @@ export interface LocalizedContent {
   keywords: string[];
   faq: FAQItem[];
   article: Article;
-  examples: Example[];
-  references: Reference[];
+  examples?: Example[];
+  references?: Reference[];
 }
 
 export interface FAQItem {
@@ -19,7 +19,7 @@ export interface Article {
   introduction: string;
   sections: ArticleSection[];
   conclusion: string;
-  wordCount: number;
+  wordCount?: number;
 }
 
 export interface ArticleSection {
@@ -55,9 +55,16 @@ export interface CalculatorInput {
   step?: number;
   required?: boolean;
   options?: SelectOption[];
-  validation?: ValidationRule[];
+  validation?: {
+    min?: number;
+    max?: number;
+    required?: boolean;
+    pattern?: string;
+    message?: string;
+  };
   tooltip?: string;
   dependsOn?: string[];
+  showWhen?: Record<string, any>;
 }
 
 export interface SelectOption {
@@ -79,9 +86,11 @@ export interface CalculatorOutput {
   unit?: string;
   format?: 'number' | 'currency' | 'percentage' | 'text';
   precision?: number;
+  decimals?: number;
   description?: string;
   category?: string;
   visualization?: VisualizationType;
+  primary?: boolean;
 }
 
 export type VisualizationType = 
@@ -111,12 +120,13 @@ export interface Calculator {
   inputs: CalculatorInput[];
   outputs: CalculatorOutput[];
   formulas: CalculatorFormula[];
+  graph?: Graph;
   relatedCalculators?: string[];
   localizedContent: Record<string, LocalizedContent>;
   countrySpecific?: Record<string, CountrySpecificData>;
-  tags: string[];
-  difficulty: 'basic' | 'intermediate' | 'advanced';
-  popularity: number;
+  tags?: string[];
+  difficulty?: 'basic' | 'intermediate' | 'advanced';
+  popularity?: number;
 }
 
 export interface CountrySpecificData {

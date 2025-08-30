@@ -15,9 +15,11 @@ export const loanCalculator: Calculator = {
       placeholder: 'Enter loan amount',
       min: 0,
       required: true,
-      validation: [
-        { type: 'min', value: 0, message: 'Loan amount must be positive' }
-      ],
+      validation: {
+        min: 0,
+        required: true,
+        message: 'Loan amount must be positive'
+      },
     },
     {
       key: 'interestRate',

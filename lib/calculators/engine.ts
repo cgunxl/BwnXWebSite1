@@ -55,10 +55,18 @@ export class CalculatorEngine {
 
       // Validation
       if (input.validation) {
-        for (const rule of input.validation) {
-          if (!this.validateInput(value, rule)) {
-            throw new Error(rule.message || `Validation failed for ${input.key}`);
-          }
+        const validation = input.validation;
+        if (validation.required && !value) {
+          throw new Error(validation.message || `${input.label || input.key} is required`);
+        }
+        if (validation.min !== undefined && Number(value) < validation.min) {
+          throw new Error(validation.message || `${input.label || input.key} must be at least ${validation.min}`);
+        }
+        if (validation.max !== undefined && Number(value) > validation.max) {
+          throw new Error(validation.message || `${input.label || input.key} must be at most ${validation.max}`);
+        }
+        if (validation.pattern && !new RegExp(validation.pattern).test(String(value))) {
+          throw new Error(validation.message || `${input.label || input.key} format is invalid`);
         }
       }
 
@@ -272,19 +280,12 @@ export class CalculatorEngine {
   /**
    * Validate input against a rule
    */
-  private validateInput(value: any, rule: any): boolean {
-    switch (rule.type) {
-      case 'min':
-        return value >= rule.value;
-      case 'max':
-        return value <= rule.value;
-      case 'pattern':
-        return new RegExp(rule.value).test(value);
-      case 'custom':
-        return rule.value(value);
-      default:
-        return true;
-    }
+  private validateInput(value: any, validation: any): boolean {
+    if (validation.required && !value) return false;
+    if (validation.min !== undefined && Number(value) < validation.min) return false;
+    if (validation.max !== undefined && Number(value) > validation.max) return false;
+    if (validation.pattern && !new RegExp(validation.pattern).test(String(value))) return false;
+    return true;
   }
 
   /**
