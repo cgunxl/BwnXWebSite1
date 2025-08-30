@@ -16,10 +16,12 @@ export const bmiCalculator: Calculator = {
       min: 1,
       max: 500,
       required: true,
-      validation: [
-        { type: 'min', value: 1, message: 'Weight must be greater than 0' },
-        { type: 'max', value: 500, message: 'Please enter a valid weight' }
-      ],
+      validation: {
+        min: 1,
+        max: 500,
+        required: true,
+        message: 'Weight must be between 1 and 500 kg'
+      },
     },
     {
       key: 'height',
@@ -30,10 +32,12 @@ export const bmiCalculator: Calculator = {
       min: 50,
       max: 300,
       required: true,
-      validation: [
-        { type: 'min', value: 50, message: 'Height must be greater than 50cm' },
-        { type: 'max', value: 300, message: 'Please enter a valid height' }
-      ],
+      validation: {
+        min: 50,
+        max: 300,
+        required: true,
+        message: 'Height must be between 50 and 300 cm'
+      },
     },
     {
       key: 'unitSystem',
