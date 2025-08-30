@@ -16,10 +16,12 @@ export const calorieCalculator: Calculator = {
       min: 1,
       max: 120,
       required: true,
-      validation: [
-        { type: 'min', value: 1, message: 'Age must be at least 1' },
-        { type: 'max', value: 120, message: 'Please enter a valid age' }
-      ],
+      validation: {
+        min: 1,
+        max: 120,
+        required: true,
+        message: 'Age must be between 1 and 120'
+      },
     },
     {
       key: 'gender',
