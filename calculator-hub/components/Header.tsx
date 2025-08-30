@@ -10,18 +10,8 @@ interface HeaderProps {
 }
 
 export default function Header({ locale }: HeaderProps) {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
   const pathname = usePathname();
-
-  const navigation = [
-    { name: 'Home', href: `/${locale}` },
-    { name: 'Finance', href: `/${locale}/category/finance` },
-    { name: 'Health', href: `/${locale}/category/health` },
-    { name: 'Education', href: `/${locale}/category/education` },
-    { name: 'Engineering', href: `/${locale}/category/engineering` },
-    { name: 'All Calculators', href: `/${locale}/calculators` },
-  ];
 
   const switchLocale = (newLocale: string) => {
     const segments = pathname.split('/');
@@ -29,104 +19,69 @@ export default function Header({ locale }: HeaderProps) {
     return segments.join('/');
   };
 
+  const currentFlag = localeFlags[locale as keyof typeof localeFlags];
+  const currentName = localeNames[locale as keyof typeof localeNames];
+
   return (
-    <header className="bg-white shadow-md sticky top-0 z-50">
+    <header className="bg-white shadow-sm border-b sticky top-0 z-50">
       <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <div className="flex items-center">
-            <Link href={`/${locale}`} className="flex items-center space-x-2">
-              <span className="text-2xl">🧮</span>
-              <span className="text-xl font-bold text-gray-900">Calculator Hub</span>
-            </Link>
-          </div>
+          <Link href={`/${locale}`} className="flex items-center space-x-2">
+            <span className="text-2xl">🧮</span>
+            <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+              Calculator Hub
+            </span>
+            <span className="text-xs bg-blue-100 text-blue-700 px-2 py-1 rounded-full">430+</span>
+          </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors"
-              >
-                {item.name}
-              </Link>
-            ))}
-          </div>
-
-          {/* Language Switcher */}
-          <div className="flex items-center space-x-4">
-            <div className="relative">
-              <button
-                onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
-                className="flex items-center space-x-2 px-3 py-2 text-sm font-medium text-gray-700 hover:text-blue-600 transition-colors"
-              >
-                <span>{localeFlags[locale as keyof typeof localeFlags]}</span>
-                <span>{locale.toUpperCase()}</span>
-                <svg
-                  className={`w-4 h-4 transition-transform ${isLangMenuOpen ? 'rotate-180' : ''}`}
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-
-              {/* Language Dropdown */}
-              {isLangMenuOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg py-2 z-50">
-                  {i18n.locales.map((loc) => (
-                    <Link
-                      key={loc}
-                      href={switchLocale(loc)}
-                      onClick={() => setIsLangMenuOpen(false)}
-                      className="flex items-center space-x-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                    >
-                      <span>{localeFlags[loc]}</span>
-                      <span>{localeNames[loc]}</span>
-                    </Link>
-                  ))}
-                </div>
-              )}
-            </div>
-
-            {/* Mobile menu button */}
+          {/* Language Selector - Right Corner */}
+          <div className="relative">
             <button
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-blue-600 hover:bg-gray-100 transition-colors"
+              onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
+              className="flex items-center space-x-2 px-4 py-2 bg-gray-50 hover:bg-gray-100 rounded-lg transition-colors"
             >
+              <span className="text-xl">{currentFlag}</span>
+              <span className="hidden sm:block text-sm font-medium text-gray-700">
+                {currentName}
+              </span>
               <svg
-                className="h-6 w-6"
+                className={`w-4 h-4 text-gray-500 transition-transform ${
+                  isLangMenuOpen ? 'rotate-180' : ''
+                }`}
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
               >
-                {isMenuOpen ? (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                ) : (
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-                )}
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
               </svg>
             </button>
+
+            {/* Language Dropdown */}
+            {isLangMenuOpen && (
+              <div className="absolute right-0 mt-2 w-48 bg-white rounded-lg shadow-lg border border-gray-200 py-2 max-h-96 overflow-y-auto">
+                {i18n.locales.map((loc) => (
+                  <Link
+                    key={loc}
+                    href={switchLocale(loc)}
+                    onClick={() => setIsLangMenuOpen(false)}
+                    className={`flex items-center space-x-3 px-4 py-2 hover:bg-gray-50 transition-colors ${
+                      locale === loc ? 'bg-blue-50 text-blue-600' : 'text-gray-700'
+                    }`}
+                  >
+                    <span className="text-xl">{localeFlags[loc]}</span>
+                    <span className="text-sm">{localeNames[loc]}</span>
+                    {locale === loc && (
+                      <svg className="w-4 h-4 ml-auto text-blue-600" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    )}
+                  </Link>
+                ))}
+              </div>
+            )}
           </div>
         </div>
-
-        {/* Mobile Navigation */}
-        {isMenuOpen && (
-          <div className="md:hidden py-4 border-t border-gray-200">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                onClick={() => setIsMenuOpen(false)}
-                className="block px-3 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50 rounded-md transition-colors"
-              >
-                {item.name}
-              </Link>
-            ))}
-          </div>
-        )}
       </nav>
     </header>
   );
