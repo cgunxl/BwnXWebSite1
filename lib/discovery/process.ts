@@ -492,7 +492,7 @@ export class SchemaProcessor {
       // Add more categories...
     };
 
-    const defaultDisclaimer = {
+    const defaultDisclaimer: Partial<Record<Locale, string[]>> = {
       en: ['Results are estimates and may vary based on individual circumstances.'],
       th: ['ผลลัพธ์เป็นการประมาณการและอาจแตกต่างตามสถานการณ์ของแต่ละบุคคล'],
     };
@@ -500,7 +500,8 @@ export class SchemaProcessor {
     return disclaimers[category]?.[locale] || 
            disclaimers[category]?.['en'] || 
            defaultDisclaimer[locale] || 
-           defaultDisclaimer['en'];
+           defaultDisclaimer['en'] ||
+           ['Results are estimates and may vary based on individual circumstances.'];
   }
 
   // Helper methods
@@ -509,8 +510,8 @@ export class SchemaProcessor {
     
     const unitMap: Record<string, string> = {
       'dollars': config.currency,
-      'pounds': config.units.weight === 'lbs' ? 'lbs' : 'kg',
-      'meters': config.units.distance === 'miles' ? 'feet' : 'm',
+      'pounds': config.units?.weight === 'lbs' ? 'lbs' : 'kg',
+      'meters': config.units?.distance === 'miles' ? 'feet' : 'm',
       // Add more mappings...
     };
 
@@ -589,9 +590,9 @@ export class SchemaProcessor {
         // Use locale-specific currency values
         localized[key] = config.incomeRanges.medium / 12; // Monthly average
       } else if (key.includes('weight')) {
-        localized[key] = config.units.weight === 'kg' ? 70 : 154;
+        localized[key] = config.units?.weight === 'kg' ? 70 : 154;
       } else if (key.includes('height')) {
-        localized[key] = config.units.height === 'cm' ? 170 : 67;
+        localized[key] = config.units?.height === 'cm' ? 170 : 67;
       } else {
         localized[key] = value;
       }
@@ -621,8 +622,8 @@ export class SchemaProcessor {
     return [
       `Currency: ${config.currency}`,
       `Tax Rate: ${(config.taxRate * 100).toFixed(0)}%`,
-      `Date Format: ${config.dateFormat}`,
-      `Units: ${config.units.weight}, ${config.units.distance}`,
+      `Date Format: ${config.dateFormat || 'MM/DD/YYYY'}`,
+      `Units: ${config.units?.weight || 'kg'}, ${config.units?.distance || 'km'}`,
     ];
   }
 }

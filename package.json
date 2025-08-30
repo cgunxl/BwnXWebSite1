@@ -5,14 +5,15 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
+    "build:github": "cp .env.github .env.production && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "export": "next export"
   },
   "dependencies": {
     "@formatjs/intl-localematcher": "^0.6.1",
     "clsx": "^2.1.1",
     "date-fns": "^4.1.0",
-    "framer-motion": "^12.23.12",
     "negotiator": "^1.0.0",
     "next": "15.5.2",
     "react": "19.1.0",

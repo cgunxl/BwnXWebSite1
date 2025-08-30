@@ -239,7 +239,7 @@ export class SafeEvaluator {
         index++;
         return {
           type: 'literal',
-          value: token.value,
+          value: token.value as number,
         };
       }
       
@@ -337,7 +337,8 @@ export class SafeEvaluator {
       case 'binary':
         const left = this.evaluateAST(node.left!, variables);
         const right = this.evaluateAST(node.right!, variables);
-        const op = this.operators[node.operator!];
+        const operator = node.operator as keyof typeof this.operators;
+        const op = this.operators[operator];
         if (!op) {
           throw new Error(`Unknown operator: ${node.operator}`);
         }

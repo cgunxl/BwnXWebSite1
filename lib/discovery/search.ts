@@ -260,8 +260,8 @@ class SchemaExtractor {
     
     // Pattern matching for common input patterns
     const patterns = [
-      /(?:input|enter|provide)\\s+(?:the\\s+)?([\\w\\s]+)(?:\\s+in\\s+)?(\\w+)?/gi,
-      /<label[^>]*>([^<]+)<\\/label>/gi,
+      /(?:input|enter|provide)\s+(?:the\s+)?([\w\s]+)(?:\s+in\s+)?(\w+)?/gi,
+      /<label[^>]*>([^<]+)<\/label>/gi,
       /<input[^>]+(?:name|id)=["']([^"']+)["'][^>]*>/gi,
     ];
 
@@ -291,9 +291,9 @@ class SchemaExtractor {
     
     // Look for mathematical expressions
     const patterns = [
-      /(?:formula|equation|calculate):[\\s]*([^<.]+)/gi,
-      /([A-Z])\\s*=\\s*([^<.]+)/g,
-      /\\b(\\w+)\\s*=\\s*([\\w\\s+\\-*/()^.]+)/g,
+      /(?:formula|equation|calculate):[\s]*([^<.]+)/gi,
+      /([A-Z])\s*=\s*([^<.]+)/g,
+      /\b(\w+)\s*=\s*([\w\s+\-*/()^.]+)/g,
     ];
 
     for (const pattern of patterns) {
@@ -318,8 +318,8 @@ class SchemaExtractor {
     
     // Look for range patterns
     const patterns = [
-      /(?:if|when)\\s+(?:result|value|score)\\s+(?:is\\s+)?(?:between\\s+)?(\\d+(?:\\.\\d+)?)\\s*(?:to|-)\\s*(\\d+(?:\\.\\d+)?)[^:]*:\\s*([^<.]+)/gi,
-      /([\\w\\s]+):\\s*(\\d+(?:\\.\\d+)?)\\s*-\\s*(\\d+(?:\\.\\d+)?)/g,
+      /(?:if|when)\s+(?:result|value|score)\s+(?:is\s+)?(?:between\s+)?(\d+(?:\.\d+)?)\s*(?:to|-)\s*(\d+(?:\.\d+)?)[^:]*:\s*([^<.]+)/gi,
+      /([\w\s]+):\s*(\d+(?:\.\d+)?)\s*-\s*(\d+(?:\.\d+)?)/g,
     ];
 
     for (const pattern of patterns) {
@@ -342,8 +342,8 @@ class SchemaExtractor {
     
     // Look for example patterns
     const patterns = [
-      /(?:example|for instance|e\\.g\\.):[^<]{20,200}/gi,
-      /(?:if|when)\\s+([\\w\\s]+)\\s*=\\s*(\\d+(?:\\.\\d+)?)[^,]*,\\s*(?:then\\s+)?([\\w\\s]+)\\s*=\\s*(\\d+(?:\\.\\d+)?)/gi,
+      /(?:example|for instance|e\.g\.):[^<]{20,200}/gi,
+      /(?:if|when)\s+([\w\s]+)\s*=\s*(\d+(?:\.\d+)?)[^,]*,\s*(?:then\s+)?([\w\s]+)\s*=\s*(\d+(?:\.\d+)?)/gi,
     ];
 
     for (const pattern of patterns) {
@@ -362,12 +362,12 @@ class SchemaExtractor {
   }
 
   private extractTitle(html: string): string | null {
-    const match = html.match(/<title>([^<]+)<\\/title>/i);
+    const match = html.match(/<title>([^<]+)<\/title>/i);
     return match ? match[1].trim() : null;
   }
 
   private labelToKey(label: string): string {
-    return label.toLowerCase().replace(/\\s+/g, '_').replace(/[^a-z0-9_]/g, '');
+    return label.toLowerCase().replace(/\s+/g, '_').replace(/[^a-z0-9_]/g, '');
   }
 
   private inferInputType(label: string, context: string): string {
@@ -385,9 +385,9 @@ class SchemaExtractor {
   private normalizeFormula(expression: string): string {
     // Convert to JavaScript-safe expression
     return expression
-      .replace(/\\^/g, '**')
-      .replace(/\\s+/g, ' ')
-      .replace(/([a-zA-Z_]\\w*)/g, (match) => {
+      .replace(/\^/g, '**')
+      .replace(/\s+/g, ' ')
+      .replace(/([a-zA-Z_]\w*)/g, (match) => {
         // Keep Math functions, convert others to variables
         if (match.startsWith('Math.')) return match;
         if (['Math', 'min', 'max', 'abs', 'pow', 'sqrt', 'log', 'exp'].includes(match)) {
@@ -400,7 +400,7 @@ class SchemaExtractor {
 
   private extractVariables(expression: string): string[] {
     const variables = new Set<string>();
-    const varPattern = /\\b([a-z_]\\w*)\\b/gi;
+    const varPattern = /\b([a-z_]\w*)\b/gi;
     let match;
     
     while ((match = varPattern.exec(expression)) !== null) {
@@ -477,7 +477,7 @@ class SchemaExtractor {
     return 'low';
   }
 
-  private getSourceType(domain: string): string {
+  private getSourceType(domain: string): 'government' | 'academic' | 'standard' | 'official' | 'reputable' {
     if (domain.endsWith('.gov')) return 'government';
     if (domain.endsWith('.edu')) return 'academic';
     if (domain.endsWith('.org')) return 'standard';

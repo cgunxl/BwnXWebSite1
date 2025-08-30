@@ -180,6 +180,12 @@ export interface CalculatorResult {
   timestamp: string;
   locale: string;
   shareUrl?: string;
+  units?: Record<string, string>;
+  category?: string;
+  categoryPercentage?: number;
+  breakdown?: Record<string, any>;
+  warnings?: string[];
+  suggestions?: string[];
 }
 
 export interface GraphData {

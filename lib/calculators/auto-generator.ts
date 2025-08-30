@@ -566,20 +566,24 @@ function generateArticle(calculatorId: string, locale: Locale) {
   const title = getCalculatorTitle(calculatorId, locale);
   
   return {
+    title: `How to Use ${title}`,
     introduction: `${title} helps you make informed decisions with accurate calculations tailored for your region.`,
-    howToUse: [
-      'Enter the required values in the input fields',
-      'The calculator will automatically compute the results',
-      'Review the detailed breakdown and visualizations',
-      'Save or share your results using the action buttons',
+    sections: [
+      {
+        heading: 'How to Use',
+        content: 'Enter the required values in the input fields. The calculator will automatically compute the results. Review the detailed breakdown and visualizations. Save or share your results using the action buttons.',
+      },
+      {
+        heading: 'Understanding Your Results',
+        content: 'Understanding your results helps you make better decisions. The color-coded categories and visual indicators make it easy to assess your situation at a glance.',
+      },
+      {
+        heading: 'Tips for Accurate Calculations',
+        content: 'Double-check your input values for accuracy. Consider multiple scenarios by adjusting the inputs. Use the related calculators for comprehensive analysis. Consult professionals for important financial or health decisions.',
+      },
     ],
-    interpretation: 'Understanding your results helps you make better decisions. The color-coded categories and visual indicators make it easy to assess your situation at a glance.',
-    tips: [
-      'Double-check your input values for accuracy',
-      'Consider multiple scenarios by adjusting the inputs',
-      'Use the related calculators for comprehensive analysis',
-      'Consult professionals for important financial or health decisions',
-    ],
+    conclusion: 'This calculator provides estimates based on the information you provide. For professional advice, please consult with qualified experts in your area.',
+    wordCount: 500,
   };
 }
 
@@ -590,12 +594,14 @@ function generateReferences(calculatorId: string, locale: Locale) {
       url: getGovernmentUrl(calculatorId, locale),
       publisher: getGovernmentAgency(locale),
       dateAccessed: new Date().toISOString(),
+      type: 'government' as const,
     },
     {
       title: 'Academic Research Paper',
       url: '#',
       publisher: 'Journal of Applied Mathematics',
       dateAccessed: new Date().toISOString(),
+      type: 'academic' as const,
     },
   ];
 
@@ -643,14 +649,25 @@ function generateExamples(calculatorId: string, locale: Locale, config: any) {
 
 function getCalculatorTitle(calculatorId: string, locale: Locale): string {
   // Generate localized titles
-  const titles: Record<string, Record<Locale, string>> = {
+  const titles: Record<string, Partial<Record<Locale, string>>> = {
     'loan-calculator': {
       en: 'Loan Calculator',
       th: 'คำนวณสินเชื่อ',
       ja: 'ローン計算機',
       de: 'Kreditrechner',
       zh: '贷款计算器',
-      // Add more...
+      es: 'Calculadora de Préstamos',
+      pt: 'Calculadora de Empréstimo',
+      fr: 'Calculateur de Prêt',
+      ko: '대출 계산기',
+      ar: 'حاسبة القرض',
+      hi: 'ऋण कैलकुलेटर',
+      id: 'Kalkulator Pinjaman',
+      ru: 'Калькулятор кредита',
+      it: 'Calcolatore di Prestito',
+      nl: 'Lening Calculator',
+      vi: 'Máy tính Khoản vay',
+      fa: 'ماشین حساب وام',
     },
     // Add more calculator titles...
   };
@@ -676,7 +693,18 @@ function getGovernmentUrl(calculatorId: string, locale: Locale): string {
     ja: 'https://www.japan.go.jp',
     de: 'https://www.bundesregierung.de',
     zh: 'https://www.gov.cn',
-    // Add more...
+    es: 'https://www.lamoncloa.gob.es',
+    pt: 'https://www.gov.br',
+    fr: 'https://www.gouvernement.fr',
+    ko: 'https://www.korea.kr',
+    ar: 'https://www.saudi.gov.sa',
+    hi: 'https://www.india.gov.in',
+    id: 'https://www.indonesia.go.id',
+    ru: 'https://www.gov.ru',
+    it: 'https://www.governo.it',
+    nl: 'https://www.government.nl',
+    vi: 'https://www.chinhphu.vn',
+    fa: 'https://www.dolat.ir',
   };
 
   return urls[locale] || urls.en;
@@ -689,7 +717,18 @@ function getGovernmentAgency(locale: Locale): string {
     ja: 'Government of Japan',
     de: 'German Federal Government',
     zh: 'Government of China',
-    // Add more...
+    es: 'Government of Spain',
+    pt: 'Government of Brazil',
+    fr: 'Government of France',
+    ko: 'Government of Korea',
+    ar: 'Government of Saudi Arabia',
+    hi: 'Government of India',
+    id: 'Government of Indonesia',
+    ru: 'Government of Russia',
+    it: 'Government of Italy',
+    nl: 'Government of Netherlands',
+    vi: 'Government of Vietnam',
+    fa: 'Government of Iran',
   };
 
   return agencies[locale] || 'Government Agency';
@@ -701,31 +740,56 @@ export function generateCalculator(
   category: string,
   locale: Locale
 ): Calculator {
-  const template = calculatorTemplates[category]?.[calculatorId.replace(`${category}-`, '')] 
-    || calculatorTemplates[category]?.['default'];
+  // Get template function based on category and calculator type
+  let calculatorConfig: any;
   
-  if (!template) {
-    throw new Error(`No template found for ${calculatorId} in category ${category}`);
+  if (category === 'finance') {
+    if (calculatorId.includes('loan')) {
+      calculatorConfig = calculatorTemplates.finance.loan(locale);
+    } else if (calculatorId.includes('mortgage')) {
+      calculatorConfig = calculatorTemplates.finance.mortgage(locale);
+    } else {
+      // Default finance template
+      calculatorConfig = calculatorTemplates.finance.loan(locale);
+    }
+  } else if (category === 'health') {
+    if (calculatorId.includes('bmi')) {
+      calculatorConfig = calculatorTemplates.health.bmi(locale);
+    } else if (calculatorId.includes('calorie')) {
+      calculatorConfig = calculatorTemplates.health.calorie(locale);
+    } else {
+      // Default health template
+      calculatorConfig = calculatorTemplates.health.bmi(locale);
+    }
+  } else if (category === 'education') {
+    calculatorConfig = calculatorTemplates.education.gpa(locale);
+  } else {
+    // Default to loan calculator template for unknown categories
+    calculatorConfig = calculatorTemplates.finance.loan(locale);
   }
-
-  const calculatorConfig = template(locale);
   const localizedContent = generateLocalizedContent(calculatorId, locale);
 
   return {
     id: calculatorId,
     slug: calculatorId,
-    name: localizedContent.title,
-    category,
-    inputs: calculatorConfig.inputs,
-    formula: calculatorConfig.formula,
-    outputs: calculatorConfig.outputs,
-    categories: calculatorConfig.categories,
+    category: category as any, // Type assertion for flexibility
+    icon: getCategoryIcon(category),
+    color: '#3B82F6', // Default blue color
+    inputs: calculatorConfig.inputs || [],
+    outputs: calculatorConfig.outputs || [],
+    formulas: calculatorConfig.formulae || [
+      {
+        name: 'primary',
+        expression: calculatorConfig.formula || '({value}) => value',
+        variables: calculatorConfig.inputs?.map((i: any) => i.key) || ['value'],
+      }
+    ],
+    graph: calculatorConfig.graphs?.[0],
+    relatedCalculators: getRelatedCalculators(calculatorId, category),
     localizedContent: {
       [locale]: localizedContent,
     },
-    relatedCalculators: getRelatedCalculators(calculatorId, category),
-    icon: getCategoryIcon(category),
-  };
+  } as Calculator;
 }
 
 function getRelatedCalculators(calculatorId: string, category: string): string[] {

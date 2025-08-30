@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Calculator, CalculatorInput, CalculatorResult } from '@/lib/types/calculator';
 import { CalculatorEngine } from '@/lib/calculators/engine';
-import { motion, AnimatePresence } from 'framer-motion';
+// No external animation libraries - using CSS animations only
 
 interface EnhancedCalculatorFormProps {
   calculator: Calculator;
@@ -117,12 +117,10 @@ export default function EnhancedCalculatorForm({
     const error = errors[input.key];
 
     return (
-      <motion.div
+      <div
         key={input.key}
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: index * 0.1 }}
-        className="mb-6"
+        className="mb-6 animate-slideIn"
+        style={{ animationDelay: `${index * 0.1}s` }}
       >
         <div className="relative">
           <label 
@@ -212,48 +210,31 @@ export default function EnhancedCalculatorForm({
           )}
 
           {error && (
-            <motion.p
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="mt-1 text-sm text-red-500"
-            >
+            <p className="mt-1 text-sm text-red-500 animate-fadeIn">
               {error}
-            </motion.p>
+            </p>
           )}
         </div>
-      </motion.div>
+      </div>
     );
   };
 
   return (
     <div className="space-y-8">
       {/* Input Form */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 md:p-8"
-      >
+      <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-6 md:p-8 animate-fadeIn">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {calculator.inputs.map((input, index) => renderInput(input, index))}
         </div>
 
         {errors.general && (
-          <motion.div
-            initial={{ opacity: 0, y: -10 }}
-            animate={{ opacity: 1, y: 0 }}
-            className="mt-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg"
-          >
+          <div className="mt-4 p-4 bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg animate-slideIn">
             <p className="text-red-600 dark:text-red-400">{errors.general}</p>
-          </motion.div>
+          </div>
         )}
 
         {/* Action Buttons */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.3 }}
-          className="flex flex-wrap gap-3 mt-6"
-        >
+        <div className="flex flex-wrap gap-3 mt-6 animate-slideUp" style={{ animationDelay: '0.3s' }}>
           <button
             onClick={handleCalculate}
             disabled={isCalculating}
@@ -319,33 +300,26 @@ export default function EnhancedCalculatorForm({
               </button>
             </>
           )}
-        </motion.div>
-      </motion.div>
+        </div>
+      </div>
 
       {/* Results Section */}
-      <AnimatePresence>
-        {showResults && result && (
-          <motion.div
-            ref={resultsRef}
-            initial={{ opacity: 0, y: 20, scale: 0.95 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: -20, scale: 0.95 }}
-            transition={{ type: 'spring', stiffness: 300, damping: 30 }}
-            className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20
-              rounded-2xl shadow-xl p-6 md:p-8 border border-blue-200 dark:border-blue-800"
-          >
+      {showResults && result && (
+        <div
+          ref={resultsRef}
+          className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20
+            rounded-2xl shadow-xl p-6 md:p-8 border border-blue-200 dark:border-blue-800 animate-scaleIn"
+        >
             <h3 className="text-2xl font-bold mb-6 text-gray-800 dark:text-gray-200">
               📊 Results
             </h3>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
               {Object.entries(result.outputs).map(([key, value], index) => (
-                <motion.div
+                <div
                   key={key}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-md hover-lift"
+                  className="bg-white dark:bg-gray-800 rounded-xl p-4 shadow-md hover-lift animate-slideIn"
+                  style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <p className="text-sm text-gray-600 dark:text-gray-400 mb-1">
                     {key.replace(/_/g, ' ').replace(/\\b\\w/g, l => l.toUpperCase())}
@@ -360,18 +334,13 @@ export default function EnhancedCalculatorForm({
                       {result.units[key]}
                     </p>
                   )}
-                </motion.div>
+                </div>
               ))}
             </div>
 
             {/* Category Bar Visualization */}
             {result.category && (
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: 0.5 }}
-                className="mt-8"
-              >
+              <div className="mt-8 animate-slideUp" style={{ animationDelay: '0.5s' }}>
                 <h4 className="text-lg font-semibold mb-4">Category Analysis</h4>
                 <div className="category-bar">
                   <div 
@@ -388,17 +357,12 @@ export default function EnhancedCalculatorForm({
                 <p className="text-center mt-4 text-lg font-medium">
                   {result.category}
                 </p>
-              </motion.div>
+              </div>
             )}
 
             {/* Detailed Breakdown */}
             {result.breakdown && (
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.6 }}
-                className="mt-6 p-4 bg-white dark:bg-gray-800 rounded-xl"
-              >
+              <div className="mt-6 p-4 bg-white dark:bg-gray-800 rounded-xl animate-fadeIn" style={{ animationDelay: '0.6s' }}>
                 <h4 className="font-semibold mb-3">Detailed Breakdown</h4>
                 <div className="space-y-2">
                   {Object.entries(result.breakdown).map(([key, value]) => (
@@ -408,11 +372,10 @@ export default function EnhancedCalculatorForm({
                     </div>
                   ))}
                 </div>
-              </motion.div>
+              </div>
             )}
-          </motion.div>
-        )}
-      </AnimatePresence>
+          </div>
+      )}
     </div>
   );
 }
