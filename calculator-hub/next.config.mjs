@@ -1,11 +1,6 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
-  // Disable turbopack for production
-  experimental: {
-    turbo: false,
-  },
   // TypeScript configuration
   typescript: {
     tsconfigPath: './tsconfig.json',
