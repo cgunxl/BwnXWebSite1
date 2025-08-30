@@ -5,7 +5,8 @@ import SearchBar from '@/components/SearchBar';
 import PopularCalculators from '@/components/PopularCalculators';
 import CategoryGrid from '@/components/CategoryGrid';
 
-export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
+  const { locale } = await params;
   const titles = {
     en: 'Free Online Calculator Hub - 430+ Calculators',
     th: 'ศูนย์รวมเครื่องคิดเลขออนไลน์ฟรี - 430+ เครื่องมือ',
@@ -33,15 +34,16 @@ export async function generateMetadata({ params }: { params: { locale: string } 
   };
 
   return {
-    title: titles[params.locale as keyof typeof titles] || titles.en,
-    description: descriptions[params.locale as keyof typeof descriptions] || descriptions.en,
+    title: titles[locale as keyof typeof titles] || titles.en,
+    description: descriptions[locale as keyof typeof descriptions] || descriptions.en,
     alternates: {
-      canonical: `https://calculatorhub.com/${params.locale}`,
+      canonical: `https://calculatorhub.com/${locale}`,
     },
   };
 }
 
-export default function HomePage({ params }: { params: { locale: string } }) {
+export default async function HomePage({ params }: { params: Promise<{ locale: string }> }) {
+  const { locale } = await params;
   const popularCalculators = getPopularCalculators(30);
 
   const heroContent = {
@@ -60,7 +62,7 @@ export default function HomePage({ params }: { params: { locale: string } }) {
     // Add more languages...
   };
 
-  const content = heroContent[params.locale as keyof typeof heroContent] || heroContent.en;
+  const content = heroContent[locale as keyof typeof heroContent] || heroContent.en;
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -77,50 +79,50 @@ export default function HomePage({ params }: { params: { locale: string } }) {
         </p>
 
         {/* Search Bar */}
-        <SearchBar locale={params.locale} placeholder={content.searchPlaceholder} />
+        <SearchBar locale={locale} placeholder={content.searchPlaceholder} />
       </section>
 
       {/* Popular Calculators */}
       <section className="mb-16">
         <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-          {params.locale === 'th' ? 'เครื่องคิดเลขยอดนิยม' : 'Popular Calculators'}
+          {locale === 'th' ? 'เครื่องคิดเลขยอดนิยม' : 'Popular Calculators'}
         </h2>
-        <PopularCalculators calculators={popularCalculators} locale={params.locale} />
+        <PopularCalculators calculators={popularCalculators} locale={locale} />
       </section>
 
       {/* Categories Grid */}
       <section className="mb-16">
         <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-          {params.locale === 'th' ? 'หมวดหมู่ทั้งหมด' : 'All Categories'}
+          {locale === 'th' ? 'หมวดหมู่ทั้งหมด' : 'All Categories'}
         </h2>
-        <CategoryGrid categories={calculatorCategories} locale={params.locale} />
+        <CategoryGrid categories={calculatorCategories} locale={locale} />
       </section>
 
       {/* Features Section */}
       <section className="bg-white rounded-2xl shadow-xl p-8 mb-16">
         <h2 className="text-3xl font-bold text-gray-900 mb-8 text-center">
-          {params.locale === 'th' ? 'ทำไมต้องเลือกเรา' : 'Why Choose Our Calculators'}
+          {locale === 'th' ? 'ทำไมต้องเลือกเรา' : 'Why Choose Our Calculators'}
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           <FeatureCard
             icon="🎯"
-            title={params.locale === 'th' ? 'แม่นยำ' : 'Accurate'}
-            description={params.locale === 'th' ? 'สูตรคำนวณที่ผ่านการตรวจสอบ' : 'Verified formulas and calculations'}
+            title={locale === 'th' ? 'แม่นยำ' : 'Accurate'}
+            description={locale === 'th' ? 'สูตรคำนวณที่ผ่านการตรวจสอบ' : 'Verified formulas and calculations'}
           />
           <FeatureCard
             icon="🌍"
-            title={params.locale === 'th' ? '17 ภาษา' : '17 Languages'}
-            description={params.locale === 'th' ? 'รองรับผู้ใช้ทั่วโลก' : 'Supporting users worldwide'}
+            title={locale === 'th' ? '17 ภาษา' : '17 Languages'}
+            description={locale === 'th' ? 'รองรับผู้ใช้ทั่วโลก' : 'Supporting users worldwide'}
           />
           <FeatureCard
             icon="📱"
-            title={params.locale === 'th' ? 'ใช้ได้ทุกอุปกรณ์' : 'Responsive'}
-            description={params.locale === 'th' ? 'ใช้งานได้บนมือถือและคอมพิวเตอร์' : 'Works on all devices'}
+            title={locale === 'th' ? 'ใช้ได้ทุกอุปกรณ์' : 'Responsive'}
+            description={locale === 'th' ? 'ใช้งานได้บนมือถือและคอมพิวเตอร์' : 'Works on all devices'}
           />
           <FeatureCard
             icon="🆓"
-            title={params.locale === 'th' ? 'ฟรี 100%' : '100% Free'}
-            description={params.locale === 'th' ? 'ไม่มีค่าใช้จ่ายใดๆ' : 'No hidden costs or fees'}
+            title={locale === 'th' ? 'ฟรี 100%' : '100% Free'}
+            description={locale === 'th' ? 'ไม่มีค่าใช้จ่ายใดๆ' : 'No hidden costs or fees'}
           />
         </div>
       </section>
@@ -128,10 +130,10 @@ export default function HomePage({ params }: { params: { locale: string } }) {
       {/* Statistics */}
       <section className="text-center mb-16">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          <StatCard number="430+" label={params.locale === 'th' ? 'เครื่องคิดเลข' : 'Calculators'} />
-          <StatCard number="17" label={params.locale === 'th' ? 'ภาษา' : 'Languages'} />
-          <StatCard number="14" label={params.locale === 'th' ? 'หมวดหมู่' : 'Categories'} />
-          <StatCard number="100%" label={params.locale === 'th' ? 'ฟรี' : 'Free'} />
+          <StatCard number="430+" label={locale === 'th' ? 'เครื่องคิดเลข' : 'Calculators'} />
+          <StatCard number="17" label={locale === 'th' ? 'ภาษา' : 'Languages'} />
+          <StatCard number="14" label={locale === 'th' ? 'หมวดหมู่' : 'Categories'} />
+          <StatCard number="100%" label={locale === 'th' ? 'ฟรี' : 'Free'} />
         </div>
       </section>
     </div>

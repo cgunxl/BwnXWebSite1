@@ -12,9 +12,10 @@ import { loadCalculatorData } from '@/lib/calculators/loader';
 export async function generateMetadata({ 
   params 
 }: { 
-  params: { locale: string; slug: string } 
+  params: Promise<{ locale: string; slug: string }> 
 }): Promise<Metadata> {
-  const calculator = await loadCalculatorData(params.slug);
+  const { locale, slug } = await params;
+  const calculator = await loadCalculatorData(slug);
   
   if (!calculator) {
     return {
@@ -22,19 +23,19 @@ export async function generateMetadata({
     };
   }
 
-  const content = calculator.localizedContent[params.locale] || calculator.localizedContent['en'];
+  const content = calculator.localizedContent[locale] || calculator.localizedContent['en'];
 
   return {
     title: content.title,
     description: content.description,
     keywords: content.keywords,
     alternates: {
-      canonical: `https://calculatorhub.com/${params.locale}/calculator/${params.slug}`,
+      canonical: `https://calculatorhub.com/${locale}/calculator/${slug}`,
     },
     openGraph: {
       title: content.title,
       description: content.description,
-      url: `https://calculatorhub.com/${params.locale}/calculator/${params.slug}`,
+      url: `https://calculatorhub.com/${locale}/calculator/${slug}`,
       type: 'website',
     },
   };
@@ -44,27 +45,29 @@ export default async function CalculatorPage({
   params,
   searchParams 
 }: { 
-  params: { locale: string; slug: string };
-  searchParams: Record<string, string>;
+  params: Promise<{ locale: string; slug: string }>;
+  searchParams: Promise<Record<string, string>>;
 }) {
-  const calculator = await loadCalculatorData(params.slug);
+  const { locale, slug } = await params;
+  const searchParamsData = await searchParams;
+  const calculator = await loadCalculatorData(slug);
 
   if (!calculator) {
     notFound();
   }
 
-  const content = calculator.localizedContent[params.locale] || calculator.localizedContent['en'];
+  const content = calculator.localizedContent[locale] || calculator.localizedContent['en'];
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Breadcrumb */}
       <nav className="flex mb-6 text-sm">
-        <a href={`/${params.locale}`} className="text-blue-600 hover:text-blue-800">
-          {params.locale === 'th' ? 'หน้าแรก' : 'Home'}
+        <a href={`/${locale}`} className="text-blue-600 hover:text-blue-800">
+          {locale === 'th' ? 'หน้าแรก' : 'Home'}
         </a>
         <span className="mx-2 text-gray-500">/</span>
-        <a href={`/${params.locale}/category/${calculator.category}`} className="text-blue-600 hover:text-blue-800">
-          {getCategoryName(calculator.category, params.locale)}
+        <a href={`/${locale}/category/${calculator.category}`} className="text-blue-600 hover:text-blue-800">
+          {getCategoryName(calculator.category, locale)}
         </a>
         <span className="mx-2 text-gray-500">/</span>
         <span className="text-gray-700">{content.title}</span>
@@ -88,29 +91,29 @@ export default async function CalculatorPage({
           {/* Calculator Form */}
           <CalculatorForm 
             calculator={calculator} 
-            locale={params.locale}
-            initialInputs={searchParams}
+            locale={locale}
+            initialInputs={searchParamsData}
           />
 
           {/* Share Buttons */}
           <div className="mt-8">
             <ShareButtons 
-              url={`https://calculatorhub.com/${params.locale}/calculator/${params.slug}`}
+              url={`https://calculatorhub.com/${locale}/calculator/${slug}`}
               title={content.title}
-              locale={params.locale}
+              locale={locale}
             />
           </div>
 
           {/* Article Content */}
           <div className="mt-12">
-            <CalculatorArticle article={content.article} locale={params.locale} />
+            <CalculatorArticle article={content.article} locale={locale} />
           </div>
 
           {/* Examples */}
           {content.examples && content.examples.length > 0 && (
             <div className="mt-12 bg-blue-50 rounded-xl p-6">
               <h2 className="text-2xl font-bold text-gray-900 mb-6">
-                {params.locale === 'th' ? 'ตัวอย่างการคำนวณ' : 'Calculation Examples'}
+                {locale === 'th' ? 'ตัวอย่างการคำนวณ' : 'Calculation Examples'}
               </h2>
               <div className="space-y-6">
                 {content.examples.map((example, index) => (
@@ -139,7 +142,7 @@ export default async function CalculatorPage({
 
           {/* FAQ Section */}
           <div className="mt-12">
-            <CalculatorFAQ faq={content.faq} locale={params.locale} />
+            <CalculatorFAQ faq={content.faq} locale={locale} />
           </div>
         </div>
 
@@ -149,14 +152,14 @@ export default async function CalculatorPage({
           <div className="sticky top-24">
             <RelatedCalculators 
               currentCalculator={calculator}
-              locale={params.locale}
+              locale={locale}
             />
 
             {/* References */}
             {content.references && content.references.length > 0 && (
               <div className="mt-8 bg-gray-50 rounded-xl p-6">
                 <h3 className="text-lg font-semibold text-gray-900 mb-4">
-                  {params.locale === 'th' ? 'แหล่งอ้างอิง' : 'References'}
+                  {locale === 'th' ? 'แหล่งอ้างอิง' : 'References'}
                 </h3>
                 <ul className="space-y-3">
                   {content.references.map((ref, index) => (
@@ -187,24 +190,24 @@ export default async function CalculatorPage({
             <div className="mt-8 bg-yellow-50 rounded-xl p-6">
               <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center">
                 <span className="text-2xl mr-2">💡</span>
-                {params.locale === 'th' ? 'เคล็ดลับ' : 'Quick Tips'}
+                {locale === 'th' ? 'เคล็ดลับ' : 'Quick Tips'}
               </h3>
               <ul className="space-y-2 text-sm text-gray-700">
                 <li className="flex items-start">
                   <span className="text-yellow-600 mr-2">•</span>
-                  {params.locale === 'th' 
+                  {locale === 'th' 
                     ? 'บันทึก URL เพื่อเก็บค่าที่คำนวณไว้' 
                     : 'Bookmark the URL to save your calculations'}
                 </li>
                 <li className="flex items-start">
                   <span className="text-yellow-600 mr-2">•</span>
-                  {params.locale === 'th'
+                  {locale === 'th'
                     ? 'ดาวน์โหลดผลลัพธ์เป็น CSV ได้'
                     : 'Download results as CSV for records'}
                 </li>
                 <li className="flex items-start">
                   <span className="text-yellow-600 mr-2">•</span>
-                  {params.locale === 'th'
+                  {locale === 'th'
                     ? 'พิมพ์หรือบันทึกเป็น PDF'
                     : 'Print or save as PDF'}
                 </li>

@@ -166,10 +166,21 @@ export const healthCalculators = [
 ];
 
 // Export all calculator lists
-export const allCalculatorLists = {
+export const allCalculatorLists: Record<CalculatorCategory, any[]> = {
   finance: financeCalculators,
   health: healthCalculators,
-  // Add more categories here...
+  education: [], // To be implemented
+  engineering: [], // To be implemented
+  lifestyle: [], // To be implemented
+  insurance: [], // To be implemented
+  environment: [], // To be implemented
+  business: [], // To be implemented
+  technology: [], // To be implemented
+  mathematics: [], // To be implemented
+  conversion: [], // To be implemented
+  logistics: [], // To be implemented
+  household: [], // To be implemented
+  miscellaneous: [], // To be implemented
 };
 
 // Function to get calculator by slug

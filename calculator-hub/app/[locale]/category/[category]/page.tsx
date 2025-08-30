@@ -8,9 +8,10 @@ import SearchBar from '@/components/SearchBar';
 export async function generateMetadata({ 
   params 
 }: { 
-  params: { locale: string; category: string } 
+  params: Promise<{ locale: string; category: string }> 
 }): Promise<Metadata> {
-  const categoryInfo = calculatorCategories[params.category as CalculatorCategory];
+  const { locale, category } = await params;
+  const categoryInfo = calculatorCategories[category as CalculatorCategory];
   
   if (!categoryInfo) {
     return {
@@ -20,20 +21,20 @@ export async function generateMetadata({
 
   const titles = {
     en: `${categoryInfo.name} Calculators - Free Online Tools`,
-    th: `เครื่องคิดเลข${getCategoryNameThai(params.category)} - เครื่องมือออนไลน์ฟรี`,
+    th: `เครื่องคิดเลข${getCategoryNameThai(category)} - เครื่องมือออนไลน์ฟรี`,
     // Add more languages...
   };
 
   const descriptions = {
     en: `Free ${categoryInfo.name.toLowerCase()} calculators online. ${categoryInfo.description}`,
-    th: `เครื่องคิดเลข${getCategoryNameThai(params.category)}ออนไลน์ฟรี ${getCategoryDescriptionThai(params.category)}`,
+    th: `เครื่องคิดเลข${getCategoryNameThai(category)}ออนไลน์ฟรี ${getCategoryDescriptionThai(category)}`,
   };
 
   return {
-    title: titles[params.locale as keyof typeof titles] || titles.en,
-    description: descriptions[params.locale as keyof typeof descriptions] || descriptions.en,
+    title: titles[locale as keyof typeof titles] || titles.en,
+    description: descriptions[locale as keyof typeof descriptions] || descriptions.en,
     alternates: {
-      canonical: `https://calculatorhub.com/${params.locale}/category/${params.category}`,
+      canonical: `https://calculatorhub.com/${locale}/category/${category}`,
     },
   };
 }
@@ -52,18 +53,19 @@ export async function generateStaticParams() {
   return params;
 }
 
-export default function CategoryPage({ 
+export default async function CategoryPage({ 
   params 
 }: { 
-  params: { locale: string; category: string } 
+  params: Promise<{ locale: string; category: string }> 
 }) {
-  const categoryInfo = calculatorCategories[params.category as CalculatorCategory];
+  const { locale, category } = await params;
+  const categoryInfo = calculatorCategories[category as CalculatorCategory];
   
   if (!categoryInfo) {
     notFound();
   }
 
-  const calculators = getCalculatorsByCategory(params.category as CalculatorCategory);
+  const calculators = getCalculatorsByCategory(category as CalculatorCategory);
   
   // Group calculators by subcategory or popularity
   const featuredCalculators = calculators.slice(0, 6);
@@ -84,11 +86,11 @@ export default function CategoryPage({
       noDownload: 'No Download Required',
     },
     th: {
-      title: `เครื่องคิดเลข${getCategoryNameThai(params.category)}`,
-      subtitle: getCategoryDescriptionThai(params.category),
+      title: `เครื่องคิดเลข${getCategoryNameThai(category)}`,
+      subtitle: getCategoryDescriptionThai(category),
       featuredTitle: 'เครื่องคิดเลขยอดนิยม',
-      allTitle: `เครื่องคิดเลข${getCategoryNameThai(params.category)}ทั้งหมด`,
-      searchPlaceholder: `ค้นหาเครื่องคิดเลข${getCategoryNameThai(params.category)}...`,
+      allTitle: `เครื่องคิดเลข${getCategoryNameThai(category)}ทั้งหมด`,
+      searchPlaceholder: `ค้นหาเครื่องคิดเลข${getCategoryNameThai(category)}...`,
       breadcrumbHome: 'หน้าแรก',
       breadcrumbCategories: 'หมวดหมู่',
       tryCalculator: 'ลองใช้งาน',
@@ -98,17 +100,17 @@ export default function CategoryPage({
     },
   };
 
-  const content = pageContent[params.locale as keyof typeof pageContent] || pageContent.en;
+  const content = pageContent[locale as keyof typeof pageContent] || pageContent.en;
 
   return (
     <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Breadcrumb */}
       <nav className="flex mb-6 text-sm">
-        <Link href={`/${params.locale}`} className="text-blue-600 hover:text-blue-800">
+        <Link href={`/${locale}`} className="text-blue-600 hover:text-blue-800">
           {content.breadcrumbHome}
         </Link>
         <span className="mx-2 text-gray-500">/</span>
-        <Link href={`/${params.locale}/categories`} className="text-blue-600 hover:text-blue-800">
+        <Link href={`/${locale}/categories`} className="text-blue-600 hover:text-blue-800">
           {content.breadcrumbCategories}
         </Link>
         <span className="mx-2 text-gray-500">/</span>
@@ -129,7 +131,7 @@ export default function CategoryPage({
 
         {/* Category Search */}
         <div className="max-w-2xl mx-auto">
-          <SearchBar locale={params.locale} placeholder={content.searchPlaceholder} />
+          <SearchBar locale={locale} placeholder={content.searchPlaceholder} />
         </div>
       </div>
 
@@ -138,7 +140,7 @@ export default function CategoryPage({
         <StatCard 
           icon="🧮" 
           number={calculators.length} 
-          label={params.locale === 'th' ? 'เครื่องคิดเลข' : 'Calculators'} 
+          label={locale === 'th' ? 'เครื่องคิดเลข' : 'Calculators'} 
         />
         <StatCard 
           icon="🆓" 
@@ -168,7 +170,7 @@ export default function CategoryPage({
               <CalculatorCard 
                 key={calc.id}
                 calculator={calc}
-                locale={params.locale}
+                locale={locale}
                 buttonText={content.tryCalculator}
               />
             ))}
@@ -185,7 +187,7 @@ export default function CategoryPage({
           {allCalculators.map((calc) => (
             <Link
               key={calc.id}
-              href={`/${params.locale}/calculator/${calc.slug}`}
+              href={`/${locale}/calculator/${calc.slug}`}
               className="group"
             >
               <div className="bg-white rounded-lg p-4 shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105 border-2 border-transparent hover:border-blue-500">
@@ -204,12 +206,12 @@ export default function CategoryPage({
       {/* Category Description */}
       <section className="mt-16 bg-white rounded-2xl shadow-xl p-8">
         <h2 className="text-2xl font-bold text-gray-900 mb-4">
-          {params.locale === 'th' 
-            ? `เกี่ยวกับเครื่องคิดเลข${getCategoryNameThai(params.category)}` 
+          {locale === 'th' 
+            ? `เกี่ยวกับเครื่องคิดเลข${getCategoryNameThai(category)}` 
             : `About ${categoryInfo.name} Calculators`}
         </h2>
         <div className="prose prose-lg max-w-none text-gray-700">
-          {getCategoryLongDescription(params.category, params.locale)}
+          {getCategoryLongDescription(category, locale)}
         </div>
       </section>
     </div>
