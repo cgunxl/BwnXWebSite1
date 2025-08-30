@@ -24,22 +24,13 @@ export default function CalculatorForm({
 
   const engine = new CalculatorEngine(calculator, locale);
 
-  // Initialize default values
+  // Initialize default values - but don't set them immediately to avoid 0 prefix issue
   useEffect(() => {
-    const defaults: Record<string, any> = {};
-    for (const input of calculator.inputs) {
-      if (input.defaultValue !== undefined && !(input.key in initialInputs)) {
-        defaults[input.key] = input.defaultValue;
-      }
+    // Only use initial inputs from URL if provided
+    if (Object.keys(initialInputs).length > 0) {
+      setInputs(initialInputs);
     }
-    
-    // Add country-specific defaults
-    const countryDefaults = calculator.countrySpecific?.[locale]?.defaultValues;
-    if (countryDefaults) {
-      Object.assign(defaults, countryDefaults);
-    }
-    
-    setInputs(prev => ({ ...defaults, ...prev }));
+    // Don't set default values - let placeholders show instead
   }, [calculator, locale]);
 
   const handleInputChange = (key: string, value: any) => {
@@ -72,7 +63,7 @@ export default function CalculatorForm({
   };
 
   const renderInput = (input: CalculatorInput) => {
-    const value = inputs[input.key] || '';
+    const value = inputs[input.key] ?? '';
     const error = errors[input.key];
 
     switch (input.type) {
@@ -84,7 +75,11 @@ export default function CalculatorForm({
               id={input.key}
               value={value}
               onChange={(e) => handleInputChange(input.key, e.target.value)}
-              placeholder={input.placeholder}
+              onFocus={(e) => {
+                // Select all text when focused for easy replacement
+                e.target.select();
+              }}
+              placeholder={input.placeholder || `Enter ${input.label?.toLowerCase() || 'value'}`}
               min={input.min}
               max={input.max}
               step={input.step}
@@ -94,7 +89,7 @@ export default function CalculatorForm({
               required={input.required}
             />
             {input.unit && (
-              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500">
+              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">
                 {input.unit}
               </span>
             )}

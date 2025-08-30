@@ -15,9 +15,10 @@ export const mortgageCalculator: Calculator = {
       placeholder: 'Enter home price',
       min: 0,
       required: true,
-      validation: [
-        { type: 'min', value: 0, message: 'Home price must be positive' }
-      ],
+      validation: {
+        min: 0,
+        required: true
+      },
     },
     {
       key: 'downPayment',

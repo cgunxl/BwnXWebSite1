@@ -2,14 +2,26 @@
 import { Calculator } from '@/lib/types/calculator';
 import { loanCalculator } from './implementations/finance/loan-calculator';
 import { mortgageCalculator } from './implementations/finance/mortgage-calculator';
+import { carLoanCalculator } from './implementations/finance/car-loan-calculator';
+import { creditCardInterestCalculator } from './implementations/finance/credit-card-interest';
+import { compoundInterestCalculator } from './implementations/finance/compound-interest';
+import { savingsGoalCalculator } from './implementations/finance/savings-goal';
+import { retirementCalculator } from './implementations/finance/retirement-calculator';
 import { bmiCalculator } from './implementations/health/bmi-calculator';
 import { calorieCalculator } from './implementations/health/calorie-calculator';
 import { createCalculator } from './factory';
 
 // Map of manually implemented calculators (for special cases)
 const calculatorImplementations: Record<string, Calculator> = {
+  // Finance calculators
   'loan-calculator': loanCalculator,
   'mortgage-calculator': mortgageCalculator,
+  'car-loan-calculator': carLoanCalculator,
+  'credit-card-interest': creditCardInterestCalculator,
+  'compound-interest': compoundInterestCalculator,
+  'savings-goal': savingsGoalCalculator,
+  'retirement-calculator': retirementCalculator,
+  // Health calculators
   'bmi-calculator': bmiCalculator,
   'calorie-calculator': calorieCalculator,
 };
