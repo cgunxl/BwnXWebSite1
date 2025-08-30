@@ -186,21 +186,18 @@ export const allCalculatorLists: Record<CalculatorCategory, any[]> = {
 
 // Function to get calculator by slug
 export function getCalculatorBySlug(slug: string): any {
-  for (const list of Object.values(allCalculatorLists)) {
-    const calculator = list.find(calc => calc.slug === slug);
-    if (calculator) return calculator;
-  }
-  return null;
+  const all = getAllCalcs();
+  return all.find((calc: any) => calc.slug === slug) || null;
 }
 
 // Function to get calculators by category
 export function getCalculatorsByCategory(category: CalculatorCategory): any[] {
-  return allCalculatorLists[category] || [];
+  return getCalcByCategory(category as any) || [];
 }
 
 // Function to get all calculators
 export function getAllCalculators(): any[] {
-  return Object.values(allCalculatorLists).flat();
+  return getAllCalcs();
 }
 
 // Function to get popular calculators

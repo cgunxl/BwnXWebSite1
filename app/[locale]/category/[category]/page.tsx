@@ -2,6 +2,7 @@ import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import { calculatorCategories, getCalculatorsByCategory } from '@/lib/calculators/registry';
+import { i18n } from '@/lib/i18n/config';
 import { CalculatorCategory } from '@/lib/types/calculator';
 import SearchBar from '@/components/SearchBar';
 
@@ -35,6 +36,9 @@ export async function generateMetadata({
     description: descriptions[locale as keyof typeof descriptions] || descriptions.en,
     alternates: {
       canonical: `https://calculatorhub.com/${locale}/category/${category}`,
+      languages: Object.fromEntries(
+        i18n.locales.map(l => [l, `https://calculatorhub.com/${l}/category/${category}`])
+      ),
     },
   };
 }

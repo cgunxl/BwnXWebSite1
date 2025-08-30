@@ -6,8 +6,9 @@ import RelatedCalculators from '@/components/RelatedCalculators';
 import CalculatorArticle from '@/components/CalculatorArticle';
 import CalculatorFAQ from '@/components/CalculatorFAQ';
 import ShareButtons from '@/components/ShareButtons';
-import { getCalculatorBySlug } from '@/lib/calculators/registry';
+import { getCalculatorBySlug, getAllCalculators } from '@/lib/calculators/registry';
 import { loadCalculatorData } from '@/lib/calculators/loader';
+import { i18n } from '@/lib/i18n/config';
 
 export async function generateMetadata({ 
   params 
@@ -31,6 +32,9 @@ export async function generateMetadata({
     keywords: content.keywords,
     alternates: {
       canonical: `https://calculatorhub.com/${locale}/calculator/${slug}`,
+      languages: Object.fromEntries(
+        i18n.locales.map(l => [l, `https://calculatorhub.com/${l}/calculator/${slug}`])
+      ),
     },
     openGraph: {
       title: content.title,
@@ -39,6 +43,18 @@ export async function generateMetadata({
       type: 'website',
     },
   };
+}
+
+export async function generateStaticParams() {
+  const calculators = getAllCalculators();
+  const locales = i18n.locales;
+  const params: { locale: string; slug: string }[] = [];
+  for (const locale of locales) {
+    for (const calc of calculators) {
+      params.push({ locale, slug: calc.slug });
+    }
+  }
+  return params;
 }
 
 export default async function CalculatorPage({ 
