@@ -1,5 +1,6 @@
 // Calculator registry with all 430 calculators organized by category
 import { Calculator, CalculatorCategory } from '@/lib/types/calculator';
+import { getAllCalculators as getAllCalcs, getCalculatorsByCategory as getCalcByCategory } from './all-calculators';
 
 export const calculatorCategories: Record<CalculatorCategory, {
   name: string;
@@ -204,6 +205,9 @@ export function getAllCalculators(): any[] {
 
 // Function to get popular calculators
 export function getPopularCalculators(limit: number = 30): any[] {
+  // Get all calculators from the complete list
+  const allCalcs = getAllCalcs();
+  
   // Return top 30 most popular calculators
   const popularSlugs = [
     'bmi-calculator',

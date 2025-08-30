@@ -4,24 +4,29 @@ import { loanCalculator } from './implementations/finance/loan-calculator';
 import { mortgageCalculator } from './implementations/finance/mortgage-calculator';
 import { bmiCalculator } from './implementations/health/bmi-calculator';
 import { calorieCalculator } from './implementations/health/calorie-calculator';
+import { createCalculator } from './factory';
 
-// Map of all calculator implementations
+// Map of manually implemented calculators (for special cases)
 const calculatorImplementations: Record<string, Calculator> = {
   'loan-calculator': loanCalculator,
   'mortgage-calculator': mortgageCalculator,
   'bmi-calculator': bmiCalculator,
   'calorie-calculator': calorieCalculator,
-  // Add more calculator implementations here...
 };
 
 export async function loadCalculatorData(slug: string): Promise<Calculator | null> {
-  // Check if we have a pre-implemented calculator
+  // Check if we have a manually implemented calculator
   if (calculatorImplementations[slug]) {
     return calculatorImplementations[slug];
   }
 
-  // For demo purposes, generate a basic calculator structure
-  // In production, this would load from a database or generate based on the slug
+  // Use factory to create calculator from definition
+  const calculator = createCalculator(slug);
+  if (calculator) {
+    return calculator;
+  }
+
+  // Fallback: generate a basic calculator structure
   return generateCalculatorFromSlug(slug);
 }
 
