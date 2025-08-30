@@ -128,7 +128,7 @@ export default function CalculatorForm({
                   onChange={(e) => handleInputChange(input.key, e.target.value)}
                   className="w-4 h-4 text-blue-600 focus:ring-blue-500"
                 />
-                <span>{option.label}</span>
+                <span className="text-gray-700 dark:text-gray-300">{option.label}</span>
                 {option.description && (
                   <span className="text-sm text-gray-500">({option.description})</span>
                 )}
@@ -176,24 +176,24 @@ export default function CalculatorForm({
   };
 
   return (
-    <div className="bg-white rounded-xl shadow-lg p-6">
+    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
       <form onSubmit={(e) => { e.preventDefault(); handleCalculate(); }} className="space-y-6">
         {/* Input Fields */}
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           {calculator.inputs.map((input) => (
             <div key={input.key} className="space-y-2">
-              <label htmlFor={input.key} className="block text-sm font-medium text-gray-700">
+              <label htmlFor={input.key} className="block text-sm font-medium text-gray-700 dark:text-gray-300">
                 {input.label}
                 {input.required && <span className="text-red-500 ml-1">*</span>}
                 {input.tooltip && (
-                  <span className="ml-2 text-gray-400 cursor-help" title={input.tooltip}>
+                  <span className="ml-2 text-gray-400 dark:text-gray-500 cursor-help" title={input.tooltip}>
                     ⓘ
                   </span>
                 )}
               </label>
               {renderInput(input)}
               {errors[input.key] && (
-                <p className="text-sm text-red-600">{errors[input.key]}</p>
+                <p className="text-sm text-red-600 dark:text-red-400">{errors[input.key]}</p>
               )}
             </div>
           ))}
@@ -201,8 +201,8 @@ export default function CalculatorForm({
 
         {/* Error Message */}
         {errors.general && (
-          <div className="bg-red-50 border border-red-200 rounded-lg p-4">
-            <p className="text-red-800">{errors.general}</p>
+          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
+            <p className="text-red-800 dark:text-red-400">{errors.general}</p>
           </div>
         )}
 
@@ -211,7 +211,7 @@ export default function CalculatorForm({
           <button
             type="submit"
             disabled={isCalculating}
-            className="flex-1 sm:flex-none px-8 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+            className="flex-1 sm:flex-none px-8 py-3 bg-blue-600 dark:bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
           >
             {isCalculating ? (
               <span className="flex items-center justify-center">
@@ -228,7 +228,7 @@ export default function CalculatorForm({
           <button
             type="button"
             onClick={handleReset}
-            className="px-8 py-3 bg-gray-200 text-gray-700 font-semibold rounded-lg hover:bg-gray-300 focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 transition-colors"
+            className="px-8 py-3 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-semibold rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-gray-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-colors"
           >
             Reset
           </button>
@@ -237,21 +237,21 @@ export default function CalculatorForm({
 
       {/* Results Display */}
       {result && (
-        <div className="mt-8 pt-8 border-t border-gray-200">
-          <h3 className="text-xl font-semibold mb-4">Results</h3>
+        <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
+          <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Results</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {calculator.outputs.map((output) => {
               const value = result.outputs[output.key];
               if (value === null || value === undefined) return null;
 
               return (
-                <div key={output.key} className="bg-gray-50 rounded-lg p-4">
-                  <div className="text-sm text-gray-600">{output.label}</div>
-                  <div className="text-2xl font-bold text-gray-900 mt-1">
+                <div key={output.key} className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
+                  <div className="text-sm text-gray-600 dark:text-gray-400">{output.label}</div>
+                  <div className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
                     {value}
                   </div>
                   {output.description && (
-                    <div className="text-xs text-gray-500 mt-1">
+                    <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
                       {output.description}
                     </div>
                   )}

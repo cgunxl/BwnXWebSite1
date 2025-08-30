@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import './globals.css';
 import { i18n, localeNames, localeFlags } from '@/lib/i18n/config';
+import { ThemeProvider } from '@/contexts/ThemeContext';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -73,9 +74,11 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className={inter.className}>
-        <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
-          {children}
-        </div>
+        <ThemeProvider>
+          <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+            {children}
+          </div>
+        </ThemeProvider>
       </body>
     </html>
   );
