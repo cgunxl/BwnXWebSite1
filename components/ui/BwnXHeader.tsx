@@ -143,6 +143,7 @@ function MobileNavLink({ href, children }: { href: string; children: React.React
 
 function LanguageSelector({ locale }: { locale: string }) {
   const [open, setOpen] = useState(false);
+  const pathname = usePathname();
   
   const languages = [
     { code: 'en', flag: '🇺🇸', name: 'English' },
