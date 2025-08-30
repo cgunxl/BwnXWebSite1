@@ -111,6 +111,26 @@ export interface CalculatorFormula {
   source?: string;
 }
 
+export interface Graph {
+  type: 'gauge' | 'bar' | 'line' | 'pie' | 'donut' | 'scatter' | 'area' | 'category-bar';
+  dataKey?: string;
+  min?: number;
+  max?: number;
+  segments?: GraphSegment[];
+  categories?: string[];
+  xAxis?: string;
+  yAxis?: string;
+  lines?: string[];
+  showProjection?: boolean;
+  showMilestones?: boolean;
+}
+
+export interface GraphSegment {
+  threshold: number;
+  color: string;
+  label: string;
+}
+
 export interface Calculator {
   id: string;
   category: CalculatorCategory;
