@@ -1,12 +1,16 @@
 // Dynamic calculator loader
 import { Calculator } from '@/lib/types/calculator';
 import { loanCalculator } from './implementations/finance/loan-calculator';
+import { mortgageCalculator } from './implementations/finance/mortgage-calculator';
 import { bmiCalculator } from './implementations/health/bmi-calculator';
+import { calorieCalculator } from './implementations/health/calorie-calculator';
 
 // Map of all calculator implementations
 const calculatorImplementations: Record<string, Calculator> = {
   'loan-calculator': loanCalculator,
+  'mortgage-calculator': mortgageCalculator,
   'bmi-calculator': bmiCalculator,
+  'calorie-calculator': calorieCalculator,
   // Add more calculator implementations here...
 };
 
