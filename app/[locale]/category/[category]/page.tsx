@@ -69,7 +69,15 @@ export default async function CategoryPage({
     notFound();
   }
 
-  const calculators = getCalculatorsByCategory(category as CalculatorCategory);
+  const calculatorSlugs = getCalculatorsByCategory(category as CalculatorCategory);
+  
+  // Convert slugs to calculator objects
+  const calculators = calculatorSlugs.map(slug => ({
+    id: slug,
+    slug: slug,
+    name: slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
+    category: category
+  }));
   
   // Group calculators by subcategory or popularity
   const featuredCalculators = calculators.slice(0, 6);

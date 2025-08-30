@@ -3,7 +3,7 @@ import { Calculator } from '@/lib/types/calculator';
 import { Locale } from '@/lib/i18n/config';
 import { getCalculator, isCalculatorRegistered, getImplementationStatus } from './registry';
 import { generateCalculator } from './auto-generator';
-import { allCalculators } from './all-calculators';
+// import { allCalculators } from './all-calculators';
 import { createCalculator } from './factory';
 
 // Legacy implementations (will be phased out)
@@ -64,10 +64,10 @@ export async function loadCalculatorData(slug: string, locale: Locale = 'en'): P
       return factoryCalculator;
     }
 
-    // 4. Find calculator definition and use auto-generator
-    const calculatorDef = allCalculators.find(c => c.slug === slug);
-    if (calculatorDef) {
-      const calculator = generateCalculator(calculatorDef.id, calculatorDef.category, locale);
+    // 4. Use auto-generator with detected category
+    const category = detectCategory(slug);
+    const calculator = generateCalculator(slug, category, locale);
+    if (calculator) {
       calculatorCache.set(cacheKey, calculator);
       console.log(`🤖 Generated ${slug} using auto-generator`);
       return calculator;

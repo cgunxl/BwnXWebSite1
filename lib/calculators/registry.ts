@@ -120,5 +120,107 @@ export function getImplementationStatus() {
   };
 }
 
+// Export additional functions for components
+export function getAllCalculators(): string[] {
+  return Array.from(calculatorRegistry.keys());
+}
+
+export function getCalculatorBySlug(slug: string): any {
+  // Return a basic calculator definition
+  return {
+    id: slug,
+    slug: slug,
+    name: slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
+    category: 'finance'
+  };
+}
+
+export function getCalculatorsByCategory(category: string): string[] {
+  const calculators: string[] = [];
+  calculatorRegistry.forEach((factory, id) => {
+    const calc = factory('en');
+    if (calc && calc.category === category) {
+      calculators.push(id);
+    }
+  });
+  return calculators;
+}
+
+// Export calculator categories
+export const calculatorCategories: Record<string, any> = {
+  finance: {
+    name: 'Finance',
+    description: 'Financial calculators for loans, investments, and taxes',
+    icon: '💰',
+    color: '#10B981'
+  },
+  health: {
+    name: 'Health & Fitness',
+    description: 'Health, nutrition, and fitness calculators',
+    icon: '❤️',
+    color: '#EF4444'
+  },
+  education: {
+    name: 'Education',
+    description: 'Academic and educational calculators',
+    icon: '🎓',
+    color: '#3B82F6'
+  },
+  math: {
+    name: 'Mathematics',
+    description: 'Mathematical and scientific calculators',
+    icon: '📐',
+    color: '#8B5CF6'
+  },
+  engineering: {
+    name: 'Engineering',
+    description: 'Engineering and technical calculators',
+    icon: '⚙️',
+    color: '#F59E0B'
+  },
+  lifestyle: {
+    name: 'Lifestyle',
+    description: 'Daily life and personal calculators',
+    icon: '🏠',
+    color: '#EC4899'
+  },
+  insurance: {
+    name: 'Insurance',
+    description: 'Insurance calculators and estimators',
+    icon: '🛡️',
+    color: '#06B6D4'
+  },
+  conversion: {
+    name: 'Conversion',
+    description: 'Unit and measurement converters',
+    icon: '🔄',
+    color: '#84CC16'
+  },
+  business: {
+    name: 'Business',
+    description: 'Business and commerce calculators',
+    icon: '💼',
+    color: '#F97316'
+  },
+  tech: {
+    name: 'Technology',
+    description: 'Technology and IT calculators',
+    icon: '💻',
+    color: '#6366F1'
+  },
+  environment: {
+    name: 'Environment',
+    description: 'Environmental and sustainability calculators',
+    icon: '🌍',
+    color: '#059669'
+  },
+  miscellaneous: {
+    name: 'Miscellaneous',
+    description: 'Other useful calculators',
+    icon: '🎯',
+    color: '#78716C'
+  }
+};
+
 // Export registry for debugging
 export { calculatorRegistry };

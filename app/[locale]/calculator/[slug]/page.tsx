@@ -50,8 +50,8 @@ export async function generateStaticParams() {
   const locales = i18n.locales;
   const params: { locale: string; slug: string }[] = [];
   for (const locale of locales) {
-    for (const calc of calculators) {
-      params.push({ locale, slug: calc.slug });
+    for (const calcSlug of calculators) {
+      params.push({ locale, slug: calcSlug });
     }
   }
   return params;
