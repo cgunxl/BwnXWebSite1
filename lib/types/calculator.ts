@@ -3,10 +3,11 @@ export interface LocalizedContent {
   title: string;
   description: string;
   keywords: string[];
-  faq: FAQItem[];
-  article: Article;
+  faq: FAQItem[] | any[];
+  article: Article | string | any;
   examples?: Example[];
   references?: Reference[];
+  [key: string]: any; // Allow any additional properties
 }
 
 export interface FAQItem {
@@ -68,6 +69,19 @@ export interface CalculatorInput {
   fields?: any[]; // For dynamic-list type
   multiple?: boolean; // For file and select types
   accept?: string; // For file type
+  minItems?: number; // For dynamic-list minimum items
+  maxItems?: number; // For dynamic-list maximum items
+  rows?: number; // For textarea
+  cols?: number; // For textarea
+  pattern?: string; // For input validation
+  maxLength?: number; // For text input
+  minLength?: number; // For text input
+  disabled?: boolean; // For disabled state
+  readonly?: boolean; // For readonly state
+  autoComplete?: string; // For autocomplete
+  className?: string; // For custom styling
+  style?: any; // For inline styles
+  [key: string]: any; // Allow any additional properties
 }
 
 export interface SelectOption {
@@ -126,6 +140,12 @@ export interface Graph {
   lines?: string[];
   showProjection?: boolean;
   showMilestones?: boolean;
+  showDistribution?: boolean;
+  showTrend?: boolean;
+  showAverage?: boolean;
+  showGrid?: boolean;
+  showTooltip?: boolean;
+  [key: string]: any; // Allow any additional properties
 }
 
 export interface GraphSegment {
