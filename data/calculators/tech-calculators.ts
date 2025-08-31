@@ -730,7 +730,7 @@ export const techCalculators: Calculator[] = [
             score -= 15;
           }
           
-          if (/(.)\1{2,}/.test(password)) {
+          if (/(.)\\1{2,}/.test(password)) {
             patterns.push('repeated characters');
             score -= 10;
           }
