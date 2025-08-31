@@ -31,7 +31,7 @@ export default function Header({ locale }: HeaderProps) {
           <Link href={`/${locale}`} className="flex items-center space-x-2">
             <span className="text-2xl">🧮</span>
             <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              Calculator Hub
+              BwnXCalculator
             </span>
             <span className="text-xs bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 px-2 py-1 rounded-full">430+</span>
           </Link>
