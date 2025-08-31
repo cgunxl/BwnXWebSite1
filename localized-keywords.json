@@ -1,0 +1,123 @@
+{
+  "loan-calculator": {
+    "en": {
+      "primary": "loan calculator",
+      "longtail": "personal loan emi calculator monthly payment",
+      "question": "how to calculate loan interest rate",
+      "local": "bank loan calculator usa 2024",
+      "voice": "calculate my monthly loan payment"
+    },
+    "th": {
+      "primary": "คำนวณสินเชื่อ",
+      "longtail": "คำนวณสินเชื่อส่วนบุคคล กสิกร scb",
+      "question": "วิธีคิดดอกเบี้ยเงินกู้ลดต้นลดดอก",
+      "local": "คำนวณสินเชื่อบ้าน ธอส 2567",
+      "voice": "คิดค่างวดสินเชื่อรายเดือน"
+    },
+    "ja": {
+      "primary": "ローン計算機",
+      "longtail": "住宅ローン シミュレーション 35年",
+      "question": "ローン金利の計算方法",
+      "local": "住宅ローン計算 三菱UFJ 2024",
+      "voice": "月々の返済額を計算"
+    },
+    "es": {
+      "primary": "calculadora de préstamos",
+      "longtail": "calculadora hipoteca con amortización",
+      "question": "cómo calcular intereses de préstamo",
+      "local": "calculadora prestamo personal 2024",
+      "voice": "calcular cuota mensual préstamo"
+    },
+    "de": {
+      "primary": "Kreditrechner",
+      "longtail": "Baufinanzierung Rechner mit Sondertilgung",
+      "question": "Wie berechnet man Kreditzinsen",
+      "local": "Immobilienkredit Rechner 2024",
+      "voice": "Monatsrate Kredit berechnen"
+    },
+    "fr": {
+      "primary": "calculateur de prêt",
+      "longtail": "simulation crédit immobilier avec frais notaire",
+      "question": "comment calculer les intérêts d'un prêt",
+      "local": "calculateur prêt immobilier 2024",
+      "voice": "calculer mensualité crédit"
+    },
+    "ko": {
+      "primary": "대출 계산기",
+      "longtail": "주택담보대출 계산기 원리금균등",
+      "question": "대출이자 계산하는 방법",
+      "local": "신한은행 대출계산기 2024",
+      "voice": "월 상환액 계산"
+    },
+    "zh": {
+      "primary": "贷款计算器",
+      "longtail": "房贷计算器等额本息2024",
+      "question": "如何计算贷款利息",
+      "local": "商业贷款计算器最新",
+      "voice": "计算每月还款额"
+    },
+    "ar": {
+      "primary": "حاسبة القرض",
+      "longtail": "حاسبة القرض الشخصي الراجحي",
+      "question": "كيفية حساب فائدة القرض",
+      "local": "حاسبة التمويل العقاري 2024",
+      "voice": "احسب القسط الشهري"
+    },
+    "hi": {
+      "primary": "लोन कैलकुलेटर",
+      "longtail": "होम लोन ईएमआई कैलकुलेटर एसबीआई",
+      "question": "लोन की ब्याज कैसे कैलकुलेट करें",
+      "local": "पर्सनल लोन कैलकुलेटर 2024",
+      "voice": "मासिक किस्त की गणना करें"
+    },
+    "id": {
+      "primary": "kalkulator pinjaman",
+      "longtail": "kalkulator kpr bank bca mandiri",
+      "question": "cara menghitung bunga pinjaman",
+      "local": "kalkulator kredit mobil 2024",
+      "voice": "hitung cicilan bulanan"
+    },
+    "ru": {
+      "primary": "калькулятор кредита",
+      "longtail": "ипотечный калькулятор сбербанк",
+      "question": "как рассчитать проценты по кредиту",
+      "local": "калькулятор кредита 2024",
+      "voice": "рассчитать ежемесячный платеж"
+    },
+    "it": {
+      "primary": "calcolatore prestito",
+      "longtail": "calcolo mutuo prima casa 2024",
+      "question": "come calcolare interessi prestito",
+      "local": "calcolatore mutuo intesa san paolo",
+      "voice": "calcola rata mensile"
+    },
+    "nl": {
+      "primary": "lening calculator",
+      "longtail": "hypotheek berekenen met extra aflossing",
+      "question": "hoe bereken je rente op lening",
+      "local": "hypotheek calculator 2024",
+      "voice": "bereken maandelijkse aflossing"
+    },
+    "vi": {
+      "primary": "máy tính khoản vay",
+      "longtail": "tính lãi suất vay mua nhà ngân hàng",
+      "question": "cách tính lãi suất vay ngân hàng",
+      "local": "tính vay vietcombank 2024",
+      "voice": "tính tiền trả góp hàng tháng"
+    },
+    "pt": {
+      "primary": "calculadora de empréstimo",
+      "longtail": "simulador financiamento imobiliário caixa",
+      "question": "como calcular juros de empréstimo",
+      "local": "calculadora crédito habitação 2024",
+      "voice": "calcular prestação mensal"
+    },
+    "fa": {
+      "primary": "محاسبه گر وام",
+      "longtail": "محاسبه وام مسکن بانک ملی",
+      "question": "نحوه محاسبه سود وام",
+      "local": "محاسبه گر وام 1403",
+      "voice": "محاسبه قسط ماهانه"
+    }
+  }
+}
