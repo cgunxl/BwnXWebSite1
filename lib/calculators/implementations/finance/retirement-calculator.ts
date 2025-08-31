@@ -108,7 +108,7 @@ export const retirementCalculator: Calculator = {
   ],
   formulas: [
     {
-      name: 'retirementProjection',
+      key: 'retirementProjection',
       expression: 'FV = PV * (1 + r)^n + PMT * (((1 + r)^n - 1) / r)',
       variables: ['PV', 'PMT', 'r', 'n'],
     },

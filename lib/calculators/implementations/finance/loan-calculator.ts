@@ -83,7 +83,7 @@ export const loanCalculator: Calculator = {
   ],
   formulas: [
     {
-      name: 'monthlyPayment',
+      key: 'monthlyPayment',
       expression: '(principal * (rate / 12)) / (1 - Math.pow(1 + (rate / 12), -months))',
       variables: ['principal', 'rate', 'months'],
       description: 'Standard loan payment formula',

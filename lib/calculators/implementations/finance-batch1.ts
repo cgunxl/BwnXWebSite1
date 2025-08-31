@@ -131,7 +131,7 @@ export function createLoanCalculator(locale: Locale): Calculator {
     ],
     formulas: [
       {
-        name: 'primary',
+        key: 'primary',
         expression: `({principal, interestRate, loanTerm, paymentFrequency}) => {
           const P = principal;
           const annualRate = interestRate / 100;
@@ -288,7 +288,7 @@ export function createMortgageCalculator(locale: Locale): Calculator {
     ],
     formulas: [
       {
-        name: 'primary',
+        key: 'primary',
         expression: `({homePrice, downPayment, interestRate, loanTerm, propertyTax, homeInsurance, hoaFees}) => {
           const downPaymentAmount = homePrice * (downPayment / 100);
           const loanAmount = homePrice - downPaymentAmount;
@@ -409,7 +409,7 @@ export function createTaxCalculator(locale: Locale): Calculator {
     ],
     formulas: [
       {
-        name: 'primary',
+        key: 'primary',
         expression: `({annualIncome, filingStatus, deductions, dependents}) => {
           const brackets = ${JSON.stringify(config.taxBrackets)};
           
@@ -541,7 +541,7 @@ export function createCompoundInterestCalculator(locale: Locale): Calculator {
     ],
     formulas: [
       {
-        name: 'primary',
+        key: 'primary',
         expression: `({principal, monthlyContribution, annualRate, years, compoundingFrequency}) => {
           const r = annualRate / 100;
           const t = years;

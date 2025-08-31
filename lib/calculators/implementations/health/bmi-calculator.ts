@@ -97,13 +97,13 @@ export const bmiCalculator: Calculator = {
   ],
   formulas: [
     {
-      name: 'bmiMetric',
+      key: 'bmiMetric',
       expression: 'weight / Math.pow(height / 100, 2)',
       variables: ['weight', 'height'],
       description: 'BMI = weight(kg) / height(m)²',
     },
     {
-      name: 'bmiImperial',
+      key: 'bmiImperial',
       expression: '(weight * 703) / Math.pow(height, 2)',
       variables: ['weight', 'height'],
       description: 'BMI = (weight(lbs) × 703) / height(inches)²',

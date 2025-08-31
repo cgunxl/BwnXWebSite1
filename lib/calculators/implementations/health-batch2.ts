@@ -148,7 +148,7 @@ export function createBMICalculator(locale: Locale): Calculator {
     ],
     formulas: [
       {
-        name: 'primary',
+        key: 'primary',
         expression: `({weight, weightUnit, height, heightUnit, age, gender}) => {
           // Convert to metric
           let weightKg = weight;
@@ -350,7 +350,7 @@ export function createCalorieCalculator(locale: Locale): Calculator {
     ],
     formulas: [
       {
-        name: 'primary',
+        key: 'primary',
         expression: `({age, gender, weight, height, activityLevel, goal, formula}) => {
           let bmr = 0;
           
@@ -548,7 +548,7 @@ export function createBodyFatCalculator(locale: Locale): Calculator {
     ],
     formulas: [
       {
-        name: 'primary',
+        key: 'primary',
         expression: `({gender, age, weight, height, neck, waist, hip}) => {
           // US Navy Method
           let bodyFatPercentage;
@@ -716,7 +716,7 @@ export function createPregnancyCalculator(locale: Locale): Calculator {
     ],
     formulas: [
       {
-        name: 'primary',
+        key: 'primary',
         expression: `({calculationMethod, lmpDate, conceptionDate, ivfDate, ivfType, cycleLength}) => {
           const today = new Date();
           let dueDate, conception, lmp;
@@ -918,7 +918,7 @@ export function createWaterIntakeCalculator(locale: Locale): Calculator {
     ],
     formulas: [
       {
-        name: 'primary',
+        key: 'primary',
         expression: `({weight, age, gender, activityLevel, climate, pregnancy}) => {
           // Base water calculation
           let baseWater = weight * ${config.waterIntake.mlPerKg};

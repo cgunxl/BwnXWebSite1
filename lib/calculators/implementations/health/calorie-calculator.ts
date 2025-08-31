@@ -146,13 +146,13 @@ export const calorieCalculator: Calculator = {
   ],
   formulas: [
     {
-      name: 'bmrMale',
+      key: 'bmrMale',
       expression: '(10 * weight) + (6.25 * height) - (5 * age) + 5',
       variables: ['weight', 'height', 'age'],
       description: 'Mifflin-St Jeor Equation for males',
     },
     {
-      name: 'bmrFemale',
+      key: 'bmrFemale',
       expression: '(10 * weight) + (6.25 * height) - (5 * age) - 161',
       variables: ['weight', 'height', 'age'],
       description: 'Mifflin-St Jeor Equation for females',

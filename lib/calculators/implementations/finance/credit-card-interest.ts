@@ -84,7 +84,7 @@ export const creditCardInterestCalculator: Calculator = {
   ],
   formulas: [
     {
-      name: 'creditCardPayoff',
+      key: 'creditCardPayoff',
       expression: 'calculateCreditCardPayoff(balance, apr, payment)',
       variables: ['balance', 'apr', 'payment'],
     },

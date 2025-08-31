@@ -83,7 +83,7 @@ export const savingsGoalCalculator: Calculator = {
   ],
   formulas: [
     {
-      name: 'savingsRequired',
+      key: 'savingsRequired',
       expression: 'PMT = (FV - PV * (1 + r/n)^(n*t)) / (((1 + r/n)^(n*t) - 1) / (r/n))',
       variables: ['FV', 'PV', 'r', 'n', 't'],
     },

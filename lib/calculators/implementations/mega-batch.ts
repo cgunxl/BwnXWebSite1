@@ -59,7 +59,7 @@ export function createOhmsLawCalculator(locale: Locale): Calculator {
     ],
     formulas: [
       {
-        name: 'primary',
+        key: 'primary',
         expression: `({calculationType, voltage, current, resistance}) => {
           let result = 0;
           let power = 0;
@@ -140,7 +140,7 @@ export function createAgeCalculator(locale: Locale): Calculator {
     ],
     formulas: [
       {
-        name: 'primary',
+        key: 'primary',
         expression: `({birthDate, calculateDate}) => {
           const birth = new Date(birthDate);
           const calc = new Date(calculateDate || new Date());
@@ -266,7 +266,7 @@ export function createLengthConverter(locale: Locale): Calculator {
     ],
     formulas: [
       {
-        name: 'primary',
+        key: 'primary',
         expression: `({value, fromUnit, toUnit}) => {
           const units = ${JSON.stringify(units)};
           
@@ -363,7 +363,7 @@ export function createBreakEvenCalculator(locale: Locale): Calculator {
     ],
     formulas: [
       {
-        name: 'primary',
+        key: 'primary',
         expression: `({fixedCosts, variableCost, sellingPrice, targetProfit}) => {
           const contributionMargin = sellingPrice - variableCost;
           const marginRatio = (contributionMargin / sellingPrice) * 100;
@@ -463,7 +463,7 @@ export function createROICalculator(locale: Locale): Calculator {
     ],
     formulas: [
       {
-        name: 'primary',
+        key: 'primary',
         expression: `({initialInvestment, finalValue, timeYears, additionalCosts}) => {
           const totalInvestment = initialInvestment + (additionalCosts || 0);
           const totalProfit = finalValue - totalInvestment;

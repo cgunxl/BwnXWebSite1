@@ -112,7 +112,7 @@ function generateCalculatorFromSlug(slug: string, locale: Locale): Calculator | 
     outputs: generateDefaultOutputs(slug),
     formulas: [
       {
-        name: 'primary',
+        key: 'primary',
         expression: '({value1, value2}) => ({ result: value1 + value2 })',
         variables: ['value1', 'value2'],
         description: 'Basic calculation'

@@ -155,7 +155,7 @@ export function createGPACalculator(locale: Locale): Calculator {
     ],
     formulas: [
       {
-        name: 'primary',
+        key: 'primary',
         expression: `({courses, previousGPA, previousCredits}) => {
           const gradePoints = ${JSON.stringify(config.gradePoints)};
           const scale = ${config.gradeScale};
@@ -298,7 +298,7 @@ export function createPercentageCalculator(locale: Locale): Calculator {
     ],
     formulas: [
       {
-        name: 'primary',
+        key: 'primary',
         expression: `({calculationType, value1, value2, decimalPlaces}) => {
           const decimals = decimalPlaces || 2;
           let result = 0;
@@ -492,7 +492,7 @@ export function createScientificCalculator(locale: Locale): Calculator {
     ],
     formulas: [
       {
-        name: 'primary',
+        key: 'primary',
         expression: `({operation, x, y, angleUnit}) => {
           let result = 0;
           let steps = '';
@@ -726,7 +726,7 @@ export function createStatisticsCalculator(locale: Locale): Calculator {
     ],
     formulas: [
       {
-        name: 'primary',
+        key: 'primary',
         expression: `({dataSet, calculations, sampleType}) => {
           // Parse data
           const data = dataSet
@@ -899,7 +899,7 @@ export function createGradeNeededCalculator(locale: Locale): Calculator {
     ],
     formulas: [
       {
-        name: 'primary',
+        key: 'primary',
         expression: `({currentGrade, desiredGrade, examWeight, extraCredit}) => {
           // Calculate grade needed
           const currentWeight = 100 - examWeight;

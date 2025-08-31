@@ -87,7 +87,7 @@ export const carLoanCalculator: Calculator = {
   ],
   formulas: [
     {
-      name: 'monthlyPayment',
+      key: 'monthlyPayment',
       expression: '(loanAmount * (rate / 12)) / (1 - Math.pow(1 + (rate / 12), -months))',
       variables: ['loanAmount', 'rate', 'months'],
     },

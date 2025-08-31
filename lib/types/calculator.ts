@@ -81,6 +81,8 @@ export interface CalculatorInput {
   autoComplete?: string; // For autocomplete
   className?: string; // For custom styling
   style?: any; // For inline styles
+  dependsOn?: string[]; // Dependencies for conditional display
+  showWhen?: Record<string, any>; // Conditions for showing this input
   [key: string]: any; // Allow any additional properties
 }
 
@@ -108,6 +110,7 @@ export interface CalculatorOutput {
   category?: string;
   visualization?: VisualizationType;
   primary?: boolean;
+  highlight?: boolean;
 }
 
 export type VisualizationType = 
@@ -121,16 +124,21 @@ export type VisualizationType =
   | 'progress';
 
 export interface CalculatorFormula {
-  name: string;
+  key: string;
+  name?: string;
   expression: string;
-  variables: string[];
+  variables?: string[];
   description?: string;
   source?: string;
 }
 
 export interface Graph {
   type: 'gauge' | 'bar' | 'line' | 'pie' | 'donut' | 'scatter' | 'area' | 'category-bar' | 'function' | 'histogram' | 'heatmap' | 'bubble' | 'radar' | 'treemap' | 'sankey' | 'waterfall' | 'timeline' | 'calendar' | 'gantt' | 'flowchart' | 'network' | 'boxplot' | 'violin' | 'sunburst' | 'chord' | 'parallel' | string;
+  title?: string;
   dataKey?: string;
+  data?: string[] | number[] | any[];
+  labels?: string[];
+  colors?: string[];
   min?: number;
   max?: number;
   segments?: GraphSegment[];
@@ -138,6 +146,8 @@ export interface Graph {
   xAxis?: string;
   yAxis?: string;
   lines?: string[];
+  milestones?: string[];
+  animated?: boolean;
   showProjection?: boolean;
   showMilestones?: boolean;
   showDistribution?: boolean;

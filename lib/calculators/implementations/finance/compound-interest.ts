@@ -86,7 +86,7 @@ export const compoundInterestCalculator: Calculator = {
   ],
   formulas: [
     {
-      name: 'compoundInterest',
+      key: 'compoundInterest',
       expression: 'P * Math.pow(1 + r/n, n*t) + PMT * ((Math.pow(1 + r/n, n*t) - 1) / (r/n))',
       variables: ['P', 'r', 'n', 't', 'PMT'],
     },
