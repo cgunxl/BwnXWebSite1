@@ -46,7 +46,7 @@ export interface Reference {
 export interface CalculatorInput {
   key: string;
   label: string;
-  type: 'number' | 'text' | 'select' | 'date' | 'boolean' | 'slider' | 'radio';
+  type: 'number' | 'text' | 'select' | 'date' | 'boolean' | 'slider' | 'radio' | 'dynamic-list' | 'textarea' | 'checkbox' | 'file' | 'color' | 'range' | 'time' | 'email' | 'url' | 'tel';
   unit?: string;
   placeholder?: string;
   defaultValue?: any;

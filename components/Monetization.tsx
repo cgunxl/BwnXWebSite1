@@ -211,7 +211,7 @@ export function AffiliateComparison({
                   {Object.entries(item).filter(([key]) => !['name', 'rating', 'bonus'].includes(key)).map(([key, value]) => (
                     <div key={key}>
                       <p className="text-gray-500 dark:text-gray-400 capitalize">{key.replace('_', ' ')}</p>
-                      <p className="font-medium text-gray-900 dark:text-white">{value}</p>
+                      <p className="font-medium text-gray-900 dark:text-white">{String(value)}</p>
                     </div>
                   ))}
                 </div>

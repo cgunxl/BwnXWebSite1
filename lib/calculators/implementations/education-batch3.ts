@@ -3,7 +3,7 @@ import { Calculator, CalculatorInput, CalculatorOutput } from '@/lib/types/calcu
 import { Locale } from '@/lib/i18n/config';
 
 // Country-specific education configurations
-const educationConfigs: Record<Locale, any> = {
+const educationConfigs: Partial<Record<Locale, any>> = {
   en: { // US System
     gradeScale: 4.0,
     gradePoints: {
