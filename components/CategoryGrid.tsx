@@ -86,6 +86,7 @@ export default function CategoryGrid({ categories, locale }: CategoryGridProps) 
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
       {categoryOrder.map((category) => {
         const cat = categories[category];
+        if (!cat) return null;
         return (
           <Link
             key={category}
@@ -98,10 +99,10 @@ export default function CategoryGrid({ categories, locale }: CategoryGridProps) 
               hover:border-blue-500 dark:hover:border-blue-400
             `}>
               <div className={`
-                w-16 h-16 rounded-full ${cat.color} bg-opacity-20 flex items-center justify-center mb-4
+                w-16 h-16 rounded-full ${cat?.color || 'bg-blue-500'} bg-opacity-20 flex items-center justify-center mb-4
                 group-hover:scale-110 transition-transform duration-300
               `}>
-                <span className="text-3xl">{cat.icon}</span>
+                <span className="text-3xl">{cat?.icon || '🧮'}</span>
               </div>
               <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
                 {getCategoryName(category, locale)}
