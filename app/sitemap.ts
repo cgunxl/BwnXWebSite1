@@ -3,8 +3,8 @@ import { i18n } from '@/lib/i18n/config';
 import { getAllCalculators, calculatorCategories } from '@/lib/calculators/registry';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://calculatorhub.com';
-  const calculators = getAllCalculators();
+  const baseUrl = 'https://bwnxcalculator.com';
+  const calculatorIds = getAllCalculators();
   const categories = Object.keys(calculatorCategories);
   
   const routes: MetadataRoute.Sitemap = [];
@@ -33,9 +33,9 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   // Add calculator pages for all locales
   i18n.locales.forEach(locale => {
-    calculators.forEach(calculator => {
+    calculatorIds.forEach(calculatorId => {
       routes.push({
-        url: `${baseUrl}/${locale}/calculator/${calculator.slug}`,
+        url: `${baseUrl}/${locale}/calculator/${calculatorId}`,
         lastModified: new Date(),
         changeFrequency: 'weekly',
         priority: 0.9,
