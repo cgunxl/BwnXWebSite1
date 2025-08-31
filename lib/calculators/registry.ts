@@ -142,12 +142,52 @@ export function getAllCalculators(): string[] {
 }
 
 export function getCalculatorBySlug(slug: string): any {
-  // Return a basic calculator definition
+  // Map of calculator metadata
+  const calculatorMetadata: Record<string, { name: string; category: string; icon: string }> = {
+    'loan-calculator': { name: 'Loan Calculator', category: 'Finance', icon: '💰' },
+    'mortgage-calculator': { name: 'Mortgage Calculator', category: 'Finance', icon: '🏠' },
+    'bmi-calculator': { name: 'BMI Calculator', category: 'Health', icon: '⚖️' },
+    'calorie-calculator': { name: 'Calorie Calculator', category: 'Health', icon: '🔥' },
+    'tax-calculator': { name: 'Tax Calculator', category: 'Finance', icon: '📊' },
+    'retirement-calculator': { name: 'Retirement Calculator', category: 'Finance', icon: '🏖️' },
+    'compound-interest': { name: 'Compound Interest', category: 'Finance', icon: '📈' },
+    'currency-converter': { name: 'Currency Converter', category: 'Finance', icon: '💱' },
+    'gpa-calculator': { name: 'GPA Calculator', category: 'Education', icon: '🎓' },
+    'percentage-calculator': { name: 'Percentage Calculator', category: 'Math', icon: '💯' },
+    'car-loan-calculator': { name: 'Car Loan Calculator', category: 'Finance', icon: '🚗' },
+    'credit-card-interest': { name: 'Credit Card Interest', category: 'Finance', icon: '💳' },
+    'savings-goal': { name: 'Savings Goal', category: 'Finance', icon: '🎯' },
+    'inflation-calculator': { name: 'Inflation Calculator', category: 'Finance', icon: '📉' },
+    'roi-calculator': { name: 'ROI Calculator', category: 'Finance', icon: '💹' },
+    'bmr-calculator': { name: 'BMR Calculator', category: 'Health', icon: '🏃' },
+    'pregnancy-due-date': { name: 'Pregnancy Due Date', category: 'Health', icon: '👶' },
+    'age-calculator': { name: 'Age Calculator', category: 'Lifestyle', icon: '🎂' },
+    'tip-calculator': { name: 'Tip Calculator', category: 'Lifestyle', icon: '💵' },
+    'discount-calculator': { name: 'Discount Calculator', category: 'Shopping', icon: '🏷️' },
+    'vat-calculator': { name: 'VAT Calculator', category: 'Finance', icon: '🧾' },
+    'salary-calculator': { name: 'Salary Calculator', category: 'Finance', icon: '💼' },
+    'fuel-cost-calculator': { name: 'Fuel Cost Calculator', category: 'Travel', icon: '⛽' },
+    'break-even': { name: 'Break-even Calculator', category: 'Business', icon: '📊' },
+    'profit-margin': { name: 'Profit Margin', category: 'Business', icon: '💰' },
+    'crypto-profit': { name: 'Crypto Profit', category: 'Finance', icon: '₿' },
+    'stock-return': { name: 'Stock Return', category: 'Finance', icon: '📈' },
+    'dividend-calculator': { name: 'Dividend Calculator', category: 'Finance', icon: '💸' },
+    'paycheck-calculator': { name: 'Paycheck Calculator', category: 'Finance', icon: '💰' },
+    'overtime-pay': { name: 'Overtime Pay', category: 'Finance', icon: '⏰' },
+  };
+  
+  const metadata = calculatorMetadata[slug] || {
+    name: slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
+    category: 'Finance',
+    icon: '🧮'
+  };
+  
   return {
     id: slug,
     slug: slug,
-    name: slug.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' '),
-    category: 'finance'
+    name: metadata.name,
+    category: metadata.category,
+    icon: metadata.icon
   };
 }
 

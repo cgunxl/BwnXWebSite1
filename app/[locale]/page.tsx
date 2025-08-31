@@ -3,7 +3,7 @@ import Link from 'next/link';
 import SearchBar from '@/components/SearchBar';
 import PopularCalculators from '@/components/PopularCalculators';
 import CategoryGrid from '@/components/CategoryGrid';
-import { getAllCalculators, calculatorCategories } from '@/lib/calculators/registry';
+import { getAllCalculators, calculatorCategories, getCalculatorBySlug } from '@/lib/calculators/registry';
 import { Locale } from '@/lib/i18n/config';
 
 export async function generateMetadata({ 
@@ -299,7 +299,11 @@ export default async function HomePage({
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
             {recommendedCalculators.map((calcId, index) => {
-              const calculator = allCalculators.find(c => c.slug === calcId || c.id === calcId);
+              // Check if this calculator exists in our registry
+              if (!allCalculators.includes(calcId)) return null;
+              
+              // Get calculator details
+              const calculator = getCalculatorBySlug(calcId);
               if (!calculator) return null;
 
               return (
@@ -310,7 +314,7 @@ export default async function HomePage({
                   style={{ animationDelay: `${index * 0.05}s` }}
                 >
                   <div className="flex items-center space-x-3">
-                    <span className="text-3xl">{calculator.icon}</span>
+                    <span className="text-3xl">{calculator.icon || '🧮'}</span>
                     <div className="flex-1">
                       <h3 className="font-semibold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
                         {calculator.name}
