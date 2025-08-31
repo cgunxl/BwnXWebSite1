@@ -3,7 +3,7 @@ import { Calculator, CalculatorInput, CalculatorOutput, CalculatorFormula } from
 import { Locale } from '@/lib/i18n/config';
 
 // Country-specific financial configurations
-const financeConfigs: Record<Locale, any> = {
+const financeConfigs: Partial<Record<Locale, any>> = {
   en: {
     currency: 'USD',
     taxBrackets: [

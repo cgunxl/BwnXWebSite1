@@ -3,7 +3,7 @@ import { Calculator, CalculatorInput, CalculatorOutput } from '@/lib/types/calcu
 import { Locale } from '@/lib/i18n/config';
 
 // Country-specific health configurations
-const healthConfigs: Record<Locale, any> = {
+const healthConfigs: Partial<Record<Locale, any>> = {
   en: {
     bmiCategories: [
       { min: 0, max: 18.5, label: 'Underweight', color: '#3B82F6' },
