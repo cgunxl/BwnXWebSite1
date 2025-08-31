@@ -42,7 +42,16 @@ export default function CalculatorForm({
     setErrors({});
     
     try {
-      const calculationResult = CalculatorEngine.calculate(calculator, inputs);
+      const outputs = CalculatorEngine.calculate(calculator, inputs);
+      const calculationResult: CalculatorResult = {
+        inputs: { ...inputs },
+        outputs,
+        timestamp: new Date().toISOString(),
+        locale,
+        shareUrl: typeof window !== 'undefined' 
+          ? `${window.location.origin}/${locale}/calculator/${calculator.slug}?${new URLSearchParams(inputs).toString()}`
+          : ''
+      };
       setResult(calculationResult);
       if (onCalculate) {
         onCalculate(calculationResult);
