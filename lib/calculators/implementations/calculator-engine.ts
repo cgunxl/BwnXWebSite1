@@ -471,7 +471,7 @@ export const mathFormulas = {
       courses: Array<{ name: string; credits: number; grade: string }>;
       scale: '4.0' | '5.0';
     }) => {
-      const gradePoints = {
+      const gradePoints: Record<string, Record<string, number>> = {
         '4.0': {
           'A+': 4.0, 'A': 4.0, 'A-': 3.7,
           'B+': 3.3, 'B': 3.0, 'B-': 2.7,
@@ -492,7 +492,7 @@ export const mathFormulas = {
       let totalPoints = 0;
       let totalCredits = 0;
       
-      const courseResults = inputs.courses.map(course => {
+      const courseResults = inputs.courses.map((course: any) => {
         const points = scale[course.grade] || 0;
         const coursePoints = points * course.credits;
         totalPoints += coursePoints;
