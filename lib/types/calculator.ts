@@ -199,6 +199,7 @@ export type CalculatorCategory =
   | 'environment'
   | 'business'
   | 'technology'
+  | 'tech'
   | 'mathematics'
   | 'math'
   | 'conversion'
