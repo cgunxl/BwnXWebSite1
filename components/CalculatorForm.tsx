@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Calculator, CalculatorInput, CalculatorResult } from '@/lib/types/calculator';
-import { CalculatorEngine } from '@/lib/calculators/engine';
+import CalculatorEngine from '@/lib/calculators/engine';
 
 interface CalculatorFormProps {
   calculator: Calculator;
@@ -21,8 +21,6 @@ export default function CalculatorForm({
   const [result, setResult] = useState<CalculatorResult | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isCalculating, setIsCalculating] = useState(false);
-
-  const engine = new CalculatorEngine(calculator, locale);
 
   // Initialize default values - but don't set them immediately to avoid 0 prefix issue
   useEffect(() => {
@@ -44,7 +42,7 @@ export default function CalculatorForm({
     setErrors({});
     
     try {
-      const calculationResult = engine.calculate(inputs);
+      const calculationResult = CalculatorEngine.calculate(calculator, inputs);
       setResult(calculationResult);
       if (onCalculate) {
         onCalculate(calculationResult);
