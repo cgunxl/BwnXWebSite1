@@ -28,6 +28,7 @@ export default function CategoryGrid({ categories, locale }: CategoryGridProps) 
         business: 'ธุรกิจ',
         technology: 'เทคโนโลยี',
         mathematics: 'คณิตศาสตร์',
+        math: 'คณิต',
         conversion: 'แปลงหน่วย',
         logistics: 'โลจิสติกส์',
         household: 'ครัวเรือน',

@@ -204,6 +204,12 @@ export function getCalculatorsByCategory(category: string): string[] {
 
 // Export calculator categories
 export const calculatorCategories: Record<string, any> = {
+  math: {
+    name: 'Mathematics',
+    description: 'Mathematical and statistical calculators',
+    icon: '🔢',
+    color: '#8B5CF6'
+  },
   finance: {
     name: 'Finance',
     description: 'Financial calculators for loans, investments, and taxes',

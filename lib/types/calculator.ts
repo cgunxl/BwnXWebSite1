@@ -192,6 +192,7 @@ export type CalculatorCategory =
   | 'business'
   | 'technology'
   | 'mathematics'
+  | 'math'
   | 'conversion'
   | 'logistics'
   | 'household'
