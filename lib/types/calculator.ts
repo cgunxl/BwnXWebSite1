@@ -65,6 +65,9 @@ export interface CalculatorInput {
   tooltip?: string;
   dependsOn?: string[];
   showWhen?: Record<string, any>;
+  fields?: any[]; // For dynamic-list type
+  multiple?: boolean; // For file and select types
+  accept?: string; // For file type
 }
 
 export interface SelectOption {
