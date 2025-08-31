@@ -2,8 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { Calculator, CalculatorInput, CalculatorResult } from '@/lib/types/calculator';
-import { CalculatorEngine } from '@/lib/calculators/engine';
-import { evaluateFormula } from '@/lib/eval';
+import CalculatorEngine from '@/lib/calculators/engine';
 
 interface BwnXCalculatorFormProps {
   calculator: Calculator;
@@ -16,7 +15,12 @@ export default function BwnXCalculatorForm({
   locale, 
   initialInputs = {} 
 }: BwnXCalculatorFormProps) {
-  const [inputs, setInputs] = useState<Record<string, any>>(initialInputs);
+  // Get default values from the engine
+  const defaultValues = CalculatorEngine.getDefaultValues(calculator);
+  const [inputs, setInputs] = useState<Record<string, any>>({
+    ...defaultValues,
+    ...initialInputs
+  });
   const [result, setResult] = useState<CalculatorResult | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isCalculating, setIsCalculating] = useState(false);
@@ -75,7 +79,12 @@ export default function BwnXCalculatorForm({
   };
 
   const handleCalculate = async () => {
-    if (!validateInputs()) return;
+    // Validate inputs using the engine
+    const validation = CalculatorEngine.validateInputs(calculator, inputs);
+    if (!validation.valid) {
+      setErrors(validation.errors);
+      return;
+    }
     
     setIsCalculating(true);
     setShowResults(false);
@@ -84,17 +93,8 @@ export default function BwnXCalculatorForm({
       // Simulate calculation delay for smooth animation
       await new Promise(resolve => setTimeout(resolve, 300));
       
-      // Use the primary formula
-      const formula = calculator.formulas?.[0];
-      if (!formula) throw new Error('No formula defined');
-      
-      // Evaluate the formula
-      const formulaResult = evaluateFormula(formula.expression, inputs);
-      
-      // Ensure outputs is an object
-      const outputs = typeof formulaResult === 'object' && formulaResult !== null 
-        ? formulaResult 
-        : { result: formulaResult };
+      // Use the calculator engine to perform calculations
+      const outputs = CalculatorEngine.calculate(calculator, inputs);
       
       const calculationResult: CalculatorResult = {
         inputs: { ...inputs },
@@ -286,7 +286,9 @@ export default function BwnXCalculatorForm({
         </h2>
         
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {calculator.inputs.map((input, index) => renderInput(input, index))}
+          {calculator.inputs
+            .filter(input => CalculatorEngine.isFieldVisible(input, inputs))
+            .map((input, index) => renderInput(input, index))}
         </div>
         
         {errors.general && (
@@ -358,8 +360,8 @@ export default function BwnXCalculatorForm({
                   <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
                     {output?.label || key}
                   </p>
-                  <p className={`text-3xl font-bold ${output?.primary ? 'text-blue-600 dark:text-blue-400' : 'text-gray-900 dark:text-white'}`}>
-                    {formatOutput(value, output?.format, locale)}
+                  <p className={`text-3xl font-bold ${output?.highlight ? 'text-blue-600 dark:text-blue-400' : 'text-gray-900 dark:text-white'}`}>
+                    {CalculatorEngine.formatOutput(value, output?.format, output?.decimals)}
                   </p>
                   {output?.unit && (
                     <p className="text-sm text-gray-500 dark:text-gray-400 mt-1">

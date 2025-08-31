@@ -1,342 +1,277 @@
-// Calculator engine for processing formulas and calculations
-import { Calculator, CalculatorInput, CalculatorOutput, CalculatorResult } from '@/lib/types/calculator';
+/**
+ * Calculator Engine - Core calculation logic for BwnXCalculator
+ * Evaluates calculator formulas safely and returns results
+ */
+
+import { Calculator, CalculatorFormula } from '@/lib/types/calculator';
 
 export class CalculatorEngine {
-  private calculator: Calculator;
-  private locale: string;
+  /**
+   * Execute a calculator formula with given inputs
+   */
+  static calculate(
+    calculator: Calculator,
+    inputs: Record<string, any>
+  ): Record<string, any> {
+    try {
+      // Get the primary formula (first one) or the one marked as primary
+      const formula = calculator.formulas?.find(f => f.key === 'primary' || f.key === 'calculate') 
+                      || calculator.formulas?.[0];
+      
+      if (!formula) {
+        throw new Error('No formula defined for this calculator');
+      }
 
-  constructor(calculator: Calculator, locale: string = 'en') {
-    this.calculator = calculator;
-    this.locale = locale;
+      // Execute the formula
+      return this.executeFormula(formula, inputs);
+    } catch (error) {
+      console.error('Calculation error:', error);
+      throw new Error(`Calculation failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
   }
 
   /**
-   * Process calculator inputs and return results
+   * Execute a single formula
    */
-  calculate(inputs: Record<string, any>): CalculatorResult {
-    const processedInputs = this.preprocessInputs(inputs);
-    const outputs = this.executeFormulas(processedInputs);
-    const postProcessedOutputs = this.postprocessOutputs(outputs, processedInputs);
+  private static executeFormula(
+    formula: CalculatorFormula,
+    inputs: Record<string, any>
+  ): Record<string, any> {
+    try {
+      // Create a safe evaluation context
+      const safeContext = this.createSafeContext(inputs);
+      
+      // Build the function body
+      const functionBody = `
+        'use strict';
+        const { ${Object.keys(inputs).join(', ')} } = inputs;
+        ${formula.expression}
+      `;
+
+      // Create and execute the function
+      const calculationFunction = new Function('inputs', 'Math', 'Date', functionBody);
+      const result = calculationFunction(safeContext, Math, Date);
+
+      // Ensure we return an object
+      if (typeof result === 'object' && result !== null) {
+        return result;
+      }
+
+      // If result is a primitive, wrap it
+      return { result };
+    } catch (error) {
+      console.error('Formula execution error:', error);
+      throw new Error(`Formula execution failed: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    }
+  }
+
+  /**
+   * Create a safe context for formula evaluation
+   */
+  private static createSafeContext(inputs: Record<string, any>): Record<string, any> {
+    // Clone inputs to prevent modification
+    const safeInputs = { ...inputs };
+
+    // Convert string numbers to actual numbers where appropriate
+    Object.keys(safeInputs).forEach(key => {
+      const value = safeInputs[key];
+      if (typeof value === 'string' && !isNaN(Number(value)) && value !== '') {
+        safeInputs[key] = Number(value);
+      }
+    });
+
+    return safeInputs;
+  }
+
+  /**
+   * Validate inputs against calculator requirements
+   */
+  static validateInputs(
+    calculator: Calculator,
+    inputs: Record<string, any>
+  ): { valid: boolean; errors: Record<string, string> } {
+    const errors: Record<string, string> = {};
+
+    calculator.inputs.forEach(input => {
+      const value = inputs[input.key];
+
+      // Check required fields
+      if (input.required && (value === undefined || value === null || value === '')) {
+        errors[input.key] = 'This field is required';
+        return;
+      }
+
+      // Skip validation for optional empty fields
+      if (!input.required && (value === undefined || value === null || value === '')) {
+        return;
+      }
+
+      // Type-specific validation
+      switch (input.type) {
+        case 'number':
+        case 'slider':
+        case 'range':
+          const numValue = Number(value);
+          if (isNaN(numValue)) {
+            errors[input.key] = 'Please enter a valid number';
+          } else {
+            if (input.min !== undefined && numValue < input.min) {
+              errors[input.key] = `Minimum value is ${input.min}`;
+            }
+            if (input.max !== undefined && numValue > input.max) {
+              errors[input.key] = `Maximum value is ${input.max}`;
+            }
+          }
+          break;
+
+        case 'date':
+          if (!value || !Date.parse(value)) {
+            errors[input.key] = 'Please enter a valid date';
+          }
+          break;
+
+        case 'email':
+          const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+          if (!emailRegex.test(value)) {
+            errors[input.key] = 'Please enter a valid email address';
+          }
+          break;
+
+        case 'url':
+          try {
+            new URL(value);
+          } catch {
+            errors[input.key] = 'Please enter a valid URL';
+          }
+          break;
+
+        case 'tel':
+          const phoneRegex = /^[\d\s\-\+\(\)]+$/;
+          if (!phoneRegex.test(value)) {
+            errors[input.key] = 'Please enter a valid phone number';
+          }
+          break;
+      }
+
+      // Check conditional visibility
+      if (input.dependsOn && input.showWhen) {
+        const shouldShow = this.checkCondition(input.showWhen, inputs);
+        if (!shouldShow && input.required) {
+          // Remove error if field is hidden
+          delete errors[input.key];
+        }
+      }
+    });
 
     return {
-      inputs: processedInputs,
-      outputs: postProcessedOutputs,
-      timestamp: new Date().toISOString(),
-      locale: this.locale,
-      shareUrl: this.generateShareUrl(processedInputs),
+      valid: Object.keys(errors).length === 0,
+      errors
     };
   }
 
   /**
-   * Preprocess and validate inputs
+   * Check if a condition is met for conditional fields
    */
-  private preprocessInputs(inputs: Record<string, any>): Record<string, any> {
-    const processed: Record<string, any> = {};
-
-    for (const input of this.calculator.inputs) {
-      let value = inputs[input.key];
-
-      // Apply default value if not provided
-      if (value === undefined || value === null || value === '') {
-        if (input.defaultValue !== undefined) {
-          value = input.defaultValue;
-        } else if (input.required) {
-          throw new Error(`Required input ${input.key} is missing`);
-        }
+  private static checkCondition(
+    condition: Record<string, any>,
+    inputs: Record<string, any>
+  ): boolean {
+    return Object.entries(condition).every(([key, value]) => {
+      const inputValue = inputs[key];
+      if (Array.isArray(value)) {
+        return value.includes(inputValue);
       }
-
-      // Type conversion
-      if (input.type === 'number' && typeof value === 'string') {
-        value = parseFloat(value);
-        if (isNaN(value)) {
-          throw new Error(`Invalid number for ${input.key}`);
-        }
-      }
-
-      // Validation
-      if (input.validation) {
-        const validation = input.validation;
-        if (validation.required && !value) {
-          throw new Error(validation.message || `${input.label || input.key} is required`);
-        }
-        if (validation.min !== undefined && Number(value) < validation.min) {
-          throw new Error(validation.message || `${input.label || input.key} must be at least ${validation.min}`);
-        }
-        if (validation.max !== undefined && Number(value) > validation.max) {
-          throw new Error(validation.message || `${input.label || input.key} must be at most ${validation.max}`);
-        }
-        if (validation.pattern && !new RegExp(validation.pattern).test(String(value))) {
-          throw new Error(validation.message || `${input.label || input.key} format is invalid`);
-        }
-      }
-
-      // Range validation for numbers
-      if (input.type === 'number') {
-        if (input.min !== undefined && value < input.min) {
-          throw new Error(`${input.label} must be at least ${input.min}`);
-        }
-        if (input.max !== undefined && value > input.max) {
-          throw new Error(`${input.label} must be at most ${input.max}`);
-        }
-      }
-
-      processed[input.key] = value;
-    }
-
-    return processed;
-  }
-
-  /**
-   * Execute calculator formulas
-   */
-  private executeFormulas(inputs: Record<string, any>): Record<string, any> {
-    const outputs: Record<string, any> = {};
-
-    // Execute each formula
-    for (const formula of this.calculator.formulas) {
-      try {
-        const result = this.evaluateFormula(formula.expression, inputs);
-        outputs[formula.name] = result;
-      } catch (error) {
-        console.error(`Error executing formula ${formula.name}:`, error);
-        outputs[formula.name] = null;
-      }
-    }
-
-    // Special calculations based on calculator type
-    if (this.calculator.id === 'bmi-calculator') {
-      outputs.bmi = this.calculateBMI(inputs);
-      outputs.category = this.getBMICategory(outputs.bmi, this.locale);
-      outputs.healthRisk = this.getBMIHealthRisk(outputs.bmi, this.locale);
-      outputs.idealWeight = this.getIdealWeightRange(inputs.height, inputs.unitSystem);
-    } else if (this.calculator.id === 'loan-calculator') {
-      outputs.payment = this.calculateLoanPayment(inputs);
-      outputs.totalPayment = outputs.payment * this.getNumberOfPayments(inputs);
-      outputs.totalInterest = outputs.totalPayment - inputs.principal;
-      outputs.payoffDate = this.calculatePayoffDate(inputs);
-    }
-    // Add more calculator-specific logic...
-
-    return outputs;
-  }
-
-  /**
-   * Calculate BMI
-   */
-  private calculateBMI(inputs: Record<string, any>): number {
-    const { weight, height, unitSystem } = inputs;
-    
-    if (unitSystem === 'imperial') {
-      // BMI = (weight in pounds × 703) / (height in inches)²
-      return (weight * 703) / Math.pow(height, 2);
-    } else {
-      // BMI = weight in kg / (height in meters)²
-      const heightInMeters = height / 100;
-      return weight / Math.pow(heightInMeters, 2);
-    }
-  }
-
-  /**
-   * Get BMI category based on locale-specific standards
-   */
-  private getBMICategory(bmi: number, locale: string): string {
-    const standards = this.calculator.countrySpecific?.[locale]?.standards || 
-                     this.calculator.countrySpecific?.['en']?.standards;
-
-    if (!standards) {
-      // Default WHO standards
-      if (bmi < 18.5) return 'Underweight';
-      if (bmi < 25) return 'Normal Weight';
-      if (bmi < 30) return 'Overweight';
-      return 'Obese';
-    }
-
-    // Use country-specific standards
-    if (locale === 'th' || locale === 'ja' || locale === 'zh' || locale === 'ko') {
-      // Asian standards
-      if (bmi < 18.5) return locale === 'th' ? 'ผอมเกินไป' : 'Underweight';
-      if (bmi < 23) return locale === 'th' ? 'น้ำหนักปกติ' : 'Normal Weight';
-      if (bmi < 25) return locale === 'th' ? 'น้ำหนักเกิน' : 'Overweight';
-      if (bmi < 30) return locale === 'th' ? 'อ้วนระดับ 1' : 'Obese Class I';
-      return locale === 'th' ? 'อ้วนระดับ 2' : 'Obese Class II';
-    }
-
-    // Western standards
-    if (bmi < 18.5) return 'Underweight';
-    if (bmi < 25) return 'Normal Weight';
-    if (bmi < 30) return 'Overweight';
-    if (bmi < 35) return 'Obese Class I';
-    if (bmi < 40) return 'Obese Class II';
-    return 'Obese Class III';
-  }
-
-  /**
-   * Get BMI health risk level
-   */
-  private getBMIHealthRisk(bmi: number, locale: string): string {
-    if (locale === 'th') {
-      if (bmi < 18.5 || bmi >= 30) return 'สูง';
-      if (bmi >= 25) return 'ปานกลาง';
-      return 'ต่ำ';
-    }
-
-    if (bmi < 18.5 || bmi >= 30) return 'High';
-    if (bmi >= 25) return 'Moderate';
-    return 'Low';
-  }
-
-  /**
-   * Get ideal weight range
-   */
-  private getIdealWeightRange(height: number, unitSystem: string): string {
-    if (unitSystem === 'imperial') {
-      // Convert to metric for calculation
-      const heightCm = height * 2.54;
-      const minWeight = 18.5 * Math.pow(heightCm / 100, 2) * 2.205;
-      const maxWeight = 24.9 * Math.pow(heightCm / 100, 2) * 2.205;
-      return `${minWeight.toFixed(0)}-${maxWeight.toFixed(0)} lbs`;
-    } else {
-      const heightM = height / 100;
-      const minWeight = 18.5 * Math.pow(heightM, 2);
-      const maxWeight = 24.9 * Math.pow(heightM, 2);
-      return `${minWeight.toFixed(0)}-${maxWeight.toFixed(0)} kg`;
-    }
-  }
-
-  /**
-   * Calculate loan payment
-   */
-  private calculateLoanPayment(inputs: Record<string, any>): number {
-    const { principal, interestRate, term, paymentFrequency } = inputs;
-    
-    let periodsPerYear = 12; // monthly by default
-    if (paymentFrequency === 'biweekly') periodsPerYear = 26;
-    if (paymentFrequency === 'weekly') periodsPerYear = 52;
-    
-    const rate = interestRate / 100 / periodsPerYear;
-    const numberOfPayments = term * periodsPerYear;
-    
-    if (rate === 0) {
-      return principal / numberOfPayments;
-    }
-    
-    const payment = principal * (rate * Math.pow(1 + rate, numberOfPayments)) / 
-                   (Math.pow(1 + rate, numberOfPayments) - 1);
-    
-    return payment;
-  }
-
-  /**
-   * Get number of payments for loan
-   */
-  private getNumberOfPayments(inputs: Record<string, any>): number {
-    const { term, paymentFrequency } = inputs;
-    
-    let periodsPerYear = 12;
-    if (paymentFrequency === 'biweekly') periodsPerYear = 26;
-    if (paymentFrequency === 'weekly') periodsPerYear = 52;
-    
-    return term * periodsPerYear;
-  }
-
-  /**
-   * Calculate loan payoff date
-   */
-  private calculatePayoffDate(inputs: Record<string, any>): string {
-    const numberOfPayments = this.getNumberOfPayments(inputs);
-    const { paymentFrequency } = inputs;
-    
-    const today = new Date();
-    const payoffDate = new Date(today);
-    
-    if (paymentFrequency === 'monthly') {
-      payoffDate.setMonth(payoffDate.getMonth() + numberOfPayments);
-    } else if (paymentFrequency === 'biweekly') {
-      payoffDate.setDate(payoffDate.getDate() + (numberOfPayments * 14));
-    } else if (paymentFrequency === 'weekly') {
-      payoffDate.setDate(payoffDate.getDate() + (numberOfPayments * 7));
-    }
-    
-    return payoffDate.toLocaleDateString(this.locale, { 
-      year: 'numeric', 
-      month: 'long' 
+      return inputValue === value;
     });
   }
 
   /**
-   * Evaluate a formula expression safely
+   * Format output value based on format type
    */
-  private evaluateFormula(expression: string, inputs: Record<string, any>): any {
-    try {
-      // Create a safe evaluation context
-      const func = new Function(...Object.keys(inputs), `return ${expression}`);
-      return func(...Object.values(inputs));
-    } catch (error) {
-      console.error('Formula evaluation error:', error);
-      return null;
+  static formatOutput(value: any, format?: string, decimals?: number): string {
+    if (value === null || value === undefined) {
+      return 'N/A';
+    }
+
+    switch (format) {
+      case 'currency':
+        const num = Number(value);
+        if (isNaN(num)) return 'N/A';
+        return new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: 'USD',
+          minimumFractionDigits: decimals ?? 2,
+          maximumFractionDigits: decimals ?? 2
+        }).format(num);
+
+      case 'percentage':
+        const pct = Number(value);
+        if (isNaN(pct)) return 'N/A';
+        return `${pct.toFixed(decimals ?? 2)}%`;
+
+      case 'number':
+        const n = Number(value);
+        if (isNaN(n)) return 'N/A';
+        return n.toFixed(decimals ?? 2);
+
+      case 'text':
+      default:
+        return String(value);
     }
   }
 
   /**
-   * Validate input against a rule
+   * Get default values for calculator inputs
    */
-  private validateInput(value: any, validation: any): boolean {
-    if (validation.required && !value) return false;
-    if (validation.min !== undefined && Number(value) < validation.min) return false;
-    if (validation.max !== undefined && Number(value) > validation.max) return false;
-    if (validation.pattern && !new RegExp(validation.pattern).test(String(value))) return false;
-    return true;
-  }
+  static getDefaultValues(calculator: Calculator): Record<string, any> {
+    const defaults: Record<string, any> = {};
 
-  /**
-   * Post-process outputs for display
-   */
-  private postprocessOutputs(outputs: Record<string, any>, inputs: Record<string, any>): Record<string, any> {
-    const processed: Record<string, any> = {};
-
-    for (const output of this.calculator.outputs) {
-      let value = outputs[output.key];
-
-      if (value !== null && value !== undefined) {
-        // Format based on output type
-        if (output.format === 'currency') {
-          const currency = this.calculator.countrySpecific?.[this.locale]?.currency || 'USD';
-          value = this.formatCurrency(value, currency);
-        } else if (output.format === 'percentage') {
-          value = `${(value * 100).toFixed(output.precision || 2)}%`;
-        } else if (output.format === 'number' && output.precision !== undefined) {
-          value = parseFloat(value).toFixed(output.precision);
+    calculator.inputs.forEach(input => {
+      if (input.defaultValue !== undefined) {
+        defaults[input.key] = input.defaultValue;
+      } else {
+        // Set sensible defaults based on type
+        switch (input.type) {
+          case 'number':
+          case 'slider':
+          case 'range':
+            defaults[input.key] = input.min ?? 0;
+            break;
+          case 'boolean':
+          case 'checkbox':
+            defaults[input.key] = false;
+            break;
+          case 'date':
+            defaults[input.key] = new Date().toISOString().split('T')[0];
+            break;
+          case 'select':
+          case 'radio':
+            if (input.options && input.options.length > 0) {
+              defaults[input.key] = input.options[0].value;
+            }
+            break;
+          default:
+            defaults[input.key] = '';
         }
       }
+    });
 
-      processed[output.key] = value;
-    }
-
-    return processed;
+    return defaults;
   }
 
   /**
-   * Format currency based on locale
+   * Check if a field should be visible based on conditions
    */
-  private formatCurrency(value: number, currency: string): string {
-    return new Intl.NumberFormat(this.locale, {
-      style: 'currency',
-      currency: currency,
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 2,
-    }).format(value);
-  }
-
-  /**
-   * Generate shareable URL with inputs
-   */
-  private generateShareUrl(inputs: Record<string, any>): string {
-    const params = new URLSearchParams();
-    for (const [key, value] of Object.entries(inputs)) {
-      if (value !== null && value !== undefined && value !== '') {
-        params.append(key, value.toString());
-      }
+  static isFieldVisible(
+    input: any,
+    currentInputs: Record<string, any>
+  ): boolean {
+    if (!input.dependsOn || !input.showWhen) {
+      return true;
     }
-    return `?${params.toString()}`;
+
+    return this.checkCondition(input.showWhen, currentInputs);
   }
 }
+
+export default CalculatorEngine;
