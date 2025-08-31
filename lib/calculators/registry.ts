@@ -7,6 +7,7 @@ import { financeCalculatorsBatch1 } from './implementations/finance-batch1';
 import { healthCalculatorsBatch2 } from './implementations/health-batch2';
 import { educationCalculatorsBatch3 } from './implementations/education-batch3';
 import { megaBatchCalculators } from './implementations/mega-batch';
+import { funCalculatorsBatch } from './implementations/fun-batch';
 
 // Calculator factory type
 type CalculatorFactory = (locale: Locale) => Calculator;
@@ -70,6 +71,20 @@ const megaBatchIds = [
 megaBatchIds.forEach((id, index) => {
   if (megaBatchCalculators[index]) {
     calculatorRegistry.set(id, megaBatchCalculators[index]);
+  }
+});
+
+// Register Fun & Novelty Calculators
+const funCalculatorIds = [
+  'love-calculator',
+  'lucky-number',
+  'birthday-calculator',
+  'personality-test'
+];
+
+funCalculatorIds.forEach((id, index) => {
+  if (funCalculatorsBatch[index]) {
+    calculatorRegistry.set(id, funCalculatorsBatch[index]);
   }
 });
 
@@ -163,6 +178,10 @@ export function getCalculatorBySlug(slug: string): any {
     'pregnancy-due-date': { name: 'Pregnancy Due Date', category: 'Health', icon: '👶' },
     'age-calculator': { name: 'Age Calculator', category: 'Lifestyle', icon: '🎂' },
     'tip-calculator': { name: 'Tip Calculator', category: 'Lifestyle', icon: '💵' },
+    'love-calculator': { name: 'Love Calculator', category: 'Lifestyle', icon: '❤️' },
+    'lucky-number': { name: 'Lucky Number Generator', category: 'Lifestyle', icon: '🍀' },
+    'birthday-calculator': { name: 'Birthday Calculator', category: 'Lifestyle', icon: '🎂' },
+    'personality-test': { name: 'Personality Test', category: 'Lifestyle', icon: '🧠' },
     'discount-calculator': { name: 'Discount Calculator', category: 'Shopping', icon: '🏷️' },
     'vat-calculator': { name: 'VAT Calculator', category: 'Finance', icon: '🧾' },
     'salary-calculator': { name: 'Salary Calculator', category: 'Finance', icon: '💼' },
@@ -219,7 +238,8 @@ export function getCalculatorsByCategory(category: string): string[] {
     ],
     lifestyle: [
       'age-calculator', 'date-calculator', 'time-calculator',
-      'tip-calculator', 'discount-calculator', 'split-bill-calculator'
+      'tip-calculator', 'discount-calculator', 'split-bill-calculator',
+      'love-calculator', 'lucky-number', 'birthday-calculator', 'personality-test'
     ],
     conversion: [
       'length-converter', 'weight-converter', 'temperature-converter',
