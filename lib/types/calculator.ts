@@ -129,7 +129,7 @@ export interface CalculatorFormula {
 }
 
 export interface Graph {
-  type: 'gauge' | 'bar' | 'line' | 'pie' | 'donut' | 'scatter' | 'area' | 'category-bar' | 'function' | 'histogram' | 'heatmap' | 'bubble' | 'radar' | 'treemap' | 'sankey' | 'waterfall';
+  type: 'gauge' | 'bar' | 'line' | 'pie' | 'donut' | 'scatter' | 'area' | 'category-bar' | 'function' | 'histogram' | 'heatmap' | 'bubble' | 'radar' | 'treemap' | 'sankey' | 'waterfall' | 'timeline' | 'calendar' | 'gantt' | 'flowchart' | 'network' | 'boxplot' | 'violin' | 'sunburst' | 'chord' | 'parallel' | string;
   dataKey?: string;
   min?: number;
   max?: number;
