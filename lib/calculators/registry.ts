@@ -228,7 +228,6 @@ export const calculatorCategories: Record<string, any> = {
     icon: '🎓',
     color: '#3B82F6'
   },
-  math: {
     name: 'Mathematics',
     description: 'Mathematical and scientific calculators',
     icon: '📐',
