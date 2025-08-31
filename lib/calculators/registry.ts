@@ -192,14 +192,46 @@ export function getCalculatorBySlug(slug: string): any {
 }
 
 export function getCalculatorsByCategory(category: string): string[] {
-  const calculators: string[] = [];
-  calculatorRegistry.forEach((factory, id) => {
-    const calc = factory('en');
-    if (calc && calc.category === category) {
-      calculators.push(id);
-    }
-  });
-  return calculators;
+  // For now, return a predefined list based on category
+  const categoryCalculators: Record<string, string[]> = {
+    finance: [
+      'loan-calculator', 'mortgage-calculator', 'car-loan-calculator', 
+      'credit-card-interest', 'compound-interest', 'savings-goal',
+      'retirement-calculator', 'investment-calculator', 'tax-calculator',
+      'vat-calculator', 'inflation-calculator', 'roi-calculator'
+    ],
+    health: [
+      'bmi-calculator', 'bmr-calculator', 'calorie-calculator',
+      'body-fat-calculator', 'ideal-weight-calculator', 'water-intake-calculator',
+      'pregnancy-calculator', 'ovulation-calculator', 'heart-rate-calculator'
+    ],
+    education: [
+      'gpa-calculator', 'grade-calculator', 'percentage-calculator',
+      'cgpa-calculator', 'study-time-calculator', 'reading-speed-calculator'
+    ],
+    mathematics: [
+      'percentage-calculator', 'average-calculator', 'ratio-calculator',
+      'proportion-calculator', 'standard-deviation', 'probability-calculator'
+    ],
+    engineering: [
+      'ohms-law-calculator', 'voltage-divider', 'power-calculator',
+      'torque-calculator', 'pressure-calculator', 'force-calculator'
+    ],
+    lifestyle: [
+      'age-calculator', 'date-calculator', 'time-calculator',
+      'tip-calculator', 'discount-calculator', 'split-bill-calculator'
+    ],
+    conversion: [
+      'length-converter', 'weight-converter', 'temperature-converter',
+      'area-converter', 'volume-converter', 'speed-converter'
+    ],
+    business: [
+      'profit-margin-calculator', 'break-even-calculator', 'markup-calculator',
+      'sales-tax-calculator', 'payroll-calculator', 'invoice-calculator'
+    ]
+  };
+
+  return categoryCalculators[category] || [];
 }
 
 // Export calculator categories

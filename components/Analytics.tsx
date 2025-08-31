@@ -134,9 +134,10 @@ export const trackAdInteraction = (adType: string, position: string) => {
 // Google Analytics Script Component
 export default function GoogleAnalytics() {
   // Check if user has consented to analytics cookies
-  const hasConsent = typeof window !== 'undefined' && 
+  const hasConsent = typeof window !== 'undefined' && (
     localStorage.getItem('cookie-consent') === 'accept' ||
-    localStorage.getItem('cookie-consent-analytics') === 'true';
+    localStorage.getItem('cookie-consent-analytics') === 'true'
+  );
 
   if (!hasConsent || !GA_MEASUREMENT_ID || GA_MEASUREMENT_ID === 'G-XXXXXXXXXX') {
     return null;

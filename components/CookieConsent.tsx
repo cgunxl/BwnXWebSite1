@@ -289,9 +289,11 @@ export default function CookieConsent({ locale }: CookieConsentProps) {
   const t = translations[locale] || translations.en;
 
   useEffect(() => {
-    const consent = localStorage.getItem('cookie-consent');
-    if (!consent) {
-      setShowBanner(true);
+    if (typeof window !== 'undefined') {
+      const consent = localStorage.getItem('cookie-consent');
+      if (!consent) {
+        setShowBanner(true);
+      }
     }
   }, []);
 
