@@ -81,8 +81,6 @@ export interface CalculatorInput {
   autoComplete?: string; // For autocomplete
   className?: string; // For custom styling
   style?: any; // For inline styles
-  dependsOn?: string[]; // Dependencies for conditional display
-  showWhen?: Record<string, any>; // Conditions for showing this input
   [key: string]: any; // Allow any additional properties
 }
 
