@@ -89,7 +89,12 @@ export default function BwnXCalculatorForm({
       if (!formula) throw new Error('No formula defined');
       
       // Evaluate the formula
-      const outputs = evaluateFormula(formula.expression, inputs);
+      const formulaResult = evaluateFormula(formula.expression, inputs);
+      
+      // Ensure outputs is an object
+      const outputs = typeof formulaResult === 'object' && formulaResult !== null 
+        ? formulaResult 
+        : { result: formulaResult };
       
       const calculationResult: CalculatorResult = {
         inputs: { ...inputs },
