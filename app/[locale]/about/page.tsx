@@ -33,7 +33,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: L
 export default async function AboutPage({ params }: { params: Promise<{ locale: Locale }> }) {
   const { locale } = await params;
 
-  const content: Record<Locale, any> = {
+  const content: Partial<Record<Locale, any>> = {
     en: {
       title: 'About BwnXCalculator',
       subtitle: 'Your Trusted Calculator Hub Since 2024',
