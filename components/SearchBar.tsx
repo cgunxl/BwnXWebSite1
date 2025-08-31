@@ -33,9 +33,8 @@ export default function SearchBar({ locale, placeholder = 'Search calculators...
     setQuery(searchQuery);
     
     if (searchQuery.length > 1) {
-      const filtered = allCalculators.filter(calc => 
-        calc.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        calc.slug.toLowerCase().includes(searchQuery.toLowerCase())
+      const filtered = allCalculators.filter(calcId => 
+        calcId.toLowerCase().includes(searchQuery.toLowerCase())
       ).slice(0, 8);
       
       setSuggestions(filtered);
@@ -46,10 +45,10 @@ export default function SearchBar({ locale, placeholder = 'Search calculators...
     }
   };
 
-  const handleSelectCalculator = (calculator: any) => {
+  const handleSelectCalculator = (calculatorId: string) => {
     setQuery('');
     setShowSuggestions(false);
-    router.push(`/${locale}/calculator/${calculator.slug}`);
+    router.push(`/${locale}/calculator/${calculatorId}`);
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -84,15 +83,17 @@ export default function SearchBar({ locale, placeholder = 'Search calculators...
       {/* Search Suggestions */}
       {showSuggestions && suggestions.length > 0 && (
         <div className="absolute top-full mt-2 w-full bg-white rounded-lg shadow-xl border border-gray-200 z-50 max-h-96 overflow-y-auto">
-          {suggestions.map((calc) => (
+          {suggestions.map((calcId) => (
             <button
-              key={calc.id}
-              onClick={() => handleSelectCalculator(calc)}
+              key={calcId}
+              onClick={() => handleSelectCalculator(calcId)}
               className="w-full px-4 py-3 text-left hover:bg-gray-50 transition-colors flex items-center space-x-3 border-b border-gray-100 last:border-b-0"
             >
               <span className="text-2xl">🧮</span>
               <div>
-                <div className="font-medium text-gray-900">{calc.name}</div>
+                <div className="font-medium text-gray-900">
+                  {calcId.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+                </div>
                 <div className="text-sm text-gray-500">Click to open calculator</div>
               </div>
             </button>
