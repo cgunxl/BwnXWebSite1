@@ -92,7 +92,7 @@ export default function SearchBar({ locale, placeholder = 'Search calculators...
               <span className="text-2xl">🧮</span>
               <div>
                 <div className="font-medium text-gray-900">
-                  {calcId.split('-').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
+                  {calcId.split('-').map((word: string) => word.charAt(0).toUpperCase() + word.slice(1)).join(' ')}
                 </div>
                 <div className="text-sm text-gray-500">Click to open calculator</div>
               </div>
