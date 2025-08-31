@@ -433,7 +433,7 @@ We continuously update and improve our calculators based on user feedback and ch
   }
 
   private localizeText(locale: Locale, key: string, params?: any): string {
-    const translations: Record<string, Record<Locale, string>> = {
+    const translations: Record<string, Partial<Record<Locale, string>>> = {
       'faq.what_is': {
         en: `What is the ${params?.name}?`,
         th: `${params?.name} คืออะไร?`,
