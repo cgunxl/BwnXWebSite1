@@ -1,12 +1,9 @@
 // Calculator Registry - Central registration of all calculator implementations
 import { Calculator } from '@/lib/types/calculator';
 import { Locale } from '@/lib/i18n/config';
+import { allCalculatorDefinitions } from './all-calculators';
 
 // Import all calculator batches
-import { financeCalculatorsBatch1 } from './implementations/finance-batch1';
-import { healthCalculatorsBatch2 } from './implementations/health-batch2';
-import { educationCalculatorsBatch3 } from './implementations/education-batch3';
-import { megaBatchCalculators } from './implementations/mega-batch';
 
 // Calculator factory type
 type CalculatorFactory = (locale: Locale) => Calculator;
@@ -14,64 +11,7 @@ type CalculatorFactory = (locale: Locale) => Calculator;
 // Registry of all calculator factories
 const calculatorRegistry: Map<string, CalculatorFactory> = new Map();
 
-// Register Finance Calculators (Batch 1)
-const financeCalculators = [
-  'loan-calculator',
-  'mortgage-calculator', 
-  'tax-calculator',
-  'compound-interest'
-];
-
-financeCalculators.forEach((id, index) => {
-  if (financeCalculatorsBatch1[index]) {
-    calculatorRegistry.set(id, financeCalculatorsBatch1[index]);
-  }
-});
-
-// Register Health Calculators (Batch 2)
-const healthCalculators = [
-  'bmi-calculator',
-  'calorie-calculator',
-  'body-fat-calculator',
-  'pregnancy-calculator',
-  'water-intake-calculator'
-];
-
-healthCalculators.forEach((id, index) => {
-  if (healthCalculatorsBatch2[index]) {
-    calculatorRegistry.set(id, healthCalculatorsBatch2[index]);
-  }
-});
-
-// Register Education Calculators (Batch 3)
-const educationCalculators = [
-  'gpa-calculator',
-  'percentage-calculator',
-  'scientific-calculator',
-  'statistics-calculator',
-  'grade-needed-calculator'
-];
-
-educationCalculators.forEach((id, index) => {
-  if (educationCalculatorsBatch3[index]) {
-    calculatorRegistry.set(id, educationCalculatorsBatch3[index]);
-  }
-});
-
-// Register Mega Batch Calculators
-const megaBatchIds = [
-  'ohms-law-calculator',
-  'age-calculator',
-  'length-converter',
-  'break-even-calculator',
-  'roi-calculator'
-];
-
-megaBatchIds.forEach((id, index) => {
-  if (megaBatchCalculators[index]) {
-    calculatorRegistry.set(id, megaBatchCalculators[index]);
-  }
-});
+// No calculator implementations registered yet; registry will fall back to auto-generation.
 
 // Get calculator by ID and locale
 export function getCalculator(id: string, locale: Locale): Calculator | null {
@@ -136,9 +76,18 @@ export function getImplementationStatus() {
   };
 }
 
-// Export additional functions for components
-export function getAllCalculators(): string[] {
-  return Array.from(calculatorRegistry.keys());
+// Meta information for search and listings
+export interface CalculatorMeta {
+  id: string;
+  slug: string;
+  name: string;
+  category: string;
+  icon: string;
+}
+
+// Return lightweight calculator metadata
+export function getAllCalculators(): CalculatorMeta[] {
+  return allCalculatorDefinitions.map(def => ({ ...def, icon: '🧮' }));
 }
 
 export function getCalculatorBySlug(slug: string): any {

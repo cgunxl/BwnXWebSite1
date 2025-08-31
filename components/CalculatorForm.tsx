@@ -87,6 +87,8 @@ export default function CalculatorForm({
                 error ? 'border-red-500' : 'border-gray-300'
               }`}
               required={input.required}
+              aria-invalid={!!error}
+              aria-describedby={error ? `${input.key}-error` : undefined}
             />
             {input.unit && (
               <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">
@@ -106,6 +108,8 @@ export default function CalculatorForm({
               error ? 'border-red-500' : 'border-gray-300'
             }`}
             required={input.required}
+            aria-invalid={!!error}
+            aria-describedby={error ? `${input.key}-error` : undefined}
           >
             {input.options?.map((option) => (
               <option key={option.value} value={option.value}>
@@ -127,6 +131,8 @@ export default function CalculatorForm({
                   checked={value === option.value}
                   onChange={(e) => handleInputChange(input.key, e.target.value)}
                   className="w-4 h-4 text-blue-600 focus:ring-blue-500"
+                  aria-invalid={!!error}
+                  aria-describedby={error ? `${input.key}-error` : undefined}
                 />
                 <span className="text-gray-700 dark:text-gray-300">{option.label}</span>
                 {option.description && (
@@ -154,6 +160,8 @@ export default function CalculatorForm({
               max={input.max}
               step={input.step}
               className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
+              aria-invalid={!!error}
+              aria-describedby={error ? `${input.key}-error` : undefined}
             />
           </div>
         );
@@ -170,6 +178,8 @@ export default function CalculatorForm({
               error ? 'border-red-500' : 'border-gray-300'
             }`}
             required={input.required}
+            aria-invalid={!!error}
+            aria-describedby={error ? `${input.key}-error` : undefined}
           />
         );
     }
@@ -193,7 +203,13 @@ export default function CalculatorForm({
               </label>
               {renderInput(input)}
               {errors[input.key] && (
-                <p className="text-sm text-red-600 dark:text-red-400">{errors[input.key]}</p>
+                <p
+                  id={`${input.key}-error`}
+                  className="text-sm text-red-600 dark:text-red-400"
+                  role="alert"
+                >
+                  {errors[input.key]}
+                </p>
               )}
             </div>
           ))}
@@ -237,7 +253,11 @@ export default function CalculatorForm({
 
       {/* Results Display */}
       {result && (
-        <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
+        <div
+          className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700"
+          aria-live="polite"
+          role="status"
+        >
           <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Results</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {calculator.outputs.map((output) => {

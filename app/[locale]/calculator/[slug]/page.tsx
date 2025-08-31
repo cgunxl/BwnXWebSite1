@@ -6,7 +6,7 @@ import RelatedCalculators from '@/components/RelatedCalculators';
 import CalculatorArticle from '@/components/CalculatorArticle';
 import CalculatorFAQ from '@/components/CalculatorFAQ';
 import ShareButtons from '@/components/ShareButtons';
-import { getCalculatorBySlug, getAllCalculators } from '@/lib/calculators/registry';
+import { getAllCalculators } from '@/lib/calculators/registry';
 import { loadCalculatorData } from '@/lib/calculators/loader';
 import { i18n } from '@/lib/i18n/config';
 
@@ -46,15 +46,7 @@ export async function generateMetadata({
 }
 
 export async function generateStaticParams() {
-  const calculators = getAllCalculators();
-  const locales = i18n.locales;
-  const params: { locale: string; slug: string }[] = [];
-  for (const locale of locales) {
-    for (const calcSlug of calculators) {
-      params.push({ locale, slug: calcSlug });
-    }
-  }
-  return params;
+  return [];
 }
 
 export default async function CalculatorPage({ 
