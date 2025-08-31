@@ -460,7 +460,7 @@ export function createScientificCalculator(locale: Locale): Calculator {
         type: 'number',
         required: true,
         validation: { required: true },
-        step: 'any'
+        step: 0.01
       },
       {
         key: 'y',
@@ -468,7 +468,7 @@ export function createScientificCalculator(locale: Locale): Calculator {
         type: 'number',
         required: false,
         validation: { required: false },
-        step: 'any',
+        step: 0.01,
         showIf: { operation: ['power', 'combination', 'permutation'] }
       },
       {

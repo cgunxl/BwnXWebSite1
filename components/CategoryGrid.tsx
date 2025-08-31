@@ -53,6 +53,7 @@ export default function CategoryGrid({ categories, locale }: CategoryGridProps) 
         business: 'เมตริกธุรกิจ ROI และความสามารถในการทำกำไร',
         technology: 'ไอที เว็บ และการคำนวณทางเทคนิค',
         mathematics: 'การดำเนินการทางคณิตศาสตร์และสถิติ',
+        math: 'การคำนวณทางคณิตศาสตร์',
         conversion: 'แปลงระหว่างหน่วยและการวัดต่างๆ',
         logistics: 'การขนส่ง ค่าเดินทาง และการขนส่ง',
         household: 'บ้าน สาธารณูปโภค และการเงินส่วนบุคคล',
