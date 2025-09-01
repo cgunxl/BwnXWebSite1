@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { i18n, localeNames, localeFlags } from '@/lib/i18n/config';
 import ThemeToggle from './ThemeToggle';
+import CommandPalette from './CommandPalette';
 
 interface HeaderProps {
   locale: string;
@@ -12,7 +13,24 @@ interface HeaderProps {
 
 export default function Header({ locale }: HeaderProps) {
   const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
+  const [isPaletteOpen, setIsPaletteOpen] = useState(false);
   const pathname = usePathname();
+
+  // Global shortcuts to open palette: '/' and Ctrl/Cmd+K
+  React.useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      const isInput = (e.target as HTMLElement)?.tagName?.match(/input|textarea|select/i);
+      if (!isInput && e.key === '/') {
+        e.preventDefault();
+        setIsPaletteOpen(true);
+      } else if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setIsPaletteOpen(true);
+      }
+    };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, []);
 
   const switchLocale = (newLocale: string) => {
     const segments = pathname.split('/');
@@ -38,6 +56,20 @@ export default function Header({ locale }: HeaderProps) {
 
           {/* Right Side Controls */}
           <div className="flex items-center gap-3">
+            {/* Search / Command Palette Button */}
+            <button
+              onClick={() => setIsPaletteOpen(true)}
+              className="hidden sm:inline-flex items-center gap-2 px-3 py-2 text-sm bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-lg transition-colors"
+              aria-label="Open Search"
+              title="/ or Ctrl/⌘+K"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+              <span>Search</span>
+              <span className="ml-2 text-[10px] text-gray-500 border rounded px-1 py-0.5">/</span>
+              <span className="ml-1 text-[10px] text-gray-500 border rounded px-1 py-0.5">Ctrl K</span>
+            </button>
             {/* Dark Mode Toggle */}
             <ThemeToggle />
             
@@ -90,6 +122,7 @@ export default function Header({ locale }: HeaderProps) {
           </div>
         </div>
       </nav>
+      <CommandPalette locale={locale} isOpen={isPaletteOpen} onClose={() => setIsPaletteOpen(false)} />
     </header>
   );
 }
