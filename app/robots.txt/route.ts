@@ -1,10 +1,10 @@
 export async function GET() {
-  const robotsTxt = `# Calculator Hub Robots.txt
+  const robotsTxt = `# BwnXCalculator Robots.txt
 User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: https://calculatorhub.com/sitemap.xml
+Sitemap: https://bwnxcalculator.com/sitemap.xml
 
 # Crawl-delay
 Crawl-delay: 1

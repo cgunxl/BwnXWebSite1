@@ -7,32 +7,32 @@ import { ThemeProvider } from '@/contexts/ThemeContext';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://calculatorhub.com'),
+  metadataBase: new URL('https://bwnxcalculator.com'),
   title: {
-    default: 'Calculator Hub - 430+ Free Online Calculators',
-    template: '%s | Calculator Hub',
+    default: 'BwnXCalculator - 430+ Free Online Calculators',
+    template: '%s | BwnXCalculator',
   },
   description: 'Access 430+ free online calculators for finance, health, education, engineering, and more. Available in 17 languages with country-specific calculations.',
   keywords: ['calculator', 'online calculator', 'free calculator', 'financial calculator', 'health calculator', 'BMI calculator', 'loan calculator', 'mortgage calculator'],
-  authors: [{ name: 'Calculator Hub' }],
-  creator: 'Calculator Hub',
-  publisher: 'Calculator Hub',
+  authors: [{ name: 'BwnXCalculator' }],
+  creator: 'BwnXCalculator',
+  publisher: 'BwnXCalculator',
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
   openGraph: {
-    title: 'Calculator Hub - 430+ Free Online Calculators',
+    title: 'BwnXCalculator - 430+ Free Online Calculators',
     description: 'Access 430+ free online calculators for finance, health, education, engineering, and more.',
-    url: 'https://calculatorhub.com',
-    siteName: 'Calculator Hub',
+    url: 'https://bwnxcalculator.com',
+    siteName: 'BwnXCalculator',
     images: [
       {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Calculator Hub',
+        alt: 'BwnXCalculator',
       },
     ],
     locale: 'en_US',
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Calculator Hub - 430+ Free Online Calculators',
+    title: 'BwnXCalculator - 430+ Free Online Calculators',
     description: 'Access 430+ free online calculators for finance, health, education, engineering, and more.',
     images: ['/twitter-image.jpg'],
   },
@@ -56,11 +56,11 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: 'https://calculatorhub.com',
+    canonical: 'https://bwnxcalculator.com',
     languages: Object.fromEntries(
       i18n.locales.map(locale => [
         locale,
-        `https://calculatorhub.com/${locale}`
+        `https://bwnxcalculator.com/${locale}`
       ])
     ),
   },

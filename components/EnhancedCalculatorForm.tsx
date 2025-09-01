@@ -26,7 +26,7 @@ export default function EnhancedCalculatorForm({
   const [copiedLink, setCopiedLink] = useState(false);
   const resultsRef = useRef<HTMLDivElement>(null);
 
-  const engine = new CalculatorEngine(calculator, locale);
+  // Use static CalculatorEngine API (no constructor)
 
   // Auto-calculate on input change
   useEffect(() => {
@@ -50,7 +50,16 @@ export default function EnhancedCalculatorForm({
     
     try {
       await new Promise(resolve => setTimeout(resolve, 300)); // Smooth animation
-      const calculationResult = engine.calculate(inputs);
+      const outputs = CalculatorEngine.calculate(calculator, inputs);
+      const calculationResult: CalculatorResult = {
+        inputs: { ...inputs },
+        outputs,
+        timestamp: new Date().toISOString(),
+        locale,
+        shareUrl: typeof window !== 'undefined'
+          ? `${window.location.origin}${window.location.pathname}?${new URLSearchParams(inputs as any).toString()}`
+          : ''
+      };
       setResult(calculationResult);
       setShowResults(true);
       
