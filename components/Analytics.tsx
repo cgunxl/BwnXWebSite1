@@ -134,10 +134,18 @@ export const trackAdInteraction = (adType: string, position: string) => {
 // Google Analytics Script Component
 export default function GoogleAnalytics() {
   // Check if user has consented to analytics cookies
-  const hasConsent = typeof window !== 'undefined' && (
-    localStorage.getItem('cookie-consent') === 'accept' ||
-    localStorage.getItem('cookie-consent-analytics') === 'true'
-  );
+  let hasConsent = false;
+  if (typeof window !== 'undefined') {
+    try {
+      const raw = localStorage.getItem('cookie-consent');
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        hasConsent = !!parsed.analytics;
+      }
+    } catch {
+      hasConsent = false;
+    }
+  }
 
   if (!hasConsent || !GA_MEASUREMENT_ID || GA_MEASUREMENT_ID === 'G-XXXXXXXXXX') {
     return null;

@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Calculator, CalculatorInput, CalculatorResult } from '@/lib/types/calculator';
-import CalculatorEngine from '@/lib/calculators/engine';
+import { CalculatorEngine } from '@/lib/calculators/engine';
 
 interface CalculatorFormProps {
   calculator: Calculator;
@@ -67,6 +67,18 @@ export default function CalculatorForm({
     setInputs({});
     setResult(null);
     setErrors({});
+  };
+
+  const handleCopyPrimaryResult = () => {
+    if (!result) return;
+    // Find primary output or fallback to first available
+    const primaryKey = calculator.outputs.find(o => o.primary)?.key || calculator.outputs[0]?.key;
+    if (!primaryKey) return;
+    const value = result.outputs[primaryKey];
+    if (value === undefined || value === null) return;
+    if (typeof navigator !== 'undefined' && navigator.clipboard) {
+      navigator.clipboard.writeText(String(value));
+    }
   };
 
   const renderInput = (input: CalculatorInput) => {
@@ -239,6 +251,15 @@ export default function CalculatorForm({
           >
             Reset
           </button>
+          {result && (
+            <button
+              type="button"
+              onClick={handleCopyPrimaryResult}
+              className="px-8 py-3 bg-indigo-600 text-white font-semibold rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition-colors"
+            >
+              Copy Result
+            </button>
+          )}
         </div>
       </form>
 

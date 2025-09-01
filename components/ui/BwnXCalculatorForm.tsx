@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import { Calculator, CalculatorInput, CalculatorResult } from '@/lib/types/calculator';
-import CalculatorEngine from '@/lib/calculators/engine';
+import { CalculatorEngine } from '@/lib/calculators/engine';
 
 interface BwnXCalculatorFormProps {
   calculator: Calculator;
