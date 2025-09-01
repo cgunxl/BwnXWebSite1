@@ -35,9 +35,9 @@ export async function generateMetadata({
     title: titles[locale as keyof typeof titles] || titles.en,
     description: descriptions[locale as keyof typeof descriptions] || descriptions.en,
     alternates: {
-      canonical: `https://bwnxcalculator.com/${locale}/category/${category}`,
+      canonical: `https://bwn-x-web-site1.vercel.app/${locale}/category/${category}`,
       languages: Object.fromEntries(
-        i18n.locales.map(l => [l, `https://bwnxcalculator.com/${l}/category/${category}`])
+        i18n.locales.map(l => [l, `https://bwn-x-web-site1.vercel.app/${l}/category/${category}`])
       ),
     },
   };

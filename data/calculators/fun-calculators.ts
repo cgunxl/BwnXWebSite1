@@ -140,6 +140,22 @@ export const loveCalculator: Calculator = {
       title: 'Love Calculator',
       description: 'Calculate love compatibility between you and your partner',
       instructions: 'Enter both names to discover your love compatibility percentage!',
+      keywords: ['love calculator', 'compatibility test', 'relationship calculator', 'love test', 'romance calculator'],
+      faq: [
+        { question: 'How accurate is the Love Calculator?', answer: 'It is a fun estimator based on names and simple heuristics; not scientific.' },
+        { question: 'Do I need birthdates?', answer: 'No, they are optional. If provided, we add a small adjustment.' },
+        { question: 'Can I share my result?', answer: 'Yes, use the Copy Link button on the results section.' }
+      ],
+      article: {
+        title: 'How to Use the Love Calculator',
+        introduction: 'Quickly estimate relationship compatibility by entering two names. Use this for fun and conversation starters.',
+        sections: [
+          { heading: 'Enter Names', content: 'Type your name and your partner\'s name. Optionally add birthdates for a minor adjustment.' },
+          { heading: 'View Results', content: 'You\'ll see a percentage, a message, and advice. Higher scores indicate stronger compatibility.' }
+        ],
+        conclusion: 'Use results lightly; real relationships depend on communication and understanding.',
+        wordCount: 170
+      },
       meta: {
         title: 'Love Calculator - Test Your Compatibility | BwnXCalculator',
         description: 'Calculate love compatibility between you and your partner. Fun love test with compatibility percentage and relationship advice.',
@@ -149,7 +165,26 @@ export const loveCalculator: Calculator = {
     th: {
       title: 'คำนวณความรัก',
       description: 'คำนวณความเข้ากันในความรักระหว่างคุณและคนที่คุณรัก',
-      instructions: 'ใส่ชื่อทั้งสองเพื่อค้นหาเปอร์เซ็นต์ความเข้ากัน!'
+      instructions: 'ใส่ชื่อทั้งสองเพื่อค้นหาเปอร์เซ็นต์ความเข้ากัน!',
+      keywords: ['เครื่องคำนวณความรัก', 'ทดสอบความเข้ากัน', 'คำนวณคู่รัก'],
+      faq: [
+        { question: 'เครื่องคำนวณความรักแม่นยำไหม?', answer: 'เป็นเครื่องมือเพื่อความบันเทิง ไม่ใช่การทดสอบทางวิทยาศาสตร์' }
+      ],
+      article: {
+        title: 'วิธีใช้เครื่องคำนวณความรัก',
+        introduction: 'ใส่ชื่อสองคนเพื่อประมาณความเข้ากัน ใช้เพื่อความสนุกและการพูดคุย',
+        sections: [
+          { heading: 'กรอกชื่อ', content: 'กรอกชื่อของคุณและคนรัก สามารถใส่วันเกิดได้เพื่อปรับคะแนนเล็กน้อย' },
+          { heading: 'ดูผลลัพธ์', content: 'แสดงเปอร์เซ็นต์ ข้อความ และคำแนะนำ' }
+        ],
+        conclusion: 'โปรดใช้ผลลัพธ์อย่างเบา ๆ ความสัมพันธ์ต้องการการสื่อสารและความเข้าใจ',
+        wordCount: 160
+      },
+      meta: {
+        title: 'เครื่องคำนวณความรัก | BwnXCalculator',
+        description: 'ทดสอบความเข้ากันของความรักด้วยชื่อของคุณและคู่รัก พร้อมคำแนะนำสนุก ๆ',
+        keywords: 'เครื่องคำนวณความรัก, ทดสอบความรัก, ความเข้ากัน'
+      }
     }
   }
 };
@@ -323,6 +358,20 @@ export const luckyNumberCalculator: Calculator = {
       title: 'Lucky Number Generator',
       description: 'Generate your personal lucky numbers based on your name and birthdate',
       instructions: 'Enter your details to discover your lucky numbers!',
+      keywords: ['lucky numbers', 'fortune numbers', 'lottery numbers'],
+      faq: [
+        { question: 'Are lucky numbers guaranteed?', answer: 'No, this tool is for entertainment and does not influence outcomes.' }
+      ],
+      article: {
+        title: 'How to Use the Lucky Number Generator',
+        introduction: 'Create a personalized set of numbers using your name, birthdate, and purpose.',
+        sections: [
+          { heading: 'Select Purpose', content: 'Pick general, lottery, business, love, or career to tailor advice.' },
+          { heading: 'Generate', content: 'Click calculate to see numbers, a lucky day, and color.' }
+        ],
+        conclusion: 'Use responsibly; outcomes are random in the real world.',
+        wordCount: 150
+      },
       meta: {
         title: 'Lucky Number Generator - Personal Fortune Numbers | BwnXCalculator',
         description: 'Generate personalized lucky numbers based on your name and birthdate. Perfect for lottery, decisions, or just for fun!',
@@ -332,7 +381,21 @@ export const luckyNumberCalculator: Calculator = {
     th: {
       title: 'สร้างเลขนำโชค',
       description: 'สร้างเลขนำโชคส่วนตัวจากชื่อและวันเกิดของคุณ',
-      instructions: 'กรอกข้อมูลเพื่อค้นหาเลขนำโชคของคุณ!'
+      instructions: 'กรอกข้อมูลเพื่อค้นหาเลขนำโชคของคุณ!',
+      keywords: ['เลขนำโชค', 'เลขเสี่ยงโชค'],
+      faq: [
+        { question: 'เลขนำโชคนี้เชื่อถือได้ไหม?', answer: 'เพื่อความบันเทิงเท่านั้น ไม่รับประกันผลลัพธ์' }
+      ],
+      article: {
+        title: 'วิธีใช้เครื่องสร้างเลขนำโชค',
+        introduction: 'สร้างเลขนำโชคโดยใช้ชื่อ วันเกิด และวัตถุประสงค์',
+        sections: [
+          { heading: 'เลือกวัตถุประสงค์', content: 'เลือกทั่วไป ลอตเตอรี ธุรกิจ ความรัก หรืออาชีพ' },
+          { heading: 'สร้างเลข', content: 'กดคำนวณเพื่อดูเลข วันมงคล และสีมงคล' }
+        ],
+        conclusion: 'ใช้เพื่อความสนุก ผลลัพธ์จริงเป็นเรื่องของความบังเอิญ',
+        wordCount: 150
+      }
     }
   }
 };
@@ -507,6 +570,20 @@ export const birthdayCalculator: Calculator = {
       title: 'Birthday Calculator',
       description: 'Calculate your exact age and discover interesting facts about your birthday',
       instructions: 'Enter your birth date to see detailed age calculations and zodiac information!',
+      keywords: ['birthday calculator', 'age calculator', 'zodiac'],
+      faq: [
+        { question: 'Do I need birth time?', answer: 'Optional. We calculate age without it; zodiac is date-based here.' }
+      ],
+      article: {
+        title: 'How to Use the Birthday Calculator',
+        introduction: 'Get precise age metrics and related fun facts from your birth date.',
+        sections: [
+          { heading: 'Enter Date', content: 'Provide your date of birth; time is optional.' },
+          { heading: 'Interpret', content: 'Review age breakdown and signs.' }
+        ],
+        conclusion: 'Use as a quick reference and share with friends.',
+        wordCount: 150
+      },
       meta: {
         title: 'Birthday Calculator - Age & Zodiac Info | BwnXCalculator',
         description: 'Calculate your exact age in years, months, days, and hours. Discover your zodiac sign, Chinese zodiac, and life path number.',
@@ -516,7 +593,21 @@ export const birthdayCalculator: Calculator = {
     th: {
       title: 'คำนวณวันเกิด',
       description: 'คำนวณอายุที่แน่นอนและค้นพบข้อมูลน่าสนใจเกี่ยวกับวันเกิดของคุณ',
-      instructions: 'ใส่วันเกิดเพื่อดูการคำนวณอายุและข้อมูลราศี!'
+      instructions: 'ใส่วันเกิดเพื่อดูการคำนวณอายุและข้อมูลราศี!',
+      keywords: ['คำนวณวันเกิด', 'คำนวณอายุ'],
+      faq: [
+        { question: 'ต้องใส่เวลาเกิดไหม?', answer: 'ไม่จำเป็น ใช้คำนวณอายุอย่างเดียวได้' }
+      ],
+      article: {
+        title: 'วิธีใช้เครื่องคำนวณวันเกิด',
+        introduction: 'รู้ค่าอายุอย่างละเอียดและข้อมูลสนุก ๆ จากวันเกิด',
+        sections: [
+          { heading: 'กรอกวันเกิด', content: 'ใส่วัน/เดือน/ปีเกิด เวลาเกิดไม่บังคับ' },
+          { heading: 'ดูผลลัพธ์', content: 'ดูอายุและข้อมูลประกอบ' }
+        ],
+        conclusion: 'ใช้เพื่ออ้างอิงอย่างรวดเร็วและแชร์ให้เพื่อนได้',
+        wordCount: 140
+      }
     }
   }
 };
@@ -714,6 +805,20 @@ export const personalityCalculator: Calculator = {
       title: 'Personality Test Calculator',
       description: 'Discover your personality type and traits through a quick assessment',
       instructions: 'Rate each statement to reveal your personality profile!',
+      keywords: ['personality test', 'personality type', 'traits'],
+      faq: [
+        { question: 'Is this a clinical test?', answer: 'No, it is a quick self-assessment for personal insight.' }
+      ],
+      article: {
+        title: 'How to Use the Personality Calculator',
+        introduction: 'Answer a short series of prompts from 1 to 5. Your scores reveal tendencies across five areas.',
+        sections: [
+          { heading: 'Rate Honestly', content: 'Be candid to get useful insights. There are no right or wrong answers.' },
+          { heading: 'Review Results', content: 'See your type, strengths, and tailored suggestions.' }
+        ],
+        conclusion: 'Use as a starting point for self-reflection; not a diagnosis.',
+        wordCount: 180
+      },
       meta: {
         title: 'Personality Test Calculator - Discover Your Type | BwnXCalculator',
         description: 'Take a quick personality test to discover your personality type, strengths, and growth areas. Free personality assessment.',
@@ -723,7 +828,21 @@ export const personalityCalculator: Calculator = {
     th: {
       title: 'ทดสอบบุคลิกภาพ',
       description: 'ค้นพบประเภทบุคลิกภาพและลักษณะนิสัยของคุณ',
-      instructions: 'ให้คะแนนแต่ละข้อเพื่อเปิดเผยบุคลิกภาพของคุณ!'
+      instructions: 'ให้คะแนนแต่ละข้อเพื่อเปิดเผยบุคลิกภาพของคุณ!',
+      keywords: ['ทดสอบบุคลิกภาพ', 'ประเภทบุคลิกภาพ'],
+      faq: [
+        { question: 'แบบทดสอบนี้เป็นทางการไหม?', answer: 'ไม่ เป็นแบบประเมินตนเองอย่างรวดเร็วเพื่อข้อมูลเชิงลึกส่วนบุคคล' }
+      ],
+      article: {
+        title: 'วิธีใช้เครื่องทดสอบบุคลิกภาพ',
+        introduction: 'ตอบแบบประเมินสั้น ๆ ตั้งแต่ 1 ถึง 5 เพื่อดูแนวโน้มของคุณ',
+        sections: [
+          { heading: 'ให้คะแนนจริงใจ', content: 'ไม่มีถูกผิด ให้คะแนนตามจริงเพื่อข้อมูลที่มีประโยชน์' },
+          { heading: 'ดูผลลัพธ์', content: 'ดูประเภทบุคลิกภาพ จุดแข็ง และคำแนะนำ' }
+        ],
+        conclusion: 'ใช้เพื่อเริ่มต้นการทบทวนตนเอง ไม่ใช่การวินิจฉัย',
+        wordCount: 170
+      }
     }
   }
 };

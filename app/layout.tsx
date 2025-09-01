@@ -7,7 +7,7 @@ import { ThemeProvider } from '@/contexts/ThemeContext';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://bwnxcalculator.com'),
+  metadataBase: new URL('https://bwn-x-web-site1.vercel.app'),
   title: {
     default: 'BwnXCalculator - 430+ Free Online Calculators',
     template: '%s | BwnXCalculator',
@@ -25,7 +25,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: 'BwnXCalculator - 430+ Free Online Calculators',
     description: 'Access 430+ free online calculators for finance, health, education, engineering, and more.',
-    url: 'https://bwnxcalculator.com',
+    url: 'https://bwn-x-web-site1.vercel.app',
     siteName: 'BwnXCalculator',
     images: [
       {
@@ -56,11 +56,11 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
-    canonical: 'https://bwnxcalculator.com',
+    canonical: 'https://bwn-x-web-site1.vercel.app',
     languages: Object.fromEntries(
       i18n.locales.map(locale => [
         locale,
-        `https://bwnxcalculator.com/${locale}`
+        `https://bwn-x-web-site1.vercel.app/${locale}`
       ])
     ),
   },

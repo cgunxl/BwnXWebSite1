@@ -31,15 +31,15 @@ export async function generateMetadata({
     description: content.description,
     keywords: content.keywords,
     alternates: {
-      canonical: `https://bwnxcalculator.com/${locale}/calculator/${slug}`,
+      canonical: `https://bwn-x-web-site1.vercel.app/${locale}/calculator/${slug}`,
       languages: Object.fromEntries(
-        i18n.locales.map(l => [l, `https://bwnxcalculator.com/${l}/calculator/${slug}`])
+        i18n.locales.map(l => [l, `https://bwn-x-web-site1.vercel.app/${l}/calculator/${slug}`])
       ),
     },
     openGraph: {
       title: content.title,
       description: content.description,
-      url: `https://bwnxcalculator.com/${locale}/calculator/${slug}`,
+      url: `https://bwn-x-web-site1.vercel.app/${locale}/calculator/${slug}`,
       type: 'website',
     },
   };
@@ -114,7 +114,7 @@ export default async function CalculatorPage({
           {/* Share Buttons */}
           <div className="mt-8">
             <ShareButtons 
-              url={`https://bwnxcalculator.com/${locale}/calculator/${slug}`}
+              url={`https://bwn-x-web-site1.vercel.app/${locale}/calculator/${slug}`}
               title={content.title}
               locale={locale}
             />

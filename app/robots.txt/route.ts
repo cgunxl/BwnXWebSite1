@@ -4,7 +4,7 @@ User-agent: *
 Allow: /
 
 # Sitemaps
-Sitemap: https://bwnxcalculator.com/sitemap.xml
+Sitemap: https://bwn-x-web-site1.vercel.app/sitemap.xml
 
 # Crawl-delay
 Crawl-delay: 1

@@ -3,7 +3,7 @@ import { i18n } from '@/lib/i18n/config';
 import { getAllCalculators, calculatorCategories } from '@/lib/calculators/registry';
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://bwnxcalculator.com';
+  const baseUrl = 'https://bwn-x-web-site1.vercel.app';
   const calculatorIds = getAllCalculators();
   const categories = Object.keys(calculatorCategories);
   
