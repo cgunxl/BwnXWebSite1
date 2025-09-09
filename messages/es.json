@@ -1,0 +1,70 @@
+{
+  "common": {
+    "calculate": "Calcular",
+    "reset": "Reiniciar",
+    "copy": "Copiar",
+    "copied": "¡Copiado!",
+    "search": "Buscar calculadoras...",
+    "language": "Idioma",
+    "theme": "Tema",
+    "loading": "Cargando...",
+    "error": "Error",
+    "success": "Éxito"
+  },
+  "navigation": {
+    "home": "Inicio",
+    "calculators": "Calculadoras",
+    "about": "Acerca de",
+    "privacy": "Privacidad",
+    "terms": "Términos",
+    "contact": "Contacto"
+  },
+  "categories": {
+    "finance": "Finanzas",
+    "health": "Salud",
+    "education": "Educación",
+    "engineering": "Ingeniería",
+    "lifestyle": "Estilo de Vida",
+    "insurance": "Seguros",
+    "tech": "Tecnología",
+    "math": "Matemáticas",
+    "conversion": "Conversión",
+    "business": "Negocios",
+    "environment": "Medio Ambiente",
+    "fun": "Diversión",
+    "logistics": "Logística",
+    "household": "Hogar"
+  },
+  "calculators": {
+    "loan": {
+      "title": "Calculadora de Préstamos",
+      "description": "Calcula pagos mensuales de préstamos con intereses y cronograma de amortización",
+      "amount": "Monto del Préstamo",
+      "rate": "Tasa de Interés (%)",
+      "term": "Plazo del Préstamo (años)",
+      "monthlyPayment": "Pago Mensual",
+      "totalInterest": "Interés Total",
+      "totalPayment": "Pago Total"
+    },
+    "bmi": {
+      "title": "Calculadora de IMC",
+      "description": "Calcula tu Índice de Masa Corporal para evaluar tu estado de peso",
+      "weight": "Peso (kg)",
+      "height": "Altura (cm)",
+      "bmi": "IMC",
+      "category": "Categoría"
+    }
+  },
+  "faq": {
+    "title": "Preguntas Frecuentes",
+    "howToUse": "¿Cómo usar esta calculadora?",
+    "whatIs": "¿Para qué sirve esta calculadora?",
+    "accurate": "¿Qué tan precisos son los resultados?",
+    "free": "¿Es gratuita esta calculadora?"
+  },
+  "footer": {
+    "description": "BwnXCalculator - Tu centro integral de calculadoras para finanzas, salud, educación y más. Disponible en 17 idiomas.",
+    "rights": "Todos los derechos reservados",
+    "disclaimer": "Los resultados son solo para fines informativos. Consulta a profesionales para decisiones importantes."
+  }
+}

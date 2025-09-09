@@ -1,6 +1,6 @@
 import { Calculator, Category } from '@/types/calculator';
 
-// Complete list of all 430 calculators with full data
+// Complete list of all 430 calculators
 export const allCalculators: Calculator[] = [
   // Finance Calculators (1-40)
   {

@@ -1,0 +1,70 @@
+{
+  "common": {
+    "calculate": "Calculate",
+    "reset": "Reset",
+    "copy": "Copy",
+    "copied": "Copied!",
+    "search": "Search calculators...",
+    "language": "Language",
+    "theme": "Theme",
+    "loading": "Loading...",
+    "error": "Error",
+    "success": "Success"
+  },
+  "navigation": {
+    "home": "Home",
+    "calculators": "Calculators",
+    "about": "About",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "contact": "Contact"
+  },
+  "categories": {
+    "finance": "Finance",
+    "health": "Health",
+    "education": "Education",
+    "engineering": "Engineering",
+    "lifestyle": "Lifestyle",
+    "insurance": "Insurance",
+    "tech": "Technology",
+    "math": "Mathematics",
+    "conversion": "Conversion",
+    "business": "Business",
+    "environment": "Environment",
+    "fun": "Fun",
+    "logistics": "Logistics",
+    "household": "Household"
+  },
+  "calculators": {
+    "loan": {
+      "title": "Loan Calculator",
+      "description": "Calculate monthly loan payments with interest and amortization schedule",
+      "amount": "Loan Amount",
+      "rate": "Interest Rate (%)",
+      "term": "Loan Term (years)",
+      "monthlyPayment": "Monthly Payment",
+      "totalInterest": "Total Interest",
+      "totalPayment": "Total Payment"
+    },
+    "bmi": {
+      "title": "BMI Calculator",
+      "description": "Calculate your Body Mass Index to assess your weight status",
+      "weight": "Weight (kg)",
+      "height": "Height (cm)",
+      "bmi": "BMI",
+      "category": "Category"
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "howToUse": "How to use this calculator?",
+    "whatIs": "What is this calculator for?",
+    "accurate": "How accurate are the results?",
+    "free": "Is this calculator free to use?"
+  },
+  "footer": {
+    "description": "BwnXCalculator - Your comprehensive calculator hub for finance, health, education, and more. Available in 17 languages.",
+    "rights": "All rights reserved",
+    "disclaimer": "Results are for informational purposes only. Consult professionals for important decisions."
+  }
+}

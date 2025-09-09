@@ -1,95 +1,184 @@
 'use client';
 
 import React, { useState } from 'react';
-import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { i18n, localeNames, localeFlags } from '@/lib/i18n/config';
-import ThemeToggle from './ThemeToggle';
+import { Search, Globe, Menu, X } from 'lucide-react';
+import { Button } from './ui/Button';
+import { SearchModal } from './SearchModal';
+import { clsx } from 'clsx';
 
 interface HeaderProps {
   locale: string;
+  onLanguageChange: (locale: string) => void;
 }
 
-export default function Header({ locale }: HeaderProps) {
-  const [isLangMenuOpen, setIsLangMenuOpen] = useState(false);
-  const pathname = usePathname();
+const languages = [
+  { code: 'en', name: 'English', flag: '🇺🇸' },
+  { code: 'th', name: 'ไทย', flag: '🇹🇭' },
+  { code: 'es', name: 'Español', flag: '🇪🇸' },
+  { code: 'pt', name: 'Português', flag: '🇵🇹' },
+  { code: 'de', name: 'Deutsch', flag: '🇩🇪' },
+  { code: 'fr', name: 'Français', flag: '🇫🇷' },
+  { code: 'ja', name: '日本語', flag: '🇯🇵' },
+  { code: 'ko', name: '한국어', flag: '🇰🇷' },
+  { code: 'zh', name: '中文', flag: '🇨🇳' },
+  { code: 'ar', name: 'العربية', flag: '🇸🇦' },
+  { code: 'hi', name: 'हिन्दी', flag: '🇮🇳' },
+  { code: 'id', name: 'Bahasa Indonesia', flag: '🇮🇩' },
+  { code: 'ru', name: 'Русский', flag: '🇷🇺' },
+  { code: 'it', name: 'Italiano', flag: '🇮🇹' },
+  { code: 'nl', name: 'Nederlands', flag: '🇳🇱' },
+  { code: 'vi', name: 'Tiếng Việt', flag: '🇻🇳' },
+  { code: 'fa', name: 'فارسی', flag: '🇮🇷' }
+];
 
-  const switchLocale = (newLocale: string) => {
-    const segments = pathname.split('/');
-    segments[1] = newLocale;
-    return segments.join('/');
+const Header: React.FC<HeaderProps> = ({ locale, onLanguageChange }) => {
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [isLanguageOpen, setIsLanguageOpen] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const currentLanguage = languages.find(lang => lang.code === locale);
+
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === '/' || (e.ctrlKey && e.key === 'k')) {
+      e.preventDefault();
+      setIsSearchOpen(true);
+    }
   };
 
-  const currentFlag = localeFlags[locale as keyof typeof localeFlags];
-  const currentName = localeNames[locale as keyof typeof localeNames];
+  React.useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, []);
 
   return (
-    <header className="bg-white dark:bg-gray-800 shadow-sm border-b border-gray-200 dark:border-gray-700 sticky top-0 z-50 transition-colors duration-300">
-      <nav className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <Link href={`/${locale}`} className="flex items-center space-x-2">
-            <span className="text-2xl">🧮</span>
-            <span className="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-              BwnXCalculator
-            </span>
-            <span className="text-xs bg-blue-100 dark:bg-blue-900 text-blue-700 dark:text-blue-300 px-2 py-1 rounded-full">430+</span>
-          </Link>
+    <>
+      <header className="sticky top-0 z-40 bg-bg-base/80 backdrop-blur-md border-b border-stroke-soft">
+        <div className="container mx-auto px-4 py-4">
+          <div className="flex items-center justify-between">
+            {/* Logo */}
+            <div className="flex items-center gap-3">
+              <div className="text-2xl">🧮</div>
+              <div>
+                <h1 className="text-xl font-bold text-text-primary">BwnXCalculator</h1>
+                <p className="text-xs text-text-muted">430 Calculators • 17 Languages</p>
+              </div>
+            </div>
 
-          {/* Right Side Controls */}
-          <div className="flex items-center gap-3">
-            {/* Dark Mode Toggle */}
-            <ThemeToggle />
-            
-            {/* Language Selector */}
-            <div className="relative">
-              <button
-                onClick={() => setIsLangMenuOpen(!isLangMenuOpen)}
-                className="flex items-center space-x-2 px-4 py-2 bg-gray-50 dark:bg-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 rounded-lg transition-colors"
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center gap-4">
+              <Button
+                variant="ghost"
+                onClick={() => setIsSearchOpen(true)}
+                className="flex items-center gap-2"
               >
-                <span className="text-xl">{currentFlag}</span>
-                <span className="hidden sm:block text-sm font-medium text-gray-700 dark:text-gray-200">
-                  {currentName}
-                </span>
-              <svg
-                className={`w-4 h-4 text-gray-500 transition-transform ${
-                  isLangMenuOpen ? 'rotate-180' : ''
-                }`}
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
+                <Search size={16} />
+                Search
+                <kbd className="ml-2 px-1.5 py-0.5 text-xs bg-surface-1 rounded">/</kbd>
+              </Button>
 
-              {/* Language Dropdown */}
-              {isLangMenuOpen && (
-                <div className="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 rounded-lg shadow-lg border border-gray-200 dark:border-gray-700 py-2 max-h-96 overflow-y-auto">
-                  {i18n.locales.map((loc) => (
-                    <Link
-                      key={loc}
-                      href={switchLocale(loc)}
-                      onClick={() => setIsLangMenuOpen(false)}
-                      className={`flex items-center space-x-3 px-4 py-2 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors ${
-                        locale === loc ? 'bg-blue-50 dark:bg-blue-900 text-blue-600 dark:text-blue-400' : 'text-gray-700 dark:text-gray-300'
-                      }`}
-                    >
-                      <span className="text-xl">{localeFlags[loc]}</span>
-                      <span className="text-sm">{localeNames[loc]}</span>
-                      {locale === loc && (
-                        <svg className="w-4 h-4 ml-auto text-blue-600 dark:text-blue-400" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                        </svg>
-                      )}
-                    </Link>
-                  ))}
-                </div>
-              )}
+              <div className="relative">
+                <Button
+                  variant="ghost"
+                  onClick={() => setIsLanguageOpen(!isLanguageOpen)}
+                  className="flex items-center gap-2"
+                >
+                  <Globe size={16} />
+                  {currentLanguage?.flag} {currentLanguage?.name}
+                </Button>
+
+                {isLanguageOpen && (
+                  <div className="absolute right-0 top-full mt-2 w-64 bg-bg-raised border border-stroke-soft rounded-xl shadow-2xl z-50">
+                    <div className="p-2 max-h-80 overflow-y-auto">
+                      {languages.map((lang) => (
+                        <button
+                          key={lang.code}
+                          onClick={() => {
+                            onLanguageChange(lang.code);
+                            setIsLanguageOpen(false);
+                          }}
+                          className={clsx(
+                            'w-full p-3 text-left rounded-lg transition-colors',
+                            'hover:bg-surface-1/50',
+                            locale === lang.code && 'bg-surface-1/50'
+                          )}
+                        >
+                          <div className="flex items-center gap-3">
+                            <span className="text-lg">{lang.flag}</span>
+                            <span className="text-text-primary">{lang.name}</span>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <div className="md:hidden">
+              <Button
+                variant="icon"
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              >
+                {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
+              </Button>
             </div>
           </div>
+
+          {/* Mobile Menu */}
+          {isMobileMenuOpen && (
+            <div className="md:hidden mt-4 pt-4 border-t border-stroke-soft">
+              <div className="space-y-4">
+                <Button
+                  variant="ghost"
+                  onClick={() => {
+                    setIsSearchOpen(true);
+                    setIsMobileMenuOpen(false);
+                  }}
+                  className="w-full justify-start"
+                >
+                  <Search size={16} className="mr-2" />
+                  Search Calculators
+                </Button>
+
+                <div className="space-y-2">
+                  <p className="text-sm text-text-muted">Language</p>
+                  <div className="grid grid-cols-2 gap-2">
+                    {languages.slice(0, 8).map((lang) => (
+                      <button
+                        key={lang.code}
+                        onClick={() => {
+                          onLanguageChange(lang.code);
+                          setIsMobileMenuOpen(false);
+                        }}
+                        className={clsx(
+                          'p-2 text-left rounded-lg transition-colors',
+                          'hover:bg-surface-1/50',
+                          locale === lang.code && 'bg-surface-1/50'
+                        )}
+                      >
+                        <div className="flex items-center gap-2">
+                          <span>{lang.flag}</span>
+                          <span className="text-sm text-text-primary">{lang.name}</span>
+                        </div>
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
-      </nav>
-    </header>
+      </header>
+
+      {/* Search Modal */}
+      <SearchModal
+        isOpen={isSearchOpen}
+        onClose={() => setIsSearchOpen(false)}
+        locale={locale}
+      />
+    </>
   );
-}
+};
+
+export default Header;
