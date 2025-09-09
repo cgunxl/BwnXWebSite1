@@ -1,63 +1,70 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Calculator, CalculatorInput, CalculatorResult } from '@/lib/types/calculator';
-import CalculatorEngine from '@/lib/calculators/engine';
+import { Calculator, CalculationResult } from '@/types/calculator';
+import { CalculatorEngineImpl } from '@/lib/calculator-engine';
+import { Button } from './ui/Button';
+import { Input } from './ui/Input';
+import { Card } from './ui/Card';
+import { Copy, RotateCcw } from 'lucide-react';
 
 interface CalculatorFormProps {
   calculator: Calculator;
   locale: string;
-  initialInputs?: Record<string, any>;
-  onCalculate?: (result: CalculatorResult) => void;
 }
 
-export default function CalculatorForm({ 
-  calculator, 
-  locale, 
-  initialInputs = {},
-  onCalculate 
-}: CalculatorFormProps) {
-  const [inputs, setInputs] = useState<Record<string, any>>(initialInputs);
-  const [result, setResult] = useState<CalculatorResult | null>(null);
+const CalculatorForm: React.FC<CalculatorFormProps> = ({
+  calculator,
+  locale
+}) => {
+  const [inputs, setInputs] = useState<Record<string, any>>({});
+  const [results, setResults] = useState<CalculationResult | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isCalculating, setIsCalculating] = useState(false);
 
-  // Initialize default values - but don't set them immediately to avoid 0 prefix issue
-  useEffect(() => {
-    // Only use initial inputs from URL if provided
-    if (Object.keys(initialInputs).length > 0) {
-      setInputs(initialInputs);
-    }
-    // Don't set default values - let placeholders show instead
-  }, [calculator, locale]);
+  const engine = new CalculatorEngineImpl(calculator);
 
-  const handleInputChange = (key: string, value: any) => {
-    setInputs(prev => ({ ...prev, [key]: value }));
-    // Clear error for this field
-    setErrors(prev => ({ ...prev, [key]: '' }));
+  const handleInputChange = (inputId: string, value: any) => {
+    setInputs(prev => ({
+      ...prev,
+      [inputId]: value
+    }));
+    
+    // Clear error for this input
+    if (errors[inputId]) {
+      setErrors(prev => ({
+        ...prev,
+        [inputId]: ''
+      }));
+    }
   };
 
   const handleCalculate = async () => {
     setIsCalculating(true);
     setErrors({});
-    
+
     try {
-      const outputs = CalculatorEngine.calculate(calculator, inputs);
-      const calculationResult: CalculatorResult = {
-        inputs: { ...inputs },
-        outputs,
-        timestamp: new Date().toISOString(),
-        locale,
-        shareUrl: typeof window !== 'undefined' 
-          ? `${window.location.origin}/${locale}/calculator/${calculator.slug}?${new URLSearchParams(inputs).toString()}`
-          : ''
-      };
-      setResult(calculationResult);
-      if (onCalculate) {
-        onCalculate(calculationResult);
+      const validation = engine.validate(inputs);
+      if (!validation.valid) {
+        const newErrors: Record<string, string> = {};
+        validation.errors.forEach(error => {
+          // Try to match error to specific input
+          const input = calculator.inputs.find(inp => 
+            error.toLowerCase().includes(inp.label.toLowerCase())
+          );
+          if (input) {
+            newErrors[input.id] = error;
+          }
+        });
+        setErrors(newErrors);
+        return;
       }
-    } catch (error: any) {
-      setErrors({ general: error.message || 'Calculation error' });
+
+      const calculationResults = engine.calculate(inputs);
+      setResults(calculationResults);
+    } catch (error) {
+      console.error('Calculation error:', error);
+      setErrors({ general: error instanceof Error ? error.message : 'Calculation failed' });
     } finally {
       setIsCalculating(false);
     }
@@ -65,209 +72,146 @@ export default function CalculatorForm({
 
   const handleReset = () => {
     setInputs({});
-    setResult(null);
+    setResults(null);
     setErrors({});
   };
 
-  const renderInput = (input: CalculatorInput) => {
-    const value = inputs[input.key] ?? '';
-    const error = errors[input.key];
+  const handleCopyResult = (value: any) => {
+    navigator.clipboard.writeText(String(value));
+    // You could add a toast notification here
+  };
 
-    switch (input.type) {
-      case 'number':
-        return (
-          <div className="relative">
-            <input
-              type="number"
-              id={input.key}
-              value={value}
-              onChange={(e) => handleInputChange(input.key, e.target.value)}
-              onFocus={(e) => {
-                // Select all text when focused for easy replacement
-                e.target.select();
-              }}
-              placeholder={input.placeholder || `Enter ${input.label?.toLowerCase() || 'value'}`}
-              min={input.min}
-              max={input.max}
-              step={input.step}
-              className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-                error ? 'border-red-500' : 'border-gray-300'
-              }`}
-              required={input.required}
-            />
-            {input.unit && (
-              <span className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 pointer-events-none">
-                {input.unit}
-              </span>
-            )}
-          </div>
-        );
+  const getLocalizedLabel = (input: any) => {
+    return input.localizedLabel?.[locale] || input.label;
+  };
 
-      case 'select':
-        return (
-          <select
-            id={input.key}
-            value={value}
-            onChange={(e) => handleInputChange(input.key, e.target.value)}
-            className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-              error ? 'border-red-500' : 'border-gray-300'
-            }`}
-            required={input.required}
-          >
-            {input.options?.map((option) => (
-              <option key={option.value} value={option.value}>
-                {option.label}
-              </option>
-            ))}
-          </select>
-        );
-
-      case 'radio':
-        return (
-          <div className="space-y-2">
-            {input.options?.map((option) => (
-              <label key={option.value} className="flex items-center space-x-2 cursor-pointer">
-                <input
-                  type="radio"
-                  name={input.key}
-                  value={option.value}
-                  checked={value === option.value}
-                  onChange={(e) => handleInputChange(input.key, e.target.value)}
-                  className="w-4 h-4 text-blue-600 focus:ring-blue-500"
-                />
-                <span className="text-gray-700 dark:text-gray-300">{option.label}</span>
-                {option.description && (
-                  <span className="text-sm text-gray-500">({option.description})</span>
-                )}
-              </label>
-            ))}
-          </div>
-        );
-
-      case 'slider':
-        return (
-          <div className="space-y-2">
-            <div className="flex justify-between text-sm text-gray-600">
-              <span>{input.min}</span>
-              <span className="font-semibold">{value || input.min}</span>
-              <span>{input.max}</span>
-            </div>
-            <input
-              type="range"
-              id={input.key}
-              value={value || input.min}
-              onChange={(e) => handleInputChange(input.key, e.target.value)}
-              min={input.min}
-              max={input.max}
-              step={input.step}
-              className="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer"
-            />
-          </div>
-        );
-
-      default:
-        return (
-          <input
-            type="text"
-            id={input.key}
-            value={value}
-            onChange={(e) => handleInputChange(input.key, e.target.value)}
-            placeholder={input.placeholder}
-            className={`w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent ${
-              error ? 'border-red-500' : 'border-gray-300'
-            }`}
-            required={input.required}
-          />
-        );
-    }
+  const getLocalizedOutputLabel = (output: any) => {
+    return output.localizedLabel?.[locale] || output.label;
   };
 
   return (
-    <div className="bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6">
-      <form onSubmit={(e) => { e.preventDefault(); handleCalculate(); }} className="space-y-6">
-        {/* Input Fields */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-          {calculator.inputs.map((input) => (
-            <div key={input.key} className="space-y-2">
-              <label htmlFor={input.key} className="block text-sm font-medium text-gray-700 dark:text-gray-300">
-                {input.label}
-                {input.required && <span className="text-red-500 ml-1">*</span>}
-                {input.tooltip && (
-                  <span className="ml-2 text-gray-400 dark:text-gray-500 cursor-help" title={input.tooltip}>
-                    ⓘ
-                  </span>
-                )}
-              </label>
-              {renderInput(input)}
-              {errors[input.key] && (
-                <p className="text-sm text-red-600 dark:text-red-400">{errors[input.key]}</p>
-              )}
+    <div className="space-y-6">
+      {/* Input Form */}
+      <Card variant="glow">
+        <div className="space-y-6">
+          <div>
+            <h2 className="text-2xl font-bold text-text-primary mb-2">
+              {calculator.localizedContent?.[locale]?.name || calculator.name}
+            </h2>
+            <p className="text-text-secondary">
+              {calculator.localizedContent?.[locale]?.description || calculator.description}
+            </p>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-2">
+            {calculator.inputs.map((input) => (
+              <Input
+                key={input.id}
+                label={getLocalizedLabel(input)}
+                type={input.type}
+                placeholder={input.placeholder}
+                min={input.min}
+                max={input.max}
+                step={input.step}
+                value={inputs[input.id] || ''}
+                onChange={(e) => handleInputChange(input.id, e.target.value)}
+                error={errors[input.id]}
+                unit={input.unit}
+                required={input.required}
+              />
+            ))}
+          </div>
+
+          <div className="flex gap-4">
+            <Button
+              onClick={handleCalculate}
+              disabled={isCalculating}
+              className="flex-1"
+            >
+              {isCalculating ? 'Calculating...' : 'Calculate'}
+            </Button>
+            <Button
+              variant="ghost"
+              onClick={handleReset}
+              className="px-6"
+            >
+              <RotateCcw size={16} className="mr-2" />
+              Reset
+            </Button>
+          </div>
+
+          {errors.general && (
+            <div className="p-4 bg-red-500/10 border border-red-500/20 rounded-xl">
+              <p className="text-red-400">{errors.general}</p>
             </div>
-          ))}
+          )}
         </div>
+      </Card>
 
-        {/* Error Message */}
-        {errors.general && (
-          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
-            <p className="text-red-800 dark:text-red-400">{errors.general}</p>
-          </div>
-        )}
+      {/* Results */}
+      {results && (
+        <Card variant="glow">
+          <div className="space-y-4">
+            <h3 className="text-xl font-semibold text-text-primary">Results</h3>
+            <div className="grid gap-4 md:grid-cols-2">
+              {calculator.outputs.map((output) => {
+                const value = results[output.id];
+                if (value === undefined || value === null) return null;
 
-        {/* Action Buttons */}
-        <div className="flex flex-wrap gap-4">
-          <button
-            type="submit"
-            disabled={isCalculating}
-            className="flex-1 sm:flex-none px-8 py-3 bg-blue-600 dark:bg-blue-500 text-white font-semibold rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 focus:outline-none focus:ring-2 focus:ring-blue-500 dark:focus:ring-blue-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-          >
-            {isCalculating ? (
-              <span className="flex items-center justify-center">
-                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                Calculating...
-              </span>
-            ) : (
-              'Calculate'
-            )}
-          </button>
-          <button
-            type="button"
-            onClick={handleReset}
-            className="px-8 py-3 bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 font-semibold rounded-lg hover:bg-gray-300 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-gray-500 dark:focus:ring-gray-400 focus:ring-offset-2 dark:focus:ring-offset-gray-800 transition-colors"
-          >
-            Reset
-          </button>
-        </div>
-      </form>
-
-      {/* Results Display */}
-      {result && (
-        <div className="mt-8 pt-8 border-t border-gray-200 dark:border-gray-700">
-          <h3 className="text-xl font-semibold mb-4 text-gray-900 dark:text-white">Results</h3>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            {calculator.outputs.map((output) => {
-              const value = result.outputs[output.key];
-              if (value === null || value === undefined) return null;
-
-              return (
-                <div key={output.key} className="bg-gray-50 dark:bg-gray-700 rounded-lg p-4">
-                  <div className="text-sm text-gray-600 dark:text-gray-400">{output.label}</div>
-                  <div className="text-2xl font-bold text-gray-900 dark:text-white mt-1">
-                    {value}
-                  </div>
-                  {output.description && (
-                    <div className="text-xs text-gray-500 dark:text-gray-400 mt-1">
-                      {output.description}
+                return (
+                  <div
+                    key={output.id}
+                    className="p-4 bg-surface-2/50 rounded-xl border border-stroke-soft"
+                  >
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <p className="text-sm text-text-muted">
+                          {getLocalizedOutputLabel(output)}
+                        </p>
+                        <p className="text-2xl font-bold text-accent">
+                          {output.format === 'currency' 
+                            ? `$${Number(value).toLocaleString()}`
+                            : output.format === 'decimal'
+                            ? Number(value).toFixed(2)
+                            : String(value)
+                          }
+                          {output.unit && (
+                            <span className="text-text-muted text-lg ml-1">
+                              {output.unit}
+                            </span>
+                          )}
+                        </p>
+                      </div>
+                      <Button
+                        variant="icon"
+                        size="sm"
+                        onClick={() => handleCopyResult(value)}
+                        className="ml-2"
+                      >
+                        <Copy size={16} />
+                      </Button>
                     </div>
-                  )}
-                </div>
-              );
-            })}
+                  </div>
+                );
+              })}
+            </div>
           </div>
-        </div>
+        </Card>
+      )}
+
+      {/* Formula */}
+      {calculator.formula && (
+        <Card>
+          <div>
+            <h4 className="text-lg font-semibold text-text-primary mb-2">Formula</h4>
+            <code className="text-accent text-sm bg-surface-1 p-2 rounded block">
+              {calculator.formula}
+            </code>
+          </div>
+        </Card>
       )}
     </div>
   );
-}
+};
+
+export default CalculatorForm;

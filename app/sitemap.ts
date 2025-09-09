@@ -1,60 +1,59 @@
 import { MetadataRoute } from 'next';
-import { i18n } from '@/lib/i18n/config';
-import { getAllCalculators, calculatorCategories } from '@/lib/calculators/registry';
+import { calculators, categories } from '@/data/calculators';
+
+const locales = ['en', 'es', 'pt', 'de', 'fr', 'ja', 'ko', 'zh', 'th', 'ar', 'hi', 'id', 'ru', 'it', 'nl', 'vi', 'fa'];
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://bwnxcalculator.com';
-  const calculatorIds = getAllCalculators();
-  const categories = Object.keys(calculatorCategories);
+  const staticPages = ['about', 'privacy', 'terms', 'contact'];
   
-  const routes: MetadataRoute.Sitemap = [];
+  const sitemap: MetadataRoute.Sitemap = [];
 
-  // Add home pages for all locales
-  i18n.locales.forEach(locale => {
-    routes.push({
+  // Home pages for each locale
+  locales.forEach(locale => {
+    sitemap.push({
       url: `${baseUrl}/${locale}`,
       lastModified: new Date(),
       changeFrequency: 'daily',
-      priority: 1,
+      priority: 1.0
     });
   });
 
-  // Add category pages for all locales
-  i18n.locales.forEach(locale => {
+  // Category pages for each locale
+  locales.forEach(locale => {
     categories.forEach(category => {
-      routes.push({
-        url: `${baseUrl}/${locale}/category/${category}`,
+      sitemap.push({
+        url: `${baseUrl}/${locale}/${category.id}`,
         lastModified: new Date(),
         changeFrequency: 'weekly',
-        priority: 0.8,
+        priority: 0.8
       });
     });
   });
 
-  // Add calculator pages for all locales
-  i18n.locales.forEach(locale => {
-    calculatorIds.forEach(calculatorId => {
-      routes.push({
-        url: `${baseUrl}/${locale}/calculator/${calculatorId}`,
+  // Calculator pages for each locale
+  locales.forEach(locale => {
+    calculators.forEach(calculator => {
+      sitemap.push({
+        url: `${baseUrl}/${locale}/${calculator.category}/${calculator.slug}`,
         lastModified: new Date(),
-        changeFrequency: 'weekly',
-        priority: 0.9,
+        changeFrequency: 'monthly',
+        priority: 0.9
       });
     });
   });
 
-  // Add utility pages
-  const utilityPages = ['faq', 'how-to-use', 'privacy', 'terms', 'cookies'];
-  i18n.locales.forEach(locale => {
-    utilityPages.forEach(page => {
-      routes.push({
+  // Static pages for each locale
+  locales.forEach(locale => {
+    staticPages.forEach(page => {
+      sitemap.push({
         url: `${baseUrl}/${locale}/${page}`,
         lastModified: new Date(),
         changeFrequency: 'monthly',
-        priority: 0.5,
+        priority: 0.5
       });
     });
   });
 
-  return routes;
+  return sitemap;
 }

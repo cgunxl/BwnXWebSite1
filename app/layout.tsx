@@ -1,40 +1,57 @@
-import type { Metadata } from "next";
-import "./globals.css";
-import { ThemeProvider } from "@/contexts/ThemeContext";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import './globals.css';
+
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "BwnXCalculator - Multi-Language Calculator Hub",
-  description: "Free online calculators for finance, health, education, math, and lifestyle in 17 languages",
-  keywords: "calculator, online calculator, financial calculator, health calculator, math calculator",
-  authors: [{ name: "BwnXCalculator Team" }],
-  viewport: "width=device-width, initial-scale=1",
-  themeColor: "#0B0D10",
+  title: 'BwnXCalculator - 430 Calculators in 17 Languages',
+  description: 'Comprehensive calculator hub for finance, health, education, engineering, and more. Available in 17 languages with 430 specialized calculators.',
+  keywords: 'calculator, finance, health, education, math, free, online, multilingual',
+  authors: [{ name: 'BwnXCalculator Team' }],
+  creator: 'BwnXCalculator',
+  publisher: 'BwnXCalculator',
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  openGraph: {
+    type: 'website',
+    locale: 'en_US',
+    url: 'https://bwnxcalculator.com',
+    title: 'BwnXCalculator - 430 Calculators in 17 Languages',
+    description: 'Comprehensive calculator hub for finance, health, education, engineering, and more.',
+    siteName: 'BwnXCalculator',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'BwnXCalculator - 430 Calculators in 17 Languages',
+    description: 'Comprehensive calculator hub for finance, health, education, engineering, and more.',
+    creator: '@bwnxcalculator',
+  },
+  alternates: {
+    canonical: 'https://bwnxcalculator.com',
+  },
 };
 
 export default function RootLayout({
   children,
-}: Readonly<{
+}: {
   children: React.ReactNode;
-}>) {
+}) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <head>
-        <meta name="theme-color" content="#0B0D10" />
-        <link rel="icon" href="/favicon.ico" />
-      </head>
-      <body className="min-h-screen bg-waves">
-        <ThemeProvider>
-          {/* Background effects */}
-          <div className="fixed inset-0 pointer-events-none">
-            <div className="absolute inset-0 bg-waves" />
-            <div className="absolute inset-0 scan-lines opacity-20" />
-          </div>
-          
-          {/* Main content */}
-          <div className="relative z-10">
-            {children}
-          </div>
-        </ThemeProvider>
+    <html lang="en" className="dark">
+      <body className={inter.className}>
+        <div className="min-h-screen bg-bg-deep">
+          {children}
+        </div>
       </body>
     </html>
   );
