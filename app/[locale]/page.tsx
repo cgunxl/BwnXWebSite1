@@ -4,8 +4,7 @@ import PopularCalculators from '@/components/PopularCalculators';
 import Footer from '@/components/Footer';
 import CookieConsent from '@/components/CookieConsent';
 import { Locale } from '@/lib/i18n/config';
-import { getTopCalculators } from '@/data/calculators-complete';
-import { calculatorCategories } from '@/lib/calculators/registry';
+import { getTopCalculators, calculatorCategories } from '@/data/calculators-complete';
 
 interface PageProps {
   params: Promise<{ locale: Locale }>;

@@ -38,7 +38,16 @@ export default function CategoryGrid({ categories, locale }: CategoryGridProps) 
       // Add more languages...
     };
     
-    return translations[locale]?.[category] || categories[category].name;
+    const categoryData = categories[category];
+    if (!categoryData) return category;
+    
+    if (typeof categoryData.name === 'string') {
+      return translations[locale]?.[category] || categoryData.name;
+    } else if (categoryData.name && typeof categoryData.name === 'object') {
+      return categoryData.name[locale] || categoryData.name.en || categoryData.name[Object.keys(categoryData.name)[0]] || category;
+    }
+    
+    return category;
   };
 
   const getCategoryDescription = (category: CalculatorCategory, locale: string) => {
