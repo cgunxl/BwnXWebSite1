@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/contexts/ThemeContext";
+import CookieBanner from "@/components/CookieBanner";
+import Script from "next/script";
 
 export const metadata: Metadata = {
   title: "BwnXCalculator - Multi-Language Calculator Hub",
@@ -33,6 +35,18 @@ export default function RootLayout({
           {/* Main content */}
           <div className="relative z-10">
             {children}
+            <CookieBanner />
+            {/* Load analytics only after consent */}
+            <Script
+              id="ga-loader"
+              strategy="lazyOnload"
+              dangerouslySetInnerHTML={{__html:`
+                (function(){
+                  const loadGA=()=>{if(window.gtag)return;var s=document.createElement('script');s.src='https://www.googletagmanager.com/gtag/js?id=G-XXXXXXX';s.async=true;document.head.appendChild(s);window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-XXXXXXX');};
+                  if(localStorage.getItem('cookie_consent')==='accept'){loadGA();}else{window.addEventListener('cookie-consent-granted',loadGA,{once:true});}
+                })();
+              `}}
+            />
           </div>
         </ThemeProvider>
       </body>
