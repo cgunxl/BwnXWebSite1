@@ -107,6 +107,8 @@ export interface CalculatorOutput {
   description?: string;
   category?: string;
   visualization?: VisualizationType;
+  prefix?: string;
+  suffix?: string;
   primary?: boolean;
   highlight?: boolean;
 }

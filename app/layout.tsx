@@ -1,81 +1,37 @@
-import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
-import './globals.css';
-import { i18n, localeNames, localeFlags } from '@/lib/i18n/config';
-import { ThemeProvider } from '@/contexts/ThemeContext';
-
-const inter = Inter({ subsets: ['latin'] });
+import type { Metadata } from "next";
+import "./globals.css";
+import { ThemeProvider } from "@/contexts/ThemeContext";
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://calculatorhub.com'),
-  title: {
-    default: 'Calculator Hub - 430+ Free Online Calculators',
-    template: '%s | Calculator Hub',
-  },
-  description: 'Access 430+ free online calculators for finance, health, education, engineering, and more. Available in 17 languages with country-specific calculations.',
-  keywords: ['calculator', 'online calculator', 'free calculator', 'financial calculator', 'health calculator', 'BMI calculator', 'loan calculator', 'mortgage calculator'],
-  authors: [{ name: 'Calculator Hub' }],
-  creator: 'Calculator Hub',
-  publisher: 'Calculator Hub',
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
-  openGraph: {
-    title: 'Calculator Hub - 430+ Free Online Calculators',
-    description: 'Access 430+ free online calculators for finance, health, education, engineering, and more.',
-    url: 'https://calculatorhub.com',
-    siteName: 'Calculator Hub',
-    images: [
-      {
-        url: '/og-image.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Calculator Hub',
-      },
-    ],
-    locale: 'en_US',
-    type: 'website',
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: 'Calculator Hub - 430+ Free Online Calculators',
-    description: 'Access 430+ free online calculators for finance, health, education, engineering, and more.',
-    images: ['/twitter-image.jpg'],
-  },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-  alternates: {
-    canonical: 'https://calculatorhub.com',
-    languages: Object.fromEntries(
-      i18n.locales.map(locale => [
-        locale,
-        `https://calculatorhub.com/${locale}`
-      ])
-    ),
-  },
+  title: "BwnXCalculator - Multi-Language Calculator Hub",
+  description: "Free online calculators for finance, health, education, math, and lifestyle in 17 languages",
+  keywords: "calculator, online calculator, financial calculator, health calculator, math calculator",
+  authors: [{ name: "BwnXCalculator Team" }],
+  viewport: "width=device-width, initial-scale=1",
+  themeColor: "#0B0D10",
 };
 
 export default function RootLayout({
   children,
-}: {
+}: Readonly<{
   children: React.ReactNode;
-}) {
+}>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+      <head>
+        <meta name="theme-color" content="#0B0D10" />
+        <link rel="icon" href="/favicon.ico" />
+      </head>
+      <body className="min-h-screen bg-waves">
         <ThemeProvider>
-          <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+          {/* Background effects */}
+          <div className="fixed inset-0 pointer-events-none">
+            <div className="absolute inset-0 bg-waves" />
+            <div className="absolute inset-0 scan-lines opacity-20" />
+          </div>
+          
+          {/* Main content */}
+          <div className="relative z-10">
             {children}
           </div>
         </ThemeProvider>

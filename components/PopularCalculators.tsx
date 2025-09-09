@@ -85,7 +85,7 @@ export default function PopularCalculators({ calculators, locale }: PopularCalcu
               {getCalculatorIcon(calc.slug)}
             </div>
             <h3 className="text-sm font-semibold text-gray-900 text-center mb-1 line-clamp-2">
-              {calc.name}
+              {typeof calc.name === 'string' ? calc.name : (calc.name[locale] || calc.name.en || Object.values(calc.name)[0])}
             </h3>
             <p className="text-xs text-gray-500 text-center line-clamp-2">
               {getCalculatorDescription(calc.slug, locale)}
@@ -96,7 +96,7 @@ export default function PopularCalculators({ calculators, locale }: PopularCalcu
           {hoveredCard === calc.id && (
             <div className="absolute bottom-full left-1/2 transform -translate-x-1/2 mb-2 z-10">
               <div className="bg-gray-900 text-white text-xs rounded-lg px-3 py-2 whitespace-nowrap">
-                Click to open {calc.name}
+                Click to open {typeof calc.name === 'string' ? calc.name : (calc.name[locale] || calc.name.en || Object.values(calc.name)[0])}
                 <div className="absolute top-full left-1/2 transform -translate-x-1/2 -mt-1">
                   <div className="border-4 border-transparent border-t-gray-900"></div>
                 </div>
