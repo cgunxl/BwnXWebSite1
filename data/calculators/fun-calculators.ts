@@ -140,6 +140,9 @@ export const loveCalculator: Calculator = {
       title: 'Love Calculator',
       description: 'Calculate love compatibility between you and your partner',
       instructions: 'Enter both names to discover your love compatibility percentage!',
+      keywords: ['love calculator', 'compatibility test', 'relationship calculator'],
+      faq: [],
+      article: '',
       meta: {
         title: 'Love Calculator - Test Your Compatibility | BwnXCalculator',
         description: 'Calculate love compatibility between you and your partner. Fun love test with compatibility percentage and relationship advice.',
@@ -149,7 +152,10 @@ export const loveCalculator: Calculator = {
     th: {
       title: 'คำนวณความรัก',
       description: 'คำนวณความเข้ากันในความรักระหว่างคุณและคนที่คุณรัก',
-      instructions: 'ใส่ชื่อทั้งสองเพื่อค้นหาเปอร์เซ็นต์ความเข้ากัน!'
+      instructions: 'ใส่ชื่อทั้งสองเพื่อค้นหาเปอร์เซ็นต์ความเข้ากัน!',
+      keywords: ['คำนวณความรัก', 'ทดสอบความเข้ากัน', 'ความรัก'],
+      faq: [],
+      article: ''
     }
   }
 };
@@ -323,6 +329,9 @@ export const luckyNumberCalculator: Calculator = {
       title: 'Lucky Number Generator',
       description: 'Generate your personal lucky numbers based on your name and birthdate',
       instructions: 'Enter your details to discover your lucky numbers!',
+      keywords: ['lucky number generator', 'fortune numbers', 'lottery numbers'],
+      faq: [],
+      article: '',
       meta: {
         title: 'Lucky Number Generator - Personal Fortune Numbers | BwnXCalculator',
         description: 'Generate personalized lucky numbers based on your name and birthdate. Perfect for lottery, decisions, or just for fun!',
@@ -332,7 +341,10 @@ export const luckyNumberCalculator: Calculator = {
     th: {
       title: 'สร้างเลขนำโชค',
       description: 'สร้างเลขนำโชคส่วนตัวจากชื่อและวันเกิดของคุณ',
-      instructions: 'กรอกข้อมูลเพื่อค้นหาเลขนำโชคของคุณ!'
+      instructions: 'กรอกข้อมูลเพื่อค้นหาเลขนำโชคของคุณ!',
+      keywords: ['เลขนำโชค', 'สร้างเลขมงคล', 'เลขเสี่ยงโชค'],
+      faq: [],
+      article: ''
     }
   }
 };
@@ -507,6 +519,9 @@ export const birthdayCalculator: Calculator = {
       title: 'Birthday Calculator',
       description: 'Calculate your exact age and discover interesting facts about your birthday',
       instructions: 'Enter your birth date to see detailed age calculations and zodiac information!',
+      keywords: ['birthday calculator', 'age calculator', 'zodiac sign'],
+      faq: [],
+      article: '',
       meta: {
         title: 'Birthday Calculator - Age & Zodiac Info | BwnXCalculator',
         description: 'Calculate your exact age in years, months, days, and hours. Discover your zodiac sign, Chinese zodiac, and life path number.',
@@ -516,7 +531,10 @@ export const birthdayCalculator: Calculator = {
     th: {
       title: 'คำนวณวันเกิด',
       description: 'คำนวณอายุที่แน่นอนและค้นพบข้อมูลน่าสนใจเกี่ยวกับวันเกิดของคุณ',
-      instructions: 'ใส่วันเกิดเพื่อดูการคำนวณอายุและข้อมูลราศี!'
+      instructions: 'ใส่วันเกิดเพื่อดูการคำนวณอายุและข้อมูลราศี!',
+      keywords: ['คำนวณวันเกิด', 'คำนวณอายุ', 'หาราศี'],
+      faq: [],
+      article: ''
     }
   }
 };
@@ -714,6 +732,9 @@ export const personalityCalculator: Calculator = {
       title: 'Personality Test Calculator',
       description: 'Discover your personality type and traits through a quick assessment',
       instructions: 'Rate each statement to reveal your personality profile!',
+      keywords: ['personality test', 'personality calculator', 'personality type'],
+      faq: [],
+      article: '',
       meta: {
         title: 'Personality Test Calculator - Discover Your Type | BwnXCalculator',
         description: 'Take a quick personality test to discover your personality type, strengths, and growth areas. Free personality assessment.',
@@ -723,7 +744,10 @@ export const personalityCalculator: Calculator = {
     th: {
       title: 'ทดสอบบุคลิกภาพ',
       description: 'ค้นพบประเภทบุคลิกภาพและลักษณะนิสัยของคุณ',
-      instructions: 'ให้คะแนนแต่ละข้อเพื่อเปิดเผยบุคลิกภาพของคุณ!'
+      instructions: 'ให้คะแนนแต่ละข้อเพื่อเปิดเผยบุคลิกภาพของคุณ!',
+      keywords: ['ทดสอบบุคลิกภาพ', 'วิเคราะห์บุคลิกภาพ', 'แบบทดสอบ'],
+      faq: [],
+      article: ''
     }
   }
 };
