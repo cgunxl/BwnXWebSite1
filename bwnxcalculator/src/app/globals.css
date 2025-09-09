@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+  --bg-deep:#0B0D10;--bg-base:#0F1115;--bg-raised:#151922;--surface-1:#1B202A;--surface-2:#222835;--stroke-soft:#2A313B;--stroke-strong:#3A4452;--text-primary:#E6F7F5;--text-secondary:#B3C6C2;--text-muted:#869590;--accent:#00FFC6;--accent-2:#00E6A8;--aqua:#66FFF5;--glow:rgba(0,255,198,0.24);--focus-ring:rgba(0,230,168,0.65)
+}
+
+html,body{
+  background: var(--bg-deep);
+  color: var(--text-primary);
+}
+
+.bg-waves{position:relative;overflow:hidden;background:radial-gradient(1200px 800px at 70% -20%, rgba(0,255,198,0.10), transparent), linear-gradient(180deg,#0B0D10 0%,#0F1115 60%,#151922 100%);} 
+.bg-waves::before,.bg-waves::after{content:'';position:absolute;inset:-20%;background:conic-gradient(from 180deg at 50% 50%, rgba(102,255,245,0.06), rgba(0,0,0,0) 45%, rgba(0,255,198,0.08) 60%, rgba(0,0,0,0));filter:blur(18px);animation:waveShift 14s ease-in-out infinite;} 
+.bg-waves::after{animation-duration:22s;opacity:.6}
+
+.scan-lines{background-image:repeating-linear-gradient(180deg, rgba(102,255,245,0.15) 0, rgba(102,255,245,0.15) 2px, transparent 2px, transparent 8px);animation:scanLines 12s linear infinite;mix-blend-mode:screen;pointer-events:none}
+
+@keyframes waveShift {0%{transform: translateX(0)}50%{transform: translateX(-2%)}100%{transform: translateX(0)}}
+@keyframes scanLines {0%{background-position:0 0}100%{background-position:0 200px}}
+@keyframes pulseGlow {0%{box-shadow: 0 0 0 0 rgba(0,255,198,0.35)}70%{box-shadow: 0 0 0 18px rgba(0,255,198,0)}100%{box-shadow: 0 0 0 0 rgba(0,255,198,0)}}
+
+.btn-primary{background:var(--accent-2);color:var(--bg-deep);border-radius:10px;padding:10px 16px;box-shadow:0 8px 24px var(--glow);transition:transform .18s ease, box-shadow .3s ease}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 12px 36px var(--glow)}
+.btn-ghost{background:transparent;border:1px solid var(--stroke-soft);color:var(--text-primary);border-radius:10px;padding:10px 16px}
+.input{background:var(--bg-raised);border:1px solid var(--stroke-soft);color:var(--text-primary);border-radius:10px;padding:10px 12px;outline:none}
+.input:focus{border-color:var(--accent-2);box-shadow:0 0 0 3px var(--focus-ring)}
+
+a{color:var(--aqua)}
+
