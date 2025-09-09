@@ -75,18 +75,24 @@ export default function BwnXHeader({ locale }: BwnXHeaderProps) {
           <div className="hidden lg:flex items-center space-x-8">
             {/* Category Links */}
             <div className="flex items-center space-x-6">
-              {Object.entries(calculatorCategories).slice(0, 5).map(([key, category]) => (
-                <Link
-                  key={key}
-                  href={`/${locale}/${key}`}
-                  className="nav-link"
-                >
-                  <span className="flex items-center space-x-2">
-                    <span>{category.icon}</span>
-                    <span>{category.name[locale as keyof typeof category.name] || category.name.en}</span>
-                  </span>
-                </Link>
-              ))}
+              {Object.entries(calculatorCategories).slice(0, 5).map(([key, category]) => {
+                const categoryName = typeof category.name === 'string' 
+                  ? category.name 
+                  : (category.name?.[locale] || category.name?.en || 'Category');
+                
+                return (
+                  <Link
+                    key={key}
+                    href={`/${locale}/${key}`}
+                    className="nav-link"
+                  >
+                    <span className="flex items-center space-x-2">
+                      <span>{category.icon}</span>
+                      <span>{categoryName}</span>
+                    </span>
+                  </Link>
+                );
+              })}
               <button className="nav-link">
                 More...
               </button>
@@ -163,19 +169,25 @@ export default function BwnXHeader({ locale }: BwnXHeaderProps) {
               <SearchBar locale={locale} />
             </div>
             <div className="space-y-2">
-              {Object.entries(calculatorCategories).map(([key, category]) => (
-                <Link
-                  key={key}
-                  href={`/${locale}/${key}`}
-                  className="block px-4 py-2 rounded-lg text-text-secondary hover:bg-surface-1 hover:text-text-primary transition-colors"
-                  onClick={() => setShowMobileMenu(false)}
-                >
-                  <span className="flex items-center space-x-2">
-                    <span>{category.icon}</span>
-                    <span>{category.name[locale as keyof typeof category.name] || category.name.en}</span>
-                  </span>
-                </Link>
-              ))}
+              {Object.entries(calculatorCategories).map(([key, category]) => {
+                const categoryName = typeof category.name === 'string' 
+                  ? category.name 
+                  : (category.name?.[locale] || category.name?.en || 'Category');
+                
+                return (
+                  <Link
+                    key={key}
+                    href={`/${locale}/${key}`}
+                    className="block px-4 py-2 rounded-lg text-text-secondary hover:bg-surface-1 hover:text-text-primary transition-colors"
+                    onClick={() => setShowMobileMenu(false)}
+                  >
+                    <span className="flex items-center space-x-2">
+                      <span>{category.icon}</span>
+                      <span>{categoryName}</span>
+                    </span>
+                  </Link>
+                );
+              })}
             </div>
           </div>
         )}
