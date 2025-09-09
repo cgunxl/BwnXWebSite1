@@ -23,6 +23,7 @@ export default function BwnXCalculatorForm({
   const [isCalculating, setIsCalculating] = useState(false);
   const [showResults, setShowResults] = useState(false);
   const [copiedField, setCopiedField] = useState<string | null>(null);
+  const [showTip, setShowTip] = useState(false);
   const resultsRef = useRef<HTMLDivElement>(null);
 
   // Auto-calculate on input change
@@ -294,7 +295,23 @@ export default function BwnXCalculatorForm({
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m9.032 4.026a3 3 0 10-5.464 0m5.464 0a3 3 0 10-5.464 0M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
             </button>
+            <button
+              onClick={() => setShowTip((v) => !v)}
+              className="btn-ghost px-3 py-1 rounded-full"
+              title="Tips"
+            >
+              <span className="inline-flex items-center gap-2">
+                <span className="w-6 h-6 rounded-full bg-surface-1 inline-flex items-center justify-center">💡</span>
+                <span>Tips</span>
+              </span>
+            </button>
           </div>
+
+          {showTip && (
+            <div className="mb-4 p-3 border border-stroke-soft rounded-lg bg-surface-1 text-text-secondary">
+              กำลังพัฒนา
+            </div>
+          )}
           
           <div className="space-y-4">
             {calculator.outputs.map(output => {

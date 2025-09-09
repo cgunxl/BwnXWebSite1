@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@reference "tailwindcss";
+
 /* ==================== CSS Variables for Dark Futuristic Theme ==================== */
 :root {
   /* Deep backgrounds */
@@ -145,6 +147,19 @@ body {
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* Utility animation classes */
+.animate-fade-in {
+  animation: fadeIn 0.4s ease both;
+}
+
+.animate-slide-in {
+  animation: fadeIn 0.5s ease both;
+}
+
+.animate-scaleIn {
+  animation: fadeIn 0.5s ease both;
 }
 
 /* ==================== Background Effects ==================== */
