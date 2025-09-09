@@ -62,6 +62,8 @@ Kent: "Test ทุก edge case, ทุก locale" สำคัญมาก
 
 ต้องใช้กลยุทธ์แตก
 	•	อย่าใส่ Calculator รวมมั่ว ๆ ต้องทำ หน้าเฉพาะ แยกแต่ละอัน
+ 1 calculator 1 ภาษา คำเเนะนำการอธิบายที่เเตกต่างกัน
+เช่น en/loan-calculator มีเนื้อหาอีกแบบ th/loan-calculatorมีเนื้อหาอีกเเบบ
 	•	เช่น yourcalc.com/bmi, /loan, /sleep
 	•	แต่ละหน้าต้องมี บทความ + FAQ + Schema
 
