@@ -500,6 +500,318 @@ export function createROICalculator(locale: Locale): Calculator {
   };
 }
 
+// Investment Calculator (FV with contributions)
+export function createInvestmentCalculator(locale: Locale): Calculator {
+  return {
+    id: 'investment-calculator',
+    slug: 'investment-calculator',
+    category: 'finance',
+    icon: '📊',
+    color: '#3B82F6',
+    inputs: [
+      {
+        key: 'initialInvestment',
+        label: 'Initial Investment',
+        type: 'number',
+        unit: '$',
+        required: true,
+        validation: { min: 0, required: true }
+      },
+      {
+        key: 'monthlyContribution',
+        label: 'Monthly Contribution',
+        type: 'number',
+        unit: '$',
+        defaultValue: 0,
+        validation: { min: 0 }
+      },
+      {
+        key: 'annualRate',
+        label: 'Annual Return Rate',
+        type: 'number',
+        unit: '%',
+        required: true,
+        defaultValue: 7,
+        step: 0.01,
+        validation: { min: -50, max: 100, required: true }
+      },
+      {
+        key: 'years',
+        label: 'Years',
+        type: 'number',
+        unit: 'years',
+        required: true,
+        defaultValue: 10,
+        validation: { min: 1, max: 60, required: true }
+      },
+      {
+        key: 'compounding',
+        label: 'Compounding',
+        type: 'select',
+        required: true,
+        defaultValue: 'monthly',
+        options: [
+          { value: 'monthly', label: 'Monthly' },
+          { value: 'quarterly', label: 'Quarterly' },
+          { value: 'annually', label: 'Annually' }
+        ]
+      }
+    ],
+    outputs: [
+      { key: 'futureValue', label: 'Future Value', format: 'currency', precision: 2, primary: true },
+      { key: 'totalContributions', label: 'Total Contributions', format: 'currency', precision: 2 },
+      { key: 'totalInterest', label: 'Total Interest', format: 'currency', precision: 2 },
+      { key: 'effectiveAnnualRate', label: 'Effective Annual Rate', format: 'percentage', precision: 2 }
+    ],
+    formulas: [
+      {
+        key: 'primary',
+        expression: `({initialInvestment, monthlyContribution, annualRate, years, compounding}) => {
+          const r = (annualRate || 0) / 100;
+          const t = years || 0;
+          let n = 12;
+          if (compounding === 'annually') n = 1; else if (compounding === 'quarterly') n = 4;
+
+          // FV of principal
+          const fvPrincipal = (initialInvestment || 0) * Math.pow(1 + r / n, n * t);
+
+          // FV of contributions (assume monthly deposits)
+          const m = 12;
+          let fvContrib = 0;
+          if ((monthlyContribution || 0) > 0) {
+            const rm = r / m;
+            const months = t * m;
+            fvContrib = (monthlyContribution || 0) * ((Math.pow(1 + rm, months) - 1) / rm);
+          }
+
+          const futureValue = fvPrincipal + fvContrib;
+          const totalContributions = (initialInvestment || 0) + (monthlyContribution || 0) * 12 * t;
+          const totalInterest = futureValue - totalContributions;
+          const effectiveAnnualRate = (Math.pow(1 + r / n, n) - 1) * 100;
+
+          return { futureValue, totalContributions, totalInterest, effectiveAnnualRate };
+        }`,
+        variables: ['initialInvestment', 'monthlyContribution', 'annualRate', 'years', 'compounding']
+      }
+    ],
+    relatedCalculators: ['compound-interest', 'roi-calculator', 'retirement-calculator'],
+    localizedContent: {
+      [locale]: {
+        title: locale === 'th' ? 'คำนวณการลงทุน' : 'Investment Calculator',
+        description: locale === 'th' ? 'คำนวณมูลค่าในอนาคตจากเงินต้นและการออมรายเดือน' : 'Calculate future value from principal and monthly contributions',
+        keywords: ['investment', 'future value', 'compound'],
+        faq: [],
+        article: ''
+      }
+    }
+  };
+}
+
+// Salary Calculator (convert hourly/monthly/annual)
+export function createSalaryCalculator(locale: Locale): Calculator {
+  return {
+    id: 'salary-calculator',
+    slug: 'salary-calculator',
+    category: 'finance',
+    icon: '💵',
+    color: '#10B981',
+    inputs: [
+      {
+        key: 'knownType',
+        label: 'Known Amount Type',
+        type: 'select',
+        required: true,
+        defaultValue: 'annual',
+        options: [
+          { value: 'hourly', label: 'Hourly' },
+          { value: 'monthly', label: 'Monthly' },
+          { value: 'annual', label: 'Annual' }
+        ]
+      },
+      {
+        key: 'amount',
+        label: 'Amount',
+        type: 'number',
+        unit: '$',
+        required: true,
+        validation: { min: 0, required: true }
+      },
+      {
+        key: 'hoursPerWeek',
+        label: 'Hours per Week',
+        type: 'number',
+        defaultValue: 40,
+        validation: { min: 1, max: 80 }
+      },
+      {
+        key: 'weeksPerYear',
+        label: 'Weeks per Year',
+        type: 'number',
+        defaultValue: 52,
+        validation: { min: 1, max: 52 }
+      }
+    ],
+    outputs: [
+      { key: 'hourly', label: 'Hourly Pay', format: 'currency', precision: 2, primary: true },
+      { key: 'monthly', label: 'Monthly Pay', format: 'currency', precision: 2 },
+      { key: 'annual', label: 'Annual Salary', format: 'currency', precision: 2 }
+    ],
+    formulas: [
+      {
+        key: 'primary',
+        expression: `({knownType, amount, hoursPerWeek, weeksPerYear}) => {
+          const hpw = hoursPerWeek || 40;
+          const wpy = weeksPerYear || 52;
+          let hourly = 0, monthly = 0, annual = 0;
+
+          if (knownType === 'hourly') {
+            hourly = amount || 0;
+            annual = hourly * hpw * wpy;
+            monthly = annual / 12;
+          } else if (knownType === 'monthly') {
+            monthly = amount || 0;
+            annual = monthly * 12;
+            hourly = hpw > 0 ? annual / (hpw * wpy) : 0;
+          } else {
+            annual = amount || 0;
+            monthly = annual / 12;
+            hourly = hpw > 0 ? annual / (hpw * wpy) : 0;
+          }
+
+          return { hourly, monthly, annual };
+        }`,
+        variables: ['knownType', 'amount', 'hoursPerWeek', 'weeksPerYear']
+      }
+    ],
+    relatedCalculators: ['tax-calculator', 'paycheck-calculator', 'hourly-wage'],
+    localizedContent: {
+      [locale]: {
+        title: locale === 'th' ? 'คำนวณเงินเดือน' : 'Salary Calculator',
+        description: locale === 'th' ? 'แปลงรายชั่วโมง รายเดือน และรายปี' : 'Convert hourly, monthly, and annual pay',
+        keywords: ['salary', 'hourly', 'annual'],
+        faq: [],
+        article: ''
+      }
+    }
+  };
+}
+
+// Currency Converter (manual/custom rate)
+export function createCurrencyConverter(locale: Locale): Calculator {
+  const currencies = [
+    'USD','EUR','THB','JPY','GBP','AUD','CAD','CNY','KRW','INR'
+  ];
+  return {
+    id: 'currency-converter',
+    slug: 'currency-converter',
+    category: 'finance',
+    icon: '💱',
+    color: '#06B6D4',
+    inputs: [
+      { key: 'amount', label: 'Amount', type: 'number', required: true, validation: { min: 0, required: true } },
+      { key: 'from', label: 'From', type: 'select', required: true, defaultValue: 'USD', options: currencies.map(c=>({ value: c, label: c })) },
+      { key: 'to', label: 'To', type: 'select', required: true, defaultValue: 'THB', options: currencies.map(c=>({ value: c, label: c })) },
+      { key: 'rate', label: 'Exchange Rate (To per From)', type: 'number', required: true, step: 0.0001, validation: { min: 0 }, placeholder: 'e.g., 36.00 for USD→THB' }
+    ],
+    outputs: [
+      { key: 'converted', label: 'Converted Amount', format: 'number', precision: 4, primary: true },
+      { key: 'inverseRate', label: 'Inverse Rate (From per To)', format: 'number', precision: 6 },
+      { key: 'explanation', label: 'Explanation', format: 'text' }
+    ],
+    formulas: [
+      {
+        key: 'primary',
+        expression: `({amount, from, to, rate}) => {
+          const converted = (amount || 0) * (rate || 0);
+          const inverseRate = rate ? 1 / rate : 0;
+          const explanation = (amount || 0) + ' ' + (from || '') + ' × ' + (rate || 0) + ' = ' + converted;
+          return { converted, inverseRate, explanation };
+        }`,
+        variables: ['amount','from','to','rate']
+      }
+    ],
+    relatedCalculators: ['crypto-converter','travel-budget-calculator','tax-calculator'],
+    localizedContent: {
+      [locale]: {
+        title: locale === 'th' ? 'แปลงสกุลเงิน' : 'Currency Converter',
+        description: locale === 'th' ? 'แปลงสกุลเงินด้วยอัตราแลกเปลี่ยนที่กำหนดเอง' : 'Convert currencies with custom exchange rate',
+        keywords: ['currency','exchange','fx'],
+        faq: [],
+        article: ''
+      }
+    }
+  };
+}
+
+// Date Calculator (difference and add/subtract)
+export function createDateCalculator(locale: Locale): Calculator {
+  return {
+    id: 'date-calculator',
+    slug: 'date-calculator',
+    category: 'lifestyle',
+    icon: '📅',
+    color: '#64748B',
+    inputs: [
+      { key: 'mode', label: 'Mode', type: 'select', required: true, defaultValue: 'difference', options: [
+        { value: 'difference', label: 'Difference Between Dates' },
+        { value: 'add', label: 'Add Days to Date' },
+        { value: 'subtract', label: 'Subtract Days from Date' }
+      ]},
+      { key: 'startDate', label: 'Start Date', type: 'date', required: true, showIf: { mode: ['difference','add','subtract'] } },
+      { key: 'endDate', label: 'End Date', type: 'date', required: true, showIf: { mode: ['difference'] } },
+      { key: 'days', label: 'Days', type: 'number', required: true, defaultValue: 1, validation: { min: 0 }, showIf: { mode: ['add','subtract'] } }
+    ],
+    outputs: [
+      { key: 'resultDate', label: 'Result Date', format: 'text', primary: true },
+      { key: 'daysDiff', label: 'Days Difference', format: 'number', precision: 0 },
+      { key: 'weeksDiff', label: 'Weeks Difference', format: 'number', precision: 2 },
+      { key: 'monthsApprox', label: 'Months (approx)', format: 'number', precision: 2 }
+    ],
+    formulas: [
+      {
+        key: 'primary',
+        expression: `({mode, startDate, endDate, days}) => {
+          const start = new Date(startDate);
+          let resultDate = '';
+          let daysDiff = 0;
+          let weeksDiff = 0;
+          let monthsApprox = 0;
+
+          if (mode === 'difference') {
+            const end = new Date(endDate);
+            const diffMs = end.getTime() - start.getTime();
+            daysDiff = Math.round(diffMs / (1000*60*60*24));
+            weeksDiff = daysDiff / 7;
+            monthsApprox = daysDiff / 30.4375; // average month length
+            resultDate = end.toISOString().split('T')[0];
+          } else if (mode === 'add') {
+            const d = new Date(start);
+            d.setDate(d.getDate() + (days || 0));
+            resultDate = d.toISOString().split('T')[0];
+          } else {
+            const d = new Date(start);
+            d.setDate(d.getDate() - (days || 0));
+            resultDate = d.toISOString().split('T')[0];
+          }
+
+          return { resultDate, daysDiff, weeksDiff, monthsApprox };
+        }`,
+        variables: ['mode','startDate','endDate','days']
+      }
+    ],
+    relatedCalculators: ['age-calculator','time-calculator','business-days-calculator'],
+    localizedContent: {
+      [locale]: {
+        title: locale === 'th' ? 'คำนวณวันที่' : 'Date Calculator',
+        description: locale === 'th' ? 'หาความต่างระหว่างวันที่ หรือบวก/ลบวัน' : 'Find difference between dates or add/subtract days',
+        keywords: ['date','days','difference'],
+        faq: [],
+        article: ''
+      }
+    }
+  };
+}
+
 // Batch export all calculators
 export const megaBatchCalculators = [
   // Engineering (20)
@@ -516,4 +828,8 @@ export const megaBatchCalculators = [
   
   // More Finance (30+)
   createROICalculator,
+  createInvestmentCalculator,
+  createSalaryCalculator,
+  createCurrencyConverter,
+  createDateCalculator,
 ];
