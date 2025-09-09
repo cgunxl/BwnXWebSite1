@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Sitemap: https://bwnxcalculator.vercel.app/sitemap.xml
+
