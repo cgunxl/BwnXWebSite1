@@ -563,8 +563,200 @@ export const calculators: Calculator[] = [
         faq: []
       }
     }
+  },
+  // Finance Calculators (1-40)
+  {
+    id: 'mortgage-calculator',
+    slug: 'mortgage-calculator',
+    name: 'Mortgage Calculator',
+    description: 'Calculate monthly mortgage payments with taxes and insurance',
+    category: 'finance',
+    keywords: ['mortgage', 'home loan', 'monthly payment', 'property', 'real estate'],
+    formula: 'M = P[r(1+r)^n]/[(1+r)^n-1] + (Tax + Insurance)/12',
+    inputs: [
+      {
+        id: 'amount',
+        label: 'Loan Amount',
+        type: 'number',
+        placeholder: 'Enter loan amount',
+        min: 0,
+        required: true,
+        unit: '$',
+        localizedLabel: {
+          en: 'Loan Amount', th: 'จำนวนเงินกู้', es: 'Monto del Préstamo', pt: 'Valor do Empréstimo',
+          de: 'Darlehenssumme', fr: 'Montant du Prêt', ja: 'ローン金額', ko: '대출 금액',
+          zh: '贷款金额', ar: 'مبلغ القرض', hi: 'ऋण राशि', id: 'Jumlah Pinjaman',
+          ru: 'Сумма кредита', it: 'Importo del Prestito', nl: 'Leningbedrag', vi: 'Số tiền vay', fa: 'مبلغ وام'
+        }
+      },
+      {
+        id: 'rate',
+        label: 'Interest Rate',
+        type: 'number',
+        placeholder: 'Enter interest rate',
+        min: 0,
+        max: 100,
+        step: 0.01,
+        required: true,
+        unit: '%',
+        localizedLabel: {
+          en: 'Interest Rate', th: 'อัตราดอกเบี้ย', es: 'Tasa de Interés', pt: 'Taxa de Juros',
+          de: 'Zinssatz', fr: 'Taux d\'Intérêt', ja: '金利', ko: '이자율',
+          zh: '利率', ar: 'معدل الفائدة', hi: 'ब्याज दर', id: 'Suku Bunga',
+          ru: 'Процентная ставка', it: 'Tasso di Interesse', nl: 'Rente', vi: 'Lãi suất', fa: 'نرخ بهره'
+        }
+      },
+      {
+        id: 'term',
+        label: 'Loan Term',
+        type: 'number',
+        placeholder: 'Enter loan term',
+        min: 1,
+        max: 50,
+        required: true,
+        unit: 'years',
+        localizedLabel: {
+          en: 'Loan Term', th: 'ระยะเวลากู้', es: 'Plazo del Préstamo', pt: 'Prazo do Empréstimo',
+          de: 'Laufzeit', fr: 'Durée du Prêt', ja: 'ローン期間', ko: '대출 기간',
+          zh: '贷款期限', ar: 'مدة القرض', hi: 'ऋण अवधि', id: 'Jangka Waktu Pinjaman',
+          ru: 'Срок кредита', it: 'Durata del Prestito', nl: 'Leningtermijn', vi: 'Thời hạn vay', fa: 'مدت وام'
+        }
+      },
+      {
+        id: 'propertyTax',
+        label: 'Property Tax',
+        type: 'number',
+        placeholder: 'Enter annual property tax',
+        min: 0,
+        required: false,
+        unit: '$/year',
+        localizedLabel: {
+          en: 'Property Tax', th: 'ภาษีทรัพย์สิน', es: 'Impuesto sobre la Propiedad', pt: 'Imposto sobre Propriedade',
+          de: 'Grundsteuer', fr: 'Taxe Foncière', ja: '固定資産税', ko: '재산세',
+          zh: '房产税', ar: 'ضريبة العقار', hi: 'संपत्ति कर', id: 'Pajak Properti',
+          ru: 'Налог на недвижимость', it: 'Imposta sulla Proprietà', nl: 'Onroerendgoedbelasting', vi: 'Thuế bất động sản', fa: 'مالیات ملک'
+        }
+      },
+      {
+        id: 'insurance',
+        label: 'Home Insurance',
+        type: 'number',
+        placeholder: 'Enter annual insurance',
+        min: 0,
+        required: false,
+        unit: '$/year',
+        localizedLabel: {
+          en: 'Home Insurance', th: 'ประกันบ้าน', es: 'Seguro de Hogar', pt: 'Seguro Residencial',
+          de: 'Hausratversicherung', fr: 'Assurance Habitation', ja: '住宅保険', ko: '주택보험',
+          zh: '房屋保险', ar: 'تأمين المنزل', hi: 'घर का बीमा', id: 'Asuransi Rumah',
+          ru: 'Страхование дома', it: 'Assicurazione Casa', nl: 'Woonverzekering', vi: 'Bảo hiểm nhà', fa: 'بیمه خانه'
+        }
+      }
+    ],
+    outputs: [
+      {
+        id: 'monthlyPayment',
+        label: 'Monthly Payment',
+        type: 'number',
+        format: 'currency',
+        unit: '$',
+        localizedLabel: {
+          en: 'Monthly Payment', th: 'ค่างวดรายเดือน', es: 'Pago Mensual', pt: 'Pagamento Mensal',
+          de: 'Monatliche Zahlung', fr: 'Paiement Mensuel', ja: '月々の支払い', ko: '월 납입금',
+          zh: '月付款', ar: 'الدفعة الشهرية', hi: 'मासिक भुगतान', id: 'Pembayaran Bulanan',
+          ru: 'Ежемесячный платеж', it: 'Pagamento Mensile', nl: 'Maandelijkse Betaling', vi: 'Thanh toán hàng tháng', fa: 'پرداخت ماهانه'
+        }
+      },
+      {
+        id: 'totalInterest',
+        label: 'Total Interest',
+        type: 'number',
+        format: 'currency',
+        unit: '$',
+        localizedLabel: {
+          en: 'Total Interest', th: 'ดอกเบี้ยรวม', es: 'Interés Total', pt: 'Juros Totais',
+          de: 'Gesamtzinsen', fr: 'Intérêts Totaux', ja: '総利息', ko: '총 이자',
+          zh: '总利息', ar: 'إجمالي الفائدة', hi: 'कुल ब्याज', id: 'Total Bunga',
+          ru: 'Общие проценты', it: 'Interessi Totali', nl: 'Totale Rente', vi: 'Tổng lãi suất', fa: 'کل بهره'
+        }
+      },
+      {
+        id: 'totalPayment',
+        label: 'Total Payment',
+        type: 'number',
+        format: 'currency',
+        unit: '$',
+        localizedLabel: {
+          en: 'Total Payment', th: 'ยอดชำระรวม', es: 'Pago Total', pt: 'Pagamento Total',
+          de: 'Gesamtzahlung', fr: 'Paiement Total', ja: '総支払い', ko: '총 납입금',
+          zh: '总付款', ar: 'إجمالي الدفع', hi: 'कुल भुगतान', id: 'Total Pembayaran',
+          ru: 'Общий платеж', it: 'Pagamento Totale', nl: 'Totale Betaling', vi: 'Tổng thanh toán', fa: 'کل پرداخت'
+        }
+      }
+    ],
+    faq: [
+      {
+        question: 'How does the mortgage calculator work?',
+        answer: 'The mortgage calculator uses the standard amortization formula to calculate your monthly payment, including principal, interest, property taxes, and insurance.',
+        localizedQuestion: {
+          en: 'How does the mortgage calculator work?', th: 'เครื่องคิดเลขจำนองทำงานอย่างไร?', es: '¿Cómo funciona la calculadora de hipoteca?', pt: 'Como funciona a calculadora de hipoteca?',
+          de: 'Wie funktioniert der Hypothekenrechner?', fr: 'Comment fonctionne le calculateur d\'hypothèque?', ja: '住宅ローン計算機はどのように動作しますか？', ko: '모기지 계산기는 어떻게 작동하나요?',
+          zh: '抵押贷款计算器如何工作？', ar: 'كيف تعمل حاسبة الرهن العقاري؟', hi: 'बंधक कैलकुलेटर कैसे काम करता है?', id: 'Bagaimana cara kerja kalkulator hipotek?',
+          ru: 'Как работает калькулятор ипотеки?', it: 'Come funziona il calcolatore di mutuo?', nl: 'Hoe werkt de hypotheekcalculator?', vi: 'Máy tính thế chấp hoạt động như thế nào?', fa: 'ماشین حساب رهن چگونه کار می کند؟'
+        },
+        localizedAnswer: {
+          en: 'The mortgage calculator uses the standard amortization formula to calculate your monthly payment, including principal, interest, property taxes, and insurance.',
+          th: 'เครื่องคิดเลขจำนองใช้สูตรการผ่อนชำระมาตรฐานเพื่อคำนวณค่างวดรายเดือน รวมถึงเงินต้น ดอกเบี้ย ภาษีทรัพย์สิน และประกันภัย',
+          es: 'La calculadora de hipoteca utiliza la fórmula de amortización estándar para calcular su pago mensual, incluyendo principal, interés, impuestos sobre la propiedad e seguro.',
+          pt: 'A calculadora de hipoteca usa a fórmula de amortização padrão para calcular seu pagamento mensal, incluindo principal, juros, impostos sobre propriedade e seguro.',
+          de: 'Der Hypothekenrechner verwendet die Standard-Amortisationsformel, um Ihre monatliche Zahlung zu berechnen, einschließlich Kapital, Zinsen, Grundsteuern und Versicherung.',
+          fr: 'Le calculateur d\'hypothèque utilise la formule d\'amortissement standard pour calculer votre paiement mensuel, y compris le principal, les intérêts, les taxes foncières et l\'assurance.',
+          ja: '住宅ローン計算機は、元本、利息、固定資産税、保険を含む月々の支払いを計算するために標準的な償却式を使用します。',
+          ko: '모기지 계산기는 원금, 이자, 재산세, 보험을 포함한 월 납입금을 계산하기 위해 표준 상환 공식을 사용합니다.',
+          zh: '抵押贷款计算器使用标准摊销公式计算您的月付款，包括本金、利息、房产税和保险。',
+          ar: 'تستخدم حاسبة الرهن العقاري صيغة الإطفاء القياسية لحساب دفعتك الشهرية، بما في ذلك أصل الدين والفائدة وضرائب العقارات والتأمين.',
+          hi: 'बंधक कैलकुलेटर मासिक भुगतान की गणना के लिए मानक परिशोधन सूत्र का उपयोग करता है, जिसमें मूलधन, ब्याज, संपत्ति कर और बीमा शामिल है।',
+          id: 'Kalkulator hipotek menggunakan rumus amortisasi standar untuk menghitung pembayaran bulanan Anda, termasuk pokok, bunga, pajak properti, dan asuransi.',
+          ru: 'Калькулятор ипотеки использует стандартную формулу амортизации для расчета вашего ежемесячного платежа, включая основную сумму, проценты, налоги на недвижимость и страхование.',
+          it: 'Il calcolatore di mutuo utilizza la formula di ammortamento standard per calcolare il pagamento mensile, inclusi capitale, interessi, tasse sulla proprietà e assicurazione.',
+          nl: 'De hypotheekcalculator gebruikt de standaard aflossingsformule om uw maandelijkse betaling te berekenen, inclusief hoofdsom, rente, onroerendgoedbelasting en verzekering.',
+          vi: 'Máy tính thế chấp sử dụng công thức khấu hao tiêu chuẩn để tính toán khoản thanh toán hàng tháng, bao gồm gốc, lãi, thuế bất động sản và bảo hiểm.',
+          fa: 'ماشین حساب رهن از فرمول استاندارد استهلاک برای محاسبه پرداخت ماهانه شما استفاده می کند، شامل اصل، بهره، مالیات ملک و بیمه.'
+        }
+      }
+    ],
+    howToUse: 'Enter the loan amount, interest rate, term, property tax, and insurance to calculate your monthly mortgage payment.',
+    references: [
+      {
+        title: 'Mortgage Calculator - Investopedia',
+        url: 'https://www.investopedia.com/mortgage-calculator-5083159',
+        type: 'financial'
+      },
+      {
+        title: 'Amortization Formula - Wikipedia',
+        url: 'https://en.wikipedia.org/wiki/Amortization_calculator',
+        type: 'wikipedia'
+      }
+    ],
+    relatedCalculators: ['loan-calculator', 'refinance-calculator', 'property-tax-calculator'],
+    icon: '🏠',
+    emoji: '🏡',
+    localizedContent: {
+      en: {
+        name: 'Mortgage Calculator',
+        description: 'Calculate monthly mortgage payments with taxes and insurance',
+        howToUse: 'Enter the loan amount, interest rate, term, property tax, and insurance to calculate your monthly mortgage payment.',
+        faq: []
+      },
+      th: {
+        name: 'เครื่องคิดเลขจำนอง',
+        description: 'คำนวณค่างวดจำนองรายเดือนพร้อมภาษีและประกันภัย',
+        howToUse: 'กรอกจำนวนเงินกู้ อัตราดอกเบี้ย ระยะเวลา ภาษีทรัพย์สิน และประกันภัยเพื่อคำนวณค่างวดจำนองรายเดือน',
+        faq: []
+      }
+    }
   }
-  // Add more calculators as needed
+  // Add more calculators as needed - will continue with all 430 calculators
 ];
 
 export const getCalculatorById = (id: string): Calculator | undefined => {
