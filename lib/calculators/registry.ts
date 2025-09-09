@@ -65,7 +65,11 @@ const megaBatchIds = [
   'age-calculator',
   'length-converter',
   'break-even-calculator',
-  'roi-calculator'
+  'roi-calculator',
+  'investment-calculator',
+  'salary-calculator',
+  'currency-converter',
+  'date-calculator'
 ];
 
 megaBatchIds.forEach((id, index) => {
