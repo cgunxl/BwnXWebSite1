@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@reference "tailwindcss";
+
 /* ==================== CSS Variables for Dark Futuristic Theme ==================== */
 :root {
   /* Deep backgrounds */
