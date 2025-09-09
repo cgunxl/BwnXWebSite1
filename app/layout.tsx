@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 
@@ -7,7 +7,11 @@ export const metadata: Metadata = {
   description: "Free online calculators for finance, health, education, math, and lifestyle in 17 languages",
   keywords: "calculator, online calculator, financial calculator, health calculator, math calculator",
   authors: [{ name: "BwnXCalculator Team" }],
-  viewport: "width=device-width, initial-scale=1",
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
   themeColor: "#0B0D10",
 };
 
