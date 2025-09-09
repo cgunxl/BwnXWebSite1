@@ -5,18 +5,19 @@ import Link from 'next/link';
 import { CalculatorCategory } from '@/lib/types/calculator';
 
 interface CategoryGridProps {
-  categories: Record<CalculatorCategory, {
-    name: string;
+  categories: Record<string, {
+    name: string | Record<string, string>;
     description: string;
     icon: string;
     color: string;
+    slug?: string;
   }>;
   locale: string;
 }
 
 export default function CategoryGrid({ categories, locale }: CategoryGridProps) {
-  const getCategoryName = (category: CalculatorCategory, locale: string) => {
-    const translations: Record<string, Record<CalculatorCategory, string>> = {
+  const getCategoryName = (category: string, locale: string) => {
+    const translations: Record<string, Record<string, string>> = {
       th: {
         finance: 'การเงิน',
         health: 'สุขภาพ',
@@ -50,8 +51,8 @@ export default function CategoryGrid({ categories, locale }: CategoryGridProps) 
     return category;
   };
 
-  const getCategoryDescription = (category: CalculatorCategory, locale: string) => {
-    const translations: Record<string, Record<CalculatorCategory, string>> = {
+  const getCategoryDescription = (category: string, locale: string) => {
+    const translations: Record<string, Record<string, string>> = {
       th: {
         finance: 'เงินกู้ การลงทุน ภาษี และการวางแผนการเงิน',
         health: 'BMI แคลอรี่ โภชนาการ และสุขภาพ',
@@ -76,7 +77,7 @@ export default function CategoryGrid({ categories, locale }: CategoryGridProps) 
     return translations[locale]?.[category] || categories[category].description;
   };
 
-  const categoryOrder: CalculatorCategory[] = [
+  const categoryOrder = [
     'finance',
     'health',
     'education',
@@ -87,11 +88,12 @@ export default function CategoryGrid({ categories, locale }: CategoryGridProps) 
     'business',
     'technology',
     'mathematics',
+    'math',
     'conversion',
     'logistics',
     'household',
     'miscellaneous',
-  ];
+  ] as const;
 
   return (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">

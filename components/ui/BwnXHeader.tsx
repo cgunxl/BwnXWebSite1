@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 import SearchBar from '@/components/SearchBar';
 import ThemeToggle from '@/components/ThemeToggle';
 import { locales, localeNames, type Locale } from '@/lib/i18n/config';
-import { calculatorCategories } from '@/data/calculators-complete';
+import { mergedCategories as calculatorCategories } from '@/lib/utils/categories';
 
 interface BwnXHeaderProps {
   locale: Locale;
