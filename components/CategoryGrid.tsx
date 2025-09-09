@@ -106,24 +106,22 @@ export default function CategoryGrid({ categories, locale }: CategoryGridProps) 
             href={`/${locale}/category/${category}`}
             className="group"
           >
-            <div className={`
-              bg-white dark:bg-gray-800 rounded-xl p-6 shadow-md hover:shadow-xl transition-all duration-300
-              transform hover:scale-105 cursor-pointer border-2 border-transparent
-              hover:border-blue-500 dark:hover:border-blue-400
-            `}>
+            <div className="glass-card p-6 hover:scale-[1.02]">
               <div className={`
-                w-16 h-16 rounded-full ${cat?.color || 'bg-blue-500'} bg-opacity-20 flex items-center justify-center mb-4
+                w-16 h-16 rounded-full flex items-center justify-center mb-4
                 group-hover:scale-110 transition-transform duration-300
-              `}>
+              `} style={{
+                background: `linear-gradient(135deg, ${(cat?.color)||'#3B82F6'}22, ${(cat?.color)||'#3B82F6'}44)`
+              }}>
                 <span className="text-3xl">{cat?.icon || '🧮'}</span>
               </div>
-              <h3 className="text-lg font-semibold text-gray-900 dark:text-white mb-2">
+              <h3 className="text-lg font-semibold text-text-primary mb-2">
                 {getCategoryName(category, locale)}
               </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
+              <p className="text-sm text-text-secondary line-clamp-2">
                 {getCategoryDescription(category, locale)}
               </p>
-              <div className="mt-4 flex items-center text-blue-600 dark:text-blue-400 text-sm font-medium">
+              <div className="mt-4 flex items-center text-sm font-medium text-accent">
                 <span>{locale === 'th' ? 'ดูเครื่องคิดเลขทั้งหมด' : 'View all calculators'}</span>
                 <svg className="w-4 h-4 ml-1 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />

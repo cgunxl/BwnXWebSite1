@@ -28,16 +28,9 @@ export default function CalculatorCard({
 }: CalculatorCardProps) {
   return (
     <Link href={`/${locale}/calculator/${slug}`}>
-      <div className="
-        group relative bg-white dark:bg-gray-800 rounded-2xl shadow-lg 
-        hover:shadow-2xl transition-all duration-500 overflow-hidden
-        hover:-translate-y-2 cursor-pointer
-      ">
-        {/* Gradient Border Animation */}
-        <div className="absolute inset-0 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-500 blur-xl"></div>
-        
+      <div className="group relative cursor-pointer">
         {/* Card Content */}
-        <div className="relative bg-white dark:bg-gray-800 rounded-2xl p-6">
+        <div className="glass-card p-6">
           {/* Badges */}
           <div className="absolute top-4 right-4 flex gap-2">
             {isNew && (
@@ -88,9 +81,9 @@ export default function CalculatorCard({
             </span>
 
             {/* Arrow Icon */}
-            <div className="w-8 h-8 rounded-full bg-gray-100 dark:bg-gray-700 flex items-center justify-center group-hover:bg-blue-600 transition-all duration-300">
+            <div className="w-8 h-8 rounded-full bg-surface-1 flex items-center justify-center group-hover:bg-accent transition-all duration-300">
               <svg 
-                className="w-4 h-4 text-gray-600 dark:text-gray-400 group-hover:text-white transition-colors transform group-hover:translate-x-0.5"
+                className="w-4 h-4 text-text-secondary group-hover:text-bg-deep transition-colors transform group-hover:translate-x-0.5"
                 fill="none" 
                 stroke="currentColor" 
                 viewBox="0 0 24 24"
@@ -100,9 +93,6 @@ export default function CalculatorCard({
             </div>
           </div>
         </div>
-
-        {/* Hover Overlay Effect */}
-        <div className="absolute inset-0 bg-gradient-to-t from-blue-600/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"></div>
       </div>
     </Link>
   );
