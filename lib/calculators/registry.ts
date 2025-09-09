@@ -9,6 +9,10 @@ import { educationCalculatorsBatch3 } from './implementations/education-batch3';
 import { megaBatchCalculators } from './implementations/mega-batch';
 import { funCalculatorsBatch } from './implementations/fun-batch';
 
+// Import individual finance calculators
+import { carLoanCalculator } from './implementations/finance/car-loan-calculator';
+import { creditCardInterestCalculator } from './implementations/finance/credit-card-interest';
+
 // Calculator factory type
 type CalculatorFactory = (locale: Locale) => Calculator;
 
@@ -28,6 +32,10 @@ financeCalculators.forEach((id, index) => {
     calculatorRegistry.set(id, financeCalculatorsBatch1[index]);
   }
 });
+
+// Register individual finance calculators
+calculatorRegistry.set('car-loan-calculator', () => carLoanCalculator);
+calculatorRegistry.set('credit-card-interest', () => creditCardInterestCalculator);
 
 // Register Health Calculators (Batch 2)
 const healthCalculators = [
